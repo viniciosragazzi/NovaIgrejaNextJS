@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../prisma/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum SystemRole {
+  ADMIN
+  USER
+  GUEST
+}
+
+enum TypePerson {
+  STAFF
+  MEMBER
+  VISITOR
+  VOLUNTEER
+}
+
+enum DayOfWeek {
+  DOMINGO
+  SEGUNDA
+  TERCA
+  QUARTA
+  QUINTA
+  SEXTA
+  SABADO
+}
+
+model Church {
+  id      String   @id @default(uuid())
+  name    String
+  label   String   @unique
+  address String
+  contact String[]
+
+  // Relações
+  users     User[]
+  persons   Person[]
+  links     ChurchLink[]
+  schedules WeeklySchedule[] // Nova relação de Agenda
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ChurchLink {
+  id     String  @id @default(uuid())
+  title  String
+  url    String
+  icon   String?
+  active Boolean @default(true)
+  order  Int     @default(0)
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([churchId])
+}
+
+// NOVA MODEL: Agenda Semanal
+model WeeklySchedule {
+  id          String    @id @default(uuid())
+  title       String // Ex: "Culto de Celebração"
+  dayOfWeek   DayOfWeek
+  time        String // Ex: "19:30"
+  description String? // Ex: "Um momento de louvor e palavra"
+  active      Boolean   @default(true)
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([churchId])
+}
+
+model User {
+  id            String      @id @default(cuid())
+  name          String
+  email         String      @unique
+  emailVerified Boolean     @default(false)
+  image         String?
+  role          SystemRole  @default(USER)
+  status        TypePerson? @default(MEMBER)
+
+  churchId  String?
+  youChurch Church? @relation(fields: [churchId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  sessions  Session[]
+  accounts  Account[]
+
+  @@map("user")
+}
+
+model Person {
+  id       String     @id @default(uuid())
+  name     String
+  email    String?
+  contact  String[]
+  address  String?
+  birthday String?
+  type     TypePerson @default(MEMBER)
+
+  // NOVOS CAMPOS PARA VOLUNTÁRIOS
+  ministry String? // Ex: "Louvor", "Kids"
+  role     String? // Ex: "Guitarrista", "Professor"
+
+  // Campos extras para Visitantes no Admin
+  notes        String? // Observações
+  firstVisitAt DateTime? @default(now())
+
+  churchId  String
+  youChurch Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([email, churchId])
+}
+
+// ... Models do Better Auth (Session, Account, Verification) seguem iguais ...
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
