@@ -27,6 +27,9 @@ export default async function Page({ params }: { params: Promise<{ churchLabel: 
     address: p.address || undefined,
     birthDate: p.birthday || undefined,
     type: p.type.toLowerCase() as any,
+    ministry: p.ministry || undefined,
+    role: p.role || undefined,
+    notes: p.notes || undefined,
   }));
 
   return (

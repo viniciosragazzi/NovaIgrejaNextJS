@@ -389,6 +389,8 @@ export const ModelName = {
   WeeklySchedule: 'WeeklySchedule',
   User: 'User',
   Person: 'Person',
+  Ministry: 'Ministry',
+  VolunteerScale: 'VolunteerScale',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -407,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "church" | "churchLink" | "weeklySchedule" | "user" | "person" | "session" | "account" | "verification"
+    modelProps: "church" | "churchLink" | "weeklySchedule" | "user" | "person" | "ministry" | "volunteerScale" | "session" | "account" | "verification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -781,6 +783,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Ministry: {
+      payload: Prisma.$MinistryPayload<ExtArgs>
+      fields: Prisma.MinistryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MinistryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MinistryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>
+        }
+        findFirst: {
+          args: Prisma.MinistryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MinistryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>
+        }
+        findMany: {
+          args: Prisma.MinistryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>[]
+        }
+        create: {
+          args: Prisma.MinistryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>
+        }
+        createMany: {
+          args: Prisma.MinistryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MinistryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>[]
+        }
+        delete: {
+          args: Prisma.MinistryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>
+        }
+        update: {
+          args: Prisma.MinistryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>
+        }
+        deleteMany: {
+          args: Prisma.MinistryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MinistryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MinistryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>[]
+        }
+        upsert: {
+          args: Prisma.MinistryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MinistryPayload>
+        }
+        aggregate: {
+          args: Prisma.MinistryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMinistry>
+        }
+        groupBy: {
+          args: Prisma.MinistryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MinistryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MinistryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MinistryCountAggregateOutputType> | number
+        }
+      }
+    }
+    VolunteerScale: {
+      payload: Prisma.$VolunteerScalePayload<ExtArgs>
+      fields: Prisma.VolunteerScaleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VolunteerScaleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VolunteerScaleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>
+        }
+        findFirst: {
+          args: Prisma.VolunteerScaleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VolunteerScaleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>
+        }
+        findMany: {
+          args: Prisma.VolunteerScaleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>[]
+        }
+        create: {
+          args: Prisma.VolunteerScaleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>
+        }
+        createMany: {
+          args: Prisma.VolunteerScaleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VolunteerScaleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>[]
+        }
+        delete: {
+          args: Prisma.VolunteerScaleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>
+        }
+        update: {
+          args: Prisma.VolunteerScaleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>
+        }
+        deleteMany: {
+          args: Prisma.VolunteerScaleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VolunteerScaleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VolunteerScaleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>[]
+        }
+        upsert: {
+          args: Prisma.VolunteerScaleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VolunteerScalePayload>
+        }
+        aggregate: {
+          args: Prisma.VolunteerScaleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVolunteerScale>
+        }
+        groupBy: {
+          args: Prisma.VolunteerScaleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VolunteerScaleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VolunteerScaleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VolunteerScaleCountAggregateOutputType> | number
+        }
+      }
+    }
     Session: {
       payload: Prisma.$SessionPayload<ExtArgs>
       fields: Prisma.SessionFieldRefs
@@ -1121,6 +1271,36 @@ export const PersonScalarFieldEnum = {
 export type PersonScalarFieldEnum = (typeof PersonScalarFieldEnum)[keyof typeof PersonScalarFieldEnum]
 
 
+export const MinistryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  icon: 'icon',
+  color: 'color',
+  churchId: 'churchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MinistryScalarFieldEnum = (typeof MinistryScalarFieldEnum)[keyof typeof MinistryScalarFieldEnum]
+
+
+export const VolunteerScaleScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  role: 'role',
+  eventName: 'eventName',
+  confirmed: 'confirmed',
+  personId: 'personId',
+  ministryId: 'ministryId',
+  churchId: 'churchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VolunteerScaleScalarFieldEnum = (typeof VolunteerScaleScalarFieldEnum)[keyof typeof VolunteerScaleScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -1400,6 +1580,8 @@ export type GlobalOmitConfig = {
   weeklySchedule?: Prisma.WeeklyScheduleOmit
   user?: Prisma.UserOmit
   person?: Prisma.PersonOmit
+  ministry?: Prisma.MinistryOmit
+  volunteerScale?: Prisma.VolunteerScaleOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit

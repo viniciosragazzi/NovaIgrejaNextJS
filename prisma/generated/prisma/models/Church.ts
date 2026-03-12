@@ -198,6 +198,8 @@ export type ChurchWhereInput = {
   persons?: Prisma.PersonListRelationFilter
   links?: Prisma.ChurchLinkListRelationFilter
   schedules?: Prisma.WeeklyScheduleListRelationFilter
+  ministries?: Prisma.MinistryListRelationFilter
+  volunteerScales?: Prisma.VolunteerScaleListRelationFilter
 }
 
 export type ChurchOrderByWithRelationInput = {
@@ -212,6 +214,8 @@ export type ChurchOrderByWithRelationInput = {
   persons?: Prisma.PersonOrderByRelationAggregateInput
   links?: Prisma.ChurchLinkOrderByRelationAggregateInput
   schedules?: Prisma.WeeklyScheduleOrderByRelationAggregateInput
+  ministries?: Prisma.MinistryOrderByRelationAggregateInput
+  volunteerScales?: Prisma.VolunteerScaleOrderByRelationAggregateInput
 }
 
 export type ChurchWhereUniqueInput = Prisma.AtLeast<{
@@ -229,6 +233,8 @@ export type ChurchWhereUniqueInput = Prisma.AtLeast<{
   persons?: Prisma.PersonListRelationFilter
   links?: Prisma.ChurchLinkListRelationFilter
   schedules?: Prisma.WeeklyScheduleListRelationFilter
+  ministries?: Prisma.MinistryListRelationFilter
+  volunteerScales?: Prisma.VolunteerScaleListRelationFilter
 }, "id" | "label">
 
 export type ChurchOrderByWithAggregationInput = {
@@ -269,6 +275,8 @@ export type ChurchCreateInput = {
   persons?: Prisma.PersonCreateNestedManyWithoutYouChurchInput
   links?: Prisma.ChurchLinkCreateNestedManyWithoutChurchInput
   schedules?: Prisma.WeeklyScheduleCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchUncheckedCreateInput = {
@@ -283,6 +291,8 @@ export type ChurchUncheckedCreateInput = {
   persons?: Prisma.PersonUncheckedCreateNestedManyWithoutYouChurchInput
   links?: Prisma.ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
   schedules?: Prisma.WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryUncheckedCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchUpdateInput = {
@@ -297,6 +307,8 @@ export type ChurchUpdateInput = {
   persons?: Prisma.PersonUpdateManyWithoutYouChurchNestedInput
   links?: Prisma.ChurchLinkUpdateManyWithoutChurchNestedInput
   schedules?: Prisma.WeeklyScheduleUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchUncheckedUpdateInput = {
@@ -311,6 +323,8 @@ export type ChurchUncheckedUpdateInput = {
   persons?: Prisma.PersonUncheckedUpdateManyWithoutYouChurchNestedInput
   links?: Prisma.ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
   schedules?: Prisma.WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUncheckedUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchCreateManyInput = {
@@ -464,6 +478,34 @@ export type ChurchUpdateOneRequiredWithoutPersonsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ChurchUpdateToOneWithWhereWithoutPersonsInput, Prisma.ChurchUpdateWithoutPersonsInput>, Prisma.ChurchUncheckedUpdateWithoutPersonsInput>
 }
 
+export type ChurchCreateNestedOneWithoutMinistriesInput = {
+  create?: Prisma.XOR<Prisma.ChurchCreateWithoutMinistriesInput, Prisma.ChurchUncheckedCreateWithoutMinistriesInput>
+  connectOrCreate?: Prisma.ChurchCreateOrConnectWithoutMinistriesInput
+  connect?: Prisma.ChurchWhereUniqueInput
+}
+
+export type ChurchUpdateOneRequiredWithoutMinistriesNestedInput = {
+  create?: Prisma.XOR<Prisma.ChurchCreateWithoutMinistriesInput, Prisma.ChurchUncheckedCreateWithoutMinistriesInput>
+  connectOrCreate?: Prisma.ChurchCreateOrConnectWithoutMinistriesInput
+  upsert?: Prisma.ChurchUpsertWithoutMinistriesInput
+  connect?: Prisma.ChurchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ChurchUpdateToOneWithWhereWithoutMinistriesInput, Prisma.ChurchUpdateWithoutMinistriesInput>, Prisma.ChurchUncheckedUpdateWithoutMinistriesInput>
+}
+
+export type ChurchCreateNestedOneWithoutVolunteerScalesInput = {
+  create?: Prisma.XOR<Prisma.ChurchCreateWithoutVolunteerScalesInput, Prisma.ChurchUncheckedCreateWithoutVolunteerScalesInput>
+  connectOrCreate?: Prisma.ChurchCreateOrConnectWithoutVolunteerScalesInput
+  connect?: Prisma.ChurchWhereUniqueInput
+}
+
+export type ChurchUpdateOneRequiredWithoutVolunteerScalesNestedInput = {
+  create?: Prisma.XOR<Prisma.ChurchCreateWithoutVolunteerScalesInput, Prisma.ChurchUncheckedCreateWithoutVolunteerScalesInput>
+  connectOrCreate?: Prisma.ChurchCreateOrConnectWithoutVolunteerScalesInput
+  upsert?: Prisma.ChurchUpsertWithoutVolunteerScalesInput
+  connect?: Prisma.ChurchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ChurchUpdateToOneWithWhereWithoutVolunteerScalesInput, Prisma.ChurchUpdateWithoutVolunteerScalesInput>, Prisma.ChurchUncheckedUpdateWithoutVolunteerScalesInput>
+}
+
 export type ChurchCreateWithoutLinksInput = {
   id?: string
   name: string
@@ -475,6 +517,8 @@ export type ChurchCreateWithoutLinksInput = {
   users?: Prisma.UserCreateNestedManyWithoutYouChurchInput
   persons?: Prisma.PersonCreateNestedManyWithoutYouChurchInput
   schedules?: Prisma.WeeklyScheduleCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchUncheckedCreateWithoutLinksInput = {
@@ -488,6 +532,8 @@ export type ChurchUncheckedCreateWithoutLinksInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutYouChurchInput
   persons?: Prisma.PersonUncheckedCreateNestedManyWithoutYouChurchInput
   schedules?: Prisma.WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryUncheckedCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchCreateOrConnectWithoutLinksInput = {
@@ -517,6 +563,8 @@ export type ChurchUpdateWithoutLinksInput = {
   users?: Prisma.UserUpdateManyWithoutYouChurchNestedInput
   persons?: Prisma.PersonUpdateManyWithoutYouChurchNestedInput
   schedules?: Prisma.WeeklyScheduleUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchUncheckedUpdateWithoutLinksInput = {
@@ -530,6 +578,8 @@ export type ChurchUncheckedUpdateWithoutLinksInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutYouChurchNestedInput
   persons?: Prisma.PersonUncheckedUpdateManyWithoutYouChurchNestedInput
   schedules?: Prisma.WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUncheckedUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchCreateWithoutSchedulesInput = {
@@ -543,6 +593,8 @@ export type ChurchCreateWithoutSchedulesInput = {
   users?: Prisma.UserCreateNestedManyWithoutYouChurchInput
   persons?: Prisma.PersonCreateNestedManyWithoutYouChurchInput
   links?: Prisma.ChurchLinkCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchUncheckedCreateWithoutSchedulesInput = {
@@ -556,6 +608,8 @@ export type ChurchUncheckedCreateWithoutSchedulesInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutYouChurchInput
   persons?: Prisma.PersonUncheckedCreateNestedManyWithoutYouChurchInput
   links?: Prisma.ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryUncheckedCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchCreateOrConnectWithoutSchedulesInput = {
@@ -585,6 +639,8 @@ export type ChurchUpdateWithoutSchedulesInput = {
   users?: Prisma.UserUpdateManyWithoutYouChurchNestedInput
   persons?: Prisma.PersonUpdateManyWithoutYouChurchNestedInput
   links?: Prisma.ChurchLinkUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchUncheckedUpdateWithoutSchedulesInput = {
@@ -598,6 +654,8 @@ export type ChurchUncheckedUpdateWithoutSchedulesInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutYouChurchNestedInput
   persons?: Prisma.PersonUncheckedUpdateManyWithoutYouChurchNestedInput
   links?: Prisma.ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUncheckedUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchCreateWithoutUsersInput = {
@@ -611,6 +669,8 @@ export type ChurchCreateWithoutUsersInput = {
   persons?: Prisma.PersonCreateNestedManyWithoutYouChurchInput
   links?: Prisma.ChurchLinkCreateNestedManyWithoutChurchInput
   schedules?: Prisma.WeeklyScheduleCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchUncheckedCreateWithoutUsersInput = {
@@ -624,6 +684,8 @@ export type ChurchUncheckedCreateWithoutUsersInput = {
   persons?: Prisma.PersonUncheckedCreateNestedManyWithoutYouChurchInput
   links?: Prisma.ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
   schedules?: Prisma.WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryUncheckedCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchCreateOrConnectWithoutUsersInput = {
@@ -653,6 +715,8 @@ export type ChurchUpdateWithoutUsersInput = {
   persons?: Prisma.PersonUpdateManyWithoutYouChurchNestedInput
   links?: Prisma.ChurchLinkUpdateManyWithoutChurchNestedInput
   schedules?: Prisma.WeeklyScheduleUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchUncheckedUpdateWithoutUsersInput = {
@@ -666,6 +730,8 @@ export type ChurchUncheckedUpdateWithoutUsersInput = {
   persons?: Prisma.PersonUncheckedUpdateManyWithoutYouChurchNestedInput
   links?: Prisma.ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
   schedules?: Prisma.WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUncheckedUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchCreateWithoutPersonsInput = {
@@ -679,6 +745,8 @@ export type ChurchCreateWithoutPersonsInput = {
   users?: Prisma.UserCreateNestedManyWithoutYouChurchInput
   links?: Prisma.ChurchLinkCreateNestedManyWithoutChurchInput
   schedules?: Prisma.WeeklyScheduleCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchUncheckedCreateWithoutPersonsInput = {
@@ -692,6 +760,8 @@ export type ChurchUncheckedCreateWithoutPersonsInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutYouChurchInput
   links?: Prisma.ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
   schedules?: Prisma.WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryUncheckedCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
 }
 
 export type ChurchCreateOrConnectWithoutPersonsInput = {
@@ -721,6 +791,8 @@ export type ChurchUpdateWithoutPersonsInput = {
   users?: Prisma.UserUpdateManyWithoutYouChurchNestedInput
   links?: Prisma.ChurchLinkUpdateManyWithoutChurchNestedInput
   schedules?: Prisma.WeeklyScheduleUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUpdateManyWithoutChurchNestedInput
 }
 
 export type ChurchUncheckedUpdateWithoutPersonsInput = {
@@ -734,6 +806,160 @@ export type ChurchUncheckedUpdateWithoutPersonsInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutYouChurchNestedInput
   links?: Prisma.ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
   schedules?: Prisma.WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUncheckedUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+}
+
+export type ChurchCreateWithoutMinistriesInput = {
+  id?: string
+  name: string
+  label: string
+  address: string
+  contact?: Prisma.ChurchCreatecontactInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutYouChurchInput
+  persons?: Prisma.PersonCreateNestedManyWithoutYouChurchInput
+  links?: Prisma.ChurchLinkCreateNestedManyWithoutChurchInput
+  schedules?: Prisma.WeeklyScheduleCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleCreateNestedManyWithoutChurchInput
+}
+
+export type ChurchUncheckedCreateWithoutMinistriesInput = {
+  id?: string
+  name: string
+  label: string
+  address: string
+  contact?: Prisma.ChurchCreatecontactInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutYouChurchInput
+  persons?: Prisma.PersonUncheckedCreateNestedManyWithoutYouChurchInput
+  links?: Prisma.ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
+  schedules?: Prisma.WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+}
+
+export type ChurchCreateOrConnectWithoutMinistriesInput = {
+  where: Prisma.ChurchWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChurchCreateWithoutMinistriesInput, Prisma.ChurchUncheckedCreateWithoutMinistriesInput>
+}
+
+export type ChurchUpsertWithoutMinistriesInput = {
+  update: Prisma.XOR<Prisma.ChurchUpdateWithoutMinistriesInput, Prisma.ChurchUncheckedUpdateWithoutMinistriesInput>
+  create: Prisma.XOR<Prisma.ChurchCreateWithoutMinistriesInput, Prisma.ChurchUncheckedCreateWithoutMinistriesInput>
+  where?: Prisma.ChurchWhereInput
+}
+
+export type ChurchUpdateToOneWithWhereWithoutMinistriesInput = {
+  where?: Prisma.ChurchWhereInput
+  data: Prisma.XOR<Prisma.ChurchUpdateWithoutMinistriesInput, Prisma.ChurchUncheckedUpdateWithoutMinistriesInput>
+}
+
+export type ChurchUpdateWithoutMinistriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.ChurchUpdatecontactInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutYouChurchNestedInput
+  persons?: Prisma.PersonUpdateManyWithoutYouChurchNestedInput
+  links?: Prisma.ChurchLinkUpdateManyWithoutChurchNestedInput
+  schedules?: Prisma.WeeklyScheduleUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUpdateManyWithoutChurchNestedInput
+}
+
+export type ChurchUncheckedUpdateWithoutMinistriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.ChurchUpdatecontactInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutYouChurchNestedInput
+  persons?: Prisma.PersonUncheckedUpdateManyWithoutYouChurchNestedInput
+  links?: Prisma.ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
+  schedules?: Prisma.WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+}
+
+export type ChurchCreateWithoutVolunteerScalesInput = {
+  id?: string
+  name: string
+  label: string
+  address: string
+  contact?: Prisma.ChurchCreatecontactInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutYouChurchInput
+  persons?: Prisma.PersonCreateNestedManyWithoutYouChurchInput
+  links?: Prisma.ChurchLinkCreateNestedManyWithoutChurchInput
+  schedules?: Prisma.WeeklyScheduleCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryCreateNestedManyWithoutChurchInput
+}
+
+export type ChurchUncheckedCreateWithoutVolunteerScalesInput = {
+  id?: string
+  name: string
+  label: string
+  address: string
+  contact?: Prisma.ChurchCreatecontactInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutYouChurchInput
+  persons?: Prisma.PersonUncheckedCreateNestedManyWithoutYouChurchInput
+  links?: Prisma.ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
+  schedules?: Prisma.WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+  ministries?: Prisma.MinistryUncheckedCreateNestedManyWithoutChurchInput
+}
+
+export type ChurchCreateOrConnectWithoutVolunteerScalesInput = {
+  where: Prisma.ChurchWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChurchCreateWithoutVolunteerScalesInput, Prisma.ChurchUncheckedCreateWithoutVolunteerScalesInput>
+}
+
+export type ChurchUpsertWithoutVolunteerScalesInput = {
+  update: Prisma.XOR<Prisma.ChurchUpdateWithoutVolunteerScalesInput, Prisma.ChurchUncheckedUpdateWithoutVolunteerScalesInput>
+  create: Prisma.XOR<Prisma.ChurchCreateWithoutVolunteerScalesInput, Prisma.ChurchUncheckedCreateWithoutVolunteerScalesInput>
+  where?: Prisma.ChurchWhereInput
+}
+
+export type ChurchUpdateToOneWithWhereWithoutVolunteerScalesInput = {
+  where?: Prisma.ChurchWhereInput
+  data: Prisma.XOR<Prisma.ChurchUpdateWithoutVolunteerScalesInput, Prisma.ChurchUncheckedUpdateWithoutVolunteerScalesInput>
+}
+
+export type ChurchUpdateWithoutVolunteerScalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.ChurchUpdatecontactInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutYouChurchNestedInput
+  persons?: Prisma.PersonUpdateManyWithoutYouChurchNestedInput
+  links?: Prisma.ChurchLinkUpdateManyWithoutChurchNestedInput
+  schedules?: Prisma.WeeklyScheduleUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUpdateManyWithoutChurchNestedInput
+}
+
+export type ChurchUncheckedUpdateWithoutVolunteerScalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.ChurchUpdatecontactInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutYouChurchNestedInput
+  persons?: Prisma.PersonUncheckedUpdateManyWithoutYouChurchNestedInput
+  links?: Prisma.ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
+  schedules?: Prisma.WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+  ministries?: Prisma.MinistryUncheckedUpdateManyWithoutChurchNestedInput
 }
 
 
@@ -746,6 +972,8 @@ export type ChurchCountOutputType = {
   persons: number
   links: number
   schedules: number
+  ministries: number
+  volunteerScales: number
 }
 
 export type ChurchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -753,6 +981,8 @@ export type ChurchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   persons?: boolean | ChurchCountOutputTypeCountPersonsArgs
   links?: boolean | ChurchCountOutputTypeCountLinksArgs
   schedules?: boolean | ChurchCountOutputTypeCountSchedulesArgs
+  ministries?: boolean | ChurchCountOutputTypeCountMinistriesArgs
+  volunteerScales?: boolean | ChurchCountOutputTypeCountVolunteerScalesArgs
 }
 
 /**
@@ -793,6 +1023,20 @@ export type ChurchCountOutputTypeCountSchedulesArgs<ExtArgs extends runtime.Type
   where?: Prisma.WeeklyScheduleWhereInput
 }
 
+/**
+ * ChurchCountOutputType without action
+ */
+export type ChurchCountOutputTypeCountMinistriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MinistryWhereInput
+}
+
+/**
+ * ChurchCountOutputType without action
+ */
+export type ChurchCountOutputTypeCountVolunteerScalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VolunteerScaleWhereInput
+}
+
 
 export type ChurchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -806,6 +1050,8 @@ export type ChurchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   persons?: boolean | Prisma.Church$personsArgs<ExtArgs>
   links?: boolean | Prisma.Church$linksArgs<ExtArgs>
   schedules?: boolean | Prisma.Church$schedulesArgs<ExtArgs>
+  ministries?: boolean | Prisma.Church$ministriesArgs<ExtArgs>
+  volunteerScales?: boolean | Prisma.Church$volunteerScalesArgs<ExtArgs>
   _count?: boolean | Prisma.ChurchCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["church"]>
 
@@ -845,6 +1091,8 @@ export type ChurchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   persons?: boolean | Prisma.Church$personsArgs<ExtArgs>
   links?: boolean | Prisma.Church$linksArgs<ExtArgs>
   schedules?: boolean | Prisma.Church$schedulesArgs<ExtArgs>
+  ministries?: boolean | Prisma.Church$ministriesArgs<ExtArgs>
+  volunteerScales?: boolean | Prisma.Church$volunteerScalesArgs<ExtArgs>
   _count?: boolean | Prisma.ChurchCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ChurchIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -857,6 +1105,8 @@ export type $ChurchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     persons: Prisma.$PersonPayload<ExtArgs>[]
     links: Prisma.$ChurchLinkPayload<ExtArgs>[]
     schedules: Prisma.$WeeklySchedulePayload<ExtArgs>[]
+    ministries: Prisma.$MinistryPayload<ExtArgs>[]
+    volunteerScales: Prisma.$VolunteerScalePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1264,6 +1514,8 @@ export interface Prisma__ChurchClient<T, Null = never, ExtArgs extends runtime.T
   persons<T extends Prisma.Church$personsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Church$personsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   links<T extends Prisma.Church$linksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Church$linksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChurchLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   schedules<T extends Prisma.Church$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Church$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklySchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ministries<T extends Prisma.Church$ministriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Church$ministriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MinistryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  volunteerScales<T extends Prisma.Church$volunteerScalesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Church$volunteerScalesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VolunteerScalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1781,6 +2033,54 @@ export type Church$schedulesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.WeeklyScheduleScalarFieldEnum | Prisma.WeeklyScheduleScalarFieldEnum[]
+}
+
+/**
+ * Church.ministries
+ */
+export type Church$ministriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ministry
+   */
+  select?: Prisma.MinistrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ministry
+   */
+  omit?: Prisma.MinistryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MinistryInclude<ExtArgs> | null
+  where?: Prisma.MinistryWhereInput
+  orderBy?: Prisma.MinistryOrderByWithRelationInput | Prisma.MinistryOrderByWithRelationInput[]
+  cursor?: Prisma.MinistryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MinistryScalarFieldEnum | Prisma.MinistryScalarFieldEnum[]
+}
+
+/**
+ * Church.volunteerScales
+ */
+export type Church$volunteerScalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VolunteerScale
+   */
+  select?: Prisma.VolunteerScaleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VolunteerScale
+   */
+  omit?: Prisma.VolunteerScaleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VolunteerScaleInclude<ExtArgs> | null
+  where?: Prisma.VolunteerScaleWhereInput
+  orderBy?: Prisma.VolunteerScaleOrderByWithRelationInput | Prisma.VolunteerScaleOrderByWithRelationInput[]
+  cursor?: Prisma.VolunteerScaleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VolunteerScaleScalarFieldEnum | Prisma.VolunteerScaleScalarFieldEnum[]
 }
 
 /**

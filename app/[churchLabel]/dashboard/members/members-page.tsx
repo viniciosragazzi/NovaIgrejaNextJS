@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, ChangeEvent } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -31,6 +31,8 @@ type Person = {
   email?: string
   address?: string
   birthDate?: string
+  firstVisitDate?: string
+  notes?: string
   type: "member" | "visitor" | "volunteer"
   ministry?: string
   role?: string
@@ -74,9 +76,112 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
   const [isSubmitting, setIsSubmitting] = useState(false)
   const isMobile = useIsMobile()
 
+  const formCreate = useForm<PersonFormData>({
+    resolver: zodResolver(personSchema),
+    defaultValues: { type: "visitor", whatsapp: "", email: "", address: "", birthDate: "", ministry: "", role: "", firstVisitDate: "", notes: "" },
+  })
+
+  const formEdit = useForm<PersonFormData>({
+    resolver: zodResolver(personSchema),
+  })
+
+  function formatWhatsApp(value: string): string {
+    const numbers = value.replace(/\D/g, "")
+    if (numbers.length <= 2) return numbers
+    if (numbers.length <= 7) return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`
+    return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`
+  }
+
+  // Estatísticas dinâmicas baseadas no estado local 'people'
+  const stats = {
+    total: people.length,
+    members: people.filter((p) => p.type.toLowerCase() === "member").length,
+    visitors: people.filter((p) => p.type.toLowerCase() === "visitor").length,
+    volunteers: people.filter((p) => p.type.toLowerCase() === "volunteer").length,
+  }
+  useEffect(() => {
+    if (editingPerson) {
+      formEdit.reset({
+        fullName: editingPerson.fullName,
+        whatsapp: editingPerson.whatsapp,
+        email: editingPerson.email || "",
+        address: editingPerson.address || "",
+        birthDate: editingPerson.birthDate || "",
+        firstVisitDate: editingPerson.firstVisitDate || "",
+        notes: editingPerson.notes || "",
+        type: editingPerson.type as any,
+        ministry: editingPerson.ministry || "",
+        role: editingPerson.role || "",
+      })
+    }
+  }, [editingPerson, formEdit])
+
+  async function onSubmit(data: PersonFormData) {
+    setIsSubmitting(true)
+    const result = await createPersonAction(churchId, data)
+
+    if (result.success) {
+      toast.success("Cadastrado com sucesso!")
+
+      // Criamos o objeto exatamente como a interface 'Person' espera para a listagem
+      const newPerson: Person = {
+        id: Math.random().toString(), // O banco gera um real, mas para o estado local usamos esse
+        fullName: data.fullName,
+        whatsapp: data.whatsapp,
+        email: data.email,
+        address: data.address,
+        birthDate: data.birthDate,
+        type: data.type as any,
+        ministry: data.ministry, // GARANTE QUE O MINISTÉRIO APAREÇA NA LISTA IMEDIATAMENTE
+        role: data.role,         // GARANTE QUE A FUNÇÃO APAREÇA NA LISTA IMEDIATAMENTE
+      }
+
+      setPeople([newPerson, ...people])
+      setIsModalOpen(false)
+      formCreate.reset()
+    } else {
+      toast.error(result.error)
+    }
+    setIsSubmitting(false)
+  }
+
+  async function onEditSubmit(data: PersonFormData) {
+    if (!editingPerson?.id) return
+    setIsSubmitting(true)
+    try {
+      const result = await updatePersonAction(churchId, editingPerson.id, data)
+      if (result.success) {
+        toast.success("Dados atualizados!")
+
+        // Atualiza o estado local mapeando todos os campos novos
+        setPeople(prev => prev.map(p =>
+          p.id === editingPerson.id
+            ? {
+              ...p,
+              fullName: data.fullName,
+              whatsapp: data.whatsapp,
+              email: data.email,
+              address: data.address,
+              birthDate: data.birthDate,
+              type: data.type as any,
+              ministry: data.ministry,
+              role: data.role
+            }
+            : p
+        ))
+        setIsEditOpen(false)
+      } else {
+        toast.error(result.error)
+      }
+    } catch (e) {
+      toast.error("Erro interno ao atualizar")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
   const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<PersonFormData>({
     resolver: zodResolver(personSchema),
-    defaultValues: { type: "visitor", whatsapp: "", email: "", address: "", birthDate: "", ministry: "", role: "" },
+    defaultValues: { type: "visitor", whatsapp: "", email: "", address: "", birthDate: "", ministry: "", role: "", firstVisitDate: "", notes: "" },
   })
 
   const {
@@ -84,15 +189,8 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
     reset: resetEdit, setValue: setValueEdit, watch: watchEdit
   } = useForm<PersonFormData>({ resolver: zodResolver(personSchema) })
 
-  const typeValue = watch("type")
-  const typeEditValue = watchEdit("type")
 
-  const stats = {
-    total: people.length,
-    members: people.filter((p) => p.type === "member").length,
-    visitors: people.filter((p) => p.type === "visitor").length,
-    volunteers: people.filter((p) => p.type === "volunteer").length,
-  }
+
 
   const filteredPeople = people.filter((person) => {
     const matchesSearch = person.fullName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -108,6 +206,8 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
         email: editingPerson.email || "",
         address: editingPerson.address || "",
         birthDate: editingPerson.birthDate || "",
+        firstVisitDate: editingPerson.firstVisitDate || "",
+        notes: editingPerson.notes || "",
         type: editingPerson.type,
         ministry: editingPerson.ministry || "",
         role: editingPerson.role || "",
@@ -115,59 +215,43 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
     }
   }, [editingPerson, resetEdit])
 
-  async function onSubmit(data: PersonFormData) {
-    setIsSubmitting(true)
-    const result = await createPersonAction(churchId, data)
-    if (result.success) {
-      toast.success("Cadastrado com sucesso!")
-      setPeople([{ id: Math.random().toString(), ...data } as Person, ...people])
-      setIsModalOpen(false)
-      reset()
-    } else { toast.error(result.error) }
-    setIsSubmitting(false)
-  }
-
-  async function onEditSubmit(data: PersonFormData) {
-    if (!editingPerson) return
-    setIsSubmitting(true)
-    const result = await updatePersonAction(churchId, editingPerson.id, data)
-    if (result.success) {
-      toast.success("Dados atualizados!")
-      setPeople(people.map((p) => (p.id === editingPerson.id ? { ...p, ...data } : p)))
-      setIsEditOpen(false)
-    } else { toast.error(result.error) }
-    setIsSubmitting(false)
-  }
 
   const PersonForm = ({ isEditing = false }: { isEditing?: boolean }) => {
-    const reg = isEditing ? registerEdit : register
-    const currentType = isEditing ? typeEditValue : typeValue
-    const setVal = isEditing ? setValueEdit : setValue
-    const handleS = isEditing ? handleSubmitEdit(onEditSubmit) : handleSubmit(onSubmit)
+    const f = isEditing ? formEdit : formCreate
+    const currentType = f.watch("type")
 
     return (
-      <form onSubmit={handleS} className="mt-4 space-y-4 pb-6">
+      <form onSubmit={f.handleSubmit(isEditing ? onEditSubmit : onSubmit)} className="mt-4 space-y-4 pb-6">
         <div className="space-y-1">
           <Label className="text-[10px] font-bold uppercase text-zinc-400">Nome Completo *</Label>
-          <Input {...reg("fullName")} className="h-12 rounded-xl bg-zinc-50 border-0" />
+          <Input {...f.register("fullName")} className="h-12 rounded-xl bg-zinc-50 border-0" />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
             <Label className="text-[10px] font-bold uppercase text-zinc-400">WhatsApp *</Label>
-            <Input {...reg("whatsapp")} className="h-12 rounded-xl bg-zinc-50 border-0" />
+            <Input
+              {...f.register("whatsapp")}
+              onChange={(e) => f.setValue("whatsapp", formatWhatsApp(e.target.value))}
+              className="h-12 rounded-xl bg-zinc-50 border-0"
+            />
           </div>
           <div className="space-y-1">
             <Label className="text-[10px] font-bold uppercase text-zinc-400">E-mail</Label>
-            <Input {...reg("email")} className="h-12 rounded-xl bg-zinc-50 border-0" />
+            <Input {...f.register("email")} className="h-12 rounded-xl bg-zinc-50 border-0" />
           </div>
         </div>
 
         <div className="space-y-1">
           <Label className="text-[10px] font-bold uppercase text-zinc-400">Vínculo</Label>
-          <Select defaultValue={isEditing ? editingPerson?.type : "visitor"} onValueChange={(v) => setVal("type", v as any)}>
-            <SelectTrigger className="h-12 rounded-xl bg-zinc-50 border-0"><SelectValue /></SelectTrigger>
-            <SelectContent>
+          <Select
+            value={currentType}
+            onValueChange={(v) => f.setValue("type", v as any)}
+          >
+            <SelectTrigger className="h-12 rounded-xl bg-zinc-50 border-0">
+              <SelectValue placeholder="Selecione" />
+            </SelectTrigger>
+            <SelectContent className="rounded-2xl border-0 shadow-2xl">
               <SelectItem value="visitor">Visitante</SelectItem>
               <SelectItem value="member">Membro</SelectItem>
               <SelectItem value="volunteer">Voluntário</SelectItem>
@@ -181,11 +265,11 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <Label className="text-[10px] font-bold uppercase text-amber-600">Ministério</Label>
-                  <Input {...reg("ministry")} placeholder="Ex: Louvor" className="h-12 rounded-xl bg-amber-50/30 border-0" />
+                  <Input {...f.register("ministry")} placeholder="Ex: Louvor" className="h-12 rounded-xl bg-amber-50/30 border-0" />
                 </div>
                 <div className="space-y-1">
                   <Label className="text-[10px] font-bold uppercase text-amber-600">Função</Label>
-                  <Input {...reg("role")} placeholder="Ex: Guitarra" className="h-12 rounded-xl bg-amber-50/30 border-0" />
+                  <Input {...f.register("role")} placeholder="Ex: Guitarra" className="h-12 rounded-xl bg-amber-50/30 border-0" />
                 </div>
               </div>
             </motion.div>
@@ -195,16 +279,27 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
             <Label className="text-[10px] font-bold uppercase text-zinc-400">Endereço</Label>
-            <Input {...reg("address")} className="h-12 rounded-xl bg-zinc-50 border-0" />
+            <Input {...f.register("address")} className="h-12 rounded-xl bg-zinc-50 border-0" />
           </div>
           <div className="space-y-1">
             <Label className="text-[10px] font-bold uppercase text-zinc-400">Nascimento</Label>
-            <Input {...reg("birthDate")} type="date" className="h-12 rounded-xl bg-zinc-50 border-0" />
+            <Input {...f.register("birthDate")} type="date" className="h-12 rounded-xl bg-zinc-50 border-0" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <Label className="text-[10px] font-bold uppercase text-zinc-400">Primeira Visita</Label>
+            <Input {...f.register("firstVisitDate")} type="date" className="h-12 rounded-xl bg-zinc-50 border-0" />
+          </div>
+          <div className="space-y-1">
+            <Label className="text-[10px] font-bold uppercase text-zinc-400">Observações</Label>
+            <Input {...f.register("notes")} className="h-12 rounded-xl bg-zinc-50 border-0" />
           </div>
         </div>
 
         <Button type="submit" disabled={isSubmitting} className="h-14 w-full rounded-2xl bg-zinc-900 text-white font-bold">
-          {isSubmitting ? <Spinner /> : "Salvar"}
+          {isSubmitting ? <Spinner /> : isEditing ? "Salvar Alterações" : "Confirmar Cadastro"}
         </Button>
       </form>
     )
@@ -214,16 +309,21 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
     <motion.div variants={containerVariants} initial="hidden" animate="show" className="p-6 space-y-8 max-w-6xl mx-auto">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1 className="text-4xl font-black tracking-tighter">Pessoas</h1>
+        <div>
+          <h1 className="text-2xl font-bold">Membros e Visitantes</h1>
+          <p className="text-muted-foreground">
+            Gerencie as pessoas da sua comunidade
+          </p>
+        </div>
         {isStaff && (
           <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
             <DialogTrigger  >
               <Button className="h-12 rounded-2xl bg-zinc-900 px-6 shadow-lg shadow-zinc-900/20 hover:scale-105 transition-all">
-                <Plus className="mr-2 h-4 w-4" /> Novo
+                <Plus className="mr-2 h-4 w-4" /> Adicionar Novo
               </Button>
             </DialogTrigger>
             <DialogContent className="rounded-[32px] sm:max-w-lg border-0 shadow-2xl">
-              <DialogHeader><DialogTitle>Cadastrar Pessoa</DialogTitle></DialogHeader>
+              <DialogHeader><DialogTitle>Adicionar Pessoa</DialogTitle></DialogHeader>
               <PersonForm />
             </DialogContent>
           </Dialog>

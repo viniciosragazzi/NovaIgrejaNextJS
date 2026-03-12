@@ -251,6 +251,7 @@ export type PersonWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   youChurch?: Prisma.XOR<Prisma.ChurchScalarRelationFilter, Prisma.ChurchWhereInput>
+  volunteerScales?: Prisma.VolunteerScaleListRelationFilter
 }
 
 export type PersonOrderByWithRelationInput = {
@@ -269,6 +270,7 @@ export type PersonOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   youChurch?: Prisma.ChurchOrderByWithRelationInput
+  volunteerScales?: Prisma.VolunteerScaleOrderByRelationAggregateInput
 }
 
 export type PersonWhereUniqueInput = Prisma.AtLeast<{
@@ -291,6 +293,7 @@ export type PersonWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   youChurch?: Prisma.XOR<Prisma.ChurchScalarRelationFilter, Prisma.ChurchWhereInput>
+  volunteerScales?: Prisma.VolunteerScaleListRelationFilter
 }, "id" | "email_churchId">
 
 export type PersonOrderByWithAggregationInput = {
@@ -348,6 +351,7 @@ export type PersonCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   youChurch: Prisma.ChurchCreateNestedOneWithoutPersonsInput
+  volunteerScales?: Prisma.VolunteerScaleCreateNestedManyWithoutPersonInput
 }
 
 export type PersonUncheckedCreateInput = {
@@ -365,6 +369,7 @@ export type PersonUncheckedCreateInput = {
   churchId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  volunteerScales?: Prisma.VolunteerScaleUncheckedCreateNestedManyWithoutPersonInput
 }
 
 export type PersonUpdateInput = {
@@ -382,6 +387,7 @@ export type PersonUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   youChurch?: Prisma.ChurchUpdateOneRequiredWithoutPersonsNestedInput
+  volunteerScales?: Prisma.VolunteerScaleUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonUncheckedUpdateInput = {
@@ -399,6 +405,7 @@ export type PersonUncheckedUpdateInput = {
   churchId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  volunteerScales?: Prisma.VolunteerScaleUncheckedUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonCreateManyInput = {
@@ -515,6 +522,11 @@ export type PersonMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type PersonScalarRelationFilter = {
+  is?: Prisma.PersonWhereInput
+  isNot?: Prisma.PersonWhereInput
+}
+
 export type PersonCreateNestedManyWithoutYouChurchInput = {
   create?: Prisma.XOR<Prisma.PersonCreateWithoutYouChurchInput, Prisma.PersonUncheckedCreateWithoutYouChurchInput> | Prisma.PersonCreateWithoutYouChurchInput[] | Prisma.PersonUncheckedCreateWithoutYouChurchInput[]
   connectOrCreate?: Prisma.PersonCreateOrConnectWithoutYouChurchInput | Prisma.PersonCreateOrConnectWithoutYouChurchInput[]
@@ -574,6 +586,20 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type PersonCreateNestedOneWithoutVolunteerScalesInput = {
+  create?: Prisma.XOR<Prisma.PersonCreateWithoutVolunteerScalesInput, Prisma.PersonUncheckedCreateWithoutVolunteerScalesInput>
+  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutVolunteerScalesInput
+  connect?: Prisma.PersonWhereUniqueInput
+}
+
+export type PersonUpdateOneRequiredWithoutVolunteerScalesNestedInput = {
+  create?: Prisma.XOR<Prisma.PersonCreateWithoutVolunteerScalesInput, Prisma.PersonUncheckedCreateWithoutVolunteerScalesInput>
+  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutVolunteerScalesInput
+  upsert?: Prisma.PersonUpsertWithoutVolunteerScalesInput
+  connect?: Prisma.PersonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PersonUpdateToOneWithWhereWithoutVolunteerScalesInput, Prisma.PersonUpdateWithoutVolunteerScalesInput>, Prisma.PersonUncheckedUpdateWithoutVolunteerScalesInput>
+}
+
 export type PersonCreateWithoutYouChurchInput = {
   id?: string
   name: string
@@ -588,6 +614,7 @@ export type PersonCreateWithoutYouChurchInput = {
   firstVisitAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  volunteerScales?: Prisma.VolunteerScaleCreateNestedManyWithoutPersonInput
 }
 
 export type PersonUncheckedCreateWithoutYouChurchInput = {
@@ -604,6 +631,7 @@ export type PersonUncheckedCreateWithoutYouChurchInput = {
   firstVisitAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  volunteerScales?: Prisma.VolunteerScaleUncheckedCreateNestedManyWithoutPersonInput
 }
 
 export type PersonCreateOrConnectWithoutYouChurchInput = {
@@ -652,6 +680,90 @@ export type PersonScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
 }
 
+export type PersonCreateWithoutVolunteerScalesInput = {
+  id?: string
+  name: string
+  email?: string | null
+  contact?: Prisma.PersonCreatecontactInput | string[]
+  address?: string | null
+  birthday?: string | null
+  type?: $Enums.TypePerson
+  ministry?: string | null
+  role?: string | null
+  notes?: string | null
+  firstVisitAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  youChurch: Prisma.ChurchCreateNestedOneWithoutPersonsInput
+}
+
+export type PersonUncheckedCreateWithoutVolunteerScalesInput = {
+  id?: string
+  name: string
+  email?: string | null
+  contact?: Prisma.PersonCreatecontactInput | string[]
+  address?: string | null
+  birthday?: string | null
+  type?: $Enums.TypePerson
+  ministry?: string | null
+  role?: string | null
+  notes?: string | null
+  firstVisitAt?: Date | string | null
+  churchId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PersonCreateOrConnectWithoutVolunteerScalesInput = {
+  where: Prisma.PersonWhereUniqueInput
+  create: Prisma.XOR<Prisma.PersonCreateWithoutVolunteerScalesInput, Prisma.PersonUncheckedCreateWithoutVolunteerScalesInput>
+}
+
+export type PersonUpsertWithoutVolunteerScalesInput = {
+  update: Prisma.XOR<Prisma.PersonUpdateWithoutVolunteerScalesInput, Prisma.PersonUncheckedUpdateWithoutVolunteerScalesInput>
+  create: Prisma.XOR<Prisma.PersonCreateWithoutVolunteerScalesInput, Prisma.PersonUncheckedCreateWithoutVolunteerScalesInput>
+  where?: Prisma.PersonWhereInput
+}
+
+export type PersonUpdateToOneWithWhereWithoutVolunteerScalesInput = {
+  where?: Prisma.PersonWhereInput
+  data: Prisma.XOR<Prisma.PersonUpdateWithoutVolunteerScalesInput, Prisma.PersonUncheckedUpdateWithoutVolunteerScalesInput>
+}
+
+export type PersonUpdateWithoutVolunteerScalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.PersonUpdatecontactInput | string[]
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson
+  ministry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstVisitAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  youChurch?: Prisma.ChurchUpdateOneRequiredWithoutPersonsNestedInput
+}
+
+export type PersonUncheckedUpdateWithoutVolunteerScalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.PersonUpdatecontactInput | string[]
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson
+  ministry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstVisitAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  churchId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type PersonCreateManyYouChurchInput = {
   id?: string
   name: string
@@ -682,6 +794,7 @@ export type PersonUpdateWithoutYouChurchInput = {
   firstVisitAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  volunteerScales?: Prisma.VolunteerScaleUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonUncheckedUpdateWithoutYouChurchInput = {
@@ -698,6 +811,7 @@ export type PersonUncheckedUpdateWithoutYouChurchInput = {
   firstVisitAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  volunteerScales?: Prisma.VolunteerScaleUncheckedUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonUncheckedUpdateManyWithoutYouChurchInput = {
@@ -717,6 +831,35 @@ export type PersonUncheckedUpdateManyWithoutYouChurchInput = {
 }
 
 
+/**
+ * Count Type PersonCountOutputType
+ */
+
+export type PersonCountOutputType = {
+  volunteerScales: number
+}
+
+export type PersonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  volunteerScales?: boolean | PersonCountOutputTypeCountVolunteerScalesArgs
+}
+
+/**
+ * PersonCountOutputType without action
+ */
+export type PersonCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PersonCountOutputType
+   */
+  select?: Prisma.PersonCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PersonCountOutputType without action
+ */
+export type PersonCountOutputTypeCountVolunteerScalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VolunteerScaleWhereInput
+}
+
 
 export type PersonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -734,6 +877,8 @@ export type PersonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   youChurch?: boolean | Prisma.ChurchDefaultArgs<ExtArgs>
+  volunteerScales?: boolean | Prisma.Person$volunteerScalesArgs<ExtArgs>
+  _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["person"]>
 
 export type PersonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -792,6 +937,8 @@ export type PersonSelectScalar = {
 export type PersonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "contact" | "address" | "birthday" | "type" | "ministry" | "role" | "notes" | "firstVisitAt" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["person"]>
 export type PersonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   youChurch?: boolean | Prisma.ChurchDefaultArgs<ExtArgs>
+  volunteerScales?: boolean | Prisma.Person$volunteerScalesArgs<ExtArgs>
+  _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PersonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   youChurch?: boolean | Prisma.ChurchDefaultArgs<ExtArgs>
@@ -804,6 +951,7 @@ export type $PersonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Person"
   objects: {
     youChurch: Prisma.$ChurchPayload<ExtArgs>
+    volunteerScales: Prisma.$VolunteerScalePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1215,6 +1363,7 @@ readonly fields: PersonFieldRefs;
 export interface Prisma__PersonClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   youChurch<T extends Prisma.ChurchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ChurchDefaultArgs<ExtArgs>>): Prisma.Prisma__ChurchClient<runtime.Types.Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  volunteerScales<T extends Prisma.Person$volunteerScalesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$volunteerScalesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VolunteerScalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1651,6 +1800,30 @@ export type PersonDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many People to delete.
    */
   limit?: number
+}
+
+/**
+ * Person.volunteerScales
+ */
+export type Person$volunteerScalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VolunteerScale
+   */
+  select?: Prisma.VolunteerScaleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VolunteerScale
+   */
+  omit?: Prisma.VolunteerScaleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VolunteerScaleInclude<ExtArgs> | null
+  where?: Prisma.VolunteerScaleWhereInput
+  orderBy?: Prisma.VolunteerScaleOrderByWithRelationInput | Prisma.VolunteerScaleOrderByWithRelationInput[]
+  cursor?: Prisma.VolunteerScaleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VolunteerScaleScalarFieldEnum | Prisma.VolunteerScaleScalarFieldEnum[]
 }
 
 /**

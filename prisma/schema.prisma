@@ -43,8 +43,10 @@ model Church {
   links     ChurchLink[]
   schedules WeeklySchedule[] // Nova relação de Agenda
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  ministries      Ministry[]
+  volunteerScales VolunteerScale[]
 }
 
 model ChurchLink {
@@ -122,10 +124,56 @@ model Person {
   churchId  String
   youChurch Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
 
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  volunteerScales VolunteerScale[]
+
+  @@unique([email, churchId])
+}
+
+// Adicione isso ao seu schema.prisma
+
+model Ministry {
+  id          String  @id @default(uuid())
+  name        String // Ex: Louvor, Mídia
+  description String?
+  icon        String?
+  color       String? @default("#8ee4af")
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  scales VolunteerScale[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([name, churchId])
+}
+
+model VolunteerScale {
+  id        String   @id @default(uuid())
+  date      DateTime
+  role      String // Ex: Guitarra, Som
+  eventName String? // Ex: Culto de Domingo
+  confirmed Boolean  @default(false)
+
+  // Relação com a Pessoa (Voluntário)
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  // Relação com o Ministério
+  ministryId String
+  ministry   Ministry @relation(fields: [ministryId], references: [id], onDelete: Cascade)
+
+  // Relação com a Igreja (Tenant)
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([email, churchId])
+  @@index([churchId])
+  @@index([personId])
 }
 
 // ... Models do Better Auth (Session, Account, Verification) seguem iguais ...

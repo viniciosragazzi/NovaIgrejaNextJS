@@ -56,6 +56,8 @@ export const ModelName = {
   WeeklySchedule: 'WeeklySchedule',
   User: 'User',
   Person: 'Person',
+  Ministry: 'Ministry',
+  VolunteerScale: 'VolunteerScale',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -154,6 +156,36 @@ export const PersonScalarFieldEnum = {
 } as const
 
 export type PersonScalarFieldEnum = (typeof PersonScalarFieldEnum)[keyof typeof PersonScalarFieldEnum]
+
+
+export const MinistryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  icon: 'icon',
+  color: 'color',
+  churchId: 'churchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MinistryScalarFieldEnum = (typeof MinistryScalarFieldEnum)[keyof typeof MinistryScalarFieldEnum]
+
+
+export const VolunteerScaleScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  role: 'role',
+  eventName: 'eventName',
+  confirmed: 'confirmed',
+  personId: 'personId',
+  ministryId: 'ministryId',
+  churchId: 'churchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VolunteerScaleScalarFieldEnum = (typeof VolunteerScaleScalarFieldEnum)[keyof typeof VolunteerScaleScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {

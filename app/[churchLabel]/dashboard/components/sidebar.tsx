@@ -14,7 +14,8 @@ import {
   X,
   LogOut,
   HandCoins,
-  MessageSquareHeart
+  MessageSquareHeart,
+  Calendar
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -24,6 +25,9 @@ const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/profile", label: "Perfil da Igreja", icon: Church, requiredStaff: true },
   { href: "/dashboard/members", label: "Membros & Visitantes", icon: Users, requiredStaff: true },
+  { href: "/dashboard/ministerios", label: "Ministérios", icon: Users, requiredStaff: true },
+  { href: "/dashboard/schedule", label: "Agenda", icon: Calendar, requiredStaff: true },
+
   { href: "/dashboard/offering", label: "Ofertas", icon: HandCoins },
   { href: "/dashboard/prayers", label: "Pedidos de Oração", icon: MessageSquareHeart },
   { href: "/dashboard/settings", label: "Configurações", icon: Settings, requiredStaff: true },

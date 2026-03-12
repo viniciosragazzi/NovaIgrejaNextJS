@@ -67,6 +67,16 @@ export type User = Prisma.UserModel
  */
 export type Person = Prisma.PersonModel
 /**
+ * Model Ministry
+ * 
+ */
+export type Ministry = Prisma.MinistryModel
+/**
+ * Model VolunteerScale
+ * 
+ */
+export type VolunteerScale = Prisma.VolunteerScaleModel
+/**
  * Model Session
  * 
  */

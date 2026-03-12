@@ -6,15 +6,30 @@ import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 export async function createPersonAction(churchId: string, data: any) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session || session.user.churchId !== churchId) {
-    return { error: "Não autorizado" };
-  }
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session || session.user.churchId !== churchId) return { error: "Não autorizado" };
 
   try {
+    // 1. Integração Automática de Ministério
+    if (data.type === "volunteer" && data.ministry) {
+      await prisma.ministry.upsert({
+        where: {
+          name_churchId: {
+            name: data.ministry,
+            churchId: churchId,
+          },
+        },
+        update: {}, // Não altera nada se já existir
+        create: {
+          name: data.ministry,
+          churchId: churchId,
+          color: "#8ee4af", // Cor padrão do seu sistema
+          icon: "users",
+        },
+      });
+    }
+
+    // 2. Criação da Pessoa
     await prisma.person.create({
       data: {
         name: data.fullName,
@@ -22,15 +37,16 @@ export async function createPersonAction(churchId: string, data: any) {
         contact: [data.whatsapp],
         birthday: data.birthDate || null,
         address: data.address || null,
-        type: data.type.toUpperCase(), // MEMBER, VISITOR, VOLUNTEER
+        type: data.type.toUpperCase(),
         churchId: churchId,
-        // Novos campos
         ministry: data.type === "volunteer" ? data.ministry : null,
         role: data.type === "volunteer" ? data.role : null,
+        notes: data.notes || null,
       },
     });
 
-    revalidatePath(`/[churchLabel]/dashboard/members`, "page");
+    revalidatePath(`/[churchLabel]/dashboard/members`);
+    revalidatePath(`/[churchLabel]/dashboard/ministerios`);
     return { success: true };
   } catch (error) {
     console.error(error);
@@ -40,12 +56,28 @@ export async function createPersonAction(churchId: string, data: any) {
 
 export async function updatePersonAction(churchId: string, personId: string, data: any) {
   const session = await auth.api.getSession({ headers: await headers() });
-
-  if (!session || session.user.churchId !== churchId) {
-    return { error: "Não autorizado" };
-  }
+  if (!session || session.user.churchId !== churchId) return { error: "Não autorizado" };
 
   try {
+    // 1. Garantir que o ministério existe se for voluntário
+    if (data.type === "volunteer" && data.ministry) {
+      await prisma.ministry.upsert({
+        where: {
+          name_churchId: {
+            name: data.ministry,
+            churchId: churchId,
+          },
+        },
+        update: {},
+        create: {
+          name: data.ministry,
+          churchId: churchId,
+          color: "#8ee4af",
+        },
+      });
+    }
+
+    // 2. Atualizar a Pessoa
     await prisma.person.update({
       where: { id: personId },
       data: {
@@ -55,67 +87,28 @@ export async function updatePersonAction(churchId: string, personId: string, dat
         birthday: data.birthDate || null,
         address: data.address || null,
         type: data.type.toUpperCase(),
-        // Novos campos
         ministry: data.type === "volunteer" ? data.ministry : null,
         role: data.type === "volunteer" ? data.role : null,
+        notes: data.notes || null,
       },
     });
 
-    revalidatePath(`/[churchLabel]/dashboard/members`, "page");
+    revalidatePath(`/[churchLabel]/dashboard/members`);
+    revalidatePath(`/[churchLabel]/dashboard/ministerios`);
     return { success: true };
   } catch (error) {
-    console.error(error);
-    return { error: "Erro ao atualizar pessoa." };
+    console.error("ERRO AO ATUALIZAR:", error);
+    return { error: "Falha técnica ao atualizar." };
   }
 }
 
-export async function vincularMembroAction(email: string, churchId: string) {
+export async function deletePersonAction(churchId: string, personId: string) {
   const session = await auth.api.getSession({ headers: await headers() });
-
   if (!session || session.user.churchId !== churchId) return { error: "Não autorizado" };
 
   try {
-    const updatedUser = await prisma.user.update({
-      where: { email: email },
-      data: {
-        churchId: churchId,
-        status: "MEMBER"
-      }
-    });
-
-    await prisma.person.upsert({
-      where: { email_churchId: { email, churchId } },
-      update: { type: "MEMBER" },
-      create: {
-        name: updatedUser.name,
-        email: updatedUser.email,
-        type: "MEMBER",
-        churchId: churchId,
-        contact: []
-      }
-    });
-
-    revalidatePath(`/[churchLabel]/dashboard/members`, "page");
-    return { success: true };
-  } catch (error) {
-    return { error: "Usuário não encontrado no sistema." };
-  }
-}
-
-// Action de Deletar (faltava no seu código)
-export async function deletePersonAction(churchId: string, personId: string) {
-  const session = await auth.api.getSession({ headers: await headers() });
-
-  if (!session || session.user.churchId !== churchId) {
-    return { error: "Não autorizado" };
-  }
-
-  try {
-    await prisma.person.delete({
-      where: { id: personId }
-    });
-
-    revalidatePath(`/[churchLabel]/dashboard/members`, "page");
+    await prisma.person.delete({ where: { id: personId } });
+    revalidatePath(`/[churchLabel]/dashboard/members`);
     return { success: true };
   } catch (error) {
     return { error: "Erro ao excluir registro." };
