@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js" // Corrigido de "prisma-client" para o padrão
   output   = "../prisma/generated/prisma"
 }
 
@@ -30,23 +30,55 @@ enum DayOfWeek {
   SABADO
 }
 
+// Novo Enum para separar Entradas e Saídas (útil para o futuro)
+enum EntryType {
+  INCOME
+  EXPENSE
+}
+
 model Church {
   id      String   @id @default(uuid())
   name    String
   label   String   @unique
   address String
   contact String[]
+  customization Json?
+
+  // --- NOVOS CAMPOS PARA O FINANCEIRO (PIX) ---
+  pixKeyType   String? // Ex: "email", "cnpj", "phone"
+  pixKeyValue  String? // Ex: "igreja@contato.com"
+  pixCopyPaste String? // Armazena o código BR Code se necessário
 
   // Relações
-  users     User[]
-  persons   Person[]
-  links     ChurchLink[]
-  schedules WeeklySchedule[] // Nova relação de Agenda
+  users            User[]
+  persons          Person[]
+  links            ChurchLink[]
+  schedules        WeeklySchedule[]
+  ministries       Ministry[]
+  volunteerScales  VolunteerScale[]
+  financialEntries FinancialEntry[] // Nova relação financeira
 
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  ministries      Ministry[]
-  volunteerScales VolunteerScale[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// --- NOVA MODEL: ENTRADAS FINANCEIRAS ---
+model FinancialEntry {
+  id          String    @id @default(uuid())
+  amount      Float // Valor da doação/entrada
+  category    String // Ex: "tithe" (dízimo), "offering", "missions"
+  type        EntryType @default(INCOME)
+  date        DateTime  @default(now())
+  donorName   String? // Nome do doador (opcional para entradas manuais)
+  description String? // Observações/Descrição
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([churchId])
 }
 
 model ChurchLink {
@@ -66,13 +98,12 @@ model ChurchLink {
   @@index([churchId])
 }
 
-// NOVA MODEL: Agenda Semanal
 model WeeklySchedule {
   id          String    @id @default(uuid())
-  title       String // Ex: "Culto de Celebração"
+  title       String
   dayOfWeek   DayOfWeek
-  time        String // Ex: "19:30"
-  description String? // Ex: "Um momento de louvor e palavra"
+  time        String
+  description String?
   active      Boolean   @default(true)
 
   churchId String
@@ -112,14 +143,15 @@ model Person {
   address  String?
   birthday String?
   type     TypePerson @default(MEMBER)
+  profileImage String?
 
-  // NOVOS CAMPOS PARA VOLUNTÁRIOS
-  ministry String? // Ex: "Louvor", "Kids"
-  role     String? // Ex: "Guitarrista", "Professor"
+  ministry String?
+  role     String?
 
-  // Campos extras para Visitantes no Admin
-  notes        String? // Observações
+  notes        String?
   firstVisitAt DateTime? @default(now())
+  onboardingDraft       Json?
+  onboardingCompletedAt DateTime?
 
   churchId  String
   youChurch Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
@@ -131,11 +163,9 @@ model Person {
   @@unique([email, churchId])
 }
 
-// Adicione isso ao seu schema.prisma
-
 model Ministry {
   id          String  @id @default(uuid())
-  name        String // Ex: Louvor, Mídia
+  name        String
   description String?
   icon        String?
   color       String? @default("#8ee4af")
@@ -147,25 +177,23 @@ model Ministry {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
   @@unique([name, churchId])
 }
 
 model VolunteerScale {
   id        String   @id @default(uuid())
   date      DateTime
-  role      String // Ex: Guitarra, Som
-  eventName String? // Ex: Culto de Domingo
+  role      String
+  eventName String?
   confirmed Boolean  @default(false)
 
-  // Relação com a Pessoa (Voluntário)
   personId String
   person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
-  // Relação com o Ministério
   ministryId String
   ministry   Ministry @relation(fields: [ministryId], references: [id], onDelete: Cascade)
 
-  // Relação com a Igreja (Tenant)
   churchId String
   church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
 
@@ -176,7 +204,6 @@ model VolunteerScale {
   @@index([personId])
 }
 
-// ... Models do Better Auth (Session, Account, Verification) seguem iguais ...
 model Session {
   id        String   @id
   expiresAt DateTime

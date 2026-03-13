@@ -1,0 +1,127 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 7864 >>
+stream
+0.87 0.89 0.91 RG 0.97 0.97 0.96 rg 32.00 739.00 531.00 71.00 re B
+BT /F2 24 Tf 0.13 0.14 0.16 rg 1 0 0 1 44.00 786.00 Tm (NovaIgreja) Tj ET
+BT /F1 10 Tf 0.36 0.40 0.45 rg 1 0 0 1 44.00 768.00 Tm (Resumo do app baseado apenas em evidencias do repositorio) Tj ET
+BT /F2 9 Tf 0.74 0.56 0.16 rg 1 0 0 1 457.00 786.00 Tm (pt-BR | 1 pagina) Tj ET
+1 w 0.87 0.89 0.91 RG 297.50 90.00 m 297.50 728.00 l S
+BT /F2 11 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 724.00 Tm (O que e) Tj ET
+1.2 w 0.87 0.89 0.91 RG 42.00 720.00 m 140.00 720.00 l S
+BT /F1 9.8 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 706.00 Tm (NovaIgreja e um app web multi-tenant para igrejas,) Tj ET
+BT /F1 9.8 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 693.00 Tm (construido com Next.js, Prisma e Better Auth. O fluxo) Tj ET
+BT /F1 9.8 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 680.00 Tm (encontrado no repo cobre cadastro administrativo,) Tj ET
+BT /F1 9.8 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 667.00 Tm (onboarding da igreja, pagina publica por label e painel) Tj ET
+BT /F1 9.8 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 654.00 Tm (interno de gestao.) Tj ET
+BT /F2 11 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 633.00 Tm (Para quem) Tj ET
+1.2 w 0.87 0.89 0.91 RG 42.00 629.00 m 140.00 629.00 l S
+BT /F1 9.8 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 615.00 Tm (Usuario principal: staff/administrador da igreja) Tj ET
+BT /F1 9.8 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 602.00 Tm (responsavel por configurar a igreja, operar o dashboard) Tj ET
+BT /F1 9.8 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 589.00 Tm (e acompanhar membros, ministerios e financeiro.) Tj ET
+BT /F2 11 Tf 0.13 0.14 0.16 rg 1 0 0 1 42.00 568.00 Tm (O que faz) Tj ET
+1.2 w 0.87 0.89 0.91 RG 42.00 564.00 m 140.00 564.00 l S
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 42.00 550.00 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 550.00 Tm (Cadastro e login com Better Auth,) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 537.80 Tm (incluindo onboarding para criar a) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 525.60 Tm (igreja.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 42.00 512.40 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 512.40 Tm (URLs por igreja com churchLabel e) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 500.20 Tm (area publica para a comunidade.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 42.00 487.00 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 487.00 Tm (Dashboard interno por igreja com) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 474.80 Tm (isolamento entre tenants.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 42.00 461.60 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 461.60 Tm (Gestao de membros, visitantes e) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 449.40 Tm (voluntarios com formularios e) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 437.20 Tm (filtros.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 42.00 424.00 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 424.00 Tm (Ministerios e escalas de voluntarios) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 411.80 Tm (com confirmacao de participacao.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 42.00 398.60 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 398.60 Tm (Financeiro com configuracao PIX e) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 386.40 Tm (registro manual de entradas.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 42.00 373.20 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 373.20 Tm (Perfil da igreja e links publicos) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 52.00 361.00 Tm (editaveis para a pagina da igreja.) Tj ET
+BT /F2 11 Tf 0.13 0.14 0.16 rg 1 0 0 1 316.00 724.00 Tm (Como funciona) Tj ET
+1.2 w 0.87 0.89 0.91 RG 316.00 720.00 m 414.00 720.00 l S
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 706.00 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 706.00 Tm (UI: Next.js App Router em src/app,) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 693.60 Tm (com paginas globais e rotas) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 681.20 Tm (dinamicas /[churchLabel].) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 667.80 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 667.80 Tm (Auth: Better Auth exposto em) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 655.40 Tm (src/app/api/auth/[...all]/route.ts) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 643.00 Tm (e consumido por server actions.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 629.60 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 629.60 Tm (Dados: Prisma Client em) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 617.20 Tm (src/lib/prisma.ts conectado a) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 604.80 Tm (PostgreSQL; schema em) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 592.40 Tm (prisma/schema.prisma.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 579.00 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 579.00 Tm (Seguranca: proxy.ts valida labels,) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 566.60 Tm (redireciona auth e bloqueia acesso) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 554.20 Tm (cruzado entre igrejas.) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 540.80 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 540.80 Tm (Fluxo: paginas chamam server) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 528.40 Tm (actions -> actions validam sessao) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 516.00 Tm (-> Prisma le/escreve no banco ->) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 503.60 Tm (revalidatePath atualiza a UI.) Tj ET
+BT /F2 11 Tf 0.13 0.14 0.16 rg 1 0 0 1 316.00 482.20 Tm (Como rodar) Tj ET
+1.2 w 0.87 0.89 0.91 RG 316.00 478.20 m 414.00 478.20 l S
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 464.20 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 464.20 Tm (Instalar dependencias: npm install) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 450.80 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 450.80 Tm (Subir o PostgreSQL local: docker) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 438.40 Tm (compose -f) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 426.00 Tm (docker-compose.postgres.yml up -d) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 412.60 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 412.60 Tm (Configurar .env com DATABASE_URL,) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 400.20 Tm (BETTER_AUTH_SECRET e) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 387.80 Tm (BETTER_AUTH_URL) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 374.40 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 374.40 Tm (Aplicar schema/migrations do) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 362.00 Tm (Prisma: npx prisma migrate deploy) Tj ET
+BT /F1 9.1 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 348.60 Tm (-) Tj ET
+BT /F1 9.1 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 348.60 Tm (Iniciar o app: npm run dev) Tj ET
+BT /F2 11 Tf 0.13 0.14 0.16 rg 1 0 0 1 316.00 331.20 Tm (Lacunas) Tj ET
+1.2 w 0.87 0.89 0.91 RG 316.00 327.20 m 414.00 327.20 l S
+BT /F1 9 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 313.20 Tm (-) Tj ET
+BT /F1 9 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 313.20 Tm (Seed de dados: Not found in repo.) Tj ET
+BT /F1 9 Tf 0.74 0.56 0.16 rg 1 0 0 1 316.00 300.20 Tm (-) Tj ET
+BT /F1 9 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 300.20 Tm (Comando documentado oficial de) Tj ET
+BT /F1 9 Tf 0.13 0.14 0.16 rg 1 0 0 1 326.00 288.20 Tm (setup: Not found in repo.) Tj ET
+1 w 0.87 0.89 0.91 RG 42.00 70.00 m 553.00 70.00 l S
+BT /F1 8.5 Tf 0.36 0.40 0.45 rg 1 0 0 1 42.00 54.00 Tm (Fontes inspecionadas: package.json, prisma/schema.prisma, proxy.ts, src/app, src/actions, src/lib.) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+8312
+%%EOF

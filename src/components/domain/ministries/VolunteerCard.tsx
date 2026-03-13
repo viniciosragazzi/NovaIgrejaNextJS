@@ -1,6 +1,6 @@
 "use client"
 
-import { MessageCircle, Users } from "lucide-react"
+import { LucideIcon, MessageCircle, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Person as Volunteer } from "@/@types/person.types"
@@ -8,13 +8,13 @@ import { Person as Volunteer } from "@/@types/person.types"
 interface VolunteerCardProps {
   volunteer: Volunteer
   onSendWhatsApp: (v: Volunteer) => void
-  ministryIcon?: any
+  ministryIcon?: LucideIcon
 }
 
 export function VolunteerCard({
   volunteer,
   onSendWhatsApp,
-  ministryIcon: Icon = Users,
+  ministryIcon: _Icon = Users,
 }: VolunteerCardProps) {
   return (
     <div className="flex items-center justify-between rounded-2xl bg-card p-4 shadow-sm">

@@ -1,0 +1,253 @@
+generator client {
+  provider = "prisma-client-js" // Corrigido de "prisma-client" para o padrão
+  output   = "../prisma/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum SystemRole {
+  ADMIN
+  USER
+  GUEST
+}
+
+enum TypePerson {
+  STAFF
+  MEMBER
+  VISITOR
+  VOLUNTEER
+}
+
+enum DayOfWeek {
+  DOMINGO
+  SEGUNDA
+  TERCA
+  QUARTA
+  QUINTA
+  SEXTA
+  SABADO
+}
+
+// Novo Enum para separar Entradas e Saídas (útil para o futuro)
+enum EntryType {
+  INCOME
+  EXPENSE
+}
+
+model Church {
+  id            String   @id @default(uuid())
+  name          String
+  label         String   @unique
+  address       String
+  contact       String[]
+  customization Json?
+
+  // --- NOVOS CAMPOS PARA O FINANCEIRO (PIX) ---
+  pixKeyType   String? // Ex: "email", "cnpj", "phone"
+  pixKeyValue  String? // Ex: "igreja@contato.com"
+  pixCopyPaste String? // Armazena o código BR Code se necessário
+
+  // Relações
+  users            User[]
+  persons          Person[]
+  links            ChurchLink[]
+  schedules        WeeklySchedule[]
+  ministries       Ministry[]
+  volunteerScales  VolunteerScale[]
+  financialEntries FinancialEntry[] // Nova relação financeira
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// --- NOVA MODEL: ENTRADAS FINANCEIRAS ---
+model FinancialEntry {
+  id          String    @id @default(uuid())
+  amount      Float // Valor da doação/entrada
+  category    String // Ex: "tithe" (dízimo), "offering", "missions"
+  type        EntryType @default(INCOME)
+  date        DateTime  @default(now())
+  donorName   String? // Nome do doador (opcional para entradas manuais)
+  description String? // Observações/Descrição
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([churchId])
+}
+
+model ChurchLink {
+  id     String  @id @default(uuid())
+  title  String
+  url    String
+  icon   String?
+  active Boolean @default(true)
+  order  Int     @default(0)
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([churchId])
+}
+
+model WeeklySchedule {
+  id          String    @id @default(uuid())
+  title       String
+  dayOfWeek   DayOfWeek
+  time        String
+  description String?
+  active      Boolean   @default(true)
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([churchId])
+}
+
+model User {
+  id            String      @id @default(cuid())
+  name          String
+  email         String      @unique
+  emailVerified Boolean     @default(false)
+  image         String?
+  role          SystemRole  @default(USER)
+  status        TypePerson? @default(MEMBER)
+
+  churchId  String?
+  youChurch Church? @relation(fields: [churchId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  sessions  Session[]
+  accounts  Account[]
+
+  @@map("user")
+}
+
+model Person {
+  id           String     @id @default(uuid())
+  name         String
+  email        String?
+  contact      String[]
+  address      String?
+  birthday     String?
+  type         TypePerson @default(MEMBER)
+  profileImage String?
+
+  ministry String?
+  role     String?
+
+  notes                 String?
+  firstVisitAt          DateTime? @default(now())
+  onboardingDraft       Json?
+  onboardingCompletedAt DateTime?
+
+  churchId  String
+  youChurch Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  volunteerScales VolunteerScale[]
+
+  @@unique([email, churchId])
+}
+
+model Ministry {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  icon        String?
+  color       String? @default("#8ee4af")
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  scales VolunteerScale[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name, churchId])
+}
+
+model VolunteerScale {
+  id        String   @id @default(uuid())
+  date      DateTime
+  role      String
+  eventName String?
+  confirmed Boolean  @default(false)
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  ministryId String
+  ministry   Ministry @relation(fields: [ministryId], references: [id], onDelete: Cascade)
+
+  churchId String
+  church   Church @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([churchId])
+  @@index([personId])
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}

@@ -46,7 +46,7 @@ export interface ScheduleEvent {
   description?: string;
 }
 
-export type ActionResponse<T = any> = {
+export type ActionResponse<T = unknown> = {
   success: boolean;
   data?: T;
   error?: string;

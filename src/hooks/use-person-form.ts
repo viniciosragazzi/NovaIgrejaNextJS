@@ -1,65 +1,95 @@
 "use client"
 
-import { useState } from "react"
-import { useForm, UseFormReturn } from "react-hook-form"
+import { useEffect, useMemo, useState } from "react"
+import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
 import { personSchema } from "@/lib/validations"
-import { Person, PersonFormData } from "@/@types/person.types"
+import { Person, PersonFormData, PersonType } from "@/@types/person.types"
 import { createPersonAction, updatePersonAction } from "@/actions/person.actions"
 
 interface UsePersonFormProps {
   churchId: string
   onSuccess: (newPerson: Person) => void
   editingPerson?: Person | null
+  defaultValues?: Partial<PersonFormData>
 }
 
 export function usePersonForm({
   churchId,
   onSuccess,
   editingPerson,
+  defaultValues,
 }: UsePersonFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const initialValues = useMemo<PersonFormData>(() => ({
+    fullName: editingPerson?.fullName || defaultValues?.fullName || "",
+    whatsapp: editingPerson?.whatsapp || defaultValues?.whatsapp || "",
+    email: editingPerson?.email || defaultValues?.email || "",
+    address: editingPerson?.address || defaultValues?.address || "",
+    birthDate: editingPerson?.birthDate || defaultValues?.birthDate || "",
+    firstVisitDate: editingPerson?.firstVisitDate || defaultValues?.firstVisitDate || "",
+    notes: editingPerson?.notes || defaultValues?.notes || "",
+    type: editingPerson?.type || defaultValues?.type || "visitor",
+    ministry: editingPerson?.ministry || defaultValues?.ministry || "",
+    role: editingPerson?.role || defaultValues?.role || "",
+  }), [
+    defaultValues?.address,
+    defaultValues?.birthDate,
+    defaultValues?.email,
+    defaultValues?.firstVisitDate,
+    defaultValues?.fullName,
+    defaultValues?.ministry,
+    defaultValues?.notes,
+    defaultValues?.role,
+    defaultValues?.type,
+    defaultValues?.whatsapp,
+    editingPerson?.address,
+    editingPerson?.birthDate,
+    editingPerson?.email,
+    editingPerson?.firstVisitDate,
+    editingPerson?.fullName,
+    editingPerson?.ministry,
+    editingPerson?.notes,
+    editingPerson?.role,
+    editingPerson?.type,
+    editingPerson?.whatsapp,
+  ])
 
   const form = useForm<PersonFormData>({
     resolver: zodResolver(personSchema),
-    defaultValues: {
-      fullName: editingPerson?.fullName || "",
-      whatsapp: editingPerson?.whatsapp || "",
-      email: editingPerson?.email || "",
-      address: editingPerson?.address || "",
-      birthDate: editingPerson?.birthDate || "",
-      firstVisitDate: editingPerson?.firstVisitDate || "",
-      notes: editingPerson?.notes || "",
-      type: (editingPerson?.type as any) || "visitor",
-      ministry: editingPerson?.ministry || "",
-      role: editingPerson?.role || "",
-    },
+    defaultValues: initialValues,
   })
+
+  useEffect(() => {
+    form.reset(initialValues)
+  }, [form, initialValues])
 
   async function onSubmit(data: PersonFormData) {
     setIsSubmitting(true)
     try {
-      let result
-      if (editingPerson) {
-        result = await updatePersonAction(churchId, editingPerson.id, data)
-      } else {
-        result = await createPersonAction(churchId, data)
-      }
+      const result = editingPerson
+        ? await updatePersonAction(churchId, editingPerson.id, data)
+        : await createPersonAction(churchId, data)
 
       if (result.success) {
-        toast.success(editingPerson ? "Atualizado!" : "Cadastrado!")
-        onSuccess({
-          id: editingPerson?.id || Math.random().toString(),
-          ...data,
-          type: data.type as any,
-        })
-        if (!editingPerson) form.reset()
+        toast.success(editingPerson ? "Pessoa atualizada com sucesso." : "Pessoa cadastrada com sucesso.")
+
+        if (result.data) {
+          onSuccess({
+            ...result.data,
+            type: result.data.type as PersonType,
+          })
+        }
+
+        if (!editingPerson) {
+          form.reset(initialValues)
+        }
       } else {
-        toast.error(result.error)
+        toast.error(result.error || "Nao foi possivel salvar os dados da pessoa.")
       }
-    } catch (error) {
-      toast.error("Erro ao processar")
+    } catch {
+      toast.error("Erro inesperado ao processar o formulario.")
     } finally {
       setIsSubmitting(false)
     }

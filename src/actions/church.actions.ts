@@ -1,57 +1,69 @@
 "use server";
 
+import { ActionResponse } from "@/@types/shared.types";
+import { ChurchLink } from "@/@types/church.types";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { ChurchProfileFormData, ChurchLink } from "@/@types/church.types";
-import { ActionResponse } from "@/@types/shared.types";
+import { headers } from "next/headers";
+import { ChurchProfileSchemaData } from "@/lib/validations";
+import { Prisma } from "@prisma/generated/prisma/client";
 
 export async function updateChurchProfileAction(
   churchId: string,
-  data: ChurchProfileFormData,
+  data: ChurchProfileSchemaData,
   links: Partial<ChurchLink>[]
 ): Promise<ActionResponse> {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
-  // SEGURANÇA: Verifica se é staff desta igreja específica
   if (
     !session ||
     session.user.churchId !== churchId ||
-    session.user.role !== "USER"
+    (session.user.status !== "STAFF" && session.user.role !== "ADMIN")
   ) {
     return { success: false, error: "Não autorizado" };
   }
 
   try {
-    // Transação para garantir que tudo salve ou nada salve
     await prisma.$transaction([
-      // 1. Atualiza dados básicos da Igreja
       prisma.church.update({
         where: { id: churchId },
         data: {
           name: data.name,
           address: data.address,
-          // slug/label costuma ser bloqueado após criação para não quebrar URLs
+          customization: data.customization as Prisma.InputJsonValue,
+          pixCopyPaste:
+            data.customization.doacoes.qrCodePix || undefined,
         },
       }),
-
-      // 2. Limpa links antigos e insere os novos (Sincronização)
       prisma.churchLink.deleteMany({ where: { churchId } }),
       prisma.churchLink.createMany({
-        data: links.map((link, index) => ({
-          title: link.title || "",
-          url: link.url || "",
-          churchId: churchId,
-          order: index,
-          icon: link.title?.toLowerCase() || "", // O componente já faz o mapeamento por nome
-        })),
+        data: links
+          .filter((link) => link.title && link.url)
+          .map((link, index) => ({
+            title: link.title || "",
+            url: link.url || "",
+            churchId,
+            order: index,
+            icon: link.title?.toLowerCase() || "",
+          })),
       }),
     ]);
 
-    revalidatePath(`/dashboard/profile`);
+    const church = await prisma.church.findUnique({
+      where: { id: churchId },
+      select: { label: true },
+    });
+
+    if (church?.label) {
+      revalidatePath(`/${church.label}`);
+      revalidatePath(`/${church.label}/dashboard/profile`);
+      revalidatePath(`/${church.label}/dashboard/financeiro`);
+      revalidatePath(`/${church.label}/dashboard`);
+    }
+
     return { success: true };
   } catch (error) {
     console.error(error);

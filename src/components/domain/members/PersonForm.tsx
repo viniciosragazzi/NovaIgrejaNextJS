@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
-import { PersonFormData } from "@/@types/person.types"
+import { PersonFormData, PersonType } from "@/@types/person.types"
 
 interface PersonFormProps {
   form: UseFormReturn<PersonFormData>
@@ -79,7 +79,7 @@ export function PersonForm({
         </Label>
         <Select
           value={currentType}
-          onValueChange={(v) => form.setValue("type", v as any)}
+          onValueChange={(v) => form.setValue("type", v as PersonType)}
         >
           <SelectTrigger className="h-12 rounded-xl bg-zinc-50 border-0">
             <SelectValue placeholder="Selecione" />

@@ -1,8 +1,9 @@
 "use client"
 
+import { useMemo } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Plus } from "lucide-react"
+import { Check, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -20,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { cn } from "@/lib/utils"
 import { volunteerScaleSchema } from "@/lib/validations"
 import { Ministry, ScheduleFormData } from "@/@types/ministry.types"
 import { Person as Volunteer } from "@/@types/person.types"
@@ -45,54 +47,89 @@ export function ScheduleForm({
     resolver: zodResolver(volunteerScaleSchema),
     defaultValues: {
       eventDate: new Date().toISOString().split("T")[0],
+      volunteerIds: [],
     },
   })
 
+  const selectedVolunteerIds = form.watch("volunteerIds") || []
+  const selectedMinistryId = form.watch("ministryId")
+
+  const filteredVolunteers = useMemo(() => {
+    if (!selectedMinistryId) {
+      return availableVolunteers
+    }
+
+    const selectedMinistry = ministries.find((ministry) => ministry.id === selectedMinistryId)
+    if (!selectedMinistry) {
+      return availableVolunteers
+    }
+
+    return availableVolunteers.filter(
+      (volunteer) => !volunteer.ministry || volunteer.ministry === selectedMinistry.name
+    )
+  }, [availableVolunteers, ministries, selectedMinistryId])
+
+  const toggleVolunteer = (volunteerId: string) => {
+    const current = form.getValues("volunteerIds") || []
+    const nextValues = current.includes(volunteerId)
+      ? current.filter((id) => id !== volunteerId)
+      : [...current, volunteerId]
+
+    form.setValue("volunteerIds", nextValues, { shouldValidate: true })
+  }
+
+  const handleSubmit = async (data: ScheduleFormData) => {
+    const success = await onSubmit(data)
+    if (success) {
+      form.reset({
+        eventDate: new Date().toISOString().split("T")[0],
+        eventName: "",
+        ministryId: "",
+        volunteerIds: [],
+        role: "",
+      })
+    }
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogTrigger >
+      <DialogTrigger>
         <Button className="gap-2 rounded-2xl bg-primary px-6 text-primary-foreground">
           <Plus className="h-4 w-4" />
           Nova Escala
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="rounded-3xl sm:max-w-md">
+      <DialogContent className="rounded-3xl sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Escalar Voluntário</DialogTitle>
+          <DialogTitle>Escalar Voluntarios</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
           <div className="space-y-2">
             <Label>Data do Evento</Label>
-            <Input
-              type="date"
-              className="h-12 rounded-2xl"
-              {...form.register("eventDate")}
-            />
+            <Input type="date" className="h-12 rounded-2xl" {...form.register("eventDate")} />
           </div>
 
           <div className="space-y-2">
             <Label>Nome do Evento</Label>
-            <Input
-              placeholder="Ex: Culto Domingo"
-              className="h-12 rounded-2xl"
-              {...form.register("eventName")}
-            />
+            <Input placeholder="Ex: Culto Domingo" className="h-12 rounded-2xl" {...form.register("eventName")} />
           </div>
 
           <div className="space-y-2">
-            <Label>Ministério</Label>
+            <Label>Ministerio</Label>
             <Select
-              onValueChange={(v) => form.setValue("ministryId", v as string)}
+              onValueChange={(value) =>
+                form.setValue("ministryId", String(value ?? ""), { shouldValidate: true })
+              }
             >
               <SelectTrigger className="h-12 rounded-2xl">
-                <SelectValue placeholder="Selecione o ministério" />
+                <SelectValue placeholder="Selecione o ministerio" />
               </SelectTrigger>
               <SelectContent>
-                {ministries.map((m) => (
-                  <SelectItem key={m.id} value={m.id}>
-                    {m.name}
+                {ministries.map((ministry) => (
+                  <SelectItem key={ministry.id} value={ministry.id}>
+                    {ministry.name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -100,38 +137,52 @@ export function ScheduleForm({
           </div>
 
           <div className="space-y-2">
-            <Label>Voluntário</Label>
-            <Select
-              onValueChange={(v) => form.setValue("volunteerId", v as string)}
-            >
-              <SelectTrigger className="h-12 rounded-2xl">
-                <SelectValue placeholder="Selecione o voluntário" />
-              </SelectTrigger>
-              <SelectContent>
-                {availableVolunteers.map((v) => (
-                  <SelectItem key={v.id} value={v.id}>
-                    {v.fullName}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Label>Voluntarios</Label>
+            <div className="max-h-56 space-y-2 overflow-y-auto rounded-2xl border border-border p-3">
+              {filteredVolunteers.length > 0 ? (
+                filteredVolunteers.map((volunteer) => {
+                  const isSelected = selectedVolunteerIds.includes(volunteer.id)
+                  return (
+                    <button
+                      key={volunteer.id}
+                      type="button"
+                      onClick={() => toggleVolunteer(volunteer.id)}
+                      className={cn(
+                        "flex w-full items-center justify-between rounded-xl border px-3 py-3 text-left transition-colors",
+                        isSelected ? "border-primary bg-primary/5" : "border-border hover:bg-muted/50"
+                      )}
+                    >
+                      <div>
+                        <p className="text-sm font-medium">{volunteer.fullName}</p>
+                        <p className="text-xs text-muted-foreground">{volunteer.ministry || "Sem ministerio"}</p>
+                      </div>
+                      <div
+                        className={cn(
+                          "flex h-6 w-6 items-center justify-center rounded-full border",
+                          isSelected ? "border-primary bg-primary text-primary-foreground" : "border-border"
+                        )}
+                      >
+                        {isSelected ? <Check className="h-3.5 w-3.5" /> : null}
+                      </div>
+                    </button>
+                  )
+                })
+              ) : (
+                <p className="text-sm text-muted-foreground">Nenhum voluntario disponivel para este ministerio.</p>
+              )}
+            </div>
+            {form.formState.errors.volunteerIds ? (
+              <p className="text-xs text-destructive">{form.formState.errors.volunteerIds.message}</p>
+            ) : null}
           </div>
 
           <div className="space-y-2">
-            <Label>Função</Label>
-            <Input
-              placeholder="Ex: Câmera"
-              className="h-12 rounded-2xl"
-              {...form.register("role")}
-            />
+            <Label>Funcao</Label>
+            <Input placeholder="Ex: Camera" className="h-12 rounded-2xl" {...form.register("role")} />
           </div>
 
-          <Button
-            type="submit"
-            className="h-12 w-full rounded-2xl bg-primary text-primary-foreground"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Processando..." : "Escalar Voluntário"}
+          <Button type="submit" className="h-12 w-full rounded-2xl bg-primary text-primary-foreground" disabled={isSubmitting}>
+            {isSubmitting ? "Processando..." : "Escalar Voluntarios"}
           </Button>
         </form>
       </DialogContent>

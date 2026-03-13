@@ -7,6 +7,7 @@ export interface Person {
   email?: string;
   address?: string;
   birthDate?: string;
+  profileImage?: string;
   firstVisitDate?: string;
   notes?: string;
   type: PersonType;
@@ -20,6 +21,7 @@ export interface PersonFormData {
   email?: string;
   address?: string;
   birthDate?: string;
+  profileImage?: string;
   firstVisitDate?: string;
   notes?: string;
   type: PersonType;

@@ -1,17 +1,19 @@
 "use client"
 
 import { useState } from "react"
-import { UserPlus, Send, Calendar, Phone, User, MessageSquare, ChevronRight } from "lucide-react"
+import { ChevronRight, Send, Calendar, Phone, User, MessageSquare, UserPlus } from "lucide-react"
+import { toast } from "sonner"
+import { registerVisitorAction } from "@/actions/landing.actions"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
   Drawer,
   DrawerClose,
@@ -22,15 +24,15 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { useIsMobile } from "@/hooks/use-mobile"
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Spinner } from "@/components/ui/spinner"
 
 function formatPhone(value: string) {
@@ -40,27 +42,45 @@ function formatPhone(value: string) {
   return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`
 }
 
-function FormContent({ onClose }: { onClose?: () => void }) {
-  const [phone, setPhone] = useState("")
+function FormContent({
+  churchLabel,
+  onClose,
+}: {
+  churchLabel: string
+  onClose?: () => void
+}) {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    birthDate: "",
+    source: "",
+  })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatPhone(e.target.value)
-    setPhone(formatted)
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const result = await registerVisitorAction(churchLabel, formData)
 
     setIsSubmitting(false)
+
+    if (!result.success) {
+      toast.error(result.error)
+      return
+    }
+
     setIsSuccess(true)
 
     setTimeout(() => {
       setIsSuccess(false)
+      setFormData({
+        name: "",
+        phone: "",
+        birthDate: "",
+        source: "",
+      })
       onClose?.()
     }, 2000)
   }
@@ -90,6 +110,8 @@ function FormContent({ onClose }: { onClose?: () => void }) {
           id="name"
           placeholder="Digite seu nome"
           required
+          value={formData.name}
+          onChange={(e) => setFormData((current) => ({ ...current, name: e.target.value }))}
           className="h-12 rounded-2xl border-border bg-muted/50"
         />
       </div>
@@ -103,8 +125,10 @@ function FormContent({ onClose }: { onClose?: () => void }) {
           id="phone"
           type="tel"
           placeholder="(00) 00000-0000"
-          value={phone}
-          onChange={handlePhoneChange}
+          value={formData.phone}
+          onChange={(e) =>
+            setFormData((current) => ({ ...current, phone: formatPhone(e.target.value) }))
+          }
           maxLength={15}
           required
           className="h-12 rounded-2xl border-border bg-muted/50"
@@ -120,6 +144,8 @@ function FormContent({ onClose }: { onClose?: () => void }) {
           id="birthdate"
           type="date"
           required
+          value={formData.birthDate}
+          onChange={(e) => setFormData((current) => ({ ...current, birthDate: e.target.value }))}
           className="h-12 rounded-2xl border-border bg-muted/50"
         />
       </div>
@@ -129,7 +155,10 @@ function FormContent({ onClose }: { onClose?: () => void }) {
           <MessageSquare className="h-4 w-4 text-muted-foreground" />
           Como nos conheceu?
         </Label>
-        <Select required>
+        <Select
+          value={formData.source}
+          onValueChange={(value) => setFormData((current) => ({ ...current, source: value ?? "" }))}
+        >
           <SelectTrigger id="source" className="h-12 rounded-2xl border-border bg-muted/50">
             <SelectValue placeholder="Selecione uma opção" />
           </SelectTrigger>
@@ -165,11 +194,11 @@ function FormContent({ onClose }: { onClose?: () => void }) {
   )
 }
 
-export function VisitorFormTrigger() {
+export function VisitorFormTrigger({ churchLabel }: { churchLabel: string }) {
   const isMobile = useIsMobile()
   const [open, setOpen] = useState(false)
 
-  const TriggerButton = (
+  const triggerButton = (
     <Button
       size="lg"
       className="flex h-16 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-xl shadow-black/20 hover:bg-primary/90"
@@ -185,9 +214,7 @@ export function VisitorFormTrigger() {
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerTrigger asChild>
-          {TriggerButton}
-        </DrawerTrigger>
+        <DrawerTrigger asChild>{triggerButton}</DrawerTrigger>
         <DrawerContent className="px-4 pb-8">
           <DrawerHeader className="text-left">
             <DrawerTitle className="text-xl">Cadastro de Visitante</DrawerTitle>
@@ -195,7 +222,7 @@ export function VisitorFormTrigger() {
               Preencha seus dados para nos conhecermos melhor
             </DrawerDescription>
           </DrawerHeader>
-          <FormContent onClose={() => setOpen(false)} />
+          <FormContent churchLabel={churchLabel} onClose={() => setOpen(false)} />
           <DrawerFooter className="pt-2">
             <DrawerClose asChild>
               <Button variant="outline" className="h-12 rounded-2xl">
@@ -210,9 +237,7 @@ export function VisitorFormTrigger() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger  >
-        {TriggerButton}
-      </DialogTrigger>
+      <DialogTrigger>{triggerButton}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl">Cadastro de Visitante</DialogTitle>
@@ -220,7 +245,7 @@ export function VisitorFormTrigger() {
             Preencha seus dados para nos conhecermos melhor
           </DialogDescription>
         </DialogHeader>
-        <FormContent onClose={() => setOpen(false)} />
+        <FormContent churchLabel={churchLabel} onClose={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   )

@@ -1,31 +1,53 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { loginAction } from "@/actions/auth.actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { SpinnerGapIcon, CaretLeftIcon } from "@phosphor-icons/react";
-
+import { validateAuthFields } from "@/lib/action-feedback";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(loginAction, null);
+  const [clientError, setClientError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (state?.error) {
+      toast.error(state.error);
+    }
+  }, [state?.error]);
+
+  const handleSubmit = (formData: FormData) => {
+    const email = String(formData.get("email") ?? "");
+    const password = String(formData.get("password") ?? "");
+    const validationError = validateAuthFields({ email, password });
+
+    if (validationError) {
+      setClientError(validationError);
+      toast.error(validationError);
+      return;
+    }
+
+    setClientError(null);
+    formAction(formData);
+  };
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-8 border rounded-2xl bg-card shadow-sm">
+    <div className="mx-auto mt-20 max-w-md rounded-2xl border bg-card p-8 shadow-sm">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Login</h1>
-        <p className="text-muted-foreground text-sm">
+        <h1 className="mb-2 text-3xl font-bold">Login</h1>
+        <p className="text-sm text-muted-foreground">
           Acesse o painel da sua igreja.
         </p>
       </div>
 
-      <form action={formAction} className="space-y-5">
-        {/* Alerta de Erro */}
-        {state?.error && (
-          <div className="p-3 bg-destructive/10 border border-destructive/20 text-destructive text-sm rounded-xl">
-            {state.error}
+      <form action={handleSubmit} className="space-y-5">
+        {(clientError || state?.error) && (
+          <div className="rounded-xl border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive">
+            {clientError || state?.error}
           </div>
         )}
 
@@ -38,13 +60,14 @@ export default function LoginPage() {
             placeholder="seu@email.com"
             required
             className="h-12 rounded-xl"
+            onChange={() => setClientError(null)}
           />
         </div>
 
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Senha</Label>
-            <Link href="/forgot-password" className="text-xs hover:underline text-muted-foreground">
+            <Link href="/forgot-password" className="text-xs text-muted-foreground hover:underline">
               Esqueceu a senha?
             </Link>
           </div>
@@ -53,29 +76,31 @@ export default function LoginPage() {
             name="password"
             type="password"
             required
+            minLength={8}
             className="h-12 rounded-xl"
+            onChange={() => setClientError(null)}
           />
         </div>
 
         <Button
           disabled={isPending}
           type="submit"
-          className="w-full h-12 rounded-xl bg-nova-yellow text-nova-dark hover:bg-nova-yellow/90 font-semibold"
+          className="h-12 w-full rounded-xl bg-nova-yellow font-semibold text-nova-dark hover:bg-nova-yellow/90"
         >
           {isPending ? (
-            <SpinnerGapIcon className="w-5 h-5 animate-spin" />
+            <SpinnerGapIcon className="h-5 w-5 animate-spin" />
           ) : (
             <>
-              Entrar <CaretLeftIcon className="w-4 h-4 ml-2" />
+              Entrar <CaretLeftIcon className="ml-2 h-4 w-4" />
             </>
           )}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        Não tem conta?{" "}
-        <Link href="/register" className="text-nova-yellow font-medium hover:underline">
-          Cadastre-se grátis
+        Nao tem conta?{" "}
+        <Link href="/register" className="font-medium text-nova-yellow hover:underline">
+          Cadastre-se gratis
         </Link>
       </p>
     </div>

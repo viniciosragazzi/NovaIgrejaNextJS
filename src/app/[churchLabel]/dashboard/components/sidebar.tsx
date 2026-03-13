@@ -1,158 +1,167 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useMemo, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
-import {
-  LayoutDashboard,
-  Church,
-  Users,
-  Settings,
-  ChevronLeft,
-  Menu,
-  X,
-  LogOut,
-  HandCoins,
-  MessageSquareHeart,
-  Calendar
-} from "lucide-react"
-import { cn } from "@/lib/utils"
+import { AnimatePresence, motion } from "framer-motion"
+import { ChevronLeft, Menu, Search, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LogoutButton } from "@/components/logout"
-
-const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/dashboard/profile", label: "Perfil da Igreja", icon: Church, requiredStaff: true },
-  { href: "/dashboard/members", label: "Membros & Visitantes", icon: Users, requiredStaff: true },
-  { href: "/dashboard/ministerios", label: "Ministérios", icon: Users, requiredStaff: true },
-  { href: "/dashboard/schedule", label: "Agenda", icon: Calendar, requiredStaff: true },
-
-  { href: "/dashboard/offering", label: "Ofertas", icon: HandCoins },
-  { href: "/dashboard/prayers", label: "Pedidos de Oração", icon: MessageSquareHeart },
-  { href: "/dashboard/settings", label: "Configurações", icon: Settings, requiredStaff: true },
-]
+import { useIsMobile } from "@/hooks/use-mobile"
+import { dashboardNavGroupLabels, dashboardNavItems } from "@/lib/dashboard-navigation"
+import { cn } from "@/lib/utils"
 
 interface SidebarProps {
-  churchLabel: string;
-  churchName: string;
-  userName?: string;
-  isStaff?: boolean;
+  churchLabel: string
+  churchName: string
+  userName?: string
+  isStaff?: boolean
 }
 
 export function DashboardSidebar({ churchLabel, churchName, userName, isStaff }: SidebarProps) {
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const [mounted, setMounted] = useState(false);
+  const isMobile = useIsMobile()
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const groupedItems = useMemo(() => {
+    return Object.entries(dashboardNavGroupLabels).map(([group, label]) => ({
+      group,
+      label,
+      items: dashboardNavItems.filter(
+        (item) => item.group === group && (!item.requiredStaff || isStaff)
+      ),
+    }))
+  }, [isStaff])
 
-  if (!mounted) return null; // Ou um esqueleto/placeholder
   return (
     <>
-      {/* Mobile Menu Button */}
       <Button
         variant="ghost"
         size="icon"
-        className="fixed left-4 top-4 z-50 flex h-12 w-12 items-center justify-center rounded-2xl bg-card shadow-sm lg:hidden border"
+        className="fixed left-4 top-4 z-50 flex h-12 w-12 items-center justify-center rounded-2xl border bg-card shadow-sm lg:hidden"
         onClick={() => setIsMobileOpen(true)}
       >
         <Menu className="h-5 w-5" />
       </Button>
 
-      {/* Sidebar Container */}
       <motion.aside
         initial={false}
         animate={{
-          width: isCollapsed ? 80 : 280,
-          x: isMobileOpen ? 0 : (typeof window !== 'undefined' && window.innerWidth < 1024 ? -280 : 0)
+          width: isCollapsed ? 86 : 292,
+          x: isMobile && !isMobileOpen ? -292 : 0,
         }}
         className={cn(
-          "fixed left-0 top-0 z-50 flex h-screen flex-col bg-card border-r transition-all duration-75",
+          "fixed left-0 top-0 z-50 flex h-screen flex-col border-r bg-card transition-all duration-100",
           "lg:relative lg:z-0 shadow-xl lg:shadow-none"
         )}
       >
-        {/* Header - Informações da Igreja vindas do Server Context */}
-        <div className="flex h-20 items-center justify-between px-4 border-b overflow-x-hidden">
-          {!isCollapsed && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-3 overflow-hidden">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
-                <Church className="h-5 w-5 text-primary-foreground" />
+        <div className="border-b px-4 py-5">
+          <div className="flex items-center justify-between gap-3">
+            {!isCollapsed ? (
+              <div className="min-w-0">
+                <p className="truncate text-sm font-bold">{churchName}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                  {isStaff ? "Administracao" : "Membro"}
+                </p>
               </div>
-              <div className="flex flex-col">
-                <h1 className="text-sm font-bold truncate max-w-[150px]">{churchName}</h1>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">{isStaff ? "Admin" : "Membro"}</p>
-              </div>
-            </motion.div>
-          )}
+            ) : null}
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hidden lg:flex h-8 w-8 rounded-lg"
-            onClick={() => setIsCollapsed(!isCollapsed)}
-          >
-            <motion.div animate={{ rotate: isCollapsed ? 180 : 0 }}>
-              <ChevronLeft className="h-4 w-4" />
-            </motion.div>
-          </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="hidden h-9 w-9 rounded-xl lg:flex"
+                onClick={() => setIsCollapsed((current) => !current)}
+              >
+                <motion.div animate={{ rotate: isCollapsed ? 180 : 0 }}>
+                  <ChevronLeft className="h-4 w-4" />
+                </motion.div>
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="h-9 w-9 rounded-xl lg:hidden"
+                onClick={() => setIsMobileOpen(false)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
 
-          <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setIsMobileOpen(false)}>
-            <X className="h-5 w-5" />
-          </Button>
+          {!isCollapsed ? (
+            <Button
+              type="button"
+              variant="outline"
+              className="mt-4 h-11 w-full justify-between rounded-2xl px-4 text-muted-foreground"
+              onClick={() => window.dispatchEvent(new Event("open-command-palette"))}
+            >
+              <span className="flex items-center gap-2">
+                <Search className="h-4 w-4" />
+                Buscar
+              </span>
+              <span className="rounded-lg bg-muted px-2 py-1 text-[10px]">Ctrl K</span>
+            </Button>
+          ) : null}
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 space-y-1 px-3 py-6 overflow-x-hidden">
-          {navItems.map((item) => {
-            const fullPath = `/${churchLabel}${item.href}`
-            const isActive = pathname === fullPath
-            const Icon = item.icon
-            const shouldShow = !item.requiredStaff || (item.requiredStaff && isStaff)
-            if (!shouldShow) return null
+        <nav className="flex-1 overflow-y-auto px-3 py-5">
+          <div className="space-y-6">
+            {groupedItems.map((section) =>
+              section.items.length > 0 ? (
+                <div key={section.group} className="space-y-2">
+                  {!isCollapsed ? (
+                    <p className="px-3 text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                      {section.label}
+                    </p>
+                  ) : null}
+                  <div className="space-y-1">
+                    {section.items.map((item) => {
+                      const fullPath = `/${churchLabel}${item.href}`
+                      const isActive = pathname === fullPath
+                      const Icon = item.icon
 
-            return (
-              <Link
-                key={item.href}
-                href={fullPath}
-                onClick={() => setIsMobileOpen(false)}
-                className={cn(
-                  "group relative flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200",
-                  isActive ? "text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                )}
-              >
-                <Icon className={cn("h-5 w-5 shrink-0 z-10", isActive && "text-primary-foreground")} />
-                {!isCollapsed && <span className="z-10 text-nowrap">{item.label}</span>}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute inset-0 rounded-2xl bg-primary shadow-md shadow-primary/20"
-                    transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
-                  />
-                )}
-              </Link>
-            );
-          })}
+                      return (
+                        <Link
+                          key={item.href}
+                          href={fullPath}
+                          onClick={() => setIsMobileOpen(false)}
+                          className={cn(
+                            "group relative flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-colors",
+                            isActive
+                              ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                              : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                          )}
+                        >
+                          <Icon className={cn("h-5 w-5 shrink-0", isActive && "text-[#8ee4af]")} />
+                          {!isCollapsed ? <span className="truncate">{item.label}</span> : null}
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
+              ) : null
+            )}
+          </div>
         </nav>
 
-        {/* Footer - Identificação do Maestro/Admin */}
         <div className="border-t p-4">
-          {!isCollapsed && (
-            <div className="mb-4 px-2">
-              <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-tight">Operador</p>
-              <p className="text-xs font-semibold truncate text-zinc-700">{userName}</p>
+          {!isCollapsed ? (
+            <div className="mb-4 rounded-2xl bg-muted/50 px-4 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                Operador
+              </p>
+              <p className="truncate text-sm font-semibold">{userName}</p>
             </div>
-          )}
+          ) : null}
           <LogoutButton churchLabel={churchLabel} isCollapsed={isCollapsed} />
         </div>
       </motion.aside>
 
-      {/* Mobile Overlay */}
       <AnimatePresence>
-        {isMobileOpen && (
+        {isMobileOpen ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -160,7 +169,7 @@ export function DashboardSidebar({ churchLabel, churchName, userName, isStaff }:
             className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
             onClick={() => setIsMobileOpen(false)}
           />
-        )}
+        ) : null}
       </AnimatePresence>
     </>
   )

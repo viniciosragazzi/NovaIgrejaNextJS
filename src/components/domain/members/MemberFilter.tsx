@@ -30,18 +30,18 @@ export function MemberFilter({
   onFilterChange,
 }: MemberFilterProps) {
   return (
-    <motion.div variants={itemVariants} className="flex gap-4">
+    <motion.div variants={itemVariants} className="flex flex-col gap-4 lg:flex-row">
       <div className="relative flex-1">
         <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-300" />
         <Input
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Buscar pelo nome..."
-          className="h-14 rounded-2xl border-0 bg-white shadow-sm pl-12"
+          className="h-14 rounded-2xl border-0 bg-white pl-12 shadow-sm"
         />
       </div>
       <Select value={filterType} onValueChange={(v) => onFilterChange(v as string)}>
-        <SelectTrigger className="h-14 w-48 rounded-2xl border-0 bg-white shadow-sm">
+        <SelectTrigger className="h-14 w-full rounded-2xl border-0 bg-white shadow-sm lg:w-56">
           <Filter className="mr-2 h-4 w-4" />
           <SelectValue />
         </SelectTrigger>

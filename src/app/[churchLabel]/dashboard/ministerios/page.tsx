@@ -1,10 +1,9 @@
-import { getChurchContext } from "@/lib/get-church-context";
-import { redirect } from "next/navigation";
-import prisma from "@/lib/prisma";
-import MinistriesPage from "./ministerios-page";
-
+import { Ministry, Schedule } from "@/@types/ministry.types";
 import { Person, PersonType } from "@/@types/person.types";
-import { Schedule } from "@/@types/ministry.types";
+import { getChurchContext } from "@/lib/get-church-context";
+import prisma from "@/lib/prisma";
+import { redirect } from "next/navigation";
+import MinistriesPage from "./ministerios-page";
 
 export default async function Page({ params }: { params: Promise<{ churchLabel: string }> }) {
   const { churchLabel } = await params;
@@ -14,53 +13,74 @@ export default async function Page({ params }: { params: Promise<{ churchLabel: 
     redirect(`/${churchLabel}/dashboard`);
   }
 
-  // 1. Busca os ministérios (equipes) desta igreja
   const dbMinistries = await prisma.ministry.findMany({
     where: { churchId: church.id },
     orderBy: { name: "asc" },
   });
 
-  // 2. Busca as pessoas que podem ser voluntários
   const dbPeople = await prisma.person.findMany({
     where: { churchId: church.id },
     orderBy: { name: "asc" },
   });
 
-  // 3. Busca as escalas atuais incluindo os dados da pessoa vinculada
   const dbSchedules = await prisma.volunteerScale.findMany({
     where: { churchId: church.id },
     include: {
       person: {
         select: {
+          id: true,
           name: true,
           contact: true,
+          email: true,
+          address: true,
+          birthday: true,
+          notes: true,
+          ministry: true,
+          role: true,
+          type: true,
+        },
+      },
+      ministry: {
+        select: {
+          name: true,
         },
       },
     },
     orderBy: { date: "asc" },
   });
 
-  // Formata os voluntários para o componente
-  const formattedVolunteers: Person[] = dbPeople.map((p) => ({
-    id: p.id,
-    fullName: p.name,
-    whatsapp: p.contact[0] || "",
-    type: p.type.toLowerCase() as PersonType,
-    ministry: p.ministry || undefined,
-    role: p.role || undefined,
+  const formattedVolunteers: Person[] = dbPeople.map((person) => ({
+    id: person.id,
+    fullName: person.name,
+    whatsapp: person.contact[0] || "",
+    email: person.email || undefined,
+    address: person.address || undefined,
+    birthDate: person.birthday || undefined,
+    type: person.type.toLowerCase() as PersonType,
+    ministry: person.ministry || undefined,
+    role: person.role || undefined,
+    notes: person.notes || undefined,
   }));
 
-  // Formata as escalas para o componente
-  const formattedSchedules: Schedule[] = dbSchedules.map((s) => ({
-    id: s.id,
-    eventDate: s.date.toISOString(),
-    eventName: s.eventName || "Evento",
-    ministryId: s.ministryId || "",
-    role: s.role,
-    confirmed: s.confirmed,
+  const formattedSchedules: Schedule[] = dbSchedules.map((schedule) => ({
+    id: schedule.id,
+    eventDate: schedule.date.toISOString(),
+    eventName: schedule.eventName || "Evento",
+    ministryId: schedule.ministryId,
+    ministryName: schedule.ministry.name,
+    role: schedule.role,
+    confirmed: schedule.confirmed,
     person: {
-      fullName: s.person.name,
-      whatsapp: s.person.contact[0] || "",
+      id: schedule.person.id,
+      fullName: schedule.person.name,
+      whatsapp: schedule.person.contact[0] || "",
+      email: schedule.person.email || undefined,
+      address: schedule.person.address || undefined,
+      birthDate: schedule.person.birthday || undefined,
+      notes: schedule.person.notes || undefined,
+      ministry: schedule.person.ministry || undefined,
+      role: schedule.person.role || undefined,
+      type: schedule.person.type.toLowerCase() as PersonType,
     },
   }));
 
@@ -68,7 +88,7 @@ export default async function Page({ params }: { params: Promise<{ churchLabel: 
     <MinistriesPage
       churchId={church.id}
       isStaff={isStaff}
-      ministries={dbMinistries as any}
+      ministries={dbMinistries as unknown as Ministry[]}
       volunteers={formattedVolunteers}
       initialSchedules={formattedSchedules}
     />

@@ -12,28 +12,21 @@ export default async function OnboardingPage() {
 
   if (!session) redirect("/login");
 
-  // Se o cara já tem igreja, não tem o que fazer aqui.
   if (session.user.churchId) {
     const church = await prisma.church.findUnique({
       where: { id: session.user.churchId },
-      select: { label: true }
+      select: { label: true },
     });
     if (church) redirect(`/${church.label}/dashboard`);
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-50 p-4">
-      <LogoutButton />
-      <div className="w-full max-w-xl bg-white rounded-2xl shadow-sm border p-8">
-        <div className="mb-8 text-center">
-          <span className="text-nova-yellow font-bold text-sm tracking-widest uppercase">Passo Único</span>
-          <h1 className="text-3xl font-bold mt-2 text-zinc-900">Configure sua Igreja</h1>
-          <p className="text-zinc-500 mt-2">
-            Olá {session.user.name}, vamos criar o espaço digital da sua comunidade.
-          </p>
-        </div>
-
-        <OnboardingForm />
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(23,23,23,0.08),_transparent_35%),linear-gradient(180deg,#fafafa_0%,#f3f4f6_100%)] sm:px-6 sm:py-6">
+      <div className="mx-auto flex w-full max-w-7xl justify-end px-4 pt-4 sm:px-0 sm:pt-0">
+        <LogoutButton />
+      </div>
+      <div className="mx-auto mt-3 w-full max-w-7xl bg-white/90 p-4 shadow-[0_30px_80px_rgba(15,23,42,0.08)] backdrop-blur sm:mt-4 sm:rounded-[2.5rem] sm:p-8">
+        <OnboardingForm userName={session.user.name} />
       </div>
     </div>
   );
