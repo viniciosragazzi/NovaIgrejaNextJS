@@ -249,9 +249,10 @@ export default function MemberWelcomePage({
                   {ministries.map((ministry) => {
                     const selected = draft.interests.ministries.includes(ministry.name)
                     return (
-                      <button
+                      <Button
                         key={ministry.id}
                         type="button"
+                        variant="ghost"
                         onClick={() =>
                           setDraft((current) => ({
                             ...current,
@@ -270,7 +271,7 @@ export default function MemberWelcomePage({
                       >
                         <p className="font-medium">{ministry.name}</p>
                         <p className="mt-1 text-sm text-muted-foreground">{ministry.description || "Sem descricao."}</p>
-                      </button>
+                      </Button>
                     )
                   })}
                 </div>

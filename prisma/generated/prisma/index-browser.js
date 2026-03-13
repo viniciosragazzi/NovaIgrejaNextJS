@@ -221,11 +221,115 @@ exports.Prisma.VolunteerScaleScalarFieldEnum = {
   role: 'role',
   eventName: 'eventName',
   confirmed: 'confirmed',
+  responseStatus: 'responseStatus',
+  responseNote: 'responseNote',
+  respondedAt: 'respondedAt',
   personId: 'personId',
   ministryId: 'ministryId',
   churchId: 'churchId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  link: 'link',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  metadata: 'metadata',
+  readAt: 'readAt',
+  churchId: 'churchId',
+  recipientUserId: 'recipientUserId',
+  actorUserId: 'actorUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.JourneyStageScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  order: 'order',
+  active: 'active',
+  visibleToMember: 'visibleToMember',
+  pointsReward: 'pointsReward',
+  churchId: 'churchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.JourneyTaskScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  title: 'title',
+  description: 'description',
+  points: 'points',
+  required: 'required',
+  active: 'active',
+  triggerType: 'triggerType',
+  stageId: 'stageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.JourneyAchievementScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  icon: 'icon',
+  points: 'points',
+  active: 'active',
+  churchId: 'churchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PersonJourneyScalarFieldEnum = {
+  id: 'id',
+  score: 'score',
+  level: 'level',
+  progress: 'progress',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  lastActivityAt: 'lastActivityAt',
+  personId: 'personId',
+  currentStageId: 'currentStageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PersonJourneyTaskScalarFieldEnum = {
+  id: 'id',
+  completed: 'completed',
+  completedAt: 'completedAt',
+  source: 'source',
+  personId: 'personId',
+  journeyId: 'journeyId',
+  taskId: 'taskId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PersonAchievementScalarFieldEnum = {
+  id: 'id',
+  earnedAt: 'earnedAt',
+  personId: 'personId',
+  achievementId: 'achievementId'
+};
+
+exports.Prisma.PersonJourneyStageHistoryScalarFieldEnum = {
+  id: 'id',
+  movedAt: 'movedAt',
+  notes: 'notes',
+  source: 'source',
+  journeyId: 'journeyId',
+  fromStageId: 'fromStageId',
+  toStageId: 'toStageId'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -317,6 +421,32 @@ exports.TypePerson = exports.$Enums.TypePerson = {
   VOLUNTEER: 'VOLUNTEER'
 };
 
+exports.VolunteerScaleResponseStatus = exports.$Enums.VolunteerScaleResponseStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  DECLINED: 'DECLINED',
+  SWAP_REQUESTED: 'SWAP_REQUESTED'
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  VOLUNTEER_ASSIGNED_TO_SCALE: 'VOLUNTEER_ASSIGNED_TO_SCALE',
+  VOLUNTEER_CONFIRMED_SCALE: 'VOLUNTEER_CONFIRMED_SCALE',
+  VOLUNTEER_DECLINED_SCALE: 'VOLUNTEER_DECLINED_SCALE',
+  VOLUNTEER_REQUESTED_SWAP: 'VOLUNTEER_REQUESTED_SWAP'
+};
+
+exports.JourneyTriggerType = exports.$Enums.JourneyTriggerType = {
+  MANUAL: 'MANUAL',
+  PROFILE_COMPLETED: 'PROFILE_COMPLETED',
+  ONBOARDING_COMPLETED: 'ONBOARDING_COMPLETED',
+  FIRST_ATTENDANCE: 'FIRST_ATTENDANCE',
+  ATTENDANCE_STREAK: 'ATTENDANCE_STREAK',
+  JOINED_MINISTRY: 'JOINED_MINISTRY',
+  JOINED_GROUP: 'JOINED_GROUP',
+  FIRST_PRAYER_REQUEST: 'FIRST_PRAYER_REQUEST',
+  SCALE_CONFIRMED: 'SCALE_CONFIRMED'
+};
+
 exports.Prisma.ModelName = {
   Church: 'Church',
   FinancialEntry: 'FinancialEntry',
@@ -326,6 +456,14 @@ exports.Prisma.ModelName = {
   Person: 'Person',
   Ministry: 'Ministry',
   VolunteerScale: 'VolunteerScale',
+  Notification: 'Notification',
+  JourneyStage: 'JourneyStage',
+  JourneyTask: 'JourneyTask',
+  JourneyAchievement: 'JourneyAchievement',
+  PersonJourney: 'PersonJourney',
+  PersonJourneyTask: 'PersonJourneyTask',
+  PersonAchievement: 'PersonAchievement',
+  PersonJourneyStageHistory: 'PersonJourneyStageHistory',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'

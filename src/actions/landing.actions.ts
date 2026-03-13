@@ -3,8 +3,10 @@
 import { ActionResponse } from "@/@types/shared.types";
 import { auth } from "@/lib/auth";
 import { mapActionError, validateAuthFields } from "@/lib/action-feedback";
+import { buildPersonMatchWhere, formatPhone } from "@/lib/person-linking";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { TypePerson } from "@prisma/generated/prisma/client";
 
 export async function loginChurchAction(
   churchLabel: string,
@@ -57,9 +59,10 @@ export async function registerMemberAction(
   formData: FormData
 ): Promise<ActionResponse> {
   const name = formData.get("name") as string;
+  const phone = formData.get("phone") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const validationError = validateAuthFields({ name, email, password });
+  const validationError = validateAuthFields({ name, phone, email, password });
 
   if (validationError) {
     return { success: false, error: validationError };
@@ -79,20 +82,46 @@ export async function registerMemberAction(
     });
 
     if (church && user) {
+      const existingPerson = await prisma.person.findFirst({
+        where: buildPersonMatchWhere(church.id, { email, phone }),
+        orderBy: { createdAt: "asc" },
+      })
+
+      const nextStatus = existingPerson?.type || TypePerson.MEMBER
+
       await prisma.user.update({
         where: { email },
-        data: { churchId: church.id },
-      });
-
-      await prisma.person.create({
         data: {
-          name,
-          email,
-          contact: [],
-          type: "MEMBER",
           churchId: church.id,
+          status: nextStatus,
         },
       });
+
+      if (existingPerson) {
+        await prisma.person.update({
+          where: { id: existingPerson.id },
+          data: {
+            email: existingPerson.email || email,
+            contact:
+              existingPerson.contact.length > 0
+                ? existingPerson.contact
+                : phone
+                  ? [formatPhone(phone)]
+                  : [],
+            name: existingPerson.name || name,
+          },
+        })
+      } else {
+        await prisma.person.create({
+          data: {
+            name,
+            email,
+            contact: phone ? [formatPhone(phone)] : [],
+            type: "MEMBER",
+            churchId: church.id,
+          },
+        });
+      }
     }
   } catch (error) {
     console.error(error);

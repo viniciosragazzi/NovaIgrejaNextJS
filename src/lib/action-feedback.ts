@@ -1,5 +1,6 @@
 type AuthValidationInput = {
   name?: string
+  phone?: string
   email?: string
   password?: string
   confirmPassword?: string
@@ -13,6 +14,17 @@ export function validateAuthFields(input: AuthValidationInput) {
 
   if ("name" in input && !name) {
     return "Informe seu nome."
+  }
+
+  if ("phone" in input) {
+    const phone = input.phone?.trim() || ""
+    const digits = phone.replace(/\D/g, "")
+    if (!phone) {
+      return "Informe seu WhatsApp."
+    }
+    if (digits.length < 10) {
+      return "Informe um WhatsApp valido."
+    }
   }
 
   if (!email) {

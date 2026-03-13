@@ -1,5 +1,4 @@
 import { getChurchContext } from "@/lib/get-church-context";
-import { redirect } from "next/navigation";
 import ChurchProfilePage from "./profile-page";
 import prisma from "@/lib/prisma";
 import { normalizeChurchCustomization } from "@/lib/church-customization";
@@ -8,11 +7,7 @@ import { Church, ChurchLink } from "@/@types/church.types";
 
 export default async function Page({ params }: { params: Promise<{ churchLabel: string }> }) {
   const { churchLabel } = await params;
-  const { isStaff, church } = await getChurchContext(churchLabel);
-
-  if (!isStaff) {
-    return redirect(`/${churchLabel}/dashboard`);
-  }
+  const { church, moduleAccess } = await getChurchContext(churchLabel, { requiredModule: "perfil" });
 
   // Busca os links reais da igreja
   const dbLinks = await prisma.churchLink.findMany({
@@ -44,7 +39,7 @@ export default async function Page({ params }: { params: Promise<{ churchLabel: 
 
   return (
     <ChurchProfilePage
-      isStaff={isStaff}
+      canManageProfile={moduleAccess.perfil}
       initialData={{
         ...(church as unknown as Church),
         customization: normalizeChurchCustomization(church.customization, ministries),

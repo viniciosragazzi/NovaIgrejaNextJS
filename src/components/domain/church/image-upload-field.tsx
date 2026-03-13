@@ -75,15 +75,16 @@ export function ImageUploadField({
               </div>
             </div>
           ) : (
-            <button
+            <Button
               type="button"
+              variant="ghost"
               onClick={() => inputRef.current?.click()}
-              className="flex w-full flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-background px-4 py-8 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+              className="flex h-auto w-full flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-background px-4 py-8 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
             >
               <ImagePlus className="h-6 w-6" />
               <span>Enviar imagem</span>
               <span className="text-xs">PNG, JPG, WEBP, SVG ou ICO ate 1MB</span>
-            </button>
+            </Button>
           )}
           <input ref={inputRef} type="file" className="hidden" accept={allowedTypes.join(",")} onChange={handleFileChange} />
         </div>

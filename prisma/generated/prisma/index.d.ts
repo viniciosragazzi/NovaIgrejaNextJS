@@ -54,6 +54,46 @@ export type Ministry = $Result.DefaultSelection<Prisma.$MinistryPayload>
  */
 export type VolunteerScale = $Result.DefaultSelection<Prisma.$VolunteerScalePayload>
 /**
+ * Model Notification
+ * 
+ */
+export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
+/**
+ * Model JourneyStage
+ * 
+ */
+export type JourneyStage = $Result.DefaultSelection<Prisma.$JourneyStagePayload>
+/**
+ * Model JourneyTask
+ * 
+ */
+export type JourneyTask = $Result.DefaultSelection<Prisma.$JourneyTaskPayload>
+/**
+ * Model JourneyAchievement
+ * 
+ */
+export type JourneyAchievement = $Result.DefaultSelection<Prisma.$JourneyAchievementPayload>
+/**
+ * Model PersonJourney
+ * 
+ */
+export type PersonJourney = $Result.DefaultSelection<Prisma.$PersonJourneyPayload>
+/**
+ * Model PersonJourneyTask
+ * 
+ */
+export type PersonJourneyTask = $Result.DefaultSelection<Prisma.$PersonJourneyTaskPayload>
+/**
+ * Model PersonAchievement
+ * 
+ */
+export type PersonAchievement = $Result.DefaultSelection<Prisma.$PersonAchievementPayload>
+/**
+ * Model PersonJourneyStageHistory
+ * 
+ */
+export type PersonJourneyStageHistory = $Result.DefaultSelection<Prisma.$PersonJourneyStageHistoryPayload>
+/**
  * Model Session
  * 
  */
@@ -112,6 +152,41 @@ export const EntryType: {
 
 export type EntryType = (typeof EntryType)[keyof typeof EntryType]
 
+
+export const JourneyTriggerType: {
+  MANUAL: 'MANUAL',
+  PROFILE_COMPLETED: 'PROFILE_COMPLETED',
+  ONBOARDING_COMPLETED: 'ONBOARDING_COMPLETED',
+  FIRST_ATTENDANCE: 'FIRST_ATTENDANCE',
+  ATTENDANCE_STREAK: 'ATTENDANCE_STREAK',
+  JOINED_MINISTRY: 'JOINED_MINISTRY',
+  JOINED_GROUP: 'JOINED_GROUP',
+  FIRST_PRAYER_REQUEST: 'FIRST_PRAYER_REQUEST',
+  SCALE_CONFIRMED: 'SCALE_CONFIRMED'
+};
+
+export type JourneyTriggerType = (typeof JourneyTriggerType)[keyof typeof JourneyTriggerType]
+
+
+export const VolunteerScaleResponseStatus: {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  DECLINED: 'DECLINED',
+  SWAP_REQUESTED: 'SWAP_REQUESTED'
+};
+
+export type VolunteerScaleResponseStatus = (typeof VolunteerScaleResponseStatus)[keyof typeof VolunteerScaleResponseStatus]
+
+
+export const NotificationType: {
+  VOLUNTEER_ASSIGNED_TO_SCALE: 'VOLUNTEER_ASSIGNED_TO_SCALE',
+  VOLUNTEER_CONFIRMED_SCALE: 'VOLUNTEER_CONFIRMED_SCALE',
+  VOLUNTEER_DECLINED_SCALE: 'VOLUNTEER_DECLINED_SCALE',
+  VOLUNTEER_REQUESTED_SWAP: 'VOLUNTEER_REQUESTED_SWAP'
+};
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
 }
 
 export type SystemRole = $Enums.SystemRole
@@ -129,6 +204,18 @@ export const DayOfWeek: typeof $Enums.DayOfWeek
 export type EntryType = $Enums.EntryType
 
 export const EntryType: typeof $Enums.EntryType
+
+export type JourneyTriggerType = $Enums.JourneyTriggerType
+
+export const JourneyTriggerType: typeof $Enums.JourneyTriggerType
+
+export type VolunteerScaleResponseStatus = $Enums.VolunteerScaleResponseStatus
+
+export const VolunteerScaleResponseStatus: typeof $Enums.VolunteerScaleResponseStatus
+
+export type NotificationType = $Enums.NotificationType
+
+export const NotificationType: typeof $Enums.NotificationType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -330,6 +417,86 @@ export class PrismaClient<
     * ```
     */
   get volunteerScale(): Prisma.VolunteerScaleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.notification`: Exposes CRUD operations for the **Notification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Notifications
+    * const notifications = await prisma.notification.findMany()
+    * ```
+    */
+  get notification(): Prisma.NotificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.journeyStage`: Exposes CRUD operations for the **JourneyStage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more JourneyStages
+    * const journeyStages = await prisma.journeyStage.findMany()
+    * ```
+    */
+  get journeyStage(): Prisma.JourneyStageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.journeyTask`: Exposes CRUD operations for the **JourneyTask** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more JourneyTasks
+    * const journeyTasks = await prisma.journeyTask.findMany()
+    * ```
+    */
+  get journeyTask(): Prisma.JourneyTaskDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.journeyAchievement`: Exposes CRUD operations for the **JourneyAchievement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more JourneyAchievements
+    * const journeyAchievements = await prisma.journeyAchievement.findMany()
+    * ```
+    */
+  get journeyAchievement(): Prisma.JourneyAchievementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.personJourney`: Exposes CRUD operations for the **PersonJourney** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PersonJourneys
+    * const personJourneys = await prisma.personJourney.findMany()
+    * ```
+    */
+  get personJourney(): Prisma.PersonJourneyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.personJourneyTask`: Exposes CRUD operations for the **PersonJourneyTask** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PersonJourneyTasks
+    * const personJourneyTasks = await prisma.personJourneyTask.findMany()
+    * ```
+    */
+  get personJourneyTask(): Prisma.PersonJourneyTaskDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.personAchievement`: Exposes CRUD operations for the **PersonAchievement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PersonAchievements
+    * const personAchievements = await prisma.personAchievement.findMany()
+    * ```
+    */
+  get personAchievement(): Prisma.PersonAchievementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.personJourneyStageHistory`: Exposes CRUD operations for the **PersonJourneyStageHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PersonJourneyStageHistories
+    * const personJourneyStageHistories = await prisma.personJourneyStageHistory.findMany()
+    * ```
+    */
+  get personJourneyStageHistory(): Prisma.PersonJourneyStageHistoryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -802,6 +969,14 @@ export namespace Prisma {
     Person: 'Person',
     Ministry: 'Ministry',
     VolunteerScale: 'VolunteerScale',
+    Notification: 'Notification',
+    JourneyStage: 'JourneyStage',
+    JourneyTask: 'JourneyTask',
+    JourneyAchievement: 'JourneyAchievement',
+    PersonJourney: 'PersonJourney',
+    PersonJourneyTask: 'PersonJourneyTask',
+    PersonAchievement: 'PersonAchievement',
+    PersonJourneyStageHistory: 'PersonJourneyStageHistory',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -820,7 +995,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "church" | "financialEntry" | "churchLink" | "weeklySchedule" | "user" | "person" | "ministry" | "volunteerScale" | "session" | "account" | "verification"
+      modelProps: "church" | "financialEntry" | "churchLink" | "weeklySchedule" | "user" | "person" | "ministry" | "volunteerScale" | "notification" | "journeyStage" | "journeyTask" | "journeyAchievement" | "personJourney" | "personJourneyTask" | "personAchievement" | "personJourneyStageHistory" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1416,6 +1591,598 @@ export namespace Prisma {
           }
         }
       }
+      Notification: {
+        payload: Prisma.$NotificationPayload<ExtArgs>
+        fields: Prisma.NotificationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          findFirst: {
+            args: Prisma.NotificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          findMany: {
+            args: Prisma.NotificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          create: {
+            args: Prisma.NotificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          createMany: {
+            args: Prisma.NotificationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          delete: {
+            args: Prisma.NotificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          update: {
+            args: Prisma.NotificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          deleteMany: {
+            args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          upsert: {
+            args: Prisma.NotificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          aggregate: {
+            args: Prisma.NotificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNotification>
+          }
+          groupBy: {
+            args: Prisma.NotificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NotificationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NotificationCountArgs<ExtArgs>
+            result: $Utils.Optional<NotificationCountAggregateOutputType> | number
+          }
+        }
+      }
+      JourneyStage: {
+        payload: Prisma.$JourneyStagePayload<ExtArgs>
+        fields: Prisma.JourneyStageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.JourneyStageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.JourneyStageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>
+          }
+          findFirst: {
+            args: Prisma.JourneyStageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.JourneyStageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>
+          }
+          findMany: {
+            args: Prisma.JourneyStageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>[]
+          }
+          create: {
+            args: Prisma.JourneyStageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>
+          }
+          createMany: {
+            args: Prisma.JourneyStageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.JourneyStageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>[]
+          }
+          delete: {
+            args: Prisma.JourneyStageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>
+          }
+          update: {
+            args: Prisma.JourneyStageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>
+          }
+          deleteMany: {
+            args: Prisma.JourneyStageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.JourneyStageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.JourneyStageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>[]
+          }
+          upsert: {
+            args: Prisma.JourneyStageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyStagePayload>
+          }
+          aggregate: {
+            args: Prisma.JourneyStageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateJourneyStage>
+          }
+          groupBy: {
+            args: Prisma.JourneyStageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<JourneyStageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.JourneyStageCountArgs<ExtArgs>
+            result: $Utils.Optional<JourneyStageCountAggregateOutputType> | number
+          }
+        }
+      }
+      JourneyTask: {
+        payload: Prisma.$JourneyTaskPayload<ExtArgs>
+        fields: Prisma.JourneyTaskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.JourneyTaskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.JourneyTaskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>
+          }
+          findFirst: {
+            args: Prisma.JourneyTaskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.JourneyTaskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>
+          }
+          findMany: {
+            args: Prisma.JourneyTaskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>[]
+          }
+          create: {
+            args: Prisma.JourneyTaskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>
+          }
+          createMany: {
+            args: Prisma.JourneyTaskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.JourneyTaskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>[]
+          }
+          delete: {
+            args: Prisma.JourneyTaskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>
+          }
+          update: {
+            args: Prisma.JourneyTaskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>
+          }
+          deleteMany: {
+            args: Prisma.JourneyTaskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.JourneyTaskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.JourneyTaskUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>[]
+          }
+          upsert: {
+            args: Prisma.JourneyTaskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyTaskPayload>
+          }
+          aggregate: {
+            args: Prisma.JourneyTaskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateJourneyTask>
+          }
+          groupBy: {
+            args: Prisma.JourneyTaskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<JourneyTaskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.JourneyTaskCountArgs<ExtArgs>
+            result: $Utils.Optional<JourneyTaskCountAggregateOutputType> | number
+          }
+        }
+      }
+      JourneyAchievement: {
+        payload: Prisma.$JourneyAchievementPayload<ExtArgs>
+        fields: Prisma.JourneyAchievementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.JourneyAchievementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.JourneyAchievementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>
+          }
+          findFirst: {
+            args: Prisma.JourneyAchievementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.JourneyAchievementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>
+          }
+          findMany: {
+            args: Prisma.JourneyAchievementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>[]
+          }
+          create: {
+            args: Prisma.JourneyAchievementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>
+          }
+          createMany: {
+            args: Prisma.JourneyAchievementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.JourneyAchievementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>[]
+          }
+          delete: {
+            args: Prisma.JourneyAchievementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>
+          }
+          update: {
+            args: Prisma.JourneyAchievementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>
+          }
+          deleteMany: {
+            args: Prisma.JourneyAchievementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.JourneyAchievementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.JourneyAchievementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>[]
+          }
+          upsert: {
+            args: Prisma.JourneyAchievementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JourneyAchievementPayload>
+          }
+          aggregate: {
+            args: Prisma.JourneyAchievementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateJourneyAchievement>
+          }
+          groupBy: {
+            args: Prisma.JourneyAchievementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<JourneyAchievementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.JourneyAchievementCountArgs<ExtArgs>
+            result: $Utils.Optional<JourneyAchievementCountAggregateOutputType> | number
+          }
+        }
+      }
+      PersonJourney: {
+        payload: Prisma.$PersonJourneyPayload<ExtArgs>
+        fields: Prisma.PersonJourneyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PersonJourneyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PersonJourneyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>
+          }
+          findFirst: {
+            args: Prisma.PersonJourneyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PersonJourneyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>
+          }
+          findMany: {
+            args: Prisma.PersonJourneyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>[]
+          }
+          create: {
+            args: Prisma.PersonJourneyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>
+          }
+          createMany: {
+            args: Prisma.PersonJourneyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PersonJourneyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>[]
+          }
+          delete: {
+            args: Prisma.PersonJourneyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>
+          }
+          update: {
+            args: Prisma.PersonJourneyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>
+          }
+          deleteMany: {
+            args: Prisma.PersonJourneyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PersonJourneyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PersonJourneyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>[]
+          }
+          upsert: {
+            args: Prisma.PersonJourneyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyPayload>
+          }
+          aggregate: {
+            args: Prisma.PersonJourneyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePersonJourney>
+          }
+          groupBy: {
+            args: Prisma.PersonJourneyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PersonJourneyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PersonJourneyCountArgs<ExtArgs>
+            result: $Utils.Optional<PersonJourneyCountAggregateOutputType> | number
+          }
+        }
+      }
+      PersonJourneyTask: {
+        payload: Prisma.$PersonJourneyTaskPayload<ExtArgs>
+        fields: Prisma.PersonJourneyTaskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PersonJourneyTaskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PersonJourneyTaskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>
+          }
+          findFirst: {
+            args: Prisma.PersonJourneyTaskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PersonJourneyTaskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>
+          }
+          findMany: {
+            args: Prisma.PersonJourneyTaskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>[]
+          }
+          create: {
+            args: Prisma.PersonJourneyTaskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>
+          }
+          createMany: {
+            args: Prisma.PersonJourneyTaskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PersonJourneyTaskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>[]
+          }
+          delete: {
+            args: Prisma.PersonJourneyTaskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>
+          }
+          update: {
+            args: Prisma.PersonJourneyTaskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>
+          }
+          deleteMany: {
+            args: Prisma.PersonJourneyTaskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PersonJourneyTaskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PersonJourneyTaskUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>[]
+          }
+          upsert: {
+            args: Prisma.PersonJourneyTaskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyTaskPayload>
+          }
+          aggregate: {
+            args: Prisma.PersonJourneyTaskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePersonJourneyTask>
+          }
+          groupBy: {
+            args: Prisma.PersonJourneyTaskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PersonJourneyTaskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PersonJourneyTaskCountArgs<ExtArgs>
+            result: $Utils.Optional<PersonJourneyTaskCountAggregateOutputType> | number
+          }
+        }
+      }
+      PersonAchievement: {
+        payload: Prisma.$PersonAchievementPayload<ExtArgs>
+        fields: Prisma.PersonAchievementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PersonAchievementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PersonAchievementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>
+          }
+          findFirst: {
+            args: Prisma.PersonAchievementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PersonAchievementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>
+          }
+          findMany: {
+            args: Prisma.PersonAchievementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>[]
+          }
+          create: {
+            args: Prisma.PersonAchievementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>
+          }
+          createMany: {
+            args: Prisma.PersonAchievementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PersonAchievementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>[]
+          }
+          delete: {
+            args: Prisma.PersonAchievementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>
+          }
+          update: {
+            args: Prisma.PersonAchievementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>
+          }
+          deleteMany: {
+            args: Prisma.PersonAchievementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PersonAchievementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PersonAchievementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>[]
+          }
+          upsert: {
+            args: Prisma.PersonAchievementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonAchievementPayload>
+          }
+          aggregate: {
+            args: Prisma.PersonAchievementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePersonAchievement>
+          }
+          groupBy: {
+            args: Prisma.PersonAchievementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PersonAchievementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PersonAchievementCountArgs<ExtArgs>
+            result: $Utils.Optional<PersonAchievementCountAggregateOutputType> | number
+          }
+        }
+      }
+      PersonJourneyStageHistory: {
+        payload: Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>
+        fields: Prisma.PersonJourneyStageHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PersonJourneyStageHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PersonJourneyStageHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.PersonJourneyStageHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PersonJourneyStageHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.PersonJourneyStageHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.PersonJourneyStageHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.PersonJourneyStageHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PersonJourneyStageHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.PersonJourneyStageHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>
+          }
+          update: {
+            args: Prisma.PersonJourneyStageHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.PersonJourneyStageHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PersonJourneyStageHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PersonJourneyStageHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.PersonJourneyStageHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PersonJourneyStageHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.PersonJourneyStageHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePersonJourneyStageHistory>
+          }
+          groupBy: {
+            args: Prisma.PersonJourneyStageHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PersonJourneyStageHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PersonJourneyStageHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<PersonJourneyStageHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
       Session: {
         payload: Prisma.$SessionPayload<ExtArgs>
         fields: Prisma.SessionFieldRefs
@@ -1754,6 +2521,14 @@ export namespace Prisma {
     person?: PersonOmit
     ministry?: MinistryOmit
     volunteerScale?: VolunteerScaleOmit
+    notification?: NotificationOmit
+    journeyStage?: JourneyStageOmit
+    journeyTask?: JourneyTaskOmit
+    journeyAchievement?: JourneyAchievementOmit
+    personJourney?: PersonJourneyOmit
+    personJourneyTask?: PersonJourneyTaskOmit
+    personAchievement?: PersonAchievementOmit
+    personJourneyStageHistory?: PersonJourneyStageHistoryOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -1843,7 +2618,10 @@ export namespace Prisma {
     schedules: number
     ministries: number
     volunteerScales: number
+    notifications: number
     financialEntries: number
+    journeyStages: number
+    journeyAchievements: number
   }
 
   export type ChurchCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1853,7 +2631,10 @@ export namespace Prisma {
     schedules?: boolean | ChurchCountOutputTypeCountSchedulesArgs
     ministries?: boolean | ChurchCountOutputTypeCountMinistriesArgs
     volunteerScales?: boolean | ChurchCountOutputTypeCountVolunteerScalesArgs
+    notifications?: boolean | ChurchCountOutputTypeCountNotificationsArgs
     financialEntries?: boolean | ChurchCountOutputTypeCountFinancialEntriesArgs
+    journeyStages?: boolean | ChurchCountOutputTypeCountJourneyStagesArgs
+    journeyAchievements?: boolean | ChurchCountOutputTypeCountJourneyAchievementsArgs
   }
 
   // Custom InputTypes
@@ -1912,8 +2693,29 @@ export namespace Prisma {
   /**
    * ChurchCountOutputType without action
    */
+  export type ChurchCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+  }
+
+  /**
+   * ChurchCountOutputType without action
+   */
   export type ChurchCountOutputTypeCountFinancialEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FinancialEntryWhereInput
+  }
+
+  /**
+   * ChurchCountOutputType without action
+   */
+  export type ChurchCountOutputTypeCountJourneyStagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JourneyStageWhereInput
+  }
+
+  /**
+   * ChurchCountOutputType without action
+   */
+  export type ChurchCountOutputTypeCountJourneyAchievementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JourneyAchievementWhereInput
   }
 
 
@@ -1924,11 +2726,15 @@ export namespace Prisma {
   export type UserCountOutputType = {
     sessions: number
     accounts: number
+    notificationsReceived: number
+    notificationsTriggered: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    notificationsReceived?: boolean | UserCountOutputTypeCountNotificationsReceivedArgs
+    notificationsTriggered?: boolean | UserCountOutputTypeCountNotificationsTriggeredArgs
   }
 
   // Custom InputTypes
@@ -1956,16 +2762,34 @@ export namespace Prisma {
     where?: AccountWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotificationsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotificationsTriggeredArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+  }
+
 
   /**
    * Count Type PersonCountOutputType
    */
 
   export type PersonCountOutputType = {
+    journeyTasks: number
+    achievements: number
     volunteerScales: number
   }
 
   export type PersonCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    journeyTasks?: boolean | PersonCountOutputTypeCountJourneyTasksArgs
+    achievements?: boolean | PersonCountOutputTypeCountAchievementsArgs
     volunteerScales?: boolean | PersonCountOutputTypeCountVolunteerScalesArgs
   }
 
@@ -1978,6 +2802,20 @@ export namespace Prisma {
      * Select specific fields to fetch from the PersonCountOutputType
      */
     select?: PersonCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PersonCountOutputType without action
+   */
+  export type PersonCountOutputTypeCountJourneyTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyTaskWhereInput
+  }
+
+  /**
+   * PersonCountOutputType without action
+   */
+  export type PersonCountOutputTypeCountAchievementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonAchievementWhereInput
   }
 
   /**
@@ -2016,6 +2854,166 @@ export namespace Prisma {
    */
   export type MinistryCountOutputTypeCountScalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VolunteerScaleWhereInput
+  }
+
+
+  /**
+   * Count Type JourneyStageCountOutputType
+   */
+
+  export type JourneyStageCountOutputType = {
+    tasks: number
+    currentJourneys: number
+    historyEntries: number
+    previousEntries: number
+  }
+
+  export type JourneyStageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tasks?: boolean | JourneyStageCountOutputTypeCountTasksArgs
+    currentJourneys?: boolean | JourneyStageCountOutputTypeCountCurrentJourneysArgs
+    historyEntries?: boolean | JourneyStageCountOutputTypeCountHistoryEntriesArgs
+    previousEntries?: boolean | JourneyStageCountOutputTypeCountPreviousEntriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * JourneyStageCountOutputType without action
+   */
+  export type JourneyStageCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStageCountOutputType
+     */
+    select?: JourneyStageCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * JourneyStageCountOutputType without action
+   */
+  export type JourneyStageCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JourneyTaskWhereInput
+  }
+
+  /**
+   * JourneyStageCountOutputType without action
+   */
+  export type JourneyStageCountOutputTypeCountCurrentJourneysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyWhereInput
+  }
+
+  /**
+   * JourneyStageCountOutputType without action
+   */
+  export type JourneyStageCountOutputTypeCountHistoryEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyStageHistoryWhereInput
+  }
+
+  /**
+   * JourneyStageCountOutputType without action
+   */
+  export type JourneyStageCountOutputTypeCountPreviousEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyStageHistoryWhereInput
+  }
+
+
+  /**
+   * Count Type JourneyTaskCountOutputType
+   */
+
+  export type JourneyTaskCountOutputType = {
+    progressEntries: number
+  }
+
+  export type JourneyTaskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    progressEntries?: boolean | JourneyTaskCountOutputTypeCountProgressEntriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * JourneyTaskCountOutputType without action
+   */
+  export type JourneyTaskCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTaskCountOutputType
+     */
+    select?: JourneyTaskCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * JourneyTaskCountOutputType without action
+   */
+  export type JourneyTaskCountOutputTypeCountProgressEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyTaskWhereInput
+  }
+
+
+  /**
+   * Count Type JourneyAchievementCountOutputType
+   */
+
+  export type JourneyAchievementCountOutputType = {
+    personAchievements: number
+  }
+
+  export type JourneyAchievementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    personAchievements?: boolean | JourneyAchievementCountOutputTypeCountPersonAchievementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * JourneyAchievementCountOutputType without action
+   */
+  export type JourneyAchievementCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievementCountOutputType
+     */
+    select?: JourneyAchievementCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * JourneyAchievementCountOutputType without action
+   */
+  export type JourneyAchievementCountOutputTypeCountPersonAchievementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonAchievementWhereInput
+  }
+
+
+  /**
+   * Count Type PersonJourneyCountOutputType
+   */
+
+  export type PersonJourneyCountOutputType = {
+    tasks: number
+    history: number
+  }
+
+  export type PersonJourneyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tasks?: boolean | PersonJourneyCountOutputTypeCountTasksArgs
+    history?: boolean | PersonJourneyCountOutputTypeCountHistoryArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PersonJourneyCountOutputType without action
+   */
+  export type PersonJourneyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyCountOutputType
+     */
+    select?: PersonJourneyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PersonJourneyCountOutputType without action
+   */
+  export type PersonJourneyCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyTaskWhereInput
+  }
+
+  /**
+   * PersonJourneyCountOutputType without action
+   */
+  export type PersonJourneyCountOutputTypeCountHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyStageHistoryWhereInput
   }
 
 
@@ -2233,7 +3231,10 @@ export namespace Prisma {
     schedules?: boolean | Church$schedulesArgs<ExtArgs>
     ministries?: boolean | Church$ministriesArgs<ExtArgs>
     volunteerScales?: boolean | Church$volunteerScalesArgs<ExtArgs>
+    notifications?: boolean | Church$notificationsArgs<ExtArgs>
     financialEntries?: boolean | Church$financialEntriesArgs<ExtArgs>
+    journeyStages?: boolean | Church$journeyStagesArgs<ExtArgs>
+    journeyAchievements?: boolean | Church$journeyAchievementsArgs<ExtArgs>
     _count?: boolean | ChurchCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["church"]>
 
@@ -2287,7 +3288,10 @@ export namespace Prisma {
     schedules?: boolean | Church$schedulesArgs<ExtArgs>
     ministries?: boolean | Church$ministriesArgs<ExtArgs>
     volunteerScales?: boolean | Church$volunteerScalesArgs<ExtArgs>
+    notifications?: boolean | Church$notificationsArgs<ExtArgs>
     financialEntries?: boolean | Church$financialEntriesArgs<ExtArgs>
+    journeyStages?: boolean | Church$journeyStagesArgs<ExtArgs>
+    journeyAchievements?: boolean | Church$journeyAchievementsArgs<ExtArgs>
     _count?: boolean | ChurchCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ChurchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2302,7 +3306,10 @@ export namespace Prisma {
       schedules: Prisma.$WeeklySchedulePayload<ExtArgs>[]
       ministries: Prisma.$MinistryPayload<ExtArgs>[]
       volunteerScales: Prisma.$VolunteerScalePayload<ExtArgs>[]
+      notifications: Prisma.$NotificationPayload<ExtArgs>[]
       financialEntries: Prisma.$FinancialEntryPayload<ExtArgs>[]
+      journeyStages: Prisma.$JourneyStagePayload<ExtArgs>[]
+      journeyAchievements: Prisma.$JourneyAchievementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2716,7 +3723,10 @@ export namespace Prisma {
     schedules<T extends Church$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Church$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeeklySchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ministries<T extends Church$ministriesArgs<ExtArgs> = {}>(args?: Subset<T, Church$ministriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MinistryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     volunteerScales<T extends Church$volunteerScalesArgs<ExtArgs> = {}>(args?: Subset<T, Church$volunteerScalesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VolunteerScalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notifications<T extends Church$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, Church$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     financialEntries<T extends Church$financialEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Church$financialEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    journeyStages<T extends Church$journeyStagesArgs<ExtArgs> = {}>(args?: Subset<T, Church$journeyStagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    journeyAchievements<T extends Church$journeyAchievementsArgs<ExtArgs> = {}>(args?: Subset<T, Church$journeyAchievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3289,6 +4299,30 @@ export namespace Prisma {
   }
 
   /**
+   * Church.notifications
+   */
+  export type Church$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
    * Church.financialEntries
    */
   export type Church$financialEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3310,6 +4344,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FinancialEntryScalarFieldEnum | FinancialEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Church.journeyStages
+   */
+  export type Church$journeyStagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    where?: JourneyStageWhereInput
+    orderBy?: JourneyStageOrderByWithRelationInput | JourneyStageOrderByWithRelationInput[]
+    cursor?: JourneyStageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: JourneyStageScalarFieldEnum | JourneyStageScalarFieldEnum[]
+  }
+
+  /**
+   * Church.journeyAchievements
+   */
+  export type Church$journeyAchievementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    where?: JourneyAchievementWhereInput
+    orderBy?: JourneyAchievementOrderByWithRelationInput | JourneyAchievementOrderByWithRelationInput[]
+    cursor?: JourneyAchievementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: JourneyAchievementScalarFieldEnum | JourneyAchievementScalarFieldEnum[]
   }
 
   /**
@@ -6949,6 +8031,8 @@ export namespace Prisma {
     youChurch?: boolean | User$youChurchArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    notificationsReceived?: boolean | User$notificationsReceivedArgs<ExtArgs>
+    notificationsTriggered?: boolean | User$notificationsTriggeredArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6998,6 +8082,8 @@ export namespace Prisma {
     youChurch?: boolean | User$youChurchArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    notificationsReceived?: boolean | User$notificationsReceivedArgs<ExtArgs>
+    notificationsTriggered?: boolean | User$notificationsTriggeredArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7013,6 +8099,8 @@ export namespace Prisma {
       youChurch: Prisma.$ChurchPayload<ExtArgs> | null
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
+      notificationsReceived: Prisma.$NotificationPayload<ExtArgs>[]
+      notificationsTriggered: Prisma.$NotificationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7422,6 +8510,8 @@ export namespace Prisma {
     youChurch<T extends User$youChurchArgs<ExtArgs> = {}>(args?: Subset<T, User$youChurchArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notificationsReceived<T extends User$notificationsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notificationsTriggered<T extends User$notificationsTriggeredArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsTriggeredArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7924,6 +9014,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.notificationsReceived
+   */
+  export type User$notificationsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * User.notificationsTriggered
+   */
+  export type User$notificationsTriggeredArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8195,6 +9333,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     youChurch?: boolean | ChurchDefaultArgs<ExtArgs>
+    journey?: boolean | Person$journeyArgs<ExtArgs>
+    journeyTasks?: boolean | Person$journeyTasksArgs<ExtArgs>
+    achievements?: boolean | Person$achievementsArgs<ExtArgs>
     volunteerScales?: boolean | Person$volunteerScalesArgs<ExtArgs>
     _count?: boolean | PersonCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["person"]>
@@ -8264,6 +9405,9 @@ export namespace Prisma {
   export type PersonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "contact" | "address" | "birthday" | "type" | "profileImage" | "ministry" | "role" | "notes" | "firstVisitAt" | "onboardingDraft" | "onboardingCompletedAt" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["person"]>
   export type PersonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     youChurch?: boolean | ChurchDefaultArgs<ExtArgs>
+    journey?: boolean | Person$journeyArgs<ExtArgs>
+    journeyTasks?: boolean | Person$journeyTasksArgs<ExtArgs>
+    achievements?: boolean | Person$achievementsArgs<ExtArgs>
     volunteerScales?: boolean | Person$volunteerScalesArgs<ExtArgs>
     _count?: boolean | PersonCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -8278,6 +9422,9 @@ export namespace Prisma {
     name: "Person"
     objects: {
       youChurch: Prisma.$ChurchPayload<ExtArgs>
+      journey: Prisma.$PersonJourneyPayload<ExtArgs> | null
+      journeyTasks: Prisma.$PersonJourneyTaskPayload<ExtArgs>[]
+      achievements: Prisma.$PersonAchievementPayload<ExtArgs>[]
       volunteerScales: Prisma.$VolunteerScalePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -8693,6 +9840,9 @@ export namespace Prisma {
   export interface Prisma__PersonClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     youChurch<T extends ChurchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChurchDefaultArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    journey<T extends Person$journeyArgs<ExtArgs> = {}>(args?: Subset<T, Person$journeyArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    journeyTasks<T extends Person$journeyTasksArgs<ExtArgs> = {}>(args?: Subset<T, Person$journeyTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    achievements<T extends Person$achievementsArgs<ExtArgs> = {}>(args?: Subset<T, Person$achievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     volunteerScales<T extends Person$volunteerScalesArgs<ExtArgs> = {}>(args?: Subset<T, Person$volunteerScalesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VolunteerScalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9133,6 +10283,73 @@ export namespace Prisma {
      * Limit how many People to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Person.journey
+   */
+  export type Person$journeyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    where?: PersonJourneyWhereInput
+  }
+
+  /**
+   * Person.journeyTasks
+   */
+  export type Person$journeyTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    where?: PersonJourneyTaskWhereInput
+    orderBy?: PersonJourneyTaskOrderByWithRelationInput | PersonJourneyTaskOrderByWithRelationInput[]
+    cursor?: PersonJourneyTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonJourneyTaskScalarFieldEnum | PersonJourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * Person.achievements
+   */
+  export type Person$achievementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    where?: PersonAchievementWhereInput
+    orderBy?: PersonAchievementOrderByWithRelationInput | PersonAchievementOrderByWithRelationInput[]
+    cursor?: PersonAchievementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonAchievementScalarFieldEnum | PersonAchievementScalarFieldEnum[]
   }
 
   /**
@@ -10321,6 +11538,9 @@ export namespace Prisma {
     role: string | null
     eventName: string | null
     confirmed: boolean | null
+    responseStatus: $Enums.VolunteerScaleResponseStatus | null
+    responseNote: string | null
+    respondedAt: Date | null
     personId: string | null
     ministryId: string | null
     churchId: string | null
@@ -10334,6 +11554,9 @@ export namespace Prisma {
     role: string | null
     eventName: string | null
     confirmed: boolean | null
+    responseStatus: $Enums.VolunteerScaleResponseStatus | null
+    responseNote: string | null
+    respondedAt: Date | null
     personId: string | null
     ministryId: string | null
     churchId: string | null
@@ -10347,6 +11570,9 @@ export namespace Prisma {
     role: number
     eventName: number
     confirmed: number
+    responseStatus: number
+    responseNote: number
+    respondedAt: number
     personId: number
     ministryId: number
     churchId: number
@@ -10362,6 +11588,9 @@ export namespace Prisma {
     role?: true
     eventName?: true
     confirmed?: true
+    responseStatus?: true
+    responseNote?: true
+    respondedAt?: true
     personId?: true
     ministryId?: true
     churchId?: true
@@ -10375,6 +11604,9 @@ export namespace Prisma {
     role?: true
     eventName?: true
     confirmed?: true
+    responseStatus?: true
+    responseNote?: true
+    respondedAt?: true
     personId?: true
     ministryId?: true
     churchId?: true
@@ -10388,6 +11620,9 @@ export namespace Prisma {
     role?: true
     eventName?: true
     confirmed?: true
+    responseStatus?: true
+    responseNote?: true
+    respondedAt?: true
     personId?: true
     ministryId?: true
     churchId?: true
@@ -10474,6 +11709,9 @@ export namespace Prisma {
     role: string
     eventName: string | null
     confirmed: boolean
+    responseStatus: $Enums.VolunteerScaleResponseStatus
+    responseNote: string | null
+    respondedAt: Date | null
     personId: string
     ministryId: string
     churchId: string
@@ -10504,6 +11742,9 @@ export namespace Prisma {
     role?: boolean
     eventName?: boolean
     confirmed?: boolean
+    responseStatus?: boolean
+    responseNote?: boolean
+    respondedAt?: boolean
     personId?: boolean
     ministryId?: boolean
     churchId?: boolean
@@ -10520,6 +11761,9 @@ export namespace Prisma {
     role?: boolean
     eventName?: boolean
     confirmed?: boolean
+    responseStatus?: boolean
+    responseNote?: boolean
+    respondedAt?: boolean
     personId?: boolean
     ministryId?: boolean
     churchId?: boolean
@@ -10536,6 +11780,9 @@ export namespace Prisma {
     role?: boolean
     eventName?: boolean
     confirmed?: boolean
+    responseStatus?: boolean
+    responseNote?: boolean
+    respondedAt?: boolean
     personId?: boolean
     ministryId?: boolean
     churchId?: boolean
@@ -10552,6 +11799,9 @@ export namespace Prisma {
     role?: boolean
     eventName?: boolean
     confirmed?: boolean
+    responseStatus?: boolean
+    responseNote?: boolean
+    respondedAt?: boolean
     personId?: boolean
     ministryId?: boolean
     churchId?: boolean
@@ -10559,7 +11809,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type VolunteerScaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "role" | "eventName" | "confirmed" | "personId" | "ministryId" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["volunteerScale"]>
+  export type VolunteerScaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "role" | "eventName" | "confirmed" | "responseStatus" | "responseNote" | "respondedAt" | "personId" | "ministryId" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["volunteerScale"]>
   export type VolunteerScaleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     person?: boolean | PersonDefaultArgs<ExtArgs>
     ministry?: boolean | MinistryDefaultArgs<ExtArgs>
@@ -10589,6 +11839,9 @@ export namespace Prisma {
       role: string
       eventName: string | null
       confirmed: boolean
+      responseStatus: $Enums.VolunteerScaleResponseStatus
+      responseNote: string | null
+      respondedAt: Date | null
       personId: string
       ministryId: string
       churchId: string
@@ -11025,6 +12278,9 @@ export namespace Prisma {
     readonly role: FieldRef<"VolunteerScale", 'String'>
     readonly eventName: FieldRef<"VolunteerScale", 'String'>
     readonly confirmed: FieldRef<"VolunteerScale", 'Boolean'>
+    readonly responseStatus: FieldRef<"VolunteerScale", 'VolunteerScaleResponseStatus'>
+    readonly responseNote: FieldRef<"VolunteerScale", 'String'>
+    readonly respondedAt: FieldRef<"VolunteerScale", 'DateTime'>
     readonly personId: FieldRef<"VolunteerScale", 'String'>
     readonly ministryId: FieldRef<"VolunteerScale", 'String'>
     readonly churchId: FieldRef<"VolunteerScale", 'String'>
@@ -11441,6 +12697,9448 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: VolunteerScaleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Notification
+   */
+
+  export type AggregateNotification = {
+    _count: NotificationCountAggregateOutputType | null
+    _min: NotificationMinAggregateOutputType | null
+    _max: NotificationMaxAggregateOutputType | null
+  }
+
+  export type NotificationMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.NotificationType | null
+    title: string | null
+    message: string | null
+    link: string | null
+    entityType: string | null
+    entityId: string | null
+    readAt: Date | null
+    churchId: string | null
+    recipientUserId: string | null
+    actorUserId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NotificationMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.NotificationType | null
+    title: string | null
+    message: string | null
+    link: string | null
+    entityType: string | null
+    entityId: string | null
+    readAt: Date | null
+    churchId: string | null
+    recipientUserId: string | null
+    actorUserId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NotificationCountAggregateOutputType = {
+    id: number
+    type: number
+    title: number
+    message: number
+    link: number
+    entityType: number
+    entityId: number
+    metadata: number
+    readAt: number
+    churchId: number
+    recipientUserId: number
+    actorUserId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type NotificationMinAggregateInputType = {
+    id?: true
+    type?: true
+    title?: true
+    message?: true
+    link?: true
+    entityType?: true
+    entityId?: true
+    readAt?: true
+    churchId?: true
+    recipientUserId?: true
+    actorUserId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NotificationMaxAggregateInputType = {
+    id?: true
+    type?: true
+    title?: true
+    message?: true
+    link?: true
+    entityType?: true
+    entityId?: true
+    readAt?: true
+    churchId?: true
+    recipientUserId?: true
+    actorUserId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NotificationCountAggregateInputType = {
+    id?: true
+    type?: true
+    title?: true
+    message?: true
+    link?: true
+    entityType?: true
+    entityId?: true
+    metadata?: true
+    readAt?: true
+    churchId?: true
+    recipientUserId?: true
+    actorUserId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type NotificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notification to aggregate.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Notifications
+    **/
+    _count?: true | NotificationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NotificationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NotificationMaxAggregateInputType
+  }
+
+  export type GetNotificationAggregateType<T extends NotificationAggregateArgs> = {
+        [P in keyof T & keyof AggregateNotification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotification[P]>
+      : GetScalarType<T[P], AggregateNotification[P]>
+  }
+
+
+
+
+  export type NotificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithAggregationInput | NotificationOrderByWithAggregationInput[]
+    by: NotificationScalarFieldEnum[] | NotificationScalarFieldEnum
+    having?: NotificationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NotificationCountAggregateInputType | true
+    _min?: NotificationMinAggregateInputType
+    _max?: NotificationMaxAggregateInputType
+  }
+
+  export type NotificationGroupByOutputType = {
+    id: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link: string | null
+    entityType: string | null
+    entityId: string | null
+    metadata: JsonValue | null
+    readAt: Date | null
+    churchId: string
+    recipientUserId: string
+    actorUserId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: NotificationCountAggregateOutputType | null
+    _min: NotificationMinAggregateOutputType | null
+    _max: NotificationMaxAggregateOutputType | null
+  }
+
+  type GetNotificationGroupByPayload<T extends NotificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotificationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NotificationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+            : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NotificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    link?: boolean
+    entityType?: boolean
+    entityId?: boolean
+    metadata?: boolean
+    readAt?: boolean
+    churchId?: boolean
+    recipientUserId?: boolean
+    actorUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    recipientUser?: boolean | UserDefaultArgs<ExtArgs>
+    actorUser?: boolean | Notification$actorUserArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    link?: boolean
+    entityType?: boolean
+    entityId?: boolean
+    metadata?: boolean
+    readAt?: boolean
+    churchId?: boolean
+    recipientUserId?: boolean
+    actorUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    recipientUser?: boolean | UserDefaultArgs<ExtArgs>
+    actorUser?: boolean | Notification$actorUserArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    link?: boolean
+    entityType?: boolean
+    entityId?: boolean
+    metadata?: boolean
+    readAt?: boolean
+    churchId?: boolean
+    recipientUserId?: boolean
+    actorUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    recipientUser?: boolean | UserDefaultArgs<ExtArgs>
+    actorUser?: boolean | Notification$actorUserArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectScalar = {
+    id?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    link?: boolean
+    entityType?: boolean
+    entityId?: boolean
+    metadata?: boolean
+    readAt?: boolean
+    churchId?: boolean
+    recipientUserId?: boolean
+    actorUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "title" | "message" | "link" | "entityType" | "entityId" | "metadata" | "readAt" | "churchId" | "recipientUserId" | "actorUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["notification"]>
+  export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    recipientUser?: boolean | UserDefaultArgs<ExtArgs>
+    actorUser?: boolean | Notification$actorUserArgs<ExtArgs>
+  }
+  export type NotificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    recipientUser?: boolean | UserDefaultArgs<ExtArgs>
+    actorUser?: boolean | Notification$actorUserArgs<ExtArgs>
+  }
+  export type NotificationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    recipientUser?: boolean | UserDefaultArgs<ExtArgs>
+    actorUser?: boolean | Notification$actorUserArgs<ExtArgs>
+  }
+
+  export type $NotificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Notification"
+    objects: {
+      church: Prisma.$ChurchPayload<ExtArgs>
+      recipientUser: Prisma.$UserPayload<ExtArgs>
+      actorUser: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.NotificationType
+      title: string
+      message: string
+      link: string | null
+      entityType: string | null
+      entityId: string | null
+      metadata: Prisma.JsonValue | null
+      readAt: Date | null
+      churchId: string
+      recipientUserId: string
+      actorUserId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["notification"]>
+    composites: {}
+  }
+
+  type NotificationGetPayload<S extends boolean | null | undefined | NotificationDefaultArgs> = $Result.GetResult<Prisma.$NotificationPayload, S>
+
+  type NotificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NotificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NotificationCountAggregateInputType | true
+    }
+
+  export interface NotificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Notification'], meta: { name: 'Notification' } }
+    /**
+     * Find zero or one Notification that matches the filter.
+     * @param {NotificationFindUniqueArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotificationFindUniqueArgs>(args: SelectSubset<T, NotificationFindUniqueArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Notification that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NotificationFindUniqueOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotificationFindUniqueOrThrowArgs>(args: SelectSubset<T, NotificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotificationFindFirstArgs>(args?: SelectSubset<T, NotificationFindFirstArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotificationFindFirstOrThrowArgs>(args?: SelectSubset<T, NotificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Notifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Notifications
+     * const notifications = await prisma.notification.findMany()
+     * 
+     * // Get first 10 Notifications
+     * const notifications = await prisma.notification.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const notificationWithIdOnly = await prisma.notification.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NotificationFindManyArgs>(args?: SelectSubset<T, NotificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Notification.
+     * @param {NotificationCreateArgs} args - Arguments to create a Notification.
+     * @example
+     * // Create one Notification
+     * const Notification = await prisma.notification.create({
+     *   data: {
+     *     // ... data to create a Notification
+     *   }
+     * })
+     * 
+     */
+    create<T extends NotificationCreateArgs>(args: SelectSubset<T, NotificationCreateArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Notifications.
+     * @param {NotificationCreateManyArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NotificationCreateManyArgs>(args?: SelectSubset<T, NotificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Notifications and returns the data saved in the database.
+     * @param {NotificationCreateManyAndReturnArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Notifications and only return the `id`
+     * const notificationWithIdOnly = await prisma.notification.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NotificationCreateManyAndReturnArgs>(args?: SelectSubset<T, NotificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Notification.
+     * @param {NotificationDeleteArgs} args - Arguments to delete one Notification.
+     * @example
+     * // Delete one Notification
+     * const Notification = await prisma.notification.delete({
+     *   where: {
+     *     // ... filter to delete one Notification
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NotificationDeleteArgs>(args: SelectSubset<T, NotificationDeleteArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Notification.
+     * @param {NotificationUpdateArgs} args - Arguments to update one Notification.
+     * @example
+     * // Update one Notification
+     * const notification = await prisma.notification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NotificationUpdateArgs>(args: SelectSubset<T, NotificationUpdateArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Notifications.
+     * @param {NotificationDeleteManyArgs} args - Arguments to filter Notifications to delete.
+     * @example
+     * // Delete a few Notifications
+     * const { count } = await prisma.notification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NotificationDeleteManyArgs>(args?: SelectSubset<T, NotificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NotificationUpdateManyArgs>(args: SelectSubset<T, NotificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notifications and returns the data updated in the database.
+     * @param {NotificationUpdateManyAndReturnArgs} args - Arguments to update many Notifications.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Notifications and only return the `id`
+     * const notificationWithIdOnly = await prisma.notification.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NotificationUpdateManyAndReturnArgs>(args: SelectSubset<T, NotificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Notification.
+     * @param {NotificationUpsertArgs} args - Arguments to update or create a Notification.
+     * @example
+     * // Update or create a Notification
+     * const notification = await prisma.notification.upsert({
+     *   create: {
+     *     // ... data to create a Notification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Notification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotificationUpsertArgs>(args: SelectSubset<T, NotificationUpsertArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationCountArgs} args - Arguments to filter Notifications to count.
+     * @example
+     * // Count the number of Notifications
+     * const count = await prisma.notification.count({
+     *   where: {
+     *     // ... the filter for the Notifications we want to count
+     *   }
+     * })
+    **/
+    count<T extends NotificationCountArgs>(
+      args?: Subset<T, NotificationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotificationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NotificationAggregateArgs>(args: Subset<T, NotificationAggregateArgs>): Prisma.PrismaPromise<GetNotificationAggregateType<T>>
+
+    /**
+     * Group by Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NotificationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotificationGroupByArgs['orderBy'] }
+        : { orderBy?: NotificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NotificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNotificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Notification model
+   */
+  readonly fields: NotificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Notification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    church<T extends ChurchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChurchDefaultArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    recipientUser<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    actorUser<T extends Notification$actorUserArgs<ExtArgs> = {}>(args?: Subset<T, Notification$actorUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Notification model
+   */
+  interface NotificationFieldRefs {
+    readonly id: FieldRef<"Notification", 'String'>
+    readonly type: FieldRef<"Notification", 'NotificationType'>
+    readonly title: FieldRef<"Notification", 'String'>
+    readonly message: FieldRef<"Notification", 'String'>
+    readonly link: FieldRef<"Notification", 'String'>
+    readonly entityType: FieldRef<"Notification", 'String'>
+    readonly entityId: FieldRef<"Notification", 'String'>
+    readonly metadata: FieldRef<"Notification", 'Json'>
+    readonly readAt: FieldRef<"Notification", 'DateTime'>
+    readonly churchId: FieldRef<"Notification", 'String'>
+    readonly recipientUserId: FieldRef<"Notification", 'String'>
+    readonly actorUserId: FieldRef<"Notification", 'String'>
+    readonly createdAt: FieldRef<"Notification", 'DateTime'>
+    readonly updatedAt: FieldRef<"Notification", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Notification findUnique
+   */
+  export type NotificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification findUniqueOrThrow
+   */
+  export type NotificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification findFirst
+   */
+  export type NotificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification findFirstOrThrow
+   */
+  export type NotificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification findMany
+   */
+  export type NotificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notifications to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification create
+   */
+  export type NotificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Notification.
+     */
+    data: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>
+  }
+
+  /**
+   * Notification createMany
+   */
+  export type NotificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Notification createManyAndReturn
+   */
+  export type NotificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notification update
+   */
+  export type NotificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Notification.
+     */
+    data: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>
+    /**
+     * Choose, which Notification to update.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification updateMany
+   */
+  export type NotificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notification updateManyAndReturn
+   */
+  export type NotificationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notification upsert
+   */
+  export type NotificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Notification to update in case it exists.
+     */
+    where: NotificationWhereUniqueInput
+    /**
+     * In case the Notification found by the `where` argument doesn't exist, create a new Notification with this data.
+     */
+    create: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>
+    /**
+     * In case the Notification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>
+  }
+
+  /**
+   * Notification delete
+   */
+  export type NotificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter which Notification to delete.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification deleteMany
+   */
+  export type NotificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notifications to delete
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notification.actorUser
+   */
+  export type Notification$actorUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Notification without action
+   */
+  export type NotificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model JourneyStage
+   */
+
+  export type AggregateJourneyStage = {
+    _count: JourneyStageCountAggregateOutputType | null
+    _avg: JourneyStageAvgAggregateOutputType | null
+    _sum: JourneyStageSumAggregateOutputType | null
+    _min: JourneyStageMinAggregateOutputType | null
+    _max: JourneyStageMaxAggregateOutputType | null
+  }
+
+  export type JourneyStageAvgAggregateOutputType = {
+    order: number | null
+    pointsReward: number | null
+  }
+
+  export type JourneyStageSumAggregateOutputType = {
+    order: number | null
+    pointsReward: number | null
+  }
+
+  export type JourneyStageMinAggregateOutputType = {
+    id: string | null
+    key: string | null
+    name: string | null
+    description: string | null
+    order: number | null
+    active: boolean | null
+    visibleToMember: boolean | null
+    pointsReward: number | null
+    churchId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type JourneyStageMaxAggregateOutputType = {
+    id: string | null
+    key: string | null
+    name: string | null
+    description: string | null
+    order: number | null
+    active: boolean | null
+    visibleToMember: boolean | null
+    pointsReward: number | null
+    churchId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type JourneyStageCountAggregateOutputType = {
+    id: number
+    key: number
+    name: number
+    description: number
+    order: number
+    active: number
+    visibleToMember: number
+    pointsReward: number
+    churchId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type JourneyStageAvgAggregateInputType = {
+    order?: true
+    pointsReward?: true
+  }
+
+  export type JourneyStageSumAggregateInputType = {
+    order?: true
+    pointsReward?: true
+  }
+
+  export type JourneyStageMinAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    description?: true
+    order?: true
+    active?: true
+    visibleToMember?: true
+    pointsReward?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type JourneyStageMaxAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    description?: true
+    order?: true
+    active?: true
+    visibleToMember?: true
+    pointsReward?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type JourneyStageCountAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    description?: true
+    order?: true
+    active?: true
+    visibleToMember?: true
+    pointsReward?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type JourneyStageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which JourneyStage to aggregate.
+     */
+    where?: JourneyStageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyStages to fetch.
+     */
+    orderBy?: JourneyStageOrderByWithRelationInput | JourneyStageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: JourneyStageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyStages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyStages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned JourneyStages
+    **/
+    _count?: true | JourneyStageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: JourneyStageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: JourneyStageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: JourneyStageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: JourneyStageMaxAggregateInputType
+  }
+
+  export type GetJourneyStageAggregateType<T extends JourneyStageAggregateArgs> = {
+        [P in keyof T & keyof AggregateJourneyStage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateJourneyStage[P]>
+      : GetScalarType<T[P], AggregateJourneyStage[P]>
+  }
+
+
+
+
+  export type JourneyStageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JourneyStageWhereInput
+    orderBy?: JourneyStageOrderByWithAggregationInput | JourneyStageOrderByWithAggregationInput[]
+    by: JourneyStageScalarFieldEnum[] | JourneyStageScalarFieldEnum
+    having?: JourneyStageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: JourneyStageCountAggregateInputType | true
+    _avg?: JourneyStageAvgAggregateInputType
+    _sum?: JourneyStageSumAggregateInputType
+    _min?: JourneyStageMinAggregateInputType
+    _max?: JourneyStageMaxAggregateInputType
+  }
+
+  export type JourneyStageGroupByOutputType = {
+    id: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active: boolean
+    visibleToMember: boolean
+    pointsReward: number
+    churchId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: JourneyStageCountAggregateOutputType | null
+    _avg: JourneyStageAvgAggregateOutputType | null
+    _sum: JourneyStageSumAggregateOutputType | null
+    _min: JourneyStageMinAggregateOutputType | null
+    _max: JourneyStageMaxAggregateOutputType | null
+  }
+
+  type GetJourneyStageGroupByPayload<T extends JourneyStageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<JourneyStageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof JourneyStageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], JourneyStageGroupByOutputType[P]>
+            : GetScalarType<T[P], JourneyStageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type JourneyStageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    description?: boolean
+    order?: boolean
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    tasks?: boolean | JourneyStage$tasksArgs<ExtArgs>
+    currentJourneys?: boolean | JourneyStage$currentJourneysArgs<ExtArgs>
+    historyEntries?: boolean | JourneyStage$historyEntriesArgs<ExtArgs>
+    previousEntries?: boolean | JourneyStage$previousEntriesArgs<ExtArgs>
+    _count?: boolean | JourneyStageCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyStage"]>
+
+  export type JourneyStageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    description?: boolean
+    order?: boolean
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyStage"]>
+
+  export type JourneyStageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    description?: boolean
+    order?: boolean
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyStage"]>
+
+  export type JourneyStageSelectScalar = {
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    description?: boolean
+    order?: boolean
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type JourneyStageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name" | "description" | "order" | "active" | "visibleToMember" | "pointsReward" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["journeyStage"]>
+  export type JourneyStageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    tasks?: boolean | JourneyStage$tasksArgs<ExtArgs>
+    currentJourneys?: boolean | JourneyStage$currentJourneysArgs<ExtArgs>
+    historyEntries?: boolean | JourneyStage$historyEntriesArgs<ExtArgs>
+    previousEntries?: boolean | JourneyStage$previousEntriesArgs<ExtArgs>
+    _count?: boolean | JourneyStageCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type JourneyStageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+  }
+  export type JourneyStageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+  }
+
+  export type $JourneyStagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "JourneyStage"
+    objects: {
+      church: Prisma.$ChurchPayload<ExtArgs>
+      tasks: Prisma.$JourneyTaskPayload<ExtArgs>[]
+      currentJourneys: Prisma.$PersonJourneyPayload<ExtArgs>[]
+      historyEntries: Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>[]
+      previousEntries: Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      key: string
+      name: string
+      description: string
+      order: number
+      active: boolean
+      visibleToMember: boolean
+      pointsReward: number
+      churchId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["journeyStage"]>
+    composites: {}
+  }
+
+  type JourneyStageGetPayload<S extends boolean | null | undefined | JourneyStageDefaultArgs> = $Result.GetResult<Prisma.$JourneyStagePayload, S>
+
+  type JourneyStageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<JourneyStageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: JourneyStageCountAggregateInputType | true
+    }
+
+  export interface JourneyStageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['JourneyStage'], meta: { name: 'JourneyStage' } }
+    /**
+     * Find zero or one JourneyStage that matches the filter.
+     * @param {JourneyStageFindUniqueArgs} args - Arguments to find a JourneyStage
+     * @example
+     * // Get one JourneyStage
+     * const journeyStage = await prisma.journeyStage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends JourneyStageFindUniqueArgs>(args: SelectSubset<T, JourneyStageFindUniqueArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one JourneyStage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {JourneyStageFindUniqueOrThrowArgs} args - Arguments to find a JourneyStage
+     * @example
+     * // Get one JourneyStage
+     * const journeyStage = await prisma.journeyStage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends JourneyStageFindUniqueOrThrowArgs>(args: SelectSubset<T, JourneyStageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first JourneyStage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyStageFindFirstArgs} args - Arguments to find a JourneyStage
+     * @example
+     * // Get one JourneyStage
+     * const journeyStage = await prisma.journeyStage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends JourneyStageFindFirstArgs>(args?: SelectSubset<T, JourneyStageFindFirstArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first JourneyStage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyStageFindFirstOrThrowArgs} args - Arguments to find a JourneyStage
+     * @example
+     * // Get one JourneyStage
+     * const journeyStage = await prisma.journeyStage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends JourneyStageFindFirstOrThrowArgs>(args?: SelectSubset<T, JourneyStageFindFirstOrThrowArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more JourneyStages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyStageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all JourneyStages
+     * const journeyStages = await prisma.journeyStage.findMany()
+     * 
+     * // Get first 10 JourneyStages
+     * const journeyStages = await prisma.journeyStage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const journeyStageWithIdOnly = await prisma.journeyStage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends JourneyStageFindManyArgs>(args?: SelectSubset<T, JourneyStageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a JourneyStage.
+     * @param {JourneyStageCreateArgs} args - Arguments to create a JourneyStage.
+     * @example
+     * // Create one JourneyStage
+     * const JourneyStage = await prisma.journeyStage.create({
+     *   data: {
+     *     // ... data to create a JourneyStage
+     *   }
+     * })
+     * 
+     */
+    create<T extends JourneyStageCreateArgs>(args: SelectSubset<T, JourneyStageCreateArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many JourneyStages.
+     * @param {JourneyStageCreateManyArgs} args - Arguments to create many JourneyStages.
+     * @example
+     * // Create many JourneyStages
+     * const journeyStage = await prisma.journeyStage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends JourneyStageCreateManyArgs>(args?: SelectSubset<T, JourneyStageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many JourneyStages and returns the data saved in the database.
+     * @param {JourneyStageCreateManyAndReturnArgs} args - Arguments to create many JourneyStages.
+     * @example
+     * // Create many JourneyStages
+     * const journeyStage = await prisma.journeyStage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many JourneyStages and only return the `id`
+     * const journeyStageWithIdOnly = await prisma.journeyStage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends JourneyStageCreateManyAndReturnArgs>(args?: SelectSubset<T, JourneyStageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a JourneyStage.
+     * @param {JourneyStageDeleteArgs} args - Arguments to delete one JourneyStage.
+     * @example
+     * // Delete one JourneyStage
+     * const JourneyStage = await prisma.journeyStage.delete({
+     *   where: {
+     *     // ... filter to delete one JourneyStage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends JourneyStageDeleteArgs>(args: SelectSubset<T, JourneyStageDeleteArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one JourneyStage.
+     * @param {JourneyStageUpdateArgs} args - Arguments to update one JourneyStage.
+     * @example
+     * // Update one JourneyStage
+     * const journeyStage = await prisma.journeyStage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends JourneyStageUpdateArgs>(args: SelectSubset<T, JourneyStageUpdateArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more JourneyStages.
+     * @param {JourneyStageDeleteManyArgs} args - Arguments to filter JourneyStages to delete.
+     * @example
+     * // Delete a few JourneyStages
+     * const { count } = await prisma.journeyStage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends JourneyStageDeleteManyArgs>(args?: SelectSubset<T, JourneyStageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more JourneyStages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyStageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many JourneyStages
+     * const journeyStage = await prisma.journeyStage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends JourneyStageUpdateManyArgs>(args: SelectSubset<T, JourneyStageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more JourneyStages and returns the data updated in the database.
+     * @param {JourneyStageUpdateManyAndReturnArgs} args - Arguments to update many JourneyStages.
+     * @example
+     * // Update many JourneyStages
+     * const journeyStage = await prisma.journeyStage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more JourneyStages and only return the `id`
+     * const journeyStageWithIdOnly = await prisma.journeyStage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends JourneyStageUpdateManyAndReturnArgs>(args: SelectSubset<T, JourneyStageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one JourneyStage.
+     * @param {JourneyStageUpsertArgs} args - Arguments to update or create a JourneyStage.
+     * @example
+     * // Update or create a JourneyStage
+     * const journeyStage = await prisma.journeyStage.upsert({
+     *   create: {
+     *     // ... data to create a JourneyStage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the JourneyStage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends JourneyStageUpsertArgs>(args: SelectSubset<T, JourneyStageUpsertArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of JourneyStages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyStageCountArgs} args - Arguments to filter JourneyStages to count.
+     * @example
+     * // Count the number of JourneyStages
+     * const count = await prisma.journeyStage.count({
+     *   where: {
+     *     // ... the filter for the JourneyStages we want to count
+     *   }
+     * })
+    **/
+    count<T extends JourneyStageCountArgs>(
+      args?: Subset<T, JourneyStageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], JourneyStageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a JourneyStage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyStageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends JourneyStageAggregateArgs>(args: Subset<T, JourneyStageAggregateArgs>): Prisma.PrismaPromise<GetJourneyStageAggregateType<T>>
+
+    /**
+     * Group by JourneyStage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyStageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends JourneyStageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: JourneyStageGroupByArgs['orderBy'] }
+        : { orderBy?: JourneyStageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, JourneyStageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetJourneyStageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the JourneyStage model
+   */
+  readonly fields: JourneyStageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for JourneyStage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__JourneyStageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    church<T extends ChurchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChurchDefaultArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    tasks<T extends JourneyStage$tasksArgs<ExtArgs> = {}>(args?: Subset<T, JourneyStage$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    currentJourneys<T extends JourneyStage$currentJourneysArgs<ExtArgs> = {}>(args?: Subset<T, JourneyStage$currentJourneysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    historyEntries<T extends JourneyStage$historyEntriesArgs<ExtArgs> = {}>(args?: Subset<T, JourneyStage$historyEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    previousEntries<T extends JourneyStage$previousEntriesArgs<ExtArgs> = {}>(args?: Subset<T, JourneyStage$previousEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the JourneyStage model
+   */
+  interface JourneyStageFieldRefs {
+    readonly id: FieldRef<"JourneyStage", 'String'>
+    readonly key: FieldRef<"JourneyStage", 'String'>
+    readonly name: FieldRef<"JourneyStage", 'String'>
+    readonly description: FieldRef<"JourneyStage", 'String'>
+    readonly order: FieldRef<"JourneyStage", 'Int'>
+    readonly active: FieldRef<"JourneyStage", 'Boolean'>
+    readonly visibleToMember: FieldRef<"JourneyStage", 'Boolean'>
+    readonly pointsReward: FieldRef<"JourneyStage", 'Int'>
+    readonly churchId: FieldRef<"JourneyStage", 'String'>
+    readonly createdAt: FieldRef<"JourneyStage", 'DateTime'>
+    readonly updatedAt: FieldRef<"JourneyStage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * JourneyStage findUnique
+   */
+  export type JourneyStageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyStage to fetch.
+     */
+    where: JourneyStageWhereUniqueInput
+  }
+
+  /**
+   * JourneyStage findUniqueOrThrow
+   */
+  export type JourneyStageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyStage to fetch.
+     */
+    where: JourneyStageWhereUniqueInput
+  }
+
+  /**
+   * JourneyStage findFirst
+   */
+  export type JourneyStageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyStage to fetch.
+     */
+    where?: JourneyStageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyStages to fetch.
+     */
+    orderBy?: JourneyStageOrderByWithRelationInput | JourneyStageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for JourneyStages.
+     */
+    cursor?: JourneyStageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyStages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyStages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of JourneyStages.
+     */
+    distinct?: JourneyStageScalarFieldEnum | JourneyStageScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyStage findFirstOrThrow
+   */
+  export type JourneyStageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyStage to fetch.
+     */
+    where?: JourneyStageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyStages to fetch.
+     */
+    orderBy?: JourneyStageOrderByWithRelationInput | JourneyStageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for JourneyStages.
+     */
+    cursor?: JourneyStageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyStages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyStages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of JourneyStages.
+     */
+    distinct?: JourneyStageScalarFieldEnum | JourneyStageScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyStage findMany
+   */
+  export type JourneyStageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyStages to fetch.
+     */
+    where?: JourneyStageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyStages to fetch.
+     */
+    orderBy?: JourneyStageOrderByWithRelationInput | JourneyStageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing JourneyStages.
+     */
+    cursor?: JourneyStageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyStages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyStages.
+     */
+    skip?: number
+    distinct?: JourneyStageScalarFieldEnum | JourneyStageScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyStage create
+   */
+  export type JourneyStageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a JourneyStage.
+     */
+    data: XOR<JourneyStageCreateInput, JourneyStageUncheckedCreateInput>
+  }
+
+  /**
+   * JourneyStage createMany
+   */
+  export type JourneyStageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many JourneyStages.
+     */
+    data: JourneyStageCreateManyInput | JourneyStageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * JourneyStage createManyAndReturn
+   */
+  export type JourneyStageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * The data used to create many JourneyStages.
+     */
+    data: JourneyStageCreateManyInput | JourneyStageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * JourneyStage update
+   */
+  export type JourneyStageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a JourneyStage.
+     */
+    data: XOR<JourneyStageUpdateInput, JourneyStageUncheckedUpdateInput>
+    /**
+     * Choose, which JourneyStage to update.
+     */
+    where: JourneyStageWhereUniqueInput
+  }
+
+  /**
+   * JourneyStage updateMany
+   */
+  export type JourneyStageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update JourneyStages.
+     */
+    data: XOR<JourneyStageUpdateManyMutationInput, JourneyStageUncheckedUpdateManyInput>
+    /**
+     * Filter which JourneyStages to update
+     */
+    where?: JourneyStageWhereInput
+    /**
+     * Limit how many JourneyStages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * JourneyStage updateManyAndReturn
+   */
+  export type JourneyStageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * The data used to update JourneyStages.
+     */
+    data: XOR<JourneyStageUpdateManyMutationInput, JourneyStageUncheckedUpdateManyInput>
+    /**
+     * Filter which JourneyStages to update
+     */
+    where?: JourneyStageWhereInput
+    /**
+     * Limit how many JourneyStages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * JourneyStage upsert
+   */
+  export type JourneyStageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the JourneyStage to update in case it exists.
+     */
+    where: JourneyStageWhereUniqueInput
+    /**
+     * In case the JourneyStage found by the `where` argument doesn't exist, create a new JourneyStage with this data.
+     */
+    create: XOR<JourneyStageCreateInput, JourneyStageUncheckedCreateInput>
+    /**
+     * In case the JourneyStage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<JourneyStageUpdateInput, JourneyStageUncheckedUpdateInput>
+  }
+
+  /**
+   * JourneyStage delete
+   */
+  export type JourneyStageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    /**
+     * Filter which JourneyStage to delete.
+     */
+    where: JourneyStageWhereUniqueInput
+  }
+
+  /**
+   * JourneyStage deleteMany
+   */
+  export type JourneyStageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which JourneyStages to delete
+     */
+    where?: JourneyStageWhereInput
+    /**
+     * Limit how many JourneyStages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * JourneyStage.tasks
+   */
+  export type JourneyStage$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    where?: JourneyTaskWhereInput
+    orderBy?: JourneyTaskOrderByWithRelationInput | JourneyTaskOrderByWithRelationInput[]
+    cursor?: JourneyTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: JourneyTaskScalarFieldEnum | JourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyStage.currentJourneys
+   */
+  export type JourneyStage$currentJourneysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    where?: PersonJourneyWhereInput
+    orderBy?: PersonJourneyOrderByWithRelationInput | PersonJourneyOrderByWithRelationInput[]
+    cursor?: PersonJourneyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonJourneyScalarFieldEnum | PersonJourneyScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyStage.historyEntries
+   */
+  export type JourneyStage$historyEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    where?: PersonJourneyStageHistoryWhereInput
+    orderBy?: PersonJourneyStageHistoryOrderByWithRelationInput | PersonJourneyStageHistoryOrderByWithRelationInput[]
+    cursor?: PersonJourneyStageHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonJourneyStageHistoryScalarFieldEnum | PersonJourneyStageHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyStage.previousEntries
+   */
+  export type JourneyStage$previousEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    where?: PersonJourneyStageHistoryWhereInput
+    orderBy?: PersonJourneyStageHistoryOrderByWithRelationInput | PersonJourneyStageHistoryOrderByWithRelationInput[]
+    cursor?: PersonJourneyStageHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonJourneyStageHistoryScalarFieldEnum | PersonJourneyStageHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyStage without action
+   */
+  export type JourneyStageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model JourneyTask
+   */
+
+  export type AggregateJourneyTask = {
+    _count: JourneyTaskCountAggregateOutputType | null
+    _avg: JourneyTaskAvgAggregateOutputType | null
+    _sum: JourneyTaskSumAggregateOutputType | null
+    _min: JourneyTaskMinAggregateOutputType | null
+    _max: JourneyTaskMaxAggregateOutputType | null
+  }
+
+  export type JourneyTaskAvgAggregateOutputType = {
+    points: number | null
+  }
+
+  export type JourneyTaskSumAggregateOutputType = {
+    points: number | null
+  }
+
+  export type JourneyTaskMinAggregateOutputType = {
+    id: string | null
+    key: string | null
+    title: string | null
+    description: string | null
+    points: number | null
+    required: boolean | null
+    active: boolean | null
+    triggerType: $Enums.JourneyTriggerType | null
+    stageId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type JourneyTaskMaxAggregateOutputType = {
+    id: string | null
+    key: string | null
+    title: string | null
+    description: string | null
+    points: number | null
+    required: boolean | null
+    active: boolean | null
+    triggerType: $Enums.JourneyTriggerType | null
+    stageId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type JourneyTaskCountAggregateOutputType = {
+    id: number
+    key: number
+    title: number
+    description: number
+    points: number
+    required: number
+    active: number
+    triggerType: number
+    stageId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type JourneyTaskAvgAggregateInputType = {
+    points?: true
+  }
+
+  export type JourneyTaskSumAggregateInputType = {
+    points?: true
+  }
+
+  export type JourneyTaskMinAggregateInputType = {
+    id?: true
+    key?: true
+    title?: true
+    description?: true
+    points?: true
+    required?: true
+    active?: true
+    triggerType?: true
+    stageId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type JourneyTaskMaxAggregateInputType = {
+    id?: true
+    key?: true
+    title?: true
+    description?: true
+    points?: true
+    required?: true
+    active?: true
+    triggerType?: true
+    stageId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type JourneyTaskCountAggregateInputType = {
+    id?: true
+    key?: true
+    title?: true
+    description?: true
+    points?: true
+    required?: true
+    active?: true
+    triggerType?: true
+    stageId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type JourneyTaskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which JourneyTask to aggregate.
+     */
+    where?: JourneyTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyTasks to fetch.
+     */
+    orderBy?: JourneyTaskOrderByWithRelationInput | JourneyTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: JourneyTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned JourneyTasks
+    **/
+    _count?: true | JourneyTaskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: JourneyTaskAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: JourneyTaskSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: JourneyTaskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: JourneyTaskMaxAggregateInputType
+  }
+
+  export type GetJourneyTaskAggregateType<T extends JourneyTaskAggregateArgs> = {
+        [P in keyof T & keyof AggregateJourneyTask]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateJourneyTask[P]>
+      : GetScalarType<T[P], AggregateJourneyTask[P]>
+  }
+
+
+
+
+  export type JourneyTaskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JourneyTaskWhereInput
+    orderBy?: JourneyTaskOrderByWithAggregationInput | JourneyTaskOrderByWithAggregationInput[]
+    by: JourneyTaskScalarFieldEnum[] | JourneyTaskScalarFieldEnum
+    having?: JourneyTaskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: JourneyTaskCountAggregateInputType | true
+    _avg?: JourneyTaskAvgAggregateInputType
+    _sum?: JourneyTaskSumAggregateInputType
+    _min?: JourneyTaskMinAggregateInputType
+    _max?: JourneyTaskMaxAggregateInputType
+  }
+
+  export type JourneyTaskGroupByOutputType = {
+    id: string
+    key: string
+    title: string
+    description: string
+    points: number
+    required: boolean
+    active: boolean
+    triggerType: $Enums.JourneyTriggerType
+    stageId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: JourneyTaskCountAggregateOutputType | null
+    _avg: JourneyTaskAvgAggregateOutputType | null
+    _sum: JourneyTaskSumAggregateOutputType | null
+    _min: JourneyTaskMinAggregateOutputType | null
+    _max: JourneyTaskMaxAggregateOutputType | null
+  }
+
+  type GetJourneyTaskGroupByPayload<T extends JourneyTaskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<JourneyTaskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof JourneyTaskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], JourneyTaskGroupByOutputType[P]>
+            : GetScalarType<T[P], JourneyTaskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type JourneyTaskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    title?: boolean
+    description?: boolean
+    points?: boolean
+    required?: boolean
+    active?: boolean
+    triggerType?: boolean
+    stageId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    stage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+    progressEntries?: boolean | JourneyTask$progressEntriesArgs<ExtArgs>
+    _count?: boolean | JourneyTaskCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyTask"]>
+
+  export type JourneyTaskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    title?: boolean
+    description?: boolean
+    points?: boolean
+    required?: boolean
+    active?: boolean
+    triggerType?: boolean
+    stageId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    stage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyTask"]>
+
+  export type JourneyTaskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    title?: boolean
+    description?: boolean
+    points?: boolean
+    required?: boolean
+    active?: boolean
+    triggerType?: boolean
+    stageId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    stage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyTask"]>
+
+  export type JourneyTaskSelectScalar = {
+    id?: boolean
+    key?: boolean
+    title?: boolean
+    description?: boolean
+    points?: boolean
+    required?: boolean
+    active?: boolean
+    triggerType?: boolean
+    stageId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type JourneyTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "title" | "description" | "points" | "required" | "active" | "triggerType" | "stageId" | "createdAt" | "updatedAt", ExtArgs["result"]["journeyTask"]>
+  export type JourneyTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    stage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+    progressEntries?: boolean | JourneyTask$progressEntriesArgs<ExtArgs>
+    _count?: boolean | JourneyTaskCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type JourneyTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    stage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }
+  export type JourneyTaskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    stage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }
+
+  export type $JourneyTaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "JourneyTask"
+    objects: {
+      stage: Prisma.$JourneyStagePayload<ExtArgs>
+      progressEntries: Prisma.$PersonJourneyTaskPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      key: string
+      title: string
+      description: string
+      points: number
+      required: boolean
+      active: boolean
+      triggerType: $Enums.JourneyTriggerType
+      stageId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["journeyTask"]>
+    composites: {}
+  }
+
+  type JourneyTaskGetPayload<S extends boolean | null | undefined | JourneyTaskDefaultArgs> = $Result.GetResult<Prisma.$JourneyTaskPayload, S>
+
+  type JourneyTaskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<JourneyTaskFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: JourneyTaskCountAggregateInputType | true
+    }
+
+  export interface JourneyTaskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['JourneyTask'], meta: { name: 'JourneyTask' } }
+    /**
+     * Find zero or one JourneyTask that matches the filter.
+     * @param {JourneyTaskFindUniqueArgs} args - Arguments to find a JourneyTask
+     * @example
+     * // Get one JourneyTask
+     * const journeyTask = await prisma.journeyTask.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends JourneyTaskFindUniqueArgs>(args: SelectSubset<T, JourneyTaskFindUniqueArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one JourneyTask that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {JourneyTaskFindUniqueOrThrowArgs} args - Arguments to find a JourneyTask
+     * @example
+     * // Get one JourneyTask
+     * const journeyTask = await prisma.journeyTask.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends JourneyTaskFindUniqueOrThrowArgs>(args: SelectSubset<T, JourneyTaskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first JourneyTask that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyTaskFindFirstArgs} args - Arguments to find a JourneyTask
+     * @example
+     * // Get one JourneyTask
+     * const journeyTask = await prisma.journeyTask.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends JourneyTaskFindFirstArgs>(args?: SelectSubset<T, JourneyTaskFindFirstArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first JourneyTask that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyTaskFindFirstOrThrowArgs} args - Arguments to find a JourneyTask
+     * @example
+     * // Get one JourneyTask
+     * const journeyTask = await prisma.journeyTask.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends JourneyTaskFindFirstOrThrowArgs>(args?: SelectSubset<T, JourneyTaskFindFirstOrThrowArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more JourneyTasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyTaskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all JourneyTasks
+     * const journeyTasks = await prisma.journeyTask.findMany()
+     * 
+     * // Get first 10 JourneyTasks
+     * const journeyTasks = await prisma.journeyTask.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const journeyTaskWithIdOnly = await prisma.journeyTask.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends JourneyTaskFindManyArgs>(args?: SelectSubset<T, JourneyTaskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a JourneyTask.
+     * @param {JourneyTaskCreateArgs} args - Arguments to create a JourneyTask.
+     * @example
+     * // Create one JourneyTask
+     * const JourneyTask = await prisma.journeyTask.create({
+     *   data: {
+     *     // ... data to create a JourneyTask
+     *   }
+     * })
+     * 
+     */
+    create<T extends JourneyTaskCreateArgs>(args: SelectSubset<T, JourneyTaskCreateArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many JourneyTasks.
+     * @param {JourneyTaskCreateManyArgs} args - Arguments to create many JourneyTasks.
+     * @example
+     * // Create many JourneyTasks
+     * const journeyTask = await prisma.journeyTask.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends JourneyTaskCreateManyArgs>(args?: SelectSubset<T, JourneyTaskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many JourneyTasks and returns the data saved in the database.
+     * @param {JourneyTaskCreateManyAndReturnArgs} args - Arguments to create many JourneyTasks.
+     * @example
+     * // Create many JourneyTasks
+     * const journeyTask = await prisma.journeyTask.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many JourneyTasks and only return the `id`
+     * const journeyTaskWithIdOnly = await prisma.journeyTask.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends JourneyTaskCreateManyAndReturnArgs>(args?: SelectSubset<T, JourneyTaskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a JourneyTask.
+     * @param {JourneyTaskDeleteArgs} args - Arguments to delete one JourneyTask.
+     * @example
+     * // Delete one JourneyTask
+     * const JourneyTask = await prisma.journeyTask.delete({
+     *   where: {
+     *     // ... filter to delete one JourneyTask
+     *   }
+     * })
+     * 
+     */
+    delete<T extends JourneyTaskDeleteArgs>(args: SelectSubset<T, JourneyTaskDeleteArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one JourneyTask.
+     * @param {JourneyTaskUpdateArgs} args - Arguments to update one JourneyTask.
+     * @example
+     * // Update one JourneyTask
+     * const journeyTask = await prisma.journeyTask.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends JourneyTaskUpdateArgs>(args: SelectSubset<T, JourneyTaskUpdateArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more JourneyTasks.
+     * @param {JourneyTaskDeleteManyArgs} args - Arguments to filter JourneyTasks to delete.
+     * @example
+     * // Delete a few JourneyTasks
+     * const { count } = await prisma.journeyTask.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends JourneyTaskDeleteManyArgs>(args?: SelectSubset<T, JourneyTaskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more JourneyTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyTaskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many JourneyTasks
+     * const journeyTask = await prisma.journeyTask.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends JourneyTaskUpdateManyArgs>(args: SelectSubset<T, JourneyTaskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more JourneyTasks and returns the data updated in the database.
+     * @param {JourneyTaskUpdateManyAndReturnArgs} args - Arguments to update many JourneyTasks.
+     * @example
+     * // Update many JourneyTasks
+     * const journeyTask = await prisma.journeyTask.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more JourneyTasks and only return the `id`
+     * const journeyTaskWithIdOnly = await prisma.journeyTask.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends JourneyTaskUpdateManyAndReturnArgs>(args: SelectSubset<T, JourneyTaskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one JourneyTask.
+     * @param {JourneyTaskUpsertArgs} args - Arguments to update or create a JourneyTask.
+     * @example
+     * // Update or create a JourneyTask
+     * const journeyTask = await prisma.journeyTask.upsert({
+     *   create: {
+     *     // ... data to create a JourneyTask
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the JourneyTask we want to update
+     *   }
+     * })
+     */
+    upsert<T extends JourneyTaskUpsertArgs>(args: SelectSubset<T, JourneyTaskUpsertArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of JourneyTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyTaskCountArgs} args - Arguments to filter JourneyTasks to count.
+     * @example
+     * // Count the number of JourneyTasks
+     * const count = await prisma.journeyTask.count({
+     *   where: {
+     *     // ... the filter for the JourneyTasks we want to count
+     *   }
+     * })
+    **/
+    count<T extends JourneyTaskCountArgs>(
+      args?: Subset<T, JourneyTaskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], JourneyTaskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a JourneyTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyTaskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends JourneyTaskAggregateArgs>(args: Subset<T, JourneyTaskAggregateArgs>): Prisma.PrismaPromise<GetJourneyTaskAggregateType<T>>
+
+    /**
+     * Group by JourneyTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyTaskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends JourneyTaskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: JourneyTaskGroupByArgs['orderBy'] }
+        : { orderBy?: JourneyTaskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, JourneyTaskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetJourneyTaskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the JourneyTask model
+   */
+  readonly fields: JourneyTaskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for JourneyTask.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__JourneyTaskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    stage<T extends JourneyStageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JourneyStageDefaultArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    progressEntries<T extends JourneyTask$progressEntriesArgs<ExtArgs> = {}>(args?: Subset<T, JourneyTask$progressEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the JourneyTask model
+   */
+  interface JourneyTaskFieldRefs {
+    readonly id: FieldRef<"JourneyTask", 'String'>
+    readonly key: FieldRef<"JourneyTask", 'String'>
+    readonly title: FieldRef<"JourneyTask", 'String'>
+    readonly description: FieldRef<"JourneyTask", 'String'>
+    readonly points: FieldRef<"JourneyTask", 'Int'>
+    readonly required: FieldRef<"JourneyTask", 'Boolean'>
+    readonly active: FieldRef<"JourneyTask", 'Boolean'>
+    readonly triggerType: FieldRef<"JourneyTask", 'JourneyTriggerType'>
+    readonly stageId: FieldRef<"JourneyTask", 'String'>
+    readonly createdAt: FieldRef<"JourneyTask", 'DateTime'>
+    readonly updatedAt: FieldRef<"JourneyTask", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * JourneyTask findUnique
+   */
+  export type JourneyTaskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyTask to fetch.
+     */
+    where: JourneyTaskWhereUniqueInput
+  }
+
+  /**
+   * JourneyTask findUniqueOrThrow
+   */
+  export type JourneyTaskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyTask to fetch.
+     */
+    where: JourneyTaskWhereUniqueInput
+  }
+
+  /**
+   * JourneyTask findFirst
+   */
+  export type JourneyTaskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyTask to fetch.
+     */
+    where?: JourneyTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyTasks to fetch.
+     */
+    orderBy?: JourneyTaskOrderByWithRelationInput | JourneyTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for JourneyTasks.
+     */
+    cursor?: JourneyTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of JourneyTasks.
+     */
+    distinct?: JourneyTaskScalarFieldEnum | JourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyTask findFirstOrThrow
+   */
+  export type JourneyTaskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyTask to fetch.
+     */
+    where?: JourneyTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyTasks to fetch.
+     */
+    orderBy?: JourneyTaskOrderByWithRelationInput | JourneyTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for JourneyTasks.
+     */
+    cursor?: JourneyTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of JourneyTasks.
+     */
+    distinct?: JourneyTaskScalarFieldEnum | JourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyTask findMany
+   */
+  export type JourneyTaskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyTasks to fetch.
+     */
+    where?: JourneyTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyTasks to fetch.
+     */
+    orderBy?: JourneyTaskOrderByWithRelationInput | JourneyTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing JourneyTasks.
+     */
+    cursor?: JourneyTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyTasks.
+     */
+    skip?: number
+    distinct?: JourneyTaskScalarFieldEnum | JourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyTask create
+   */
+  export type JourneyTaskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a JourneyTask.
+     */
+    data: XOR<JourneyTaskCreateInput, JourneyTaskUncheckedCreateInput>
+  }
+
+  /**
+   * JourneyTask createMany
+   */
+  export type JourneyTaskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many JourneyTasks.
+     */
+    data: JourneyTaskCreateManyInput | JourneyTaskCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * JourneyTask createManyAndReturn
+   */
+  export type JourneyTaskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * The data used to create many JourneyTasks.
+     */
+    data: JourneyTaskCreateManyInput | JourneyTaskCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * JourneyTask update
+   */
+  export type JourneyTaskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a JourneyTask.
+     */
+    data: XOR<JourneyTaskUpdateInput, JourneyTaskUncheckedUpdateInput>
+    /**
+     * Choose, which JourneyTask to update.
+     */
+    where: JourneyTaskWhereUniqueInput
+  }
+
+  /**
+   * JourneyTask updateMany
+   */
+  export type JourneyTaskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update JourneyTasks.
+     */
+    data: XOR<JourneyTaskUpdateManyMutationInput, JourneyTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which JourneyTasks to update
+     */
+    where?: JourneyTaskWhereInput
+    /**
+     * Limit how many JourneyTasks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * JourneyTask updateManyAndReturn
+   */
+  export type JourneyTaskUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * The data used to update JourneyTasks.
+     */
+    data: XOR<JourneyTaskUpdateManyMutationInput, JourneyTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which JourneyTasks to update
+     */
+    where?: JourneyTaskWhereInput
+    /**
+     * Limit how many JourneyTasks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * JourneyTask upsert
+   */
+  export type JourneyTaskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the JourneyTask to update in case it exists.
+     */
+    where: JourneyTaskWhereUniqueInput
+    /**
+     * In case the JourneyTask found by the `where` argument doesn't exist, create a new JourneyTask with this data.
+     */
+    create: XOR<JourneyTaskCreateInput, JourneyTaskUncheckedCreateInput>
+    /**
+     * In case the JourneyTask was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<JourneyTaskUpdateInput, JourneyTaskUncheckedUpdateInput>
+  }
+
+  /**
+   * JourneyTask delete
+   */
+  export type JourneyTaskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter which JourneyTask to delete.
+     */
+    where: JourneyTaskWhereUniqueInput
+  }
+
+  /**
+   * JourneyTask deleteMany
+   */
+  export type JourneyTaskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which JourneyTasks to delete
+     */
+    where?: JourneyTaskWhereInput
+    /**
+     * Limit how many JourneyTasks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * JourneyTask.progressEntries
+   */
+  export type JourneyTask$progressEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    where?: PersonJourneyTaskWhereInput
+    orderBy?: PersonJourneyTaskOrderByWithRelationInput | PersonJourneyTaskOrderByWithRelationInput[]
+    cursor?: PersonJourneyTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonJourneyTaskScalarFieldEnum | PersonJourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyTask without action
+   */
+  export type JourneyTaskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyTask
+     */
+    select?: JourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyTask
+     */
+    omit?: JourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyTaskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model JourneyAchievement
+   */
+
+  export type AggregateJourneyAchievement = {
+    _count: JourneyAchievementCountAggregateOutputType | null
+    _avg: JourneyAchievementAvgAggregateOutputType | null
+    _sum: JourneyAchievementSumAggregateOutputType | null
+    _min: JourneyAchievementMinAggregateOutputType | null
+    _max: JourneyAchievementMaxAggregateOutputType | null
+  }
+
+  export type JourneyAchievementAvgAggregateOutputType = {
+    points: number | null
+  }
+
+  export type JourneyAchievementSumAggregateOutputType = {
+    points: number | null
+  }
+
+  export type JourneyAchievementMinAggregateOutputType = {
+    id: string | null
+    key: string | null
+    name: string | null
+    description: string | null
+    icon: string | null
+    points: number | null
+    active: boolean | null
+    churchId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type JourneyAchievementMaxAggregateOutputType = {
+    id: string | null
+    key: string | null
+    name: string | null
+    description: string | null
+    icon: string | null
+    points: number | null
+    active: boolean | null
+    churchId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type JourneyAchievementCountAggregateOutputType = {
+    id: number
+    key: number
+    name: number
+    description: number
+    icon: number
+    points: number
+    active: number
+    churchId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type JourneyAchievementAvgAggregateInputType = {
+    points?: true
+  }
+
+  export type JourneyAchievementSumAggregateInputType = {
+    points?: true
+  }
+
+  export type JourneyAchievementMinAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    description?: true
+    icon?: true
+    points?: true
+    active?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type JourneyAchievementMaxAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    description?: true
+    icon?: true
+    points?: true
+    active?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type JourneyAchievementCountAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    description?: true
+    icon?: true
+    points?: true
+    active?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type JourneyAchievementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which JourneyAchievement to aggregate.
+     */
+    where?: JourneyAchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyAchievements to fetch.
+     */
+    orderBy?: JourneyAchievementOrderByWithRelationInput | JourneyAchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: JourneyAchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyAchievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyAchievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned JourneyAchievements
+    **/
+    _count?: true | JourneyAchievementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: JourneyAchievementAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: JourneyAchievementSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: JourneyAchievementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: JourneyAchievementMaxAggregateInputType
+  }
+
+  export type GetJourneyAchievementAggregateType<T extends JourneyAchievementAggregateArgs> = {
+        [P in keyof T & keyof AggregateJourneyAchievement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateJourneyAchievement[P]>
+      : GetScalarType<T[P], AggregateJourneyAchievement[P]>
+  }
+
+
+
+
+  export type JourneyAchievementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JourneyAchievementWhereInput
+    orderBy?: JourneyAchievementOrderByWithAggregationInput | JourneyAchievementOrderByWithAggregationInput[]
+    by: JourneyAchievementScalarFieldEnum[] | JourneyAchievementScalarFieldEnum
+    having?: JourneyAchievementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: JourneyAchievementCountAggregateInputType | true
+    _avg?: JourneyAchievementAvgAggregateInputType
+    _sum?: JourneyAchievementSumAggregateInputType
+    _min?: JourneyAchievementMinAggregateInputType
+    _max?: JourneyAchievementMaxAggregateInputType
+  }
+
+  export type JourneyAchievementGroupByOutputType = {
+    id: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points: number
+    active: boolean
+    churchId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: JourneyAchievementCountAggregateOutputType | null
+    _avg: JourneyAchievementAvgAggregateOutputType | null
+    _sum: JourneyAchievementSumAggregateOutputType | null
+    _min: JourneyAchievementMinAggregateOutputType | null
+    _max: JourneyAchievementMaxAggregateOutputType | null
+  }
+
+  type GetJourneyAchievementGroupByPayload<T extends JourneyAchievementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<JourneyAchievementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof JourneyAchievementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], JourneyAchievementGroupByOutputType[P]>
+            : GetScalarType<T[P], JourneyAchievementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type JourneyAchievementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    description?: boolean
+    icon?: boolean
+    points?: boolean
+    active?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    personAchievements?: boolean | JourneyAchievement$personAchievementsArgs<ExtArgs>
+    _count?: boolean | JourneyAchievementCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyAchievement"]>
+
+  export type JourneyAchievementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    description?: boolean
+    icon?: boolean
+    points?: boolean
+    active?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyAchievement"]>
+
+  export type JourneyAchievementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    description?: boolean
+    icon?: boolean
+    points?: boolean
+    active?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["journeyAchievement"]>
+
+  export type JourneyAchievementSelectScalar = {
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    description?: boolean
+    icon?: boolean
+    points?: boolean
+    active?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type JourneyAchievementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name" | "description" | "icon" | "points" | "active" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["journeyAchievement"]>
+  export type JourneyAchievementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+    personAchievements?: boolean | JourneyAchievement$personAchievementsArgs<ExtArgs>
+    _count?: boolean | JourneyAchievementCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type JourneyAchievementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+  }
+  export type JourneyAchievementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | ChurchDefaultArgs<ExtArgs>
+  }
+
+  export type $JourneyAchievementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "JourneyAchievement"
+    objects: {
+      church: Prisma.$ChurchPayload<ExtArgs>
+      personAchievements: Prisma.$PersonAchievementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      key: string
+      name: string
+      description: string
+      icon: string
+      points: number
+      active: boolean
+      churchId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["journeyAchievement"]>
+    composites: {}
+  }
+
+  type JourneyAchievementGetPayload<S extends boolean | null | undefined | JourneyAchievementDefaultArgs> = $Result.GetResult<Prisma.$JourneyAchievementPayload, S>
+
+  type JourneyAchievementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<JourneyAchievementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: JourneyAchievementCountAggregateInputType | true
+    }
+
+  export interface JourneyAchievementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['JourneyAchievement'], meta: { name: 'JourneyAchievement' } }
+    /**
+     * Find zero or one JourneyAchievement that matches the filter.
+     * @param {JourneyAchievementFindUniqueArgs} args - Arguments to find a JourneyAchievement
+     * @example
+     * // Get one JourneyAchievement
+     * const journeyAchievement = await prisma.journeyAchievement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends JourneyAchievementFindUniqueArgs>(args: SelectSubset<T, JourneyAchievementFindUniqueArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one JourneyAchievement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {JourneyAchievementFindUniqueOrThrowArgs} args - Arguments to find a JourneyAchievement
+     * @example
+     * // Get one JourneyAchievement
+     * const journeyAchievement = await prisma.journeyAchievement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends JourneyAchievementFindUniqueOrThrowArgs>(args: SelectSubset<T, JourneyAchievementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first JourneyAchievement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyAchievementFindFirstArgs} args - Arguments to find a JourneyAchievement
+     * @example
+     * // Get one JourneyAchievement
+     * const journeyAchievement = await prisma.journeyAchievement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends JourneyAchievementFindFirstArgs>(args?: SelectSubset<T, JourneyAchievementFindFirstArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first JourneyAchievement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyAchievementFindFirstOrThrowArgs} args - Arguments to find a JourneyAchievement
+     * @example
+     * // Get one JourneyAchievement
+     * const journeyAchievement = await prisma.journeyAchievement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends JourneyAchievementFindFirstOrThrowArgs>(args?: SelectSubset<T, JourneyAchievementFindFirstOrThrowArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more JourneyAchievements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyAchievementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all JourneyAchievements
+     * const journeyAchievements = await prisma.journeyAchievement.findMany()
+     * 
+     * // Get first 10 JourneyAchievements
+     * const journeyAchievements = await prisma.journeyAchievement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const journeyAchievementWithIdOnly = await prisma.journeyAchievement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends JourneyAchievementFindManyArgs>(args?: SelectSubset<T, JourneyAchievementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a JourneyAchievement.
+     * @param {JourneyAchievementCreateArgs} args - Arguments to create a JourneyAchievement.
+     * @example
+     * // Create one JourneyAchievement
+     * const JourneyAchievement = await prisma.journeyAchievement.create({
+     *   data: {
+     *     // ... data to create a JourneyAchievement
+     *   }
+     * })
+     * 
+     */
+    create<T extends JourneyAchievementCreateArgs>(args: SelectSubset<T, JourneyAchievementCreateArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many JourneyAchievements.
+     * @param {JourneyAchievementCreateManyArgs} args - Arguments to create many JourneyAchievements.
+     * @example
+     * // Create many JourneyAchievements
+     * const journeyAchievement = await prisma.journeyAchievement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends JourneyAchievementCreateManyArgs>(args?: SelectSubset<T, JourneyAchievementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many JourneyAchievements and returns the data saved in the database.
+     * @param {JourneyAchievementCreateManyAndReturnArgs} args - Arguments to create many JourneyAchievements.
+     * @example
+     * // Create many JourneyAchievements
+     * const journeyAchievement = await prisma.journeyAchievement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many JourneyAchievements and only return the `id`
+     * const journeyAchievementWithIdOnly = await prisma.journeyAchievement.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends JourneyAchievementCreateManyAndReturnArgs>(args?: SelectSubset<T, JourneyAchievementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a JourneyAchievement.
+     * @param {JourneyAchievementDeleteArgs} args - Arguments to delete one JourneyAchievement.
+     * @example
+     * // Delete one JourneyAchievement
+     * const JourneyAchievement = await prisma.journeyAchievement.delete({
+     *   where: {
+     *     // ... filter to delete one JourneyAchievement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends JourneyAchievementDeleteArgs>(args: SelectSubset<T, JourneyAchievementDeleteArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one JourneyAchievement.
+     * @param {JourneyAchievementUpdateArgs} args - Arguments to update one JourneyAchievement.
+     * @example
+     * // Update one JourneyAchievement
+     * const journeyAchievement = await prisma.journeyAchievement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends JourneyAchievementUpdateArgs>(args: SelectSubset<T, JourneyAchievementUpdateArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more JourneyAchievements.
+     * @param {JourneyAchievementDeleteManyArgs} args - Arguments to filter JourneyAchievements to delete.
+     * @example
+     * // Delete a few JourneyAchievements
+     * const { count } = await prisma.journeyAchievement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends JourneyAchievementDeleteManyArgs>(args?: SelectSubset<T, JourneyAchievementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more JourneyAchievements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyAchievementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many JourneyAchievements
+     * const journeyAchievement = await prisma.journeyAchievement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends JourneyAchievementUpdateManyArgs>(args: SelectSubset<T, JourneyAchievementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more JourneyAchievements and returns the data updated in the database.
+     * @param {JourneyAchievementUpdateManyAndReturnArgs} args - Arguments to update many JourneyAchievements.
+     * @example
+     * // Update many JourneyAchievements
+     * const journeyAchievement = await prisma.journeyAchievement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more JourneyAchievements and only return the `id`
+     * const journeyAchievementWithIdOnly = await prisma.journeyAchievement.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends JourneyAchievementUpdateManyAndReturnArgs>(args: SelectSubset<T, JourneyAchievementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one JourneyAchievement.
+     * @param {JourneyAchievementUpsertArgs} args - Arguments to update or create a JourneyAchievement.
+     * @example
+     * // Update or create a JourneyAchievement
+     * const journeyAchievement = await prisma.journeyAchievement.upsert({
+     *   create: {
+     *     // ... data to create a JourneyAchievement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the JourneyAchievement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends JourneyAchievementUpsertArgs>(args: SelectSubset<T, JourneyAchievementUpsertArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of JourneyAchievements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyAchievementCountArgs} args - Arguments to filter JourneyAchievements to count.
+     * @example
+     * // Count the number of JourneyAchievements
+     * const count = await prisma.journeyAchievement.count({
+     *   where: {
+     *     // ... the filter for the JourneyAchievements we want to count
+     *   }
+     * })
+    **/
+    count<T extends JourneyAchievementCountArgs>(
+      args?: Subset<T, JourneyAchievementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], JourneyAchievementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a JourneyAchievement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyAchievementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends JourneyAchievementAggregateArgs>(args: Subset<T, JourneyAchievementAggregateArgs>): Prisma.PrismaPromise<GetJourneyAchievementAggregateType<T>>
+
+    /**
+     * Group by JourneyAchievement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JourneyAchievementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends JourneyAchievementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: JourneyAchievementGroupByArgs['orderBy'] }
+        : { orderBy?: JourneyAchievementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, JourneyAchievementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetJourneyAchievementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the JourneyAchievement model
+   */
+  readonly fields: JourneyAchievementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for JourneyAchievement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__JourneyAchievementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    church<T extends ChurchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChurchDefaultArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    personAchievements<T extends JourneyAchievement$personAchievementsArgs<ExtArgs> = {}>(args?: Subset<T, JourneyAchievement$personAchievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the JourneyAchievement model
+   */
+  interface JourneyAchievementFieldRefs {
+    readonly id: FieldRef<"JourneyAchievement", 'String'>
+    readonly key: FieldRef<"JourneyAchievement", 'String'>
+    readonly name: FieldRef<"JourneyAchievement", 'String'>
+    readonly description: FieldRef<"JourneyAchievement", 'String'>
+    readonly icon: FieldRef<"JourneyAchievement", 'String'>
+    readonly points: FieldRef<"JourneyAchievement", 'Int'>
+    readonly active: FieldRef<"JourneyAchievement", 'Boolean'>
+    readonly churchId: FieldRef<"JourneyAchievement", 'String'>
+    readonly createdAt: FieldRef<"JourneyAchievement", 'DateTime'>
+    readonly updatedAt: FieldRef<"JourneyAchievement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * JourneyAchievement findUnique
+   */
+  export type JourneyAchievementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyAchievement to fetch.
+     */
+    where: JourneyAchievementWhereUniqueInput
+  }
+
+  /**
+   * JourneyAchievement findUniqueOrThrow
+   */
+  export type JourneyAchievementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyAchievement to fetch.
+     */
+    where: JourneyAchievementWhereUniqueInput
+  }
+
+  /**
+   * JourneyAchievement findFirst
+   */
+  export type JourneyAchievementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyAchievement to fetch.
+     */
+    where?: JourneyAchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyAchievements to fetch.
+     */
+    orderBy?: JourneyAchievementOrderByWithRelationInput | JourneyAchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for JourneyAchievements.
+     */
+    cursor?: JourneyAchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyAchievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyAchievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of JourneyAchievements.
+     */
+    distinct?: JourneyAchievementScalarFieldEnum | JourneyAchievementScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyAchievement findFirstOrThrow
+   */
+  export type JourneyAchievementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyAchievement to fetch.
+     */
+    where?: JourneyAchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyAchievements to fetch.
+     */
+    orderBy?: JourneyAchievementOrderByWithRelationInput | JourneyAchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for JourneyAchievements.
+     */
+    cursor?: JourneyAchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyAchievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyAchievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of JourneyAchievements.
+     */
+    distinct?: JourneyAchievementScalarFieldEnum | JourneyAchievementScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyAchievement findMany
+   */
+  export type JourneyAchievementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which JourneyAchievements to fetch.
+     */
+    where?: JourneyAchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JourneyAchievements to fetch.
+     */
+    orderBy?: JourneyAchievementOrderByWithRelationInput | JourneyAchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing JourneyAchievements.
+     */
+    cursor?: JourneyAchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JourneyAchievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JourneyAchievements.
+     */
+    skip?: number
+    distinct?: JourneyAchievementScalarFieldEnum | JourneyAchievementScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyAchievement create
+   */
+  export type JourneyAchievementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a JourneyAchievement.
+     */
+    data: XOR<JourneyAchievementCreateInput, JourneyAchievementUncheckedCreateInput>
+  }
+
+  /**
+   * JourneyAchievement createMany
+   */
+  export type JourneyAchievementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many JourneyAchievements.
+     */
+    data: JourneyAchievementCreateManyInput | JourneyAchievementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * JourneyAchievement createManyAndReturn
+   */
+  export type JourneyAchievementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * The data used to create many JourneyAchievements.
+     */
+    data: JourneyAchievementCreateManyInput | JourneyAchievementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * JourneyAchievement update
+   */
+  export type JourneyAchievementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a JourneyAchievement.
+     */
+    data: XOR<JourneyAchievementUpdateInput, JourneyAchievementUncheckedUpdateInput>
+    /**
+     * Choose, which JourneyAchievement to update.
+     */
+    where: JourneyAchievementWhereUniqueInput
+  }
+
+  /**
+   * JourneyAchievement updateMany
+   */
+  export type JourneyAchievementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update JourneyAchievements.
+     */
+    data: XOR<JourneyAchievementUpdateManyMutationInput, JourneyAchievementUncheckedUpdateManyInput>
+    /**
+     * Filter which JourneyAchievements to update
+     */
+    where?: JourneyAchievementWhereInput
+    /**
+     * Limit how many JourneyAchievements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * JourneyAchievement updateManyAndReturn
+   */
+  export type JourneyAchievementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * The data used to update JourneyAchievements.
+     */
+    data: XOR<JourneyAchievementUpdateManyMutationInput, JourneyAchievementUncheckedUpdateManyInput>
+    /**
+     * Filter which JourneyAchievements to update
+     */
+    where?: JourneyAchievementWhereInput
+    /**
+     * Limit how many JourneyAchievements to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * JourneyAchievement upsert
+   */
+  export type JourneyAchievementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the JourneyAchievement to update in case it exists.
+     */
+    where: JourneyAchievementWhereUniqueInput
+    /**
+     * In case the JourneyAchievement found by the `where` argument doesn't exist, create a new JourneyAchievement with this data.
+     */
+    create: XOR<JourneyAchievementCreateInput, JourneyAchievementUncheckedCreateInput>
+    /**
+     * In case the JourneyAchievement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<JourneyAchievementUpdateInput, JourneyAchievementUncheckedUpdateInput>
+  }
+
+  /**
+   * JourneyAchievement delete
+   */
+  export type JourneyAchievementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+    /**
+     * Filter which JourneyAchievement to delete.
+     */
+    where: JourneyAchievementWhereUniqueInput
+  }
+
+  /**
+   * JourneyAchievement deleteMany
+   */
+  export type JourneyAchievementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which JourneyAchievements to delete
+     */
+    where?: JourneyAchievementWhereInput
+    /**
+     * Limit how many JourneyAchievements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * JourneyAchievement.personAchievements
+   */
+  export type JourneyAchievement$personAchievementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    where?: PersonAchievementWhereInput
+    orderBy?: PersonAchievementOrderByWithRelationInput | PersonAchievementOrderByWithRelationInput[]
+    cursor?: PersonAchievementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonAchievementScalarFieldEnum | PersonAchievementScalarFieldEnum[]
+  }
+
+  /**
+   * JourneyAchievement without action
+   */
+  export type JourneyAchievementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyAchievement
+     */
+    select?: JourneyAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyAchievement
+     */
+    omit?: JourneyAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyAchievementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PersonJourney
+   */
+
+  export type AggregatePersonJourney = {
+    _count: PersonJourneyCountAggregateOutputType | null
+    _avg: PersonJourneyAvgAggregateOutputType | null
+    _sum: PersonJourneySumAggregateOutputType | null
+    _min: PersonJourneyMinAggregateOutputType | null
+    _max: PersonJourneyMaxAggregateOutputType | null
+  }
+
+  export type PersonJourneyAvgAggregateOutputType = {
+    score: number | null
+    level: number | null
+    progress: number | null
+  }
+
+  export type PersonJourneySumAggregateOutputType = {
+    score: number | null
+    level: number | null
+    progress: number | null
+  }
+
+  export type PersonJourneyMinAggregateOutputType = {
+    id: string | null
+    score: number | null
+    level: number | null
+    progress: number | null
+    startedAt: Date | null
+    completedAt: Date | null
+    lastActivityAt: Date | null
+    personId: string | null
+    currentStageId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PersonJourneyMaxAggregateOutputType = {
+    id: string | null
+    score: number | null
+    level: number | null
+    progress: number | null
+    startedAt: Date | null
+    completedAt: Date | null
+    lastActivityAt: Date | null
+    personId: string | null
+    currentStageId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PersonJourneyCountAggregateOutputType = {
+    id: number
+    score: number
+    level: number
+    progress: number
+    startedAt: number
+    completedAt: number
+    lastActivityAt: number
+    personId: number
+    currentStageId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PersonJourneyAvgAggregateInputType = {
+    score?: true
+    level?: true
+    progress?: true
+  }
+
+  export type PersonJourneySumAggregateInputType = {
+    score?: true
+    level?: true
+    progress?: true
+  }
+
+  export type PersonJourneyMinAggregateInputType = {
+    id?: true
+    score?: true
+    level?: true
+    progress?: true
+    startedAt?: true
+    completedAt?: true
+    lastActivityAt?: true
+    personId?: true
+    currentStageId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PersonJourneyMaxAggregateInputType = {
+    id?: true
+    score?: true
+    level?: true
+    progress?: true
+    startedAt?: true
+    completedAt?: true
+    lastActivityAt?: true
+    personId?: true
+    currentStageId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PersonJourneyCountAggregateInputType = {
+    id?: true
+    score?: true
+    level?: true
+    progress?: true
+    startedAt?: true
+    completedAt?: true
+    lastActivityAt?: true
+    personId?: true
+    currentStageId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PersonJourneyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PersonJourney to aggregate.
+     */
+    where?: PersonJourneyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneys to fetch.
+     */
+    orderBy?: PersonJourneyOrderByWithRelationInput | PersonJourneyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PersonJourneyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PersonJourneys
+    **/
+    _count?: true | PersonJourneyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PersonJourneyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PersonJourneySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PersonJourneyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PersonJourneyMaxAggregateInputType
+  }
+
+  export type GetPersonJourneyAggregateType<T extends PersonJourneyAggregateArgs> = {
+        [P in keyof T & keyof AggregatePersonJourney]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePersonJourney[P]>
+      : GetScalarType<T[P], AggregatePersonJourney[P]>
+  }
+
+
+
+
+  export type PersonJourneyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyWhereInput
+    orderBy?: PersonJourneyOrderByWithAggregationInput | PersonJourneyOrderByWithAggregationInput[]
+    by: PersonJourneyScalarFieldEnum[] | PersonJourneyScalarFieldEnum
+    having?: PersonJourneyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PersonJourneyCountAggregateInputType | true
+    _avg?: PersonJourneyAvgAggregateInputType
+    _sum?: PersonJourneySumAggregateInputType
+    _min?: PersonJourneyMinAggregateInputType
+    _max?: PersonJourneyMaxAggregateInputType
+  }
+
+  export type PersonJourneyGroupByOutputType = {
+    id: string
+    score: number
+    level: number
+    progress: number
+    startedAt: Date
+    completedAt: Date | null
+    lastActivityAt: Date | null
+    personId: string
+    currentStageId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PersonJourneyCountAggregateOutputType | null
+    _avg: PersonJourneyAvgAggregateOutputType | null
+    _sum: PersonJourneySumAggregateOutputType | null
+    _min: PersonJourneyMinAggregateOutputType | null
+    _max: PersonJourneyMaxAggregateOutputType | null
+  }
+
+  type GetPersonJourneyGroupByPayload<T extends PersonJourneyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PersonJourneyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PersonJourneyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PersonJourneyGroupByOutputType[P]>
+            : GetScalarType<T[P], PersonJourneyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PersonJourneySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    score?: boolean
+    level?: boolean
+    progress?: boolean
+    startedAt?: boolean
+    completedAt?: boolean
+    lastActivityAt?: boolean
+    personId?: boolean
+    currentStageId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    currentStage?: boolean | PersonJourney$currentStageArgs<ExtArgs>
+    tasks?: boolean | PersonJourney$tasksArgs<ExtArgs>
+    history?: boolean | PersonJourney$historyArgs<ExtArgs>
+    _count?: boolean | PersonJourneyCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourney"]>
+
+  export type PersonJourneySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    score?: boolean
+    level?: boolean
+    progress?: boolean
+    startedAt?: boolean
+    completedAt?: boolean
+    lastActivityAt?: boolean
+    personId?: boolean
+    currentStageId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    currentStage?: boolean | PersonJourney$currentStageArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourney"]>
+
+  export type PersonJourneySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    score?: boolean
+    level?: boolean
+    progress?: boolean
+    startedAt?: boolean
+    completedAt?: boolean
+    lastActivityAt?: boolean
+    personId?: boolean
+    currentStageId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    currentStage?: boolean | PersonJourney$currentStageArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourney"]>
+
+  export type PersonJourneySelectScalar = {
+    id?: boolean
+    score?: boolean
+    level?: boolean
+    progress?: boolean
+    startedAt?: boolean
+    completedAt?: boolean
+    lastActivityAt?: boolean
+    personId?: boolean
+    currentStageId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PersonJourneyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "score" | "level" | "progress" | "startedAt" | "completedAt" | "lastActivityAt" | "personId" | "currentStageId" | "createdAt" | "updatedAt", ExtArgs["result"]["personJourney"]>
+  export type PersonJourneyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    currentStage?: boolean | PersonJourney$currentStageArgs<ExtArgs>
+    tasks?: boolean | PersonJourney$tasksArgs<ExtArgs>
+    history?: boolean | PersonJourney$historyArgs<ExtArgs>
+    _count?: boolean | PersonJourneyCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PersonJourneyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    currentStage?: boolean | PersonJourney$currentStageArgs<ExtArgs>
+  }
+  export type PersonJourneyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    currentStage?: boolean | PersonJourney$currentStageArgs<ExtArgs>
+  }
+
+  export type $PersonJourneyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PersonJourney"
+    objects: {
+      person: Prisma.$PersonPayload<ExtArgs>
+      currentStage: Prisma.$JourneyStagePayload<ExtArgs> | null
+      tasks: Prisma.$PersonJourneyTaskPayload<ExtArgs>[]
+      history: Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      score: number
+      level: number
+      progress: number
+      startedAt: Date
+      completedAt: Date | null
+      lastActivityAt: Date | null
+      personId: string
+      currentStageId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["personJourney"]>
+    composites: {}
+  }
+
+  type PersonJourneyGetPayload<S extends boolean | null | undefined | PersonJourneyDefaultArgs> = $Result.GetResult<Prisma.$PersonJourneyPayload, S>
+
+  type PersonJourneyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PersonJourneyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PersonJourneyCountAggregateInputType | true
+    }
+
+  export interface PersonJourneyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PersonJourney'], meta: { name: 'PersonJourney' } }
+    /**
+     * Find zero or one PersonJourney that matches the filter.
+     * @param {PersonJourneyFindUniqueArgs} args - Arguments to find a PersonJourney
+     * @example
+     * // Get one PersonJourney
+     * const personJourney = await prisma.personJourney.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PersonJourneyFindUniqueArgs>(args: SelectSubset<T, PersonJourneyFindUniqueArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PersonJourney that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PersonJourneyFindUniqueOrThrowArgs} args - Arguments to find a PersonJourney
+     * @example
+     * // Get one PersonJourney
+     * const personJourney = await prisma.personJourney.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PersonJourneyFindUniqueOrThrowArgs>(args: SelectSubset<T, PersonJourneyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PersonJourney that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyFindFirstArgs} args - Arguments to find a PersonJourney
+     * @example
+     * // Get one PersonJourney
+     * const personJourney = await prisma.personJourney.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PersonJourneyFindFirstArgs>(args?: SelectSubset<T, PersonJourneyFindFirstArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PersonJourney that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyFindFirstOrThrowArgs} args - Arguments to find a PersonJourney
+     * @example
+     * // Get one PersonJourney
+     * const personJourney = await prisma.personJourney.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PersonJourneyFindFirstOrThrowArgs>(args?: SelectSubset<T, PersonJourneyFindFirstOrThrowArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PersonJourneys that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PersonJourneys
+     * const personJourneys = await prisma.personJourney.findMany()
+     * 
+     * // Get first 10 PersonJourneys
+     * const personJourneys = await prisma.personJourney.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const personJourneyWithIdOnly = await prisma.personJourney.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PersonJourneyFindManyArgs>(args?: SelectSubset<T, PersonJourneyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PersonJourney.
+     * @param {PersonJourneyCreateArgs} args - Arguments to create a PersonJourney.
+     * @example
+     * // Create one PersonJourney
+     * const PersonJourney = await prisma.personJourney.create({
+     *   data: {
+     *     // ... data to create a PersonJourney
+     *   }
+     * })
+     * 
+     */
+    create<T extends PersonJourneyCreateArgs>(args: SelectSubset<T, PersonJourneyCreateArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PersonJourneys.
+     * @param {PersonJourneyCreateManyArgs} args - Arguments to create many PersonJourneys.
+     * @example
+     * // Create many PersonJourneys
+     * const personJourney = await prisma.personJourney.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PersonJourneyCreateManyArgs>(args?: SelectSubset<T, PersonJourneyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PersonJourneys and returns the data saved in the database.
+     * @param {PersonJourneyCreateManyAndReturnArgs} args - Arguments to create many PersonJourneys.
+     * @example
+     * // Create many PersonJourneys
+     * const personJourney = await prisma.personJourney.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PersonJourneys and only return the `id`
+     * const personJourneyWithIdOnly = await prisma.personJourney.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PersonJourneyCreateManyAndReturnArgs>(args?: SelectSubset<T, PersonJourneyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PersonJourney.
+     * @param {PersonJourneyDeleteArgs} args - Arguments to delete one PersonJourney.
+     * @example
+     * // Delete one PersonJourney
+     * const PersonJourney = await prisma.personJourney.delete({
+     *   where: {
+     *     // ... filter to delete one PersonJourney
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PersonJourneyDeleteArgs>(args: SelectSubset<T, PersonJourneyDeleteArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PersonJourney.
+     * @param {PersonJourneyUpdateArgs} args - Arguments to update one PersonJourney.
+     * @example
+     * // Update one PersonJourney
+     * const personJourney = await prisma.personJourney.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PersonJourneyUpdateArgs>(args: SelectSubset<T, PersonJourneyUpdateArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PersonJourneys.
+     * @param {PersonJourneyDeleteManyArgs} args - Arguments to filter PersonJourneys to delete.
+     * @example
+     * // Delete a few PersonJourneys
+     * const { count } = await prisma.personJourney.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PersonJourneyDeleteManyArgs>(args?: SelectSubset<T, PersonJourneyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PersonJourneys.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PersonJourneys
+     * const personJourney = await prisma.personJourney.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PersonJourneyUpdateManyArgs>(args: SelectSubset<T, PersonJourneyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PersonJourneys and returns the data updated in the database.
+     * @param {PersonJourneyUpdateManyAndReturnArgs} args - Arguments to update many PersonJourneys.
+     * @example
+     * // Update many PersonJourneys
+     * const personJourney = await prisma.personJourney.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PersonJourneys and only return the `id`
+     * const personJourneyWithIdOnly = await prisma.personJourney.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PersonJourneyUpdateManyAndReturnArgs>(args: SelectSubset<T, PersonJourneyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PersonJourney.
+     * @param {PersonJourneyUpsertArgs} args - Arguments to update or create a PersonJourney.
+     * @example
+     * // Update or create a PersonJourney
+     * const personJourney = await prisma.personJourney.upsert({
+     *   create: {
+     *     // ... data to create a PersonJourney
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PersonJourney we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PersonJourneyUpsertArgs>(args: SelectSubset<T, PersonJourneyUpsertArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PersonJourneys.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyCountArgs} args - Arguments to filter PersonJourneys to count.
+     * @example
+     * // Count the number of PersonJourneys
+     * const count = await prisma.personJourney.count({
+     *   where: {
+     *     // ... the filter for the PersonJourneys we want to count
+     *   }
+     * })
+    **/
+    count<T extends PersonJourneyCountArgs>(
+      args?: Subset<T, PersonJourneyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PersonJourneyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PersonJourney.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PersonJourneyAggregateArgs>(args: Subset<T, PersonJourneyAggregateArgs>): Prisma.PrismaPromise<GetPersonJourneyAggregateType<T>>
+
+    /**
+     * Group by PersonJourney.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PersonJourneyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PersonJourneyGroupByArgs['orderBy'] }
+        : { orderBy?: PersonJourneyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PersonJourneyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPersonJourneyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PersonJourney model
+   */
+  readonly fields: PersonJourneyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PersonJourney.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PersonJourneyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    person<T extends PersonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PersonDefaultArgs<ExtArgs>>): Prisma__PersonClient<$Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    currentStage<T extends PersonJourney$currentStageArgs<ExtArgs> = {}>(args?: Subset<T, PersonJourney$currentStageArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    tasks<T extends PersonJourney$tasksArgs<ExtArgs> = {}>(args?: Subset<T, PersonJourney$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    history<T extends PersonJourney$historyArgs<ExtArgs> = {}>(args?: Subset<T, PersonJourney$historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PersonJourney model
+   */
+  interface PersonJourneyFieldRefs {
+    readonly id: FieldRef<"PersonJourney", 'String'>
+    readonly score: FieldRef<"PersonJourney", 'Int'>
+    readonly level: FieldRef<"PersonJourney", 'Int'>
+    readonly progress: FieldRef<"PersonJourney", 'Int'>
+    readonly startedAt: FieldRef<"PersonJourney", 'DateTime'>
+    readonly completedAt: FieldRef<"PersonJourney", 'DateTime'>
+    readonly lastActivityAt: FieldRef<"PersonJourney", 'DateTime'>
+    readonly personId: FieldRef<"PersonJourney", 'String'>
+    readonly currentStageId: FieldRef<"PersonJourney", 'String'>
+    readonly createdAt: FieldRef<"PersonJourney", 'DateTime'>
+    readonly updatedAt: FieldRef<"PersonJourney", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PersonJourney findUnique
+   */
+  export type PersonJourneyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourney to fetch.
+     */
+    where: PersonJourneyWhereUniqueInput
+  }
+
+  /**
+   * PersonJourney findUniqueOrThrow
+   */
+  export type PersonJourneyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourney to fetch.
+     */
+    where: PersonJourneyWhereUniqueInput
+  }
+
+  /**
+   * PersonJourney findFirst
+   */
+  export type PersonJourneyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourney to fetch.
+     */
+    where?: PersonJourneyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneys to fetch.
+     */
+    orderBy?: PersonJourneyOrderByWithRelationInput | PersonJourneyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PersonJourneys.
+     */
+    cursor?: PersonJourneyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PersonJourneys.
+     */
+    distinct?: PersonJourneyScalarFieldEnum | PersonJourneyScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourney findFirstOrThrow
+   */
+  export type PersonJourneyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourney to fetch.
+     */
+    where?: PersonJourneyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneys to fetch.
+     */
+    orderBy?: PersonJourneyOrderByWithRelationInput | PersonJourneyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PersonJourneys.
+     */
+    cursor?: PersonJourneyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PersonJourneys.
+     */
+    distinct?: PersonJourneyScalarFieldEnum | PersonJourneyScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourney findMany
+   */
+  export type PersonJourneyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneys to fetch.
+     */
+    where?: PersonJourneyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneys to fetch.
+     */
+    orderBy?: PersonJourneyOrderByWithRelationInput | PersonJourneyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PersonJourneys.
+     */
+    cursor?: PersonJourneyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneys.
+     */
+    skip?: number
+    distinct?: PersonJourneyScalarFieldEnum | PersonJourneyScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourney create
+   */
+  export type PersonJourneyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PersonJourney.
+     */
+    data: XOR<PersonJourneyCreateInput, PersonJourneyUncheckedCreateInput>
+  }
+
+  /**
+   * PersonJourney createMany
+   */
+  export type PersonJourneyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PersonJourneys.
+     */
+    data: PersonJourneyCreateManyInput | PersonJourneyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PersonJourney createManyAndReturn
+   */
+  export type PersonJourneyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * The data used to create many PersonJourneys.
+     */
+    data: PersonJourneyCreateManyInput | PersonJourneyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PersonJourney update
+   */
+  export type PersonJourneyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PersonJourney.
+     */
+    data: XOR<PersonJourneyUpdateInput, PersonJourneyUncheckedUpdateInput>
+    /**
+     * Choose, which PersonJourney to update.
+     */
+    where: PersonJourneyWhereUniqueInput
+  }
+
+  /**
+   * PersonJourney updateMany
+   */
+  export type PersonJourneyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PersonJourneys.
+     */
+    data: XOR<PersonJourneyUpdateManyMutationInput, PersonJourneyUncheckedUpdateManyInput>
+    /**
+     * Filter which PersonJourneys to update
+     */
+    where?: PersonJourneyWhereInput
+    /**
+     * Limit how many PersonJourneys to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PersonJourney updateManyAndReturn
+   */
+  export type PersonJourneyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * The data used to update PersonJourneys.
+     */
+    data: XOR<PersonJourneyUpdateManyMutationInput, PersonJourneyUncheckedUpdateManyInput>
+    /**
+     * Filter which PersonJourneys to update
+     */
+    where?: PersonJourneyWhereInput
+    /**
+     * Limit how many PersonJourneys to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PersonJourney upsert
+   */
+  export type PersonJourneyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PersonJourney to update in case it exists.
+     */
+    where: PersonJourneyWhereUniqueInput
+    /**
+     * In case the PersonJourney found by the `where` argument doesn't exist, create a new PersonJourney with this data.
+     */
+    create: XOR<PersonJourneyCreateInput, PersonJourneyUncheckedCreateInput>
+    /**
+     * In case the PersonJourney was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PersonJourneyUpdateInput, PersonJourneyUncheckedUpdateInput>
+  }
+
+  /**
+   * PersonJourney delete
+   */
+  export type PersonJourneyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+    /**
+     * Filter which PersonJourney to delete.
+     */
+    where: PersonJourneyWhereUniqueInput
+  }
+
+  /**
+   * PersonJourney deleteMany
+   */
+  export type PersonJourneyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PersonJourneys to delete
+     */
+    where?: PersonJourneyWhereInput
+    /**
+     * Limit how many PersonJourneys to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PersonJourney.currentStage
+   */
+  export type PersonJourney$currentStageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    where?: JourneyStageWhereInput
+  }
+
+  /**
+   * PersonJourney.tasks
+   */
+  export type PersonJourney$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    where?: PersonJourneyTaskWhereInput
+    orderBy?: PersonJourneyTaskOrderByWithRelationInput | PersonJourneyTaskOrderByWithRelationInput[]
+    cursor?: PersonJourneyTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonJourneyTaskScalarFieldEnum | PersonJourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourney.history
+   */
+  export type PersonJourney$historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    where?: PersonJourneyStageHistoryWhereInput
+    orderBy?: PersonJourneyStageHistoryOrderByWithRelationInput | PersonJourneyStageHistoryOrderByWithRelationInput[]
+    cursor?: PersonJourneyStageHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PersonJourneyStageHistoryScalarFieldEnum | PersonJourneyStageHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourney without action
+   */
+  export type PersonJourneyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourney
+     */
+    select?: PersonJourneySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourney
+     */
+    omit?: PersonJourneyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PersonJourneyTask
+   */
+
+  export type AggregatePersonJourneyTask = {
+    _count: PersonJourneyTaskCountAggregateOutputType | null
+    _min: PersonJourneyTaskMinAggregateOutputType | null
+    _max: PersonJourneyTaskMaxAggregateOutputType | null
+  }
+
+  export type PersonJourneyTaskMinAggregateOutputType = {
+    id: string | null
+    completed: boolean | null
+    completedAt: Date | null
+    source: $Enums.JourneyTriggerType | null
+    personId: string | null
+    journeyId: string | null
+    taskId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PersonJourneyTaskMaxAggregateOutputType = {
+    id: string | null
+    completed: boolean | null
+    completedAt: Date | null
+    source: $Enums.JourneyTriggerType | null
+    personId: string | null
+    journeyId: string | null
+    taskId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PersonJourneyTaskCountAggregateOutputType = {
+    id: number
+    completed: number
+    completedAt: number
+    source: number
+    personId: number
+    journeyId: number
+    taskId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PersonJourneyTaskMinAggregateInputType = {
+    id?: true
+    completed?: true
+    completedAt?: true
+    source?: true
+    personId?: true
+    journeyId?: true
+    taskId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PersonJourneyTaskMaxAggregateInputType = {
+    id?: true
+    completed?: true
+    completedAt?: true
+    source?: true
+    personId?: true
+    journeyId?: true
+    taskId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PersonJourneyTaskCountAggregateInputType = {
+    id?: true
+    completed?: true
+    completedAt?: true
+    source?: true
+    personId?: true
+    journeyId?: true
+    taskId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PersonJourneyTaskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PersonJourneyTask to aggregate.
+     */
+    where?: PersonJourneyTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneyTasks to fetch.
+     */
+    orderBy?: PersonJourneyTaskOrderByWithRelationInput | PersonJourneyTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PersonJourneyTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneyTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneyTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PersonJourneyTasks
+    **/
+    _count?: true | PersonJourneyTaskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PersonJourneyTaskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PersonJourneyTaskMaxAggregateInputType
+  }
+
+  export type GetPersonJourneyTaskAggregateType<T extends PersonJourneyTaskAggregateArgs> = {
+        [P in keyof T & keyof AggregatePersonJourneyTask]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePersonJourneyTask[P]>
+      : GetScalarType<T[P], AggregatePersonJourneyTask[P]>
+  }
+
+
+
+
+  export type PersonJourneyTaskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyTaskWhereInput
+    orderBy?: PersonJourneyTaskOrderByWithAggregationInput | PersonJourneyTaskOrderByWithAggregationInput[]
+    by: PersonJourneyTaskScalarFieldEnum[] | PersonJourneyTaskScalarFieldEnum
+    having?: PersonJourneyTaskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PersonJourneyTaskCountAggregateInputType | true
+    _min?: PersonJourneyTaskMinAggregateInputType
+    _max?: PersonJourneyTaskMaxAggregateInputType
+  }
+
+  export type PersonJourneyTaskGroupByOutputType = {
+    id: string
+    completed: boolean
+    completedAt: Date | null
+    source: $Enums.JourneyTriggerType
+    personId: string
+    journeyId: string
+    taskId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PersonJourneyTaskCountAggregateOutputType | null
+    _min: PersonJourneyTaskMinAggregateOutputType | null
+    _max: PersonJourneyTaskMaxAggregateOutputType | null
+  }
+
+  type GetPersonJourneyTaskGroupByPayload<T extends PersonJourneyTaskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PersonJourneyTaskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PersonJourneyTaskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PersonJourneyTaskGroupByOutputType[P]>
+            : GetScalarType<T[P], PersonJourneyTaskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PersonJourneyTaskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    completed?: boolean
+    completedAt?: boolean
+    source?: boolean
+    personId?: boolean
+    journeyId?: boolean
+    taskId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    task?: boolean | JourneyTaskDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourneyTask"]>
+
+  export type PersonJourneyTaskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    completed?: boolean
+    completedAt?: boolean
+    source?: boolean
+    personId?: boolean
+    journeyId?: boolean
+    taskId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    task?: boolean | JourneyTaskDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourneyTask"]>
+
+  export type PersonJourneyTaskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    completed?: boolean
+    completedAt?: boolean
+    source?: boolean
+    personId?: boolean
+    journeyId?: boolean
+    taskId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    task?: boolean | JourneyTaskDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourneyTask"]>
+
+  export type PersonJourneyTaskSelectScalar = {
+    id?: boolean
+    completed?: boolean
+    completedAt?: boolean
+    source?: boolean
+    personId?: boolean
+    journeyId?: boolean
+    taskId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PersonJourneyTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "completed" | "completedAt" | "source" | "personId" | "journeyId" | "taskId" | "createdAt" | "updatedAt", ExtArgs["result"]["personJourneyTask"]>
+  export type PersonJourneyTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    task?: boolean | JourneyTaskDefaultArgs<ExtArgs>
+  }
+  export type PersonJourneyTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    task?: boolean | JourneyTaskDefaultArgs<ExtArgs>
+  }
+  export type PersonJourneyTaskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    task?: boolean | JourneyTaskDefaultArgs<ExtArgs>
+  }
+
+  export type $PersonJourneyTaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PersonJourneyTask"
+    objects: {
+      person: Prisma.$PersonPayload<ExtArgs>
+      journey: Prisma.$PersonJourneyPayload<ExtArgs>
+      task: Prisma.$JourneyTaskPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      completed: boolean
+      completedAt: Date | null
+      source: $Enums.JourneyTriggerType
+      personId: string
+      journeyId: string
+      taskId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["personJourneyTask"]>
+    composites: {}
+  }
+
+  type PersonJourneyTaskGetPayload<S extends boolean | null | undefined | PersonJourneyTaskDefaultArgs> = $Result.GetResult<Prisma.$PersonJourneyTaskPayload, S>
+
+  type PersonJourneyTaskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PersonJourneyTaskFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PersonJourneyTaskCountAggregateInputType | true
+    }
+
+  export interface PersonJourneyTaskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PersonJourneyTask'], meta: { name: 'PersonJourneyTask' } }
+    /**
+     * Find zero or one PersonJourneyTask that matches the filter.
+     * @param {PersonJourneyTaskFindUniqueArgs} args - Arguments to find a PersonJourneyTask
+     * @example
+     * // Get one PersonJourneyTask
+     * const personJourneyTask = await prisma.personJourneyTask.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PersonJourneyTaskFindUniqueArgs>(args: SelectSubset<T, PersonJourneyTaskFindUniqueArgs<ExtArgs>>): Prisma__PersonJourneyTaskClient<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PersonJourneyTask that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PersonJourneyTaskFindUniqueOrThrowArgs} args - Arguments to find a PersonJourneyTask
+     * @example
+     * // Get one PersonJourneyTask
+     * const personJourneyTask = await prisma.personJourneyTask.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PersonJourneyTaskFindUniqueOrThrowArgs>(args: SelectSubset<T, PersonJourneyTaskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PersonJourneyTaskClient<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PersonJourneyTask that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyTaskFindFirstArgs} args - Arguments to find a PersonJourneyTask
+     * @example
+     * // Get one PersonJourneyTask
+     * const personJourneyTask = await prisma.personJourneyTask.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PersonJourneyTaskFindFirstArgs>(args?: SelectSubset<T, PersonJourneyTaskFindFirstArgs<ExtArgs>>): Prisma__PersonJourneyTaskClient<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PersonJourneyTask that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyTaskFindFirstOrThrowArgs} args - Arguments to find a PersonJourneyTask
+     * @example
+     * // Get one PersonJourneyTask
+     * const personJourneyTask = await prisma.personJourneyTask.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PersonJourneyTaskFindFirstOrThrowArgs>(args?: SelectSubset<T, PersonJourneyTaskFindFirstOrThrowArgs<ExtArgs>>): Prisma__PersonJourneyTaskClient<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PersonJourneyTasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyTaskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PersonJourneyTasks
+     * const personJourneyTasks = await prisma.personJourneyTask.findMany()
+     * 
+     * // Get first 10 PersonJourneyTasks
+     * const personJourneyTasks = await prisma.personJourneyTask.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const personJourneyTaskWithIdOnly = await prisma.personJourneyTask.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PersonJourneyTaskFindManyArgs>(args?: SelectSubset<T, PersonJourneyTaskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PersonJourneyTask.
+     * @param {PersonJourneyTaskCreateArgs} args - Arguments to create a PersonJourneyTask.
+     * @example
+     * // Create one PersonJourneyTask
+     * const PersonJourneyTask = await prisma.personJourneyTask.create({
+     *   data: {
+     *     // ... data to create a PersonJourneyTask
+     *   }
+     * })
+     * 
+     */
+    create<T extends PersonJourneyTaskCreateArgs>(args: SelectSubset<T, PersonJourneyTaskCreateArgs<ExtArgs>>): Prisma__PersonJourneyTaskClient<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PersonJourneyTasks.
+     * @param {PersonJourneyTaskCreateManyArgs} args - Arguments to create many PersonJourneyTasks.
+     * @example
+     * // Create many PersonJourneyTasks
+     * const personJourneyTask = await prisma.personJourneyTask.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PersonJourneyTaskCreateManyArgs>(args?: SelectSubset<T, PersonJourneyTaskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PersonJourneyTasks and returns the data saved in the database.
+     * @param {PersonJourneyTaskCreateManyAndReturnArgs} args - Arguments to create many PersonJourneyTasks.
+     * @example
+     * // Create many PersonJourneyTasks
+     * const personJourneyTask = await prisma.personJourneyTask.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PersonJourneyTasks and only return the `id`
+     * const personJourneyTaskWithIdOnly = await prisma.personJourneyTask.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PersonJourneyTaskCreateManyAndReturnArgs>(args?: SelectSubset<T, PersonJourneyTaskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PersonJourneyTask.
+     * @param {PersonJourneyTaskDeleteArgs} args - Arguments to delete one PersonJourneyTask.
+     * @example
+     * // Delete one PersonJourneyTask
+     * const PersonJourneyTask = await prisma.personJourneyTask.delete({
+     *   where: {
+     *     // ... filter to delete one PersonJourneyTask
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PersonJourneyTaskDeleteArgs>(args: SelectSubset<T, PersonJourneyTaskDeleteArgs<ExtArgs>>): Prisma__PersonJourneyTaskClient<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PersonJourneyTask.
+     * @param {PersonJourneyTaskUpdateArgs} args - Arguments to update one PersonJourneyTask.
+     * @example
+     * // Update one PersonJourneyTask
+     * const personJourneyTask = await prisma.personJourneyTask.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PersonJourneyTaskUpdateArgs>(args: SelectSubset<T, PersonJourneyTaskUpdateArgs<ExtArgs>>): Prisma__PersonJourneyTaskClient<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PersonJourneyTasks.
+     * @param {PersonJourneyTaskDeleteManyArgs} args - Arguments to filter PersonJourneyTasks to delete.
+     * @example
+     * // Delete a few PersonJourneyTasks
+     * const { count } = await prisma.personJourneyTask.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PersonJourneyTaskDeleteManyArgs>(args?: SelectSubset<T, PersonJourneyTaskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PersonJourneyTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyTaskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PersonJourneyTasks
+     * const personJourneyTask = await prisma.personJourneyTask.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PersonJourneyTaskUpdateManyArgs>(args: SelectSubset<T, PersonJourneyTaskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PersonJourneyTasks and returns the data updated in the database.
+     * @param {PersonJourneyTaskUpdateManyAndReturnArgs} args - Arguments to update many PersonJourneyTasks.
+     * @example
+     * // Update many PersonJourneyTasks
+     * const personJourneyTask = await prisma.personJourneyTask.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PersonJourneyTasks and only return the `id`
+     * const personJourneyTaskWithIdOnly = await prisma.personJourneyTask.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PersonJourneyTaskUpdateManyAndReturnArgs>(args: SelectSubset<T, PersonJourneyTaskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PersonJourneyTask.
+     * @param {PersonJourneyTaskUpsertArgs} args - Arguments to update or create a PersonJourneyTask.
+     * @example
+     * // Update or create a PersonJourneyTask
+     * const personJourneyTask = await prisma.personJourneyTask.upsert({
+     *   create: {
+     *     // ... data to create a PersonJourneyTask
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PersonJourneyTask we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PersonJourneyTaskUpsertArgs>(args: SelectSubset<T, PersonJourneyTaskUpsertArgs<ExtArgs>>): Prisma__PersonJourneyTaskClient<$Result.GetResult<Prisma.$PersonJourneyTaskPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PersonJourneyTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyTaskCountArgs} args - Arguments to filter PersonJourneyTasks to count.
+     * @example
+     * // Count the number of PersonJourneyTasks
+     * const count = await prisma.personJourneyTask.count({
+     *   where: {
+     *     // ... the filter for the PersonJourneyTasks we want to count
+     *   }
+     * })
+    **/
+    count<T extends PersonJourneyTaskCountArgs>(
+      args?: Subset<T, PersonJourneyTaskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PersonJourneyTaskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PersonJourneyTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyTaskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PersonJourneyTaskAggregateArgs>(args: Subset<T, PersonJourneyTaskAggregateArgs>): Prisma.PrismaPromise<GetPersonJourneyTaskAggregateType<T>>
+
+    /**
+     * Group by PersonJourneyTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyTaskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PersonJourneyTaskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PersonJourneyTaskGroupByArgs['orderBy'] }
+        : { orderBy?: PersonJourneyTaskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PersonJourneyTaskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPersonJourneyTaskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PersonJourneyTask model
+   */
+  readonly fields: PersonJourneyTaskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PersonJourneyTask.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PersonJourneyTaskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    person<T extends PersonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PersonDefaultArgs<ExtArgs>>): Prisma__PersonClient<$Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    journey<T extends PersonJourneyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PersonJourneyDefaultArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    task<T extends JourneyTaskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JourneyTaskDefaultArgs<ExtArgs>>): Prisma__JourneyTaskClient<$Result.GetResult<Prisma.$JourneyTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PersonJourneyTask model
+   */
+  interface PersonJourneyTaskFieldRefs {
+    readonly id: FieldRef<"PersonJourneyTask", 'String'>
+    readonly completed: FieldRef<"PersonJourneyTask", 'Boolean'>
+    readonly completedAt: FieldRef<"PersonJourneyTask", 'DateTime'>
+    readonly source: FieldRef<"PersonJourneyTask", 'JourneyTriggerType'>
+    readonly personId: FieldRef<"PersonJourneyTask", 'String'>
+    readonly journeyId: FieldRef<"PersonJourneyTask", 'String'>
+    readonly taskId: FieldRef<"PersonJourneyTask", 'String'>
+    readonly createdAt: FieldRef<"PersonJourneyTask", 'DateTime'>
+    readonly updatedAt: FieldRef<"PersonJourneyTask", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PersonJourneyTask findUnique
+   */
+  export type PersonJourneyTaskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyTask to fetch.
+     */
+    where: PersonJourneyTaskWhereUniqueInput
+  }
+
+  /**
+   * PersonJourneyTask findUniqueOrThrow
+   */
+  export type PersonJourneyTaskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyTask to fetch.
+     */
+    where: PersonJourneyTaskWhereUniqueInput
+  }
+
+  /**
+   * PersonJourneyTask findFirst
+   */
+  export type PersonJourneyTaskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyTask to fetch.
+     */
+    where?: PersonJourneyTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneyTasks to fetch.
+     */
+    orderBy?: PersonJourneyTaskOrderByWithRelationInput | PersonJourneyTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PersonJourneyTasks.
+     */
+    cursor?: PersonJourneyTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneyTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneyTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PersonJourneyTasks.
+     */
+    distinct?: PersonJourneyTaskScalarFieldEnum | PersonJourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourneyTask findFirstOrThrow
+   */
+  export type PersonJourneyTaskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyTask to fetch.
+     */
+    where?: PersonJourneyTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneyTasks to fetch.
+     */
+    orderBy?: PersonJourneyTaskOrderByWithRelationInput | PersonJourneyTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PersonJourneyTasks.
+     */
+    cursor?: PersonJourneyTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneyTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneyTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PersonJourneyTasks.
+     */
+    distinct?: PersonJourneyTaskScalarFieldEnum | PersonJourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourneyTask findMany
+   */
+  export type PersonJourneyTaskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyTasks to fetch.
+     */
+    where?: PersonJourneyTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneyTasks to fetch.
+     */
+    orderBy?: PersonJourneyTaskOrderByWithRelationInput | PersonJourneyTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PersonJourneyTasks.
+     */
+    cursor?: PersonJourneyTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneyTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneyTasks.
+     */
+    skip?: number
+    distinct?: PersonJourneyTaskScalarFieldEnum | PersonJourneyTaskScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourneyTask create
+   */
+  export type PersonJourneyTaskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PersonJourneyTask.
+     */
+    data: XOR<PersonJourneyTaskCreateInput, PersonJourneyTaskUncheckedCreateInput>
+  }
+
+  /**
+   * PersonJourneyTask createMany
+   */
+  export type PersonJourneyTaskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PersonJourneyTasks.
+     */
+    data: PersonJourneyTaskCreateManyInput | PersonJourneyTaskCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PersonJourneyTask createManyAndReturn
+   */
+  export type PersonJourneyTaskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * The data used to create many PersonJourneyTasks.
+     */
+    data: PersonJourneyTaskCreateManyInput | PersonJourneyTaskCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PersonJourneyTask update
+   */
+  export type PersonJourneyTaskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PersonJourneyTask.
+     */
+    data: XOR<PersonJourneyTaskUpdateInput, PersonJourneyTaskUncheckedUpdateInput>
+    /**
+     * Choose, which PersonJourneyTask to update.
+     */
+    where: PersonJourneyTaskWhereUniqueInput
+  }
+
+  /**
+   * PersonJourneyTask updateMany
+   */
+  export type PersonJourneyTaskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PersonJourneyTasks.
+     */
+    data: XOR<PersonJourneyTaskUpdateManyMutationInput, PersonJourneyTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which PersonJourneyTasks to update
+     */
+    where?: PersonJourneyTaskWhereInput
+    /**
+     * Limit how many PersonJourneyTasks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PersonJourneyTask updateManyAndReturn
+   */
+  export type PersonJourneyTaskUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * The data used to update PersonJourneyTasks.
+     */
+    data: XOR<PersonJourneyTaskUpdateManyMutationInput, PersonJourneyTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which PersonJourneyTasks to update
+     */
+    where?: PersonJourneyTaskWhereInput
+    /**
+     * Limit how many PersonJourneyTasks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PersonJourneyTask upsert
+   */
+  export type PersonJourneyTaskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PersonJourneyTask to update in case it exists.
+     */
+    where: PersonJourneyTaskWhereUniqueInput
+    /**
+     * In case the PersonJourneyTask found by the `where` argument doesn't exist, create a new PersonJourneyTask with this data.
+     */
+    create: XOR<PersonJourneyTaskCreateInput, PersonJourneyTaskUncheckedCreateInput>
+    /**
+     * In case the PersonJourneyTask was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PersonJourneyTaskUpdateInput, PersonJourneyTaskUncheckedUpdateInput>
+  }
+
+  /**
+   * PersonJourneyTask delete
+   */
+  export type PersonJourneyTaskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+    /**
+     * Filter which PersonJourneyTask to delete.
+     */
+    where: PersonJourneyTaskWhereUniqueInput
+  }
+
+  /**
+   * PersonJourneyTask deleteMany
+   */
+  export type PersonJourneyTaskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PersonJourneyTasks to delete
+     */
+    where?: PersonJourneyTaskWhereInput
+    /**
+     * Limit how many PersonJourneyTasks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PersonJourneyTask without action
+   */
+  export type PersonJourneyTaskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyTask
+     */
+    select?: PersonJourneyTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyTask
+     */
+    omit?: PersonJourneyTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyTaskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PersonAchievement
+   */
+
+  export type AggregatePersonAchievement = {
+    _count: PersonAchievementCountAggregateOutputType | null
+    _min: PersonAchievementMinAggregateOutputType | null
+    _max: PersonAchievementMaxAggregateOutputType | null
+  }
+
+  export type PersonAchievementMinAggregateOutputType = {
+    id: string | null
+    earnedAt: Date | null
+    personId: string | null
+    achievementId: string | null
+  }
+
+  export type PersonAchievementMaxAggregateOutputType = {
+    id: string | null
+    earnedAt: Date | null
+    personId: string | null
+    achievementId: string | null
+  }
+
+  export type PersonAchievementCountAggregateOutputType = {
+    id: number
+    earnedAt: number
+    personId: number
+    achievementId: number
+    _all: number
+  }
+
+
+  export type PersonAchievementMinAggregateInputType = {
+    id?: true
+    earnedAt?: true
+    personId?: true
+    achievementId?: true
+  }
+
+  export type PersonAchievementMaxAggregateInputType = {
+    id?: true
+    earnedAt?: true
+    personId?: true
+    achievementId?: true
+  }
+
+  export type PersonAchievementCountAggregateInputType = {
+    id?: true
+    earnedAt?: true
+    personId?: true
+    achievementId?: true
+    _all?: true
+  }
+
+  export type PersonAchievementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PersonAchievement to aggregate.
+     */
+    where?: PersonAchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonAchievements to fetch.
+     */
+    orderBy?: PersonAchievementOrderByWithRelationInput | PersonAchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PersonAchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonAchievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonAchievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PersonAchievements
+    **/
+    _count?: true | PersonAchievementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PersonAchievementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PersonAchievementMaxAggregateInputType
+  }
+
+  export type GetPersonAchievementAggregateType<T extends PersonAchievementAggregateArgs> = {
+        [P in keyof T & keyof AggregatePersonAchievement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePersonAchievement[P]>
+      : GetScalarType<T[P], AggregatePersonAchievement[P]>
+  }
+
+
+
+
+  export type PersonAchievementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonAchievementWhereInput
+    orderBy?: PersonAchievementOrderByWithAggregationInput | PersonAchievementOrderByWithAggregationInput[]
+    by: PersonAchievementScalarFieldEnum[] | PersonAchievementScalarFieldEnum
+    having?: PersonAchievementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PersonAchievementCountAggregateInputType | true
+    _min?: PersonAchievementMinAggregateInputType
+    _max?: PersonAchievementMaxAggregateInputType
+  }
+
+  export type PersonAchievementGroupByOutputType = {
+    id: string
+    earnedAt: Date
+    personId: string
+    achievementId: string
+    _count: PersonAchievementCountAggregateOutputType | null
+    _min: PersonAchievementMinAggregateOutputType | null
+    _max: PersonAchievementMaxAggregateOutputType | null
+  }
+
+  type GetPersonAchievementGroupByPayload<T extends PersonAchievementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PersonAchievementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PersonAchievementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PersonAchievementGroupByOutputType[P]>
+            : GetScalarType<T[P], PersonAchievementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PersonAchievementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    earnedAt?: boolean
+    personId?: boolean
+    achievementId?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    achievement?: boolean | JourneyAchievementDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personAchievement"]>
+
+  export type PersonAchievementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    earnedAt?: boolean
+    personId?: boolean
+    achievementId?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    achievement?: boolean | JourneyAchievementDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personAchievement"]>
+
+  export type PersonAchievementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    earnedAt?: boolean
+    personId?: boolean
+    achievementId?: boolean
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    achievement?: boolean | JourneyAchievementDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personAchievement"]>
+
+  export type PersonAchievementSelectScalar = {
+    id?: boolean
+    earnedAt?: boolean
+    personId?: boolean
+    achievementId?: boolean
+  }
+
+  export type PersonAchievementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "earnedAt" | "personId" | "achievementId", ExtArgs["result"]["personAchievement"]>
+  export type PersonAchievementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    achievement?: boolean | JourneyAchievementDefaultArgs<ExtArgs>
+  }
+  export type PersonAchievementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    achievement?: boolean | JourneyAchievementDefaultArgs<ExtArgs>
+  }
+  export type PersonAchievementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    person?: boolean | PersonDefaultArgs<ExtArgs>
+    achievement?: boolean | JourneyAchievementDefaultArgs<ExtArgs>
+  }
+
+  export type $PersonAchievementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PersonAchievement"
+    objects: {
+      person: Prisma.$PersonPayload<ExtArgs>
+      achievement: Prisma.$JourneyAchievementPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      earnedAt: Date
+      personId: string
+      achievementId: string
+    }, ExtArgs["result"]["personAchievement"]>
+    composites: {}
+  }
+
+  type PersonAchievementGetPayload<S extends boolean | null | undefined | PersonAchievementDefaultArgs> = $Result.GetResult<Prisma.$PersonAchievementPayload, S>
+
+  type PersonAchievementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PersonAchievementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PersonAchievementCountAggregateInputType | true
+    }
+
+  export interface PersonAchievementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PersonAchievement'], meta: { name: 'PersonAchievement' } }
+    /**
+     * Find zero or one PersonAchievement that matches the filter.
+     * @param {PersonAchievementFindUniqueArgs} args - Arguments to find a PersonAchievement
+     * @example
+     * // Get one PersonAchievement
+     * const personAchievement = await prisma.personAchievement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PersonAchievementFindUniqueArgs>(args: SelectSubset<T, PersonAchievementFindUniqueArgs<ExtArgs>>): Prisma__PersonAchievementClient<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PersonAchievement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PersonAchievementFindUniqueOrThrowArgs} args - Arguments to find a PersonAchievement
+     * @example
+     * // Get one PersonAchievement
+     * const personAchievement = await prisma.personAchievement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PersonAchievementFindUniqueOrThrowArgs>(args: SelectSubset<T, PersonAchievementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PersonAchievementClient<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PersonAchievement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonAchievementFindFirstArgs} args - Arguments to find a PersonAchievement
+     * @example
+     * // Get one PersonAchievement
+     * const personAchievement = await prisma.personAchievement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PersonAchievementFindFirstArgs>(args?: SelectSubset<T, PersonAchievementFindFirstArgs<ExtArgs>>): Prisma__PersonAchievementClient<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PersonAchievement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonAchievementFindFirstOrThrowArgs} args - Arguments to find a PersonAchievement
+     * @example
+     * // Get one PersonAchievement
+     * const personAchievement = await prisma.personAchievement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PersonAchievementFindFirstOrThrowArgs>(args?: SelectSubset<T, PersonAchievementFindFirstOrThrowArgs<ExtArgs>>): Prisma__PersonAchievementClient<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PersonAchievements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonAchievementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PersonAchievements
+     * const personAchievements = await prisma.personAchievement.findMany()
+     * 
+     * // Get first 10 PersonAchievements
+     * const personAchievements = await prisma.personAchievement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const personAchievementWithIdOnly = await prisma.personAchievement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PersonAchievementFindManyArgs>(args?: SelectSubset<T, PersonAchievementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PersonAchievement.
+     * @param {PersonAchievementCreateArgs} args - Arguments to create a PersonAchievement.
+     * @example
+     * // Create one PersonAchievement
+     * const PersonAchievement = await prisma.personAchievement.create({
+     *   data: {
+     *     // ... data to create a PersonAchievement
+     *   }
+     * })
+     * 
+     */
+    create<T extends PersonAchievementCreateArgs>(args: SelectSubset<T, PersonAchievementCreateArgs<ExtArgs>>): Prisma__PersonAchievementClient<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PersonAchievements.
+     * @param {PersonAchievementCreateManyArgs} args - Arguments to create many PersonAchievements.
+     * @example
+     * // Create many PersonAchievements
+     * const personAchievement = await prisma.personAchievement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PersonAchievementCreateManyArgs>(args?: SelectSubset<T, PersonAchievementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PersonAchievements and returns the data saved in the database.
+     * @param {PersonAchievementCreateManyAndReturnArgs} args - Arguments to create many PersonAchievements.
+     * @example
+     * // Create many PersonAchievements
+     * const personAchievement = await prisma.personAchievement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PersonAchievements and only return the `id`
+     * const personAchievementWithIdOnly = await prisma.personAchievement.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PersonAchievementCreateManyAndReturnArgs>(args?: SelectSubset<T, PersonAchievementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PersonAchievement.
+     * @param {PersonAchievementDeleteArgs} args - Arguments to delete one PersonAchievement.
+     * @example
+     * // Delete one PersonAchievement
+     * const PersonAchievement = await prisma.personAchievement.delete({
+     *   where: {
+     *     // ... filter to delete one PersonAchievement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PersonAchievementDeleteArgs>(args: SelectSubset<T, PersonAchievementDeleteArgs<ExtArgs>>): Prisma__PersonAchievementClient<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PersonAchievement.
+     * @param {PersonAchievementUpdateArgs} args - Arguments to update one PersonAchievement.
+     * @example
+     * // Update one PersonAchievement
+     * const personAchievement = await prisma.personAchievement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PersonAchievementUpdateArgs>(args: SelectSubset<T, PersonAchievementUpdateArgs<ExtArgs>>): Prisma__PersonAchievementClient<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PersonAchievements.
+     * @param {PersonAchievementDeleteManyArgs} args - Arguments to filter PersonAchievements to delete.
+     * @example
+     * // Delete a few PersonAchievements
+     * const { count } = await prisma.personAchievement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PersonAchievementDeleteManyArgs>(args?: SelectSubset<T, PersonAchievementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PersonAchievements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonAchievementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PersonAchievements
+     * const personAchievement = await prisma.personAchievement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PersonAchievementUpdateManyArgs>(args: SelectSubset<T, PersonAchievementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PersonAchievements and returns the data updated in the database.
+     * @param {PersonAchievementUpdateManyAndReturnArgs} args - Arguments to update many PersonAchievements.
+     * @example
+     * // Update many PersonAchievements
+     * const personAchievement = await prisma.personAchievement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PersonAchievements and only return the `id`
+     * const personAchievementWithIdOnly = await prisma.personAchievement.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PersonAchievementUpdateManyAndReturnArgs>(args: SelectSubset<T, PersonAchievementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PersonAchievement.
+     * @param {PersonAchievementUpsertArgs} args - Arguments to update or create a PersonAchievement.
+     * @example
+     * // Update or create a PersonAchievement
+     * const personAchievement = await prisma.personAchievement.upsert({
+     *   create: {
+     *     // ... data to create a PersonAchievement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PersonAchievement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PersonAchievementUpsertArgs>(args: SelectSubset<T, PersonAchievementUpsertArgs<ExtArgs>>): Prisma__PersonAchievementClient<$Result.GetResult<Prisma.$PersonAchievementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PersonAchievements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonAchievementCountArgs} args - Arguments to filter PersonAchievements to count.
+     * @example
+     * // Count the number of PersonAchievements
+     * const count = await prisma.personAchievement.count({
+     *   where: {
+     *     // ... the filter for the PersonAchievements we want to count
+     *   }
+     * })
+    **/
+    count<T extends PersonAchievementCountArgs>(
+      args?: Subset<T, PersonAchievementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PersonAchievementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PersonAchievement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonAchievementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PersonAchievementAggregateArgs>(args: Subset<T, PersonAchievementAggregateArgs>): Prisma.PrismaPromise<GetPersonAchievementAggregateType<T>>
+
+    /**
+     * Group by PersonAchievement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonAchievementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PersonAchievementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PersonAchievementGroupByArgs['orderBy'] }
+        : { orderBy?: PersonAchievementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PersonAchievementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPersonAchievementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PersonAchievement model
+   */
+  readonly fields: PersonAchievementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PersonAchievement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PersonAchievementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    person<T extends PersonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PersonDefaultArgs<ExtArgs>>): Prisma__PersonClient<$Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    achievement<T extends JourneyAchievementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JourneyAchievementDefaultArgs<ExtArgs>>): Prisma__JourneyAchievementClient<$Result.GetResult<Prisma.$JourneyAchievementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PersonAchievement model
+   */
+  interface PersonAchievementFieldRefs {
+    readonly id: FieldRef<"PersonAchievement", 'String'>
+    readonly earnedAt: FieldRef<"PersonAchievement", 'DateTime'>
+    readonly personId: FieldRef<"PersonAchievement", 'String'>
+    readonly achievementId: FieldRef<"PersonAchievement", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PersonAchievement findUnique
+   */
+  export type PersonAchievementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonAchievement to fetch.
+     */
+    where: PersonAchievementWhereUniqueInput
+  }
+
+  /**
+   * PersonAchievement findUniqueOrThrow
+   */
+  export type PersonAchievementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonAchievement to fetch.
+     */
+    where: PersonAchievementWhereUniqueInput
+  }
+
+  /**
+   * PersonAchievement findFirst
+   */
+  export type PersonAchievementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonAchievement to fetch.
+     */
+    where?: PersonAchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonAchievements to fetch.
+     */
+    orderBy?: PersonAchievementOrderByWithRelationInput | PersonAchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PersonAchievements.
+     */
+    cursor?: PersonAchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonAchievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonAchievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PersonAchievements.
+     */
+    distinct?: PersonAchievementScalarFieldEnum | PersonAchievementScalarFieldEnum[]
+  }
+
+  /**
+   * PersonAchievement findFirstOrThrow
+   */
+  export type PersonAchievementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonAchievement to fetch.
+     */
+    where?: PersonAchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonAchievements to fetch.
+     */
+    orderBy?: PersonAchievementOrderByWithRelationInput | PersonAchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PersonAchievements.
+     */
+    cursor?: PersonAchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonAchievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonAchievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PersonAchievements.
+     */
+    distinct?: PersonAchievementScalarFieldEnum | PersonAchievementScalarFieldEnum[]
+  }
+
+  /**
+   * PersonAchievement findMany
+   */
+  export type PersonAchievementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonAchievements to fetch.
+     */
+    where?: PersonAchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonAchievements to fetch.
+     */
+    orderBy?: PersonAchievementOrderByWithRelationInput | PersonAchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PersonAchievements.
+     */
+    cursor?: PersonAchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonAchievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonAchievements.
+     */
+    skip?: number
+    distinct?: PersonAchievementScalarFieldEnum | PersonAchievementScalarFieldEnum[]
+  }
+
+  /**
+   * PersonAchievement create
+   */
+  export type PersonAchievementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PersonAchievement.
+     */
+    data: XOR<PersonAchievementCreateInput, PersonAchievementUncheckedCreateInput>
+  }
+
+  /**
+   * PersonAchievement createMany
+   */
+  export type PersonAchievementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PersonAchievements.
+     */
+    data: PersonAchievementCreateManyInput | PersonAchievementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PersonAchievement createManyAndReturn
+   */
+  export type PersonAchievementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * The data used to create many PersonAchievements.
+     */
+    data: PersonAchievementCreateManyInput | PersonAchievementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PersonAchievement update
+   */
+  export type PersonAchievementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PersonAchievement.
+     */
+    data: XOR<PersonAchievementUpdateInput, PersonAchievementUncheckedUpdateInput>
+    /**
+     * Choose, which PersonAchievement to update.
+     */
+    where: PersonAchievementWhereUniqueInput
+  }
+
+  /**
+   * PersonAchievement updateMany
+   */
+  export type PersonAchievementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PersonAchievements.
+     */
+    data: XOR<PersonAchievementUpdateManyMutationInput, PersonAchievementUncheckedUpdateManyInput>
+    /**
+     * Filter which PersonAchievements to update
+     */
+    where?: PersonAchievementWhereInput
+    /**
+     * Limit how many PersonAchievements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PersonAchievement updateManyAndReturn
+   */
+  export type PersonAchievementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * The data used to update PersonAchievements.
+     */
+    data: XOR<PersonAchievementUpdateManyMutationInput, PersonAchievementUncheckedUpdateManyInput>
+    /**
+     * Filter which PersonAchievements to update
+     */
+    where?: PersonAchievementWhereInput
+    /**
+     * Limit how many PersonAchievements to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PersonAchievement upsert
+   */
+  export type PersonAchievementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PersonAchievement to update in case it exists.
+     */
+    where: PersonAchievementWhereUniqueInput
+    /**
+     * In case the PersonAchievement found by the `where` argument doesn't exist, create a new PersonAchievement with this data.
+     */
+    create: XOR<PersonAchievementCreateInput, PersonAchievementUncheckedCreateInput>
+    /**
+     * In case the PersonAchievement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PersonAchievementUpdateInput, PersonAchievementUncheckedUpdateInput>
+  }
+
+  /**
+   * PersonAchievement delete
+   */
+  export type PersonAchievementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+    /**
+     * Filter which PersonAchievement to delete.
+     */
+    where: PersonAchievementWhereUniqueInput
+  }
+
+  /**
+   * PersonAchievement deleteMany
+   */
+  export type PersonAchievementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PersonAchievements to delete
+     */
+    where?: PersonAchievementWhereInput
+    /**
+     * Limit how many PersonAchievements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PersonAchievement without action
+   */
+  export type PersonAchievementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonAchievement
+     */
+    select?: PersonAchievementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonAchievement
+     */
+    omit?: PersonAchievementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonAchievementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PersonJourneyStageHistory
+   */
+
+  export type AggregatePersonJourneyStageHistory = {
+    _count: PersonJourneyStageHistoryCountAggregateOutputType | null
+    _min: PersonJourneyStageHistoryMinAggregateOutputType | null
+    _max: PersonJourneyStageHistoryMaxAggregateOutputType | null
+  }
+
+  export type PersonJourneyStageHistoryMinAggregateOutputType = {
+    id: string | null
+    movedAt: Date | null
+    notes: string | null
+    source: $Enums.JourneyTriggerType | null
+    journeyId: string | null
+    fromStageId: string | null
+    toStageId: string | null
+  }
+
+  export type PersonJourneyStageHistoryMaxAggregateOutputType = {
+    id: string | null
+    movedAt: Date | null
+    notes: string | null
+    source: $Enums.JourneyTriggerType | null
+    journeyId: string | null
+    fromStageId: string | null
+    toStageId: string | null
+  }
+
+  export type PersonJourneyStageHistoryCountAggregateOutputType = {
+    id: number
+    movedAt: number
+    notes: number
+    source: number
+    journeyId: number
+    fromStageId: number
+    toStageId: number
+    _all: number
+  }
+
+
+  export type PersonJourneyStageHistoryMinAggregateInputType = {
+    id?: true
+    movedAt?: true
+    notes?: true
+    source?: true
+    journeyId?: true
+    fromStageId?: true
+    toStageId?: true
+  }
+
+  export type PersonJourneyStageHistoryMaxAggregateInputType = {
+    id?: true
+    movedAt?: true
+    notes?: true
+    source?: true
+    journeyId?: true
+    fromStageId?: true
+    toStageId?: true
+  }
+
+  export type PersonJourneyStageHistoryCountAggregateInputType = {
+    id?: true
+    movedAt?: true
+    notes?: true
+    source?: true
+    journeyId?: true
+    fromStageId?: true
+    toStageId?: true
+    _all?: true
+  }
+
+  export type PersonJourneyStageHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PersonJourneyStageHistory to aggregate.
+     */
+    where?: PersonJourneyStageHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneyStageHistories to fetch.
+     */
+    orderBy?: PersonJourneyStageHistoryOrderByWithRelationInput | PersonJourneyStageHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PersonJourneyStageHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneyStageHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneyStageHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PersonJourneyStageHistories
+    **/
+    _count?: true | PersonJourneyStageHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PersonJourneyStageHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PersonJourneyStageHistoryMaxAggregateInputType
+  }
+
+  export type GetPersonJourneyStageHistoryAggregateType<T extends PersonJourneyStageHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregatePersonJourneyStageHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePersonJourneyStageHistory[P]>
+      : GetScalarType<T[P], AggregatePersonJourneyStageHistory[P]>
+  }
+
+
+
+
+  export type PersonJourneyStageHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PersonJourneyStageHistoryWhereInput
+    orderBy?: PersonJourneyStageHistoryOrderByWithAggregationInput | PersonJourneyStageHistoryOrderByWithAggregationInput[]
+    by: PersonJourneyStageHistoryScalarFieldEnum[] | PersonJourneyStageHistoryScalarFieldEnum
+    having?: PersonJourneyStageHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PersonJourneyStageHistoryCountAggregateInputType | true
+    _min?: PersonJourneyStageHistoryMinAggregateInputType
+    _max?: PersonJourneyStageHistoryMaxAggregateInputType
+  }
+
+  export type PersonJourneyStageHistoryGroupByOutputType = {
+    id: string
+    movedAt: Date
+    notes: string | null
+    source: $Enums.JourneyTriggerType
+    journeyId: string
+    fromStageId: string | null
+    toStageId: string
+    _count: PersonJourneyStageHistoryCountAggregateOutputType | null
+    _min: PersonJourneyStageHistoryMinAggregateOutputType | null
+    _max: PersonJourneyStageHistoryMaxAggregateOutputType | null
+  }
+
+  type GetPersonJourneyStageHistoryGroupByPayload<T extends PersonJourneyStageHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PersonJourneyStageHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PersonJourneyStageHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PersonJourneyStageHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], PersonJourneyStageHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PersonJourneyStageHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    movedAt?: boolean
+    notes?: boolean
+    source?: boolean
+    journeyId?: boolean
+    fromStageId?: boolean
+    toStageId?: boolean
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    fromStage?: boolean | PersonJourneyStageHistory$fromStageArgs<ExtArgs>
+    toStage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourneyStageHistory"]>
+
+  export type PersonJourneyStageHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    movedAt?: boolean
+    notes?: boolean
+    source?: boolean
+    journeyId?: boolean
+    fromStageId?: boolean
+    toStageId?: boolean
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    fromStage?: boolean | PersonJourneyStageHistory$fromStageArgs<ExtArgs>
+    toStage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourneyStageHistory"]>
+
+  export type PersonJourneyStageHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    movedAt?: boolean
+    notes?: boolean
+    source?: boolean
+    journeyId?: boolean
+    fromStageId?: boolean
+    toStageId?: boolean
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    fromStage?: boolean | PersonJourneyStageHistory$fromStageArgs<ExtArgs>
+    toStage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["personJourneyStageHistory"]>
+
+  export type PersonJourneyStageHistorySelectScalar = {
+    id?: boolean
+    movedAt?: boolean
+    notes?: boolean
+    source?: boolean
+    journeyId?: boolean
+    fromStageId?: boolean
+    toStageId?: boolean
+  }
+
+  export type PersonJourneyStageHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "movedAt" | "notes" | "source" | "journeyId" | "fromStageId" | "toStageId", ExtArgs["result"]["personJourneyStageHistory"]>
+  export type PersonJourneyStageHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    fromStage?: boolean | PersonJourneyStageHistory$fromStageArgs<ExtArgs>
+    toStage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }
+  export type PersonJourneyStageHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    fromStage?: boolean | PersonJourneyStageHistory$fromStageArgs<ExtArgs>
+    toStage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }
+  export type PersonJourneyStageHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    journey?: boolean | PersonJourneyDefaultArgs<ExtArgs>
+    fromStage?: boolean | PersonJourneyStageHistory$fromStageArgs<ExtArgs>
+    toStage?: boolean | JourneyStageDefaultArgs<ExtArgs>
+  }
+
+  export type $PersonJourneyStageHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PersonJourneyStageHistory"
+    objects: {
+      journey: Prisma.$PersonJourneyPayload<ExtArgs>
+      fromStage: Prisma.$JourneyStagePayload<ExtArgs> | null
+      toStage: Prisma.$JourneyStagePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      movedAt: Date
+      notes: string | null
+      source: $Enums.JourneyTriggerType
+      journeyId: string
+      fromStageId: string | null
+      toStageId: string
+    }, ExtArgs["result"]["personJourneyStageHistory"]>
+    composites: {}
+  }
+
+  type PersonJourneyStageHistoryGetPayload<S extends boolean | null | undefined | PersonJourneyStageHistoryDefaultArgs> = $Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload, S>
+
+  type PersonJourneyStageHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PersonJourneyStageHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PersonJourneyStageHistoryCountAggregateInputType | true
+    }
+
+  export interface PersonJourneyStageHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PersonJourneyStageHistory'], meta: { name: 'PersonJourneyStageHistory' } }
+    /**
+     * Find zero or one PersonJourneyStageHistory that matches the filter.
+     * @param {PersonJourneyStageHistoryFindUniqueArgs} args - Arguments to find a PersonJourneyStageHistory
+     * @example
+     * // Get one PersonJourneyStageHistory
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PersonJourneyStageHistoryFindUniqueArgs>(args: SelectSubset<T, PersonJourneyStageHistoryFindUniqueArgs<ExtArgs>>): Prisma__PersonJourneyStageHistoryClient<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PersonJourneyStageHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PersonJourneyStageHistoryFindUniqueOrThrowArgs} args - Arguments to find a PersonJourneyStageHistory
+     * @example
+     * // Get one PersonJourneyStageHistory
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PersonJourneyStageHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, PersonJourneyStageHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PersonJourneyStageHistoryClient<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PersonJourneyStageHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyStageHistoryFindFirstArgs} args - Arguments to find a PersonJourneyStageHistory
+     * @example
+     * // Get one PersonJourneyStageHistory
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PersonJourneyStageHistoryFindFirstArgs>(args?: SelectSubset<T, PersonJourneyStageHistoryFindFirstArgs<ExtArgs>>): Prisma__PersonJourneyStageHistoryClient<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PersonJourneyStageHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyStageHistoryFindFirstOrThrowArgs} args - Arguments to find a PersonJourneyStageHistory
+     * @example
+     * // Get one PersonJourneyStageHistory
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PersonJourneyStageHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, PersonJourneyStageHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__PersonJourneyStageHistoryClient<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PersonJourneyStageHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyStageHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PersonJourneyStageHistories
+     * const personJourneyStageHistories = await prisma.personJourneyStageHistory.findMany()
+     * 
+     * // Get first 10 PersonJourneyStageHistories
+     * const personJourneyStageHistories = await prisma.personJourneyStageHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const personJourneyStageHistoryWithIdOnly = await prisma.personJourneyStageHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PersonJourneyStageHistoryFindManyArgs>(args?: SelectSubset<T, PersonJourneyStageHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PersonJourneyStageHistory.
+     * @param {PersonJourneyStageHistoryCreateArgs} args - Arguments to create a PersonJourneyStageHistory.
+     * @example
+     * // Create one PersonJourneyStageHistory
+     * const PersonJourneyStageHistory = await prisma.personJourneyStageHistory.create({
+     *   data: {
+     *     // ... data to create a PersonJourneyStageHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends PersonJourneyStageHistoryCreateArgs>(args: SelectSubset<T, PersonJourneyStageHistoryCreateArgs<ExtArgs>>): Prisma__PersonJourneyStageHistoryClient<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PersonJourneyStageHistories.
+     * @param {PersonJourneyStageHistoryCreateManyArgs} args - Arguments to create many PersonJourneyStageHistories.
+     * @example
+     * // Create many PersonJourneyStageHistories
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PersonJourneyStageHistoryCreateManyArgs>(args?: SelectSubset<T, PersonJourneyStageHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PersonJourneyStageHistories and returns the data saved in the database.
+     * @param {PersonJourneyStageHistoryCreateManyAndReturnArgs} args - Arguments to create many PersonJourneyStageHistories.
+     * @example
+     * // Create many PersonJourneyStageHistories
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PersonJourneyStageHistories and only return the `id`
+     * const personJourneyStageHistoryWithIdOnly = await prisma.personJourneyStageHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PersonJourneyStageHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, PersonJourneyStageHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PersonJourneyStageHistory.
+     * @param {PersonJourneyStageHistoryDeleteArgs} args - Arguments to delete one PersonJourneyStageHistory.
+     * @example
+     * // Delete one PersonJourneyStageHistory
+     * const PersonJourneyStageHistory = await prisma.personJourneyStageHistory.delete({
+     *   where: {
+     *     // ... filter to delete one PersonJourneyStageHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PersonJourneyStageHistoryDeleteArgs>(args: SelectSubset<T, PersonJourneyStageHistoryDeleteArgs<ExtArgs>>): Prisma__PersonJourneyStageHistoryClient<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PersonJourneyStageHistory.
+     * @param {PersonJourneyStageHistoryUpdateArgs} args - Arguments to update one PersonJourneyStageHistory.
+     * @example
+     * // Update one PersonJourneyStageHistory
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PersonJourneyStageHistoryUpdateArgs>(args: SelectSubset<T, PersonJourneyStageHistoryUpdateArgs<ExtArgs>>): Prisma__PersonJourneyStageHistoryClient<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PersonJourneyStageHistories.
+     * @param {PersonJourneyStageHistoryDeleteManyArgs} args - Arguments to filter PersonJourneyStageHistories to delete.
+     * @example
+     * // Delete a few PersonJourneyStageHistories
+     * const { count } = await prisma.personJourneyStageHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PersonJourneyStageHistoryDeleteManyArgs>(args?: SelectSubset<T, PersonJourneyStageHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PersonJourneyStageHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyStageHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PersonJourneyStageHistories
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PersonJourneyStageHistoryUpdateManyArgs>(args: SelectSubset<T, PersonJourneyStageHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PersonJourneyStageHistories and returns the data updated in the database.
+     * @param {PersonJourneyStageHistoryUpdateManyAndReturnArgs} args - Arguments to update many PersonJourneyStageHistories.
+     * @example
+     * // Update many PersonJourneyStageHistories
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PersonJourneyStageHistories and only return the `id`
+     * const personJourneyStageHistoryWithIdOnly = await prisma.personJourneyStageHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PersonJourneyStageHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, PersonJourneyStageHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PersonJourneyStageHistory.
+     * @param {PersonJourneyStageHistoryUpsertArgs} args - Arguments to update or create a PersonJourneyStageHistory.
+     * @example
+     * // Update or create a PersonJourneyStageHistory
+     * const personJourneyStageHistory = await prisma.personJourneyStageHistory.upsert({
+     *   create: {
+     *     // ... data to create a PersonJourneyStageHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PersonJourneyStageHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PersonJourneyStageHistoryUpsertArgs>(args: SelectSubset<T, PersonJourneyStageHistoryUpsertArgs<ExtArgs>>): Prisma__PersonJourneyStageHistoryClient<$Result.GetResult<Prisma.$PersonJourneyStageHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PersonJourneyStageHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyStageHistoryCountArgs} args - Arguments to filter PersonJourneyStageHistories to count.
+     * @example
+     * // Count the number of PersonJourneyStageHistories
+     * const count = await prisma.personJourneyStageHistory.count({
+     *   where: {
+     *     // ... the filter for the PersonJourneyStageHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends PersonJourneyStageHistoryCountArgs>(
+      args?: Subset<T, PersonJourneyStageHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PersonJourneyStageHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PersonJourneyStageHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyStageHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PersonJourneyStageHistoryAggregateArgs>(args: Subset<T, PersonJourneyStageHistoryAggregateArgs>): Prisma.PrismaPromise<GetPersonJourneyStageHistoryAggregateType<T>>
+
+    /**
+     * Group by PersonJourneyStageHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PersonJourneyStageHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PersonJourneyStageHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PersonJourneyStageHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: PersonJourneyStageHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PersonJourneyStageHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPersonJourneyStageHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PersonJourneyStageHistory model
+   */
+  readonly fields: PersonJourneyStageHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PersonJourneyStageHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PersonJourneyStageHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    journey<T extends PersonJourneyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PersonJourneyDefaultArgs<ExtArgs>>): Prisma__PersonJourneyClient<$Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    fromStage<T extends PersonJourneyStageHistory$fromStageArgs<ExtArgs> = {}>(args?: Subset<T, PersonJourneyStageHistory$fromStageArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    toStage<T extends JourneyStageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JourneyStageDefaultArgs<ExtArgs>>): Prisma__JourneyStageClient<$Result.GetResult<Prisma.$JourneyStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PersonJourneyStageHistory model
+   */
+  interface PersonJourneyStageHistoryFieldRefs {
+    readonly id: FieldRef<"PersonJourneyStageHistory", 'String'>
+    readonly movedAt: FieldRef<"PersonJourneyStageHistory", 'DateTime'>
+    readonly notes: FieldRef<"PersonJourneyStageHistory", 'String'>
+    readonly source: FieldRef<"PersonJourneyStageHistory", 'JourneyTriggerType'>
+    readonly journeyId: FieldRef<"PersonJourneyStageHistory", 'String'>
+    readonly fromStageId: FieldRef<"PersonJourneyStageHistory", 'String'>
+    readonly toStageId: FieldRef<"PersonJourneyStageHistory", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PersonJourneyStageHistory findUnique
+   */
+  export type PersonJourneyStageHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyStageHistory to fetch.
+     */
+    where: PersonJourneyStageHistoryWhereUniqueInput
+  }
+
+  /**
+   * PersonJourneyStageHistory findUniqueOrThrow
+   */
+  export type PersonJourneyStageHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyStageHistory to fetch.
+     */
+    where: PersonJourneyStageHistoryWhereUniqueInput
+  }
+
+  /**
+   * PersonJourneyStageHistory findFirst
+   */
+  export type PersonJourneyStageHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyStageHistory to fetch.
+     */
+    where?: PersonJourneyStageHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneyStageHistories to fetch.
+     */
+    orderBy?: PersonJourneyStageHistoryOrderByWithRelationInput | PersonJourneyStageHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PersonJourneyStageHistories.
+     */
+    cursor?: PersonJourneyStageHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneyStageHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneyStageHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PersonJourneyStageHistories.
+     */
+    distinct?: PersonJourneyStageHistoryScalarFieldEnum | PersonJourneyStageHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourneyStageHistory findFirstOrThrow
+   */
+  export type PersonJourneyStageHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyStageHistory to fetch.
+     */
+    where?: PersonJourneyStageHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneyStageHistories to fetch.
+     */
+    orderBy?: PersonJourneyStageHistoryOrderByWithRelationInput | PersonJourneyStageHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PersonJourneyStageHistories.
+     */
+    cursor?: PersonJourneyStageHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneyStageHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneyStageHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PersonJourneyStageHistories.
+     */
+    distinct?: PersonJourneyStageHistoryScalarFieldEnum | PersonJourneyStageHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourneyStageHistory findMany
+   */
+  export type PersonJourneyStageHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PersonJourneyStageHistories to fetch.
+     */
+    where?: PersonJourneyStageHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PersonJourneyStageHistories to fetch.
+     */
+    orderBy?: PersonJourneyStageHistoryOrderByWithRelationInput | PersonJourneyStageHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PersonJourneyStageHistories.
+     */
+    cursor?: PersonJourneyStageHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PersonJourneyStageHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PersonJourneyStageHistories.
+     */
+    skip?: number
+    distinct?: PersonJourneyStageHistoryScalarFieldEnum | PersonJourneyStageHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * PersonJourneyStageHistory create
+   */
+  export type PersonJourneyStageHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PersonJourneyStageHistory.
+     */
+    data: XOR<PersonJourneyStageHistoryCreateInput, PersonJourneyStageHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * PersonJourneyStageHistory createMany
+   */
+  export type PersonJourneyStageHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PersonJourneyStageHistories.
+     */
+    data: PersonJourneyStageHistoryCreateManyInput | PersonJourneyStageHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PersonJourneyStageHistory createManyAndReturn
+   */
+  export type PersonJourneyStageHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many PersonJourneyStageHistories.
+     */
+    data: PersonJourneyStageHistoryCreateManyInput | PersonJourneyStageHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PersonJourneyStageHistory update
+   */
+  export type PersonJourneyStageHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PersonJourneyStageHistory.
+     */
+    data: XOR<PersonJourneyStageHistoryUpdateInput, PersonJourneyStageHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which PersonJourneyStageHistory to update.
+     */
+    where: PersonJourneyStageHistoryWhereUniqueInput
+  }
+
+  /**
+   * PersonJourneyStageHistory updateMany
+   */
+  export type PersonJourneyStageHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PersonJourneyStageHistories.
+     */
+    data: XOR<PersonJourneyStageHistoryUpdateManyMutationInput, PersonJourneyStageHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which PersonJourneyStageHistories to update
+     */
+    where?: PersonJourneyStageHistoryWhereInput
+    /**
+     * Limit how many PersonJourneyStageHistories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PersonJourneyStageHistory updateManyAndReturn
+   */
+  export type PersonJourneyStageHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to update PersonJourneyStageHistories.
+     */
+    data: XOR<PersonJourneyStageHistoryUpdateManyMutationInput, PersonJourneyStageHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which PersonJourneyStageHistories to update
+     */
+    where?: PersonJourneyStageHistoryWhereInput
+    /**
+     * Limit how many PersonJourneyStageHistories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PersonJourneyStageHistory upsert
+   */
+  export type PersonJourneyStageHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PersonJourneyStageHistory to update in case it exists.
+     */
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    /**
+     * In case the PersonJourneyStageHistory found by the `where` argument doesn't exist, create a new PersonJourneyStageHistory with this data.
+     */
+    create: XOR<PersonJourneyStageHistoryCreateInput, PersonJourneyStageHistoryUncheckedCreateInput>
+    /**
+     * In case the PersonJourneyStageHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PersonJourneyStageHistoryUpdateInput, PersonJourneyStageHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * PersonJourneyStageHistory delete
+   */
+  export type PersonJourneyStageHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which PersonJourneyStageHistory to delete.
+     */
+    where: PersonJourneyStageHistoryWhereUniqueInput
+  }
+
+  /**
+   * PersonJourneyStageHistory deleteMany
+   */
+  export type PersonJourneyStageHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PersonJourneyStageHistories to delete
+     */
+    where?: PersonJourneyStageHistoryWhereInput
+    /**
+     * Limit how many PersonJourneyStageHistories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PersonJourneyStageHistory.fromStage
+   */
+  export type PersonJourneyStageHistory$fromStageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JourneyStage
+     */
+    select?: JourneyStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JourneyStage
+     */
+    omit?: JourneyStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JourneyStageInclude<ExtArgs> | null
+    where?: JourneyStageWhereInput
+  }
+
+  /**
+   * PersonJourneyStageHistory without action
+   */
+  export type PersonJourneyStageHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PersonJourneyStageHistory
+     */
+    select?: PersonJourneyStageHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PersonJourneyStageHistory
+     */
+    omit?: PersonJourneyStageHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PersonJourneyStageHistoryInclude<ExtArgs> | null
   }
 
 
@@ -14847,6 +25545,9 @@ export namespace Prisma {
     role: 'role',
     eventName: 'eventName',
     confirmed: 'confirmed',
+    responseStatus: 'responseStatus',
+    responseNote: 'responseNote',
+    respondedAt: 'respondedAt',
     personId: 'personId',
     ministryId: 'ministryId',
     churchId: 'churchId',
@@ -14855,6 +25556,131 @@ export namespace Prisma {
   };
 
   export type VolunteerScaleScalarFieldEnum = (typeof VolunteerScaleScalarFieldEnum)[keyof typeof VolunteerScaleScalarFieldEnum]
+
+
+  export const NotificationScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    title: 'title',
+    message: 'message',
+    link: 'link',
+    entityType: 'entityType',
+    entityId: 'entityId',
+    metadata: 'metadata',
+    readAt: 'readAt',
+    churchId: 'churchId',
+    recipientUserId: 'recipientUserId',
+    actorUserId: 'actorUserId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+  export const JourneyStageScalarFieldEnum: {
+    id: 'id',
+    key: 'key',
+    name: 'name',
+    description: 'description',
+    order: 'order',
+    active: 'active',
+    visibleToMember: 'visibleToMember',
+    pointsReward: 'pointsReward',
+    churchId: 'churchId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type JourneyStageScalarFieldEnum = (typeof JourneyStageScalarFieldEnum)[keyof typeof JourneyStageScalarFieldEnum]
+
+
+  export const JourneyTaskScalarFieldEnum: {
+    id: 'id',
+    key: 'key',
+    title: 'title',
+    description: 'description',
+    points: 'points',
+    required: 'required',
+    active: 'active',
+    triggerType: 'triggerType',
+    stageId: 'stageId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type JourneyTaskScalarFieldEnum = (typeof JourneyTaskScalarFieldEnum)[keyof typeof JourneyTaskScalarFieldEnum]
+
+
+  export const JourneyAchievementScalarFieldEnum: {
+    id: 'id',
+    key: 'key',
+    name: 'name',
+    description: 'description',
+    icon: 'icon',
+    points: 'points',
+    active: 'active',
+    churchId: 'churchId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type JourneyAchievementScalarFieldEnum = (typeof JourneyAchievementScalarFieldEnum)[keyof typeof JourneyAchievementScalarFieldEnum]
+
+
+  export const PersonJourneyScalarFieldEnum: {
+    id: 'id',
+    score: 'score',
+    level: 'level',
+    progress: 'progress',
+    startedAt: 'startedAt',
+    completedAt: 'completedAt',
+    lastActivityAt: 'lastActivityAt',
+    personId: 'personId',
+    currentStageId: 'currentStageId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PersonJourneyScalarFieldEnum = (typeof PersonJourneyScalarFieldEnum)[keyof typeof PersonJourneyScalarFieldEnum]
+
+
+  export const PersonJourneyTaskScalarFieldEnum: {
+    id: 'id',
+    completed: 'completed',
+    completedAt: 'completedAt',
+    source: 'source',
+    personId: 'personId',
+    journeyId: 'journeyId',
+    taskId: 'taskId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PersonJourneyTaskScalarFieldEnum = (typeof PersonJourneyTaskScalarFieldEnum)[keyof typeof PersonJourneyTaskScalarFieldEnum]
+
+
+  export const PersonAchievementScalarFieldEnum: {
+    id: 'id',
+    earnedAt: 'earnedAt',
+    personId: 'personId',
+    achievementId: 'achievementId'
+  };
+
+  export type PersonAchievementScalarFieldEnum = (typeof PersonAchievementScalarFieldEnum)[keyof typeof PersonAchievementScalarFieldEnum]
+
+
+  export const PersonJourneyStageHistoryScalarFieldEnum: {
+    id: 'id',
+    movedAt: 'movedAt',
+    notes: 'notes',
+    source: 'source',
+    journeyId: 'journeyId',
+    fromStageId: 'fromStageId',
+    toStageId: 'toStageId'
+  };
+
+  export type PersonJourneyStageHistoryScalarFieldEnum = (typeof PersonJourneyStageHistoryScalarFieldEnum)[keyof typeof PersonJourneyStageHistoryScalarFieldEnum]
 
 
   export const SessionScalarFieldEnum: {
@@ -15079,6 +25905,48 @@ export namespace Prisma {
    */
   export type ListEnumTypePersonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypePerson[]'>
     
+
+
+  /**
+   * Reference to a field of type 'VolunteerScaleResponseStatus'
+   */
+  export type EnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VolunteerScaleResponseStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'VolunteerScaleResponseStatus[]'
+   */
+  export type ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VolunteerScaleResponseStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationType'
+   */
+  export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationType[]'
+   */
+  export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'JourneyTriggerType'
+   */
+  export type EnumJourneyTriggerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JourneyTriggerType'>
+    
+
+
+  /**
+   * Reference to a field of type 'JourneyTriggerType[]'
+   */
+  export type ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JourneyTriggerType[]'>
+    
   /**
    * Deep Input Types
    */
@@ -15105,7 +25973,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleListRelationFilter
     ministries?: MinistryListRelationFilter
     volunteerScales?: VolunteerScaleListRelationFilter
+    notifications?: NotificationListRelationFilter
     financialEntries?: FinancialEntryListRelationFilter
+    journeyStages?: JourneyStageListRelationFilter
+    journeyAchievements?: JourneyAchievementListRelationFilter
   }
 
   export type ChurchOrderByWithRelationInput = {
@@ -15126,7 +25997,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleOrderByRelationAggregateInput
     ministries?: MinistryOrderByRelationAggregateInput
     volunteerScales?: VolunteerScaleOrderByRelationAggregateInput
+    notifications?: NotificationOrderByRelationAggregateInput
     financialEntries?: FinancialEntryOrderByRelationAggregateInput
+    journeyStages?: JourneyStageOrderByRelationAggregateInput
+    journeyAchievements?: JourneyAchievementOrderByRelationAggregateInput
   }
 
   export type ChurchWhereUniqueInput = Prisma.AtLeast<{
@@ -15150,7 +26024,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleListRelationFilter
     ministries?: MinistryListRelationFilter
     volunteerScales?: VolunteerScaleListRelationFilter
+    notifications?: NotificationListRelationFilter
     financialEntries?: FinancialEntryListRelationFilter
+    journeyStages?: JourneyStageListRelationFilter
+    journeyAchievements?: JourneyAchievementListRelationFilter
   }, "id" | "label">
 
   export type ChurchOrderByWithAggregationInput = {
@@ -15438,6 +26315,8 @@ export namespace Prisma {
     youChurch?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    notificationsReceived?: NotificationListRelationFilter
+    notificationsTriggered?: NotificationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -15454,6 +26333,8 @@ export namespace Prisma {
     youChurch?: ChurchOrderByWithRelationInput
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
+    notificationsReceived?: NotificationOrderByRelationAggregateInput
+    notificationsTriggered?: NotificationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -15473,6 +26354,8 @@ export namespace Prisma {
     youChurch?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    notificationsReceived?: NotificationListRelationFilter
+    notificationsTriggered?: NotificationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -15529,6 +26412,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Person"> | Date | string
     updatedAt?: DateTimeFilter<"Person"> | Date | string
     youChurch?: XOR<ChurchScalarRelationFilter, ChurchWhereInput>
+    journey?: XOR<PersonJourneyNullableScalarRelationFilter, PersonJourneyWhereInput> | null
+    journeyTasks?: PersonJourneyTaskListRelationFilter
+    achievements?: PersonAchievementListRelationFilter
     volunteerScales?: VolunteerScaleListRelationFilter
   }
 
@@ -15551,6 +26437,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     youChurch?: ChurchOrderByWithRelationInput
+    journey?: PersonJourneyOrderByWithRelationInput
+    journeyTasks?: PersonJourneyTaskOrderByRelationAggregateInput
+    achievements?: PersonAchievementOrderByRelationAggregateInput
     volunteerScales?: VolunteerScaleOrderByRelationAggregateInput
   }
 
@@ -15577,6 +26466,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Person"> | Date | string
     updatedAt?: DateTimeFilter<"Person"> | Date | string
     youChurch?: XOR<ChurchScalarRelationFilter, ChurchWhereInput>
+    journey?: XOR<PersonJourneyNullableScalarRelationFilter, PersonJourneyWhereInput> | null
+    journeyTasks?: PersonJourneyTaskListRelationFilter
+    achievements?: PersonAchievementListRelationFilter
     volunteerScales?: VolunteerScaleListRelationFilter
   }, "id" | "email_churchId">
 
@@ -15709,6 +26601,9 @@ export namespace Prisma {
     role?: StringFilter<"VolunteerScale"> | string
     eventName?: StringNullableFilter<"VolunteerScale"> | string | null
     confirmed?: BoolFilter<"VolunteerScale"> | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFilter<"VolunteerScale"> | $Enums.VolunteerScaleResponseStatus
+    responseNote?: StringNullableFilter<"VolunteerScale"> | string | null
+    respondedAt?: DateTimeNullableFilter<"VolunteerScale"> | Date | string | null
     personId?: StringFilter<"VolunteerScale"> | string
     ministryId?: StringFilter<"VolunteerScale"> | string
     churchId?: StringFilter<"VolunteerScale"> | string
@@ -15725,6 +26620,9 @@ export namespace Prisma {
     role?: SortOrder
     eventName?: SortOrderInput | SortOrder
     confirmed?: SortOrder
+    responseStatus?: SortOrder
+    responseNote?: SortOrderInput | SortOrder
+    respondedAt?: SortOrderInput | SortOrder
     personId?: SortOrder
     ministryId?: SortOrder
     churchId?: SortOrder
@@ -15744,6 +26642,9 @@ export namespace Prisma {
     role?: StringFilter<"VolunteerScale"> | string
     eventName?: StringNullableFilter<"VolunteerScale"> | string | null
     confirmed?: BoolFilter<"VolunteerScale"> | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFilter<"VolunteerScale"> | $Enums.VolunteerScaleResponseStatus
+    responseNote?: StringNullableFilter<"VolunteerScale"> | string | null
+    respondedAt?: DateTimeNullableFilter<"VolunteerScale"> | Date | string | null
     personId?: StringFilter<"VolunteerScale"> | string
     ministryId?: StringFilter<"VolunteerScale"> | string
     churchId?: StringFilter<"VolunteerScale"> | string
@@ -15760,6 +26661,9 @@ export namespace Prisma {
     role?: SortOrder
     eventName?: SortOrderInput | SortOrder
     confirmed?: SortOrder
+    responseStatus?: SortOrder
+    responseNote?: SortOrderInput | SortOrder
+    respondedAt?: SortOrderInput | SortOrder
     personId?: SortOrder
     ministryId?: SortOrder
     churchId?: SortOrder
@@ -15779,11 +26683,701 @@ export namespace Prisma {
     role?: StringWithAggregatesFilter<"VolunteerScale"> | string
     eventName?: StringNullableWithAggregatesFilter<"VolunteerScale"> | string | null
     confirmed?: BoolWithAggregatesFilter<"VolunteerScale"> | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusWithAggregatesFilter<"VolunteerScale"> | $Enums.VolunteerScaleResponseStatus
+    responseNote?: StringNullableWithAggregatesFilter<"VolunteerScale"> | string | null
+    respondedAt?: DateTimeNullableWithAggregatesFilter<"VolunteerScale"> | Date | string | null
     personId?: StringWithAggregatesFilter<"VolunteerScale"> | string
     ministryId?: StringWithAggregatesFilter<"VolunteerScale"> | string
     churchId?: StringWithAggregatesFilter<"VolunteerScale"> | string
     createdAt?: DateTimeWithAggregatesFilter<"VolunteerScale"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"VolunteerScale"> | Date | string
+  }
+
+  export type NotificationWhereInput = {
+    AND?: NotificationWhereInput | NotificationWhereInput[]
+    OR?: NotificationWhereInput[]
+    NOT?: NotificationWhereInput | NotificationWhereInput[]
+    id?: StringFilter<"Notification"> | string
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    title?: StringFilter<"Notification"> | string
+    message?: StringFilter<"Notification"> | string
+    link?: StringNullableFilter<"Notification"> | string | null
+    entityType?: StringNullableFilter<"Notification"> | string | null
+    entityId?: StringNullableFilter<"Notification"> | string | null
+    metadata?: JsonNullableFilter<"Notification">
+    readAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    churchId?: StringFilter<"Notification"> | string
+    recipientUserId?: StringFilter<"Notification"> | string
+    actorUserId?: StringNullableFilter<"Notification"> | string | null
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
+    church?: XOR<ChurchScalarRelationFilter, ChurchWhereInput>
+    recipientUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    actorUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type NotificationOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    link?: SortOrderInput | SortOrder
+    entityType?: SortOrderInput | SortOrder
+    entityId?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    readAt?: SortOrderInput | SortOrder
+    churchId?: SortOrder
+    recipientUserId?: SortOrder
+    actorUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    church?: ChurchOrderByWithRelationInput
+    recipientUser?: UserOrderByWithRelationInput
+    actorUser?: UserOrderByWithRelationInput
+  }
+
+  export type NotificationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NotificationWhereInput | NotificationWhereInput[]
+    OR?: NotificationWhereInput[]
+    NOT?: NotificationWhereInput | NotificationWhereInput[]
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    title?: StringFilter<"Notification"> | string
+    message?: StringFilter<"Notification"> | string
+    link?: StringNullableFilter<"Notification"> | string | null
+    entityType?: StringNullableFilter<"Notification"> | string | null
+    entityId?: StringNullableFilter<"Notification"> | string | null
+    metadata?: JsonNullableFilter<"Notification">
+    readAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    churchId?: StringFilter<"Notification"> | string
+    recipientUserId?: StringFilter<"Notification"> | string
+    actorUserId?: StringNullableFilter<"Notification"> | string | null
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
+    church?: XOR<ChurchScalarRelationFilter, ChurchWhereInput>
+    recipientUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    actorUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type NotificationOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    link?: SortOrderInput | SortOrder
+    entityType?: SortOrderInput | SortOrder
+    entityId?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    readAt?: SortOrderInput | SortOrder
+    churchId?: SortOrder
+    recipientUserId?: SortOrder
+    actorUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: NotificationCountOrderByAggregateInput
+    _max?: NotificationMaxOrderByAggregateInput
+    _min?: NotificationMinOrderByAggregateInput
+  }
+
+  export type NotificationScalarWhereWithAggregatesInput = {
+    AND?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
+    OR?: NotificationScalarWhereWithAggregatesInput[]
+    NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Notification"> | string
+    type?: EnumNotificationTypeWithAggregatesFilter<"Notification"> | $Enums.NotificationType
+    title?: StringWithAggregatesFilter<"Notification"> | string
+    message?: StringWithAggregatesFilter<"Notification"> | string
+    link?: StringNullableWithAggregatesFilter<"Notification"> | string | null
+    entityType?: StringNullableWithAggregatesFilter<"Notification"> | string | null
+    entityId?: StringNullableWithAggregatesFilter<"Notification"> | string | null
+    metadata?: JsonNullableWithAggregatesFilter<"Notification">
+    readAt?: DateTimeNullableWithAggregatesFilter<"Notification"> | Date | string | null
+    churchId?: StringWithAggregatesFilter<"Notification"> | string
+    recipientUserId?: StringWithAggregatesFilter<"Notification"> | string
+    actorUserId?: StringNullableWithAggregatesFilter<"Notification"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+  }
+
+  export type JourneyStageWhereInput = {
+    AND?: JourneyStageWhereInput | JourneyStageWhereInput[]
+    OR?: JourneyStageWhereInput[]
+    NOT?: JourneyStageWhereInput | JourneyStageWhereInput[]
+    id?: StringFilter<"JourneyStage"> | string
+    key?: StringFilter<"JourneyStage"> | string
+    name?: StringFilter<"JourneyStage"> | string
+    description?: StringFilter<"JourneyStage"> | string
+    order?: IntFilter<"JourneyStage"> | number
+    active?: BoolFilter<"JourneyStage"> | boolean
+    visibleToMember?: BoolFilter<"JourneyStage"> | boolean
+    pointsReward?: IntFilter<"JourneyStage"> | number
+    churchId?: StringFilter<"JourneyStage"> | string
+    createdAt?: DateTimeFilter<"JourneyStage"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyStage"> | Date | string
+    church?: XOR<ChurchScalarRelationFilter, ChurchWhereInput>
+    tasks?: JourneyTaskListRelationFilter
+    currentJourneys?: PersonJourneyListRelationFilter
+    historyEntries?: PersonJourneyStageHistoryListRelationFilter
+    previousEntries?: PersonJourneyStageHistoryListRelationFilter
+  }
+
+  export type JourneyStageOrderByWithRelationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    order?: SortOrder
+    active?: SortOrder
+    visibleToMember?: SortOrder
+    pointsReward?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    church?: ChurchOrderByWithRelationInput
+    tasks?: JourneyTaskOrderByRelationAggregateInput
+    currentJourneys?: PersonJourneyOrderByRelationAggregateInput
+    historyEntries?: PersonJourneyStageHistoryOrderByRelationAggregateInput
+    previousEntries?: PersonJourneyStageHistoryOrderByRelationAggregateInput
+  }
+
+  export type JourneyStageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    churchId_key?: JourneyStageChurchIdKeyCompoundUniqueInput
+    churchId_order?: JourneyStageChurchIdOrderCompoundUniqueInput
+    AND?: JourneyStageWhereInput | JourneyStageWhereInput[]
+    OR?: JourneyStageWhereInput[]
+    NOT?: JourneyStageWhereInput | JourneyStageWhereInput[]
+    key?: StringFilter<"JourneyStage"> | string
+    name?: StringFilter<"JourneyStage"> | string
+    description?: StringFilter<"JourneyStage"> | string
+    order?: IntFilter<"JourneyStage"> | number
+    active?: BoolFilter<"JourneyStage"> | boolean
+    visibleToMember?: BoolFilter<"JourneyStage"> | boolean
+    pointsReward?: IntFilter<"JourneyStage"> | number
+    churchId?: StringFilter<"JourneyStage"> | string
+    createdAt?: DateTimeFilter<"JourneyStage"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyStage"> | Date | string
+    church?: XOR<ChurchScalarRelationFilter, ChurchWhereInput>
+    tasks?: JourneyTaskListRelationFilter
+    currentJourneys?: PersonJourneyListRelationFilter
+    historyEntries?: PersonJourneyStageHistoryListRelationFilter
+    previousEntries?: PersonJourneyStageHistoryListRelationFilter
+  }, "id" | "churchId_key" | "churchId_order">
+
+  export type JourneyStageOrderByWithAggregationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    order?: SortOrder
+    active?: SortOrder
+    visibleToMember?: SortOrder
+    pointsReward?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: JourneyStageCountOrderByAggregateInput
+    _avg?: JourneyStageAvgOrderByAggregateInput
+    _max?: JourneyStageMaxOrderByAggregateInput
+    _min?: JourneyStageMinOrderByAggregateInput
+    _sum?: JourneyStageSumOrderByAggregateInput
+  }
+
+  export type JourneyStageScalarWhereWithAggregatesInput = {
+    AND?: JourneyStageScalarWhereWithAggregatesInput | JourneyStageScalarWhereWithAggregatesInput[]
+    OR?: JourneyStageScalarWhereWithAggregatesInput[]
+    NOT?: JourneyStageScalarWhereWithAggregatesInput | JourneyStageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"JourneyStage"> | string
+    key?: StringWithAggregatesFilter<"JourneyStage"> | string
+    name?: StringWithAggregatesFilter<"JourneyStage"> | string
+    description?: StringWithAggregatesFilter<"JourneyStage"> | string
+    order?: IntWithAggregatesFilter<"JourneyStage"> | number
+    active?: BoolWithAggregatesFilter<"JourneyStage"> | boolean
+    visibleToMember?: BoolWithAggregatesFilter<"JourneyStage"> | boolean
+    pointsReward?: IntWithAggregatesFilter<"JourneyStage"> | number
+    churchId?: StringWithAggregatesFilter<"JourneyStage"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"JourneyStage"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"JourneyStage"> | Date | string
+  }
+
+  export type JourneyTaskWhereInput = {
+    AND?: JourneyTaskWhereInput | JourneyTaskWhereInput[]
+    OR?: JourneyTaskWhereInput[]
+    NOT?: JourneyTaskWhereInput | JourneyTaskWhereInput[]
+    id?: StringFilter<"JourneyTask"> | string
+    key?: StringFilter<"JourneyTask"> | string
+    title?: StringFilter<"JourneyTask"> | string
+    description?: StringFilter<"JourneyTask"> | string
+    points?: IntFilter<"JourneyTask"> | number
+    required?: BoolFilter<"JourneyTask"> | boolean
+    active?: BoolFilter<"JourneyTask"> | boolean
+    triggerType?: EnumJourneyTriggerTypeFilter<"JourneyTask"> | $Enums.JourneyTriggerType
+    stageId?: StringFilter<"JourneyTask"> | string
+    createdAt?: DateTimeFilter<"JourneyTask"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyTask"> | Date | string
+    stage?: XOR<JourneyStageScalarRelationFilter, JourneyStageWhereInput>
+    progressEntries?: PersonJourneyTaskListRelationFilter
+  }
+
+  export type JourneyTaskOrderByWithRelationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    points?: SortOrder
+    required?: SortOrder
+    active?: SortOrder
+    triggerType?: SortOrder
+    stageId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    stage?: JourneyStageOrderByWithRelationInput
+    progressEntries?: PersonJourneyTaskOrderByRelationAggregateInput
+  }
+
+  export type JourneyTaskWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    stageId_key?: JourneyTaskStageIdKeyCompoundUniqueInput
+    AND?: JourneyTaskWhereInput | JourneyTaskWhereInput[]
+    OR?: JourneyTaskWhereInput[]
+    NOT?: JourneyTaskWhereInput | JourneyTaskWhereInput[]
+    key?: StringFilter<"JourneyTask"> | string
+    title?: StringFilter<"JourneyTask"> | string
+    description?: StringFilter<"JourneyTask"> | string
+    points?: IntFilter<"JourneyTask"> | number
+    required?: BoolFilter<"JourneyTask"> | boolean
+    active?: BoolFilter<"JourneyTask"> | boolean
+    triggerType?: EnumJourneyTriggerTypeFilter<"JourneyTask"> | $Enums.JourneyTriggerType
+    stageId?: StringFilter<"JourneyTask"> | string
+    createdAt?: DateTimeFilter<"JourneyTask"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyTask"> | Date | string
+    stage?: XOR<JourneyStageScalarRelationFilter, JourneyStageWhereInput>
+    progressEntries?: PersonJourneyTaskListRelationFilter
+  }, "id" | "stageId_key">
+
+  export type JourneyTaskOrderByWithAggregationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    points?: SortOrder
+    required?: SortOrder
+    active?: SortOrder
+    triggerType?: SortOrder
+    stageId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: JourneyTaskCountOrderByAggregateInput
+    _avg?: JourneyTaskAvgOrderByAggregateInput
+    _max?: JourneyTaskMaxOrderByAggregateInput
+    _min?: JourneyTaskMinOrderByAggregateInput
+    _sum?: JourneyTaskSumOrderByAggregateInput
+  }
+
+  export type JourneyTaskScalarWhereWithAggregatesInput = {
+    AND?: JourneyTaskScalarWhereWithAggregatesInput | JourneyTaskScalarWhereWithAggregatesInput[]
+    OR?: JourneyTaskScalarWhereWithAggregatesInput[]
+    NOT?: JourneyTaskScalarWhereWithAggregatesInput | JourneyTaskScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"JourneyTask"> | string
+    key?: StringWithAggregatesFilter<"JourneyTask"> | string
+    title?: StringWithAggregatesFilter<"JourneyTask"> | string
+    description?: StringWithAggregatesFilter<"JourneyTask"> | string
+    points?: IntWithAggregatesFilter<"JourneyTask"> | number
+    required?: BoolWithAggregatesFilter<"JourneyTask"> | boolean
+    active?: BoolWithAggregatesFilter<"JourneyTask"> | boolean
+    triggerType?: EnumJourneyTriggerTypeWithAggregatesFilter<"JourneyTask"> | $Enums.JourneyTriggerType
+    stageId?: StringWithAggregatesFilter<"JourneyTask"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"JourneyTask"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"JourneyTask"> | Date | string
+  }
+
+  export type JourneyAchievementWhereInput = {
+    AND?: JourneyAchievementWhereInput | JourneyAchievementWhereInput[]
+    OR?: JourneyAchievementWhereInput[]
+    NOT?: JourneyAchievementWhereInput | JourneyAchievementWhereInput[]
+    id?: StringFilter<"JourneyAchievement"> | string
+    key?: StringFilter<"JourneyAchievement"> | string
+    name?: StringFilter<"JourneyAchievement"> | string
+    description?: StringFilter<"JourneyAchievement"> | string
+    icon?: StringFilter<"JourneyAchievement"> | string
+    points?: IntFilter<"JourneyAchievement"> | number
+    active?: BoolFilter<"JourneyAchievement"> | boolean
+    churchId?: StringFilter<"JourneyAchievement"> | string
+    createdAt?: DateTimeFilter<"JourneyAchievement"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyAchievement"> | Date | string
+    church?: XOR<ChurchScalarRelationFilter, ChurchWhereInput>
+    personAchievements?: PersonAchievementListRelationFilter
+  }
+
+  export type JourneyAchievementOrderByWithRelationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    points?: SortOrder
+    active?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    church?: ChurchOrderByWithRelationInput
+    personAchievements?: PersonAchievementOrderByRelationAggregateInput
+  }
+
+  export type JourneyAchievementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    churchId_key?: JourneyAchievementChurchIdKeyCompoundUniqueInput
+    AND?: JourneyAchievementWhereInput | JourneyAchievementWhereInput[]
+    OR?: JourneyAchievementWhereInput[]
+    NOT?: JourneyAchievementWhereInput | JourneyAchievementWhereInput[]
+    key?: StringFilter<"JourneyAchievement"> | string
+    name?: StringFilter<"JourneyAchievement"> | string
+    description?: StringFilter<"JourneyAchievement"> | string
+    icon?: StringFilter<"JourneyAchievement"> | string
+    points?: IntFilter<"JourneyAchievement"> | number
+    active?: BoolFilter<"JourneyAchievement"> | boolean
+    churchId?: StringFilter<"JourneyAchievement"> | string
+    createdAt?: DateTimeFilter<"JourneyAchievement"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyAchievement"> | Date | string
+    church?: XOR<ChurchScalarRelationFilter, ChurchWhereInput>
+    personAchievements?: PersonAchievementListRelationFilter
+  }, "id" | "churchId_key">
+
+  export type JourneyAchievementOrderByWithAggregationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    points?: SortOrder
+    active?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: JourneyAchievementCountOrderByAggregateInput
+    _avg?: JourneyAchievementAvgOrderByAggregateInput
+    _max?: JourneyAchievementMaxOrderByAggregateInput
+    _min?: JourneyAchievementMinOrderByAggregateInput
+    _sum?: JourneyAchievementSumOrderByAggregateInput
+  }
+
+  export type JourneyAchievementScalarWhereWithAggregatesInput = {
+    AND?: JourneyAchievementScalarWhereWithAggregatesInput | JourneyAchievementScalarWhereWithAggregatesInput[]
+    OR?: JourneyAchievementScalarWhereWithAggregatesInput[]
+    NOT?: JourneyAchievementScalarWhereWithAggregatesInput | JourneyAchievementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"JourneyAchievement"> | string
+    key?: StringWithAggregatesFilter<"JourneyAchievement"> | string
+    name?: StringWithAggregatesFilter<"JourneyAchievement"> | string
+    description?: StringWithAggregatesFilter<"JourneyAchievement"> | string
+    icon?: StringWithAggregatesFilter<"JourneyAchievement"> | string
+    points?: IntWithAggregatesFilter<"JourneyAchievement"> | number
+    active?: BoolWithAggregatesFilter<"JourneyAchievement"> | boolean
+    churchId?: StringWithAggregatesFilter<"JourneyAchievement"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"JourneyAchievement"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"JourneyAchievement"> | Date | string
+  }
+
+  export type PersonJourneyWhereInput = {
+    AND?: PersonJourneyWhereInput | PersonJourneyWhereInput[]
+    OR?: PersonJourneyWhereInput[]
+    NOT?: PersonJourneyWhereInput | PersonJourneyWhereInput[]
+    id?: StringFilter<"PersonJourney"> | string
+    score?: IntFilter<"PersonJourney"> | number
+    level?: IntFilter<"PersonJourney"> | number
+    progress?: IntFilter<"PersonJourney"> | number
+    startedAt?: DateTimeFilter<"PersonJourney"> | Date | string
+    completedAt?: DateTimeNullableFilter<"PersonJourney"> | Date | string | null
+    lastActivityAt?: DateTimeNullableFilter<"PersonJourney"> | Date | string | null
+    personId?: StringFilter<"PersonJourney"> | string
+    currentStageId?: StringNullableFilter<"PersonJourney"> | string | null
+    createdAt?: DateTimeFilter<"PersonJourney"> | Date | string
+    updatedAt?: DateTimeFilter<"PersonJourney"> | Date | string
+    person?: XOR<PersonScalarRelationFilter, PersonWhereInput>
+    currentStage?: XOR<JourneyStageNullableScalarRelationFilter, JourneyStageWhereInput> | null
+    tasks?: PersonJourneyTaskListRelationFilter
+    history?: PersonJourneyStageHistoryListRelationFilter
+  }
+
+  export type PersonJourneyOrderByWithRelationInput = {
+    id?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    progress?: SortOrder
+    startedAt?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    lastActivityAt?: SortOrderInput | SortOrder
+    personId?: SortOrder
+    currentStageId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    person?: PersonOrderByWithRelationInput
+    currentStage?: JourneyStageOrderByWithRelationInput
+    tasks?: PersonJourneyTaskOrderByRelationAggregateInput
+    history?: PersonJourneyStageHistoryOrderByRelationAggregateInput
+  }
+
+  export type PersonJourneyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    personId?: string
+    AND?: PersonJourneyWhereInput | PersonJourneyWhereInput[]
+    OR?: PersonJourneyWhereInput[]
+    NOT?: PersonJourneyWhereInput | PersonJourneyWhereInput[]
+    score?: IntFilter<"PersonJourney"> | number
+    level?: IntFilter<"PersonJourney"> | number
+    progress?: IntFilter<"PersonJourney"> | number
+    startedAt?: DateTimeFilter<"PersonJourney"> | Date | string
+    completedAt?: DateTimeNullableFilter<"PersonJourney"> | Date | string | null
+    lastActivityAt?: DateTimeNullableFilter<"PersonJourney"> | Date | string | null
+    currentStageId?: StringNullableFilter<"PersonJourney"> | string | null
+    createdAt?: DateTimeFilter<"PersonJourney"> | Date | string
+    updatedAt?: DateTimeFilter<"PersonJourney"> | Date | string
+    person?: XOR<PersonScalarRelationFilter, PersonWhereInput>
+    currentStage?: XOR<JourneyStageNullableScalarRelationFilter, JourneyStageWhereInput> | null
+    tasks?: PersonJourneyTaskListRelationFilter
+    history?: PersonJourneyStageHistoryListRelationFilter
+  }, "id" | "personId">
+
+  export type PersonJourneyOrderByWithAggregationInput = {
+    id?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    progress?: SortOrder
+    startedAt?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    lastActivityAt?: SortOrderInput | SortOrder
+    personId?: SortOrder
+    currentStageId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PersonJourneyCountOrderByAggregateInput
+    _avg?: PersonJourneyAvgOrderByAggregateInput
+    _max?: PersonJourneyMaxOrderByAggregateInput
+    _min?: PersonJourneyMinOrderByAggregateInput
+    _sum?: PersonJourneySumOrderByAggregateInput
+  }
+
+  export type PersonJourneyScalarWhereWithAggregatesInput = {
+    AND?: PersonJourneyScalarWhereWithAggregatesInput | PersonJourneyScalarWhereWithAggregatesInput[]
+    OR?: PersonJourneyScalarWhereWithAggregatesInput[]
+    NOT?: PersonJourneyScalarWhereWithAggregatesInput | PersonJourneyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PersonJourney"> | string
+    score?: IntWithAggregatesFilter<"PersonJourney"> | number
+    level?: IntWithAggregatesFilter<"PersonJourney"> | number
+    progress?: IntWithAggregatesFilter<"PersonJourney"> | number
+    startedAt?: DateTimeWithAggregatesFilter<"PersonJourney"> | Date | string
+    completedAt?: DateTimeNullableWithAggregatesFilter<"PersonJourney"> | Date | string | null
+    lastActivityAt?: DateTimeNullableWithAggregatesFilter<"PersonJourney"> | Date | string | null
+    personId?: StringWithAggregatesFilter<"PersonJourney"> | string
+    currentStageId?: StringNullableWithAggregatesFilter<"PersonJourney"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PersonJourney"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PersonJourney"> | Date | string
+  }
+
+  export type PersonJourneyTaskWhereInput = {
+    AND?: PersonJourneyTaskWhereInput | PersonJourneyTaskWhereInput[]
+    OR?: PersonJourneyTaskWhereInput[]
+    NOT?: PersonJourneyTaskWhereInput | PersonJourneyTaskWhereInput[]
+    id?: StringFilter<"PersonJourneyTask"> | string
+    completed?: BoolFilter<"PersonJourneyTask"> | boolean
+    completedAt?: DateTimeNullableFilter<"PersonJourneyTask"> | Date | string | null
+    source?: EnumJourneyTriggerTypeFilter<"PersonJourneyTask"> | $Enums.JourneyTriggerType
+    personId?: StringFilter<"PersonJourneyTask"> | string
+    journeyId?: StringFilter<"PersonJourneyTask"> | string
+    taskId?: StringFilter<"PersonJourneyTask"> | string
+    createdAt?: DateTimeFilter<"PersonJourneyTask"> | Date | string
+    updatedAt?: DateTimeFilter<"PersonJourneyTask"> | Date | string
+    person?: XOR<PersonScalarRelationFilter, PersonWhereInput>
+    journey?: XOR<PersonJourneyScalarRelationFilter, PersonJourneyWhereInput>
+    task?: XOR<JourneyTaskScalarRelationFilter, JourneyTaskWhereInput>
+  }
+
+  export type PersonJourneyTaskOrderByWithRelationInput = {
+    id?: SortOrder
+    completed?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    source?: SortOrder
+    personId?: SortOrder
+    journeyId?: SortOrder
+    taskId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    person?: PersonOrderByWithRelationInput
+    journey?: PersonJourneyOrderByWithRelationInput
+    task?: JourneyTaskOrderByWithRelationInput
+  }
+
+  export type PersonJourneyTaskWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    journeyId_taskId?: PersonJourneyTaskJourneyIdTaskIdCompoundUniqueInput
+    AND?: PersonJourneyTaskWhereInput | PersonJourneyTaskWhereInput[]
+    OR?: PersonJourneyTaskWhereInput[]
+    NOT?: PersonJourneyTaskWhereInput | PersonJourneyTaskWhereInput[]
+    completed?: BoolFilter<"PersonJourneyTask"> | boolean
+    completedAt?: DateTimeNullableFilter<"PersonJourneyTask"> | Date | string | null
+    source?: EnumJourneyTriggerTypeFilter<"PersonJourneyTask"> | $Enums.JourneyTriggerType
+    personId?: StringFilter<"PersonJourneyTask"> | string
+    journeyId?: StringFilter<"PersonJourneyTask"> | string
+    taskId?: StringFilter<"PersonJourneyTask"> | string
+    createdAt?: DateTimeFilter<"PersonJourneyTask"> | Date | string
+    updatedAt?: DateTimeFilter<"PersonJourneyTask"> | Date | string
+    person?: XOR<PersonScalarRelationFilter, PersonWhereInput>
+    journey?: XOR<PersonJourneyScalarRelationFilter, PersonJourneyWhereInput>
+    task?: XOR<JourneyTaskScalarRelationFilter, JourneyTaskWhereInput>
+  }, "id" | "journeyId_taskId">
+
+  export type PersonJourneyTaskOrderByWithAggregationInput = {
+    id?: SortOrder
+    completed?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    source?: SortOrder
+    personId?: SortOrder
+    journeyId?: SortOrder
+    taskId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PersonJourneyTaskCountOrderByAggregateInput
+    _max?: PersonJourneyTaskMaxOrderByAggregateInput
+    _min?: PersonJourneyTaskMinOrderByAggregateInput
+  }
+
+  export type PersonJourneyTaskScalarWhereWithAggregatesInput = {
+    AND?: PersonJourneyTaskScalarWhereWithAggregatesInput | PersonJourneyTaskScalarWhereWithAggregatesInput[]
+    OR?: PersonJourneyTaskScalarWhereWithAggregatesInput[]
+    NOT?: PersonJourneyTaskScalarWhereWithAggregatesInput | PersonJourneyTaskScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PersonJourneyTask"> | string
+    completed?: BoolWithAggregatesFilter<"PersonJourneyTask"> | boolean
+    completedAt?: DateTimeNullableWithAggregatesFilter<"PersonJourneyTask"> | Date | string | null
+    source?: EnumJourneyTriggerTypeWithAggregatesFilter<"PersonJourneyTask"> | $Enums.JourneyTriggerType
+    personId?: StringWithAggregatesFilter<"PersonJourneyTask"> | string
+    journeyId?: StringWithAggregatesFilter<"PersonJourneyTask"> | string
+    taskId?: StringWithAggregatesFilter<"PersonJourneyTask"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PersonJourneyTask"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PersonJourneyTask"> | Date | string
+  }
+
+  export type PersonAchievementWhereInput = {
+    AND?: PersonAchievementWhereInput | PersonAchievementWhereInput[]
+    OR?: PersonAchievementWhereInput[]
+    NOT?: PersonAchievementWhereInput | PersonAchievementWhereInput[]
+    id?: StringFilter<"PersonAchievement"> | string
+    earnedAt?: DateTimeFilter<"PersonAchievement"> | Date | string
+    personId?: StringFilter<"PersonAchievement"> | string
+    achievementId?: StringFilter<"PersonAchievement"> | string
+    person?: XOR<PersonScalarRelationFilter, PersonWhereInput>
+    achievement?: XOR<JourneyAchievementScalarRelationFilter, JourneyAchievementWhereInput>
+  }
+
+  export type PersonAchievementOrderByWithRelationInput = {
+    id?: SortOrder
+    earnedAt?: SortOrder
+    personId?: SortOrder
+    achievementId?: SortOrder
+    person?: PersonOrderByWithRelationInput
+    achievement?: JourneyAchievementOrderByWithRelationInput
+  }
+
+  export type PersonAchievementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    personId_achievementId?: PersonAchievementPersonIdAchievementIdCompoundUniqueInput
+    AND?: PersonAchievementWhereInput | PersonAchievementWhereInput[]
+    OR?: PersonAchievementWhereInput[]
+    NOT?: PersonAchievementWhereInput | PersonAchievementWhereInput[]
+    earnedAt?: DateTimeFilter<"PersonAchievement"> | Date | string
+    personId?: StringFilter<"PersonAchievement"> | string
+    achievementId?: StringFilter<"PersonAchievement"> | string
+    person?: XOR<PersonScalarRelationFilter, PersonWhereInput>
+    achievement?: XOR<JourneyAchievementScalarRelationFilter, JourneyAchievementWhereInput>
+  }, "id" | "personId_achievementId">
+
+  export type PersonAchievementOrderByWithAggregationInput = {
+    id?: SortOrder
+    earnedAt?: SortOrder
+    personId?: SortOrder
+    achievementId?: SortOrder
+    _count?: PersonAchievementCountOrderByAggregateInput
+    _max?: PersonAchievementMaxOrderByAggregateInput
+    _min?: PersonAchievementMinOrderByAggregateInput
+  }
+
+  export type PersonAchievementScalarWhereWithAggregatesInput = {
+    AND?: PersonAchievementScalarWhereWithAggregatesInput | PersonAchievementScalarWhereWithAggregatesInput[]
+    OR?: PersonAchievementScalarWhereWithAggregatesInput[]
+    NOT?: PersonAchievementScalarWhereWithAggregatesInput | PersonAchievementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PersonAchievement"> | string
+    earnedAt?: DateTimeWithAggregatesFilter<"PersonAchievement"> | Date | string
+    personId?: StringWithAggregatesFilter<"PersonAchievement"> | string
+    achievementId?: StringWithAggregatesFilter<"PersonAchievement"> | string
+  }
+
+  export type PersonJourneyStageHistoryWhereInput = {
+    AND?: PersonJourneyStageHistoryWhereInput | PersonJourneyStageHistoryWhereInput[]
+    OR?: PersonJourneyStageHistoryWhereInput[]
+    NOT?: PersonJourneyStageHistoryWhereInput | PersonJourneyStageHistoryWhereInput[]
+    id?: StringFilter<"PersonJourneyStageHistory"> | string
+    movedAt?: DateTimeFilter<"PersonJourneyStageHistory"> | Date | string
+    notes?: StringNullableFilter<"PersonJourneyStageHistory"> | string | null
+    source?: EnumJourneyTriggerTypeFilter<"PersonJourneyStageHistory"> | $Enums.JourneyTriggerType
+    journeyId?: StringFilter<"PersonJourneyStageHistory"> | string
+    fromStageId?: StringNullableFilter<"PersonJourneyStageHistory"> | string | null
+    toStageId?: StringFilter<"PersonJourneyStageHistory"> | string
+    journey?: XOR<PersonJourneyScalarRelationFilter, PersonJourneyWhereInput>
+    fromStage?: XOR<JourneyStageNullableScalarRelationFilter, JourneyStageWhereInput> | null
+    toStage?: XOR<JourneyStageScalarRelationFilter, JourneyStageWhereInput>
+  }
+
+  export type PersonJourneyStageHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    movedAt?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    source?: SortOrder
+    journeyId?: SortOrder
+    fromStageId?: SortOrderInput | SortOrder
+    toStageId?: SortOrder
+    journey?: PersonJourneyOrderByWithRelationInput
+    fromStage?: JourneyStageOrderByWithRelationInput
+    toStage?: JourneyStageOrderByWithRelationInput
+  }
+
+  export type PersonJourneyStageHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PersonJourneyStageHistoryWhereInput | PersonJourneyStageHistoryWhereInput[]
+    OR?: PersonJourneyStageHistoryWhereInput[]
+    NOT?: PersonJourneyStageHistoryWhereInput | PersonJourneyStageHistoryWhereInput[]
+    movedAt?: DateTimeFilter<"PersonJourneyStageHistory"> | Date | string
+    notes?: StringNullableFilter<"PersonJourneyStageHistory"> | string | null
+    source?: EnumJourneyTriggerTypeFilter<"PersonJourneyStageHistory"> | $Enums.JourneyTriggerType
+    journeyId?: StringFilter<"PersonJourneyStageHistory"> | string
+    fromStageId?: StringNullableFilter<"PersonJourneyStageHistory"> | string | null
+    toStageId?: StringFilter<"PersonJourneyStageHistory"> | string
+    journey?: XOR<PersonJourneyScalarRelationFilter, PersonJourneyWhereInput>
+    fromStage?: XOR<JourneyStageNullableScalarRelationFilter, JourneyStageWhereInput> | null
+    toStage?: XOR<JourneyStageScalarRelationFilter, JourneyStageWhereInput>
+  }, "id">
+
+  export type PersonJourneyStageHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    movedAt?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    source?: SortOrder
+    journeyId?: SortOrder
+    fromStageId?: SortOrderInput | SortOrder
+    toStageId?: SortOrder
+    _count?: PersonJourneyStageHistoryCountOrderByAggregateInput
+    _max?: PersonJourneyStageHistoryMaxOrderByAggregateInput
+    _min?: PersonJourneyStageHistoryMinOrderByAggregateInput
+  }
+
+  export type PersonJourneyStageHistoryScalarWhereWithAggregatesInput = {
+    AND?: PersonJourneyStageHistoryScalarWhereWithAggregatesInput | PersonJourneyStageHistoryScalarWhereWithAggregatesInput[]
+    OR?: PersonJourneyStageHistoryScalarWhereWithAggregatesInput[]
+    NOT?: PersonJourneyStageHistoryScalarWhereWithAggregatesInput | PersonJourneyStageHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PersonJourneyStageHistory"> | string
+    movedAt?: DateTimeWithAggregatesFilter<"PersonJourneyStageHistory"> | Date | string
+    notes?: StringNullableWithAggregatesFilter<"PersonJourneyStageHistory"> | string | null
+    source?: EnumJourneyTriggerTypeWithAggregatesFilter<"PersonJourneyStageHistory"> | $Enums.JourneyTriggerType
+    journeyId?: StringWithAggregatesFilter<"PersonJourneyStageHistory"> | string
+    fromStageId?: StringNullableWithAggregatesFilter<"PersonJourneyStageHistory"> | string | null
+    toStageId?: StringWithAggregatesFilter<"PersonJourneyStageHistory"> | string
   }
 
   export type SessionWhereInput = {
@@ -16026,7 +27620,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
     ministries?: MinistryCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateInput = {
@@ -16047,7 +27644,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
     ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUpdateInput = {
@@ -16068,7 +27668,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateInput = {
@@ -16089,7 +27692,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateManyInput = {
@@ -16403,6 +28009,8 @@ export namespace Prisma {
     youChurch?: ChurchCreateNestedOneWithoutUsersInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientUserInput
+    notificationsTriggered?: NotificationCreateNestedManyWithoutActorUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -16418,6 +28026,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientUserInput
+    notificationsTriggered?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
   }
 
   export type UserUpdateInput = {
@@ -16433,6 +28043,8 @@ export namespace Prisma {
     youChurch?: ChurchUpdateOneWithoutUsersNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientUserNestedInput
+    notificationsTriggered?: NotificationUpdateManyWithoutActorUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -16448,6 +28060,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientUserNestedInput
+    notificationsTriggered?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -16506,6 +28120,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     youChurch: ChurchCreateNestedOneWithoutPersonsInput
+    journey?: PersonJourneyCreateNestedOneWithoutPersonInput
+    journeyTasks?: PersonJourneyTaskCreateNestedManyWithoutPersonInput
+    achievements?: PersonAchievementCreateNestedManyWithoutPersonInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutPersonInput
   }
 
@@ -16527,6 +28144,9 @@ export namespace Prisma {
     churchId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    journey?: PersonJourneyUncheckedCreateNestedOneWithoutPersonInput
+    journeyTasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutPersonInput
+    achievements?: PersonAchievementUncheckedCreateNestedManyWithoutPersonInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutPersonInput
   }
 
@@ -16548,6 +28168,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     youChurch?: ChurchUpdateOneRequiredWithoutPersonsNestedInput
+    journey?: PersonJourneyUpdateOneWithoutPersonNestedInput
+    journeyTasks?: PersonJourneyTaskUpdateManyWithoutPersonNestedInput
+    achievements?: PersonAchievementUpdateManyWithoutPersonNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutPersonNestedInput
   }
 
@@ -16569,6 +28192,9 @@ export namespace Prisma {
     churchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journey?: PersonJourneyUncheckedUpdateOneWithoutPersonNestedInput
+    journeyTasks?: PersonJourneyTaskUncheckedUpdateManyWithoutPersonNestedInput
+    achievements?: PersonAchievementUncheckedUpdateManyWithoutPersonNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutPersonNestedInput
   }
 
@@ -16717,6 +28343,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     person: PersonCreateNestedOneWithoutVolunteerScalesInput
@@ -16730,6 +28359,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     personId: string
     ministryId: string
     churchId: string
@@ -16743,6 +28375,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     person?: PersonUpdateOneRequiredWithoutVolunteerScalesNestedInput
@@ -16756,6 +28391,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     personId?: StringFieldUpdateOperationsInput | string
     ministryId?: StringFieldUpdateOperationsInput | string
     churchId?: StringFieldUpdateOperationsInput | string
@@ -16769,6 +28407,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     personId: string
     ministryId: string
     churchId: string
@@ -16782,6 +28423,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16792,11 +28436,737 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     personId?: StringFieldUpdateOperationsInput | string
     ministryId?: StringFieldUpdateOperationsInput | string
     churchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationCreateInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutNotificationsInput
+    recipientUser: UserCreateNestedOneWithoutNotificationsReceivedInput
+    actorUser?: UserCreateNestedOneWithoutNotificationsTriggeredInput
+  }
+
+  export type NotificationUncheckedCreateInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    churchId: string
+    recipientUserId: string
+    actorUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutNotificationsNestedInput
+    recipientUser?: UserUpdateOneRequiredWithoutNotificationsReceivedNestedInput
+    actorUser?: UserUpdateOneWithoutNotificationsTriggeredNestedInput
+  }
+
+  export type NotificationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    recipientUserId?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationCreateManyInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    churchId: string
+    recipientUserId: string
+    actorUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    recipientUserId?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JourneyStageCreateInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutJourneyStagesInput
+    tasks?: JourneyTaskCreateNestedManyWithoutStageInput
+    currentJourneys?: PersonJourneyCreateNestedManyWithoutCurrentStageInput
+    historyEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutToStageInput
+    previousEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageUncheckedCreateInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: JourneyTaskUncheckedCreateNestedManyWithoutStageInput
+    currentJourneys?: PersonJourneyUncheckedCreateNestedManyWithoutCurrentStageInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutToStageInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutJourneyStagesNestedInput
+    tasks?: JourneyTaskUpdateManyWithoutStageNestedInput
+    currentJourneys?: PersonJourneyUpdateManyWithoutCurrentStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUpdateManyWithoutToStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type JourneyStageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: JourneyTaskUncheckedUpdateManyWithoutStageNestedInput
+    currentJourneys?: PersonJourneyUncheckedUpdateManyWithoutCurrentStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutToStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type JourneyStageCreateManyInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JourneyStageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JourneyStageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JourneyTaskCreateInput = {
+    id?: string
+    key: string
+    title: string
+    description: string
+    points?: number
+    required?: boolean
+    active?: boolean
+    triggerType?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    stage: JourneyStageCreateNestedOneWithoutTasksInput
+    progressEntries?: PersonJourneyTaskCreateNestedManyWithoutTaskInput
+  }
+
+  export type JourneyTaskUncheckedCreateInput = {
+    id?: string
+    key: string
+    title: string
+    description: string
+    points?: number
+    required?: boolean
+    active?: boolean
+    triggerType?: $Enums.JourneyTriggerType
+    stageId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    progressEntries?: PersonJourneyTaskUncheckedCreateNestedManyWithoutTaskInput
+  }
+
+  export type JourneyTaskUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stage?: JourneyStageUpdateOneRequiredWithoutTasksNestedInput
+    progressEntries?: PersonJourneyTaskUpdateManyWithoutTaskNestedInput
+  }
+
+  export type JourneyTaskUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    stageId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    progressEntries?: PersonJourneyTaskUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type JourneyTaskCreateManyInput = {
+    id?: string
+    key: string
+    title: string
+    description: string
+    points?: number
+    required?: boolean
+    active?: boolean
+    triggerType?: $Enums.JourneyTriggerType
+    stageId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JourneyTaskUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JourneyTaskUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    stageId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JourneyAchievementCreateInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points?: number
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutJourneyAchievementsInput
+    personAchievements?: PersonAchievementCreateNestedManyWithoutAchievementInput
+  }
+
+  export type JourneyAchievementUncheckedCreateInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points?: number
+    active?: boolean
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    personAchievements?: PersonAchievementUncheckedCreateNestedManyWithoutAchievementInput
+  }
+
+  export type JourneyAchievementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutJourneyAchievementsNestedInput
+    personAchievements?: PersonAchievementUpdateManyWithoutAchievementNestedInput
+  }
+
+  export type JourneyAchievementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    personAchievements?: PersonAchievementUncheckedUpdateManyWithoutAchievementNestedInput
+  }
+
+  export type JourneyAchievementCreateManyInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points?: number
+    active?: boolean
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JourneyAchievementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JourneyAchievementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyCreateInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    person: PersonCreateNestedOneWithoutJourneyInput
+    currentStage?: JourneyStageCreateNestedOneWithoutCurrentJourneysInput
+    tasks?: PersonJourneyTaskCreateNestedManyWithoutJourneyInput
+    history?: PersonJourneyStageHistoryCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyUncheckedCreateInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    personId: string
+    currentStageId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutJourneyInput
+    history?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutJourneyNestedInput
+    currentStage?: JourneyStageUpdateOneWithoutCurrentJourneysNestedInput
+    tasks?: PersonJourneyTaskUpdateManyWithoutJourneyNestedInput
+    history?: PersonJourneyStageHistoryUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type PersonJourneyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personId?: StringFieldUpdateOperationsInput | string
+    currentStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: PersonJourneyTaskUncheckedUpdateManyWithoutJourneyNestedInput
+    history?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type PersonJourneyCreateManyInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    personId: string
+    currentStageId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personId?: StringFieldUpdateOperationsInput | string
+    currentStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyTaskCreateInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    person: PersonCreateNestedOneWithoutJourneyTasksInput
+    journey: PersonJourneyCreateNestedOneWithoutTasksInput
+    task: JourneyTaskCreateNestedOneWithoutProgressEntriesInput
+  }
+
+  export type PersonJourneyTaskUncheckedCreateInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    personId: string
+    journeyId: string
+    taskId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyTaskUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutJourneyTasksNestedInput
+    journey?: PersonJourneyUpdateOneRequiredWithoutTasksNestedInput
+    task?: JourneyTaskUpdateOneRequiredWithoutProgressEntriesNestedInput
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    personId?: StringFieldUpdateOperationsInput | string
+    journeyId?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyTaskCreateManyInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    personId: string
+    journeyId: string
+    taskId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyTaskUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    personId?: StringFieldUpdateOperationsInput | string
+    journeyId?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonAchievementCreateInput = {
+    id?: string
+    earnedAt?: Date | string
+    person: PersonCreateNestedOneWithoutAchievementsInput
+    achievement: JourneyAchievementCreateNestedOneWithoutPersonAchievementsInput
+  }
+
+  export type PersonAchievementUncheckedCreateInput = {
+    id?: string
+    earnedAt?: Date | string
+    personId: string
+    achievementId: string
+  }
+
+  export type PersonAchievementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutAchievementsNestedInput
+    achievement?: JourneyAchievementUpdateOneRequiredWithoutPersonAchievementsNestedInput
+  }
+
+  export type PersonAchievementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    personId?: StringFieldUpdateOperationsInput | string
+    achievementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonAchievementCreateManyInput = {
+    id?: string
+    earnedAt?: Date | string
+    personId: string
+    achievementId: string
+  }
+
+  export type PersonAchievementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonAchievementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    personId?: StringFieldUpdateOperationsInput | string
+    achievementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonJourneyStageHistoryCreateInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journey: PersonJourneyCreateNestedOneWithoutHistoryInput
+    fromStage?: JourneyStageCreateNestedOneWithoutPreviousEntriesInput
+    toStage: JourneyStageCreateNestedOneWithoutHistoryEntriesInput
+  }
+
+  export type PersonJourneyStageHistoryUncheckedCreateInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journeyId: string
+    fromStageId?: string | null
+    toStageId: string
+  }
+
+  export type PersonJourneyStageHistoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journey?: PersonJourneyUpdateOneRequiredWithoutHistoryNestedInput
+    fromStage?: JourneyStageUpdateOneWithoutPreviousEntriesNestedInput
+    toStage?: JourneyStageUpdateOneRequiredWithoutHistoryEntriesNestedInput
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journeyId?: StringFieldUpdateOperationsInput | string
+    fromStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    toStageId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonJourneyStageHistoryCreateManyInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journeyId: string
+    fromStageId?: string | null
+    toStageId: string
+  }
+
+  export type PersonJourneyStageHistoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journeyId?: StringFieldUpdateOperationsInput | string
+    fromStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    toStageId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionCreateInput = {
@@ -17157,10 +29527,28 @@ export namespace Prisma {
     none?: VolunteerScaleWhereInput
   }
 
+  export type NotificationListRelationFilter = {
+    every?: NotificationWhereInput
+    some?: NotificationWhereInput
+    none?: NotificationWhereInput
+  }
+
   export type FinancialEntryListRelationFilter = {
     every?: FinancialEntryWhereInput
     some?: FinancialEntryWhereInput
     none?: FinancialEntryWhereInput
+  }
+
+  export type JourneyStageListRelationFilter = {
+    every?: JourneyStageWhereInput
+    some?: JourneyStageWhereInput
+    none?: JourneyStageWhereInput
+  }
+
+  export type JourneyAchievementListRelationFilter = {
+    every?: JourneyAchievementWhereInput
+    some?: JourneyAchievementWhereInput
+    none?: JourneyAchievementWhereInput
   }
 
   export type SortOrderInput = {
@@ -17192,7 +29580,19 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type NotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type FinancialEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type JourneyStageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type JourneyAchievementOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17659,6 +30059,31 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type PersonJourneyNullableScalarRelationFilter = {
+    is?: PersonJourneyWhereInput | null
+    isNot?: PersonJourneyWhereInput | null
+  }
+
+  export type PersonJourneyTaskListRelationFilter = {
+    every?: PersonJourneyTaskWhereInput
+    some?: PersonJourneyTaskWhereInput
+    none?: PersonJourneyTaskWhereInput
+  }
+
+  export type PersonAchievementListRelationFilter = {
+    every?: PersonAchievementWhereInput
+    some?: PersonAchievementWhereInput
+    none?: PersonAchievementWhereInput
+  }
+
+  export type PersonJourneyTaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PersonAchievementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PersonEmailChurchIdCompoundUniqueInput = {
     email: string
     churchId: string
@@ -17782,6 +30207,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumVolunteerScaleResponseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.VolunteerScaleResponseStatus | EnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VolunteerScaleResponseStatus[] | ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VolunteerScaleResponseStatus[] | ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVolunteerScaleResponseStatusFilter<$PrismaModel> | $Enums.VolunteerScaleResponseStatus
+  }
+
   export type PersonScalarRelationFilter = {
     is?: PersonWhereInput
     isNot?: PersonWhereInput
@@ -17798,6 +30230,9 @@ export namespace Prisma {
     role?: SortOrder
     eventName?: SortOrder
     confirmed?: SortOrder
+    responseStatus?: SortOrder
+    responseNote?: SortOrder
+    respondedAt?: SortOrder
     personId?: SortOrder
     ministryId?: SortOrder
     churchId?: SortOrder
@@ -17811,6 +30246,9 @@ export namespace Prisma {
     role?: SortOrder
     eventName?: SortOrder
     confirmed?: SortOrder
+    responseStatus?: SortOrder
+    responseNote?: SortOrder
+    respondedAt?: SortOrder
     personId?: SortOrder
     ministryId?: SortOrder
     churchId?: SortOrder
@@ -17824,6 +30262,9 @@ export namespace Prisma {
     role?: SortOrder
     eventName?: SortOrder
     confirmed?: SortOrder
+    responseStatus?: SortOrder
+    responseNote?: SortOrder
+    respondedAt?: SortOrder
     personId?: SortOrder
     ministryId?: SortOrder
     churchId?: SortOrder
@@ -17831,9 +30272,482 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumVolunteerScaleResponseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VolunteerScaleResponseStatus | EnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VolunteerScaleResponseStatus[] | ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VolunteerScaleResponseStatus[] | ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVolunteerScaleResponseStatusWithAggregatesFilter<$PrismaModel> | $Enums.VolunteerScaleResponseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVolunteerScaleResponseStatusFilter<$PrismaModel>
+    _max?: NestedEnumVolunteerScaleResponseStatusFilter<$PrismaModel>
+  }
+
+  export type EnumNotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type NotificationCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    link?: SortOrder
+    entityType?: SortOrder
+    entityId?: SortOrder
+    metadata?: SortOrder
+    readAt?: SortOrder
+    churchId?: SortOrder
+    recipientUserId?: SortOrder
+    actorUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NotificationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    link?: SortOrder
+    entityType?: SortOrder
+    entityId?: SortOrder
+    readAt?: SortOrder
+    churchId?: SortOrder
+    recipientUserId?: SortOrder
+    actorUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NotificationMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    link?: SortOrder
+    entityType?: SortOrder
+    entityId?: SortOrder
+    readAt?: SortOrder
+    churchId?: SortOrder
+    recipientUserId?: SortOrder
+    actorUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
+  }
+
+  export type JourneyTaskListRelationFilter = {
+    every?: JourneyTaskWhereInput
+    some?: JourneyTaskWhereInput
+    none?: JourneyTaskWhereInput
+  }
+
+  export type PersonJourneyListRelationFilter = {
+    every?: PersonJourneyWhereInput
+    some?: PersonJourneyWhereInput
+    none?: PersonJourneyWhereInput
+  }
+
+  export type PersonJourneyStageHistoryListRelationFilter = {
+    every?: PersonJourneyStageHistoryWhereInput
+    some?: PersonJourneyStageHistoryWhereInput
+    none?: PersonJourneyStageHistoryWhereInput
+  }
+
+  export type JourneyTaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PersonJourneyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PersonJourneyStageHistoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type JourneyStageChurchIdKeyCompoundUniqueInput = {
+    churchId: string
+    key: string
+  }
+
+  export type JourneyStageChurchIdOrderCompoundUniqueInput = {
+    churchId: string
+    order: number
+  }
+
+  export type JourneyStageCountOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    order?: SortOrder
+    active?: SortOrder
+    visibleToMember?: SortOrder
+    pointsReward?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyStageAvgOrderByAggregateInput = {
+    order?: SortOrder
+    pointsReward?: SortOrder
+  }
+
+  export type JourneyStageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    order?: SortOrder
+    active?: SortOrder
+    visibleToMember?: SortOrder
+    pointsReward?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyStageMinOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    order?: SortOrder
+    active?: SortOrder
+    visibleToMember?: SortOrder
+    pointsReward?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyStageSumOrderByAggregateInput = {
+    order?: SortOrder
+    pointsReward?: SortOrder
+  }
+
+  export type EnumJourneyTriggerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.JourneyTriggerType | EnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.JourneyTriggerType[] | ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.JourneyTriggerType[] | ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumJourneyTriggerTypeFilter<$PrismaModel> | $Enums.JourneyTriggerType
+  }
+
+  export type JourneyStageScalarRelationFilter = {
+    is?: JourneyStageWhereInput
+    isNot?: JourneyStageWhereInput
+  }
+
+  export type JourneyTaskStageIdKeyCompoundUniqueInput = {
+    stageId: string
+    key: string
+  }
+
+  export type JourneyTaskCountOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    points?: SortOrder
+    required?: SortOrder
+    active?: SortOrder
+    triggerType?: SortOrder
+    stageId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyTaskAvgOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type JourneyTaskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    points?: SortOrder
+    required?: SortOrder
+    active?: SortOrder
+    triggerType?: SortOrder
+    stageId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyTaskMinOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    points?: SortOrder
+    required?: SortOrder
+    active?: SortOrder
+    triggerType?: SortOrder
+    stageId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyTaskSumOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type EnumJourneyTriggerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.JourneyTriggerType | EnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.JourneyTriggerType[] | ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.JourneyTriggerType[] | ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumJourneyTriggerTypeWithAggregatesFilter<$PrismaModel> | $Enums.JourneyTriggerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumJourneyTriggerTypeFilter<$PrismaModel>
+    _max?: NestedEnumJourneyTriggerTypeFilter<$PrismaModel>
+  }
+
+  export type JourneyAchievementChurchIdKeyCompoundUniqueInput = {
+    churchId: string
+    key: string
+  }
+
+  export type JourneyAchievementCountOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    points?: SortOrder
+    active?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyAchievementAvgOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type JourneyAchievementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    points?: SortOrder
+    active?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyAchievementMinOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    points?: SortOrder
+    active?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyAchievementSumOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type JourneyStageNullableScalarRelationFilter = {
+    is?: JourneyStageWhereInput | null
+    isNot?: JourneyStageWhereInput | null
+  }
+
+  export type PersonJourneyCountOrderByAggregateInput = {
+    id?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    progress?: SortOrder
+    startedAt?: SortOrder
+    completedAt?: SortOrder
+    lastActivityAt?: SortOrder
+    personId?: SortOrder
+    currentStageId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PersonJourneyAvgOrderByAggregateInput = {
+    score?: SortOrder
+    level?: SortOrder
+    progress?: SortOrder
+  }
+
+  export type PersonJourneyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    progress?: SortOrder
+    startedAt?: SortOrder
+    completedAt?: SortOrder
+    lastActivityAt?: SortOrder
+    personId?: SortOrder
+    currentStageId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PersonJourneyMinOrderByAggregateInput = {
+    id?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    progress?: SortOrder
+    startedAt?: SortOrder
+    completedAt?: SortOrder
+    lastActivityAt?: SortOrder
+    personId?: SortOrder
+    currentStageId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PersonJourneySumOrderByAggregateInput = {
+    score?: SortOrder
+    level?: SortOrder
+    progress?: SortOrder
+  }
+
+  export type PersonJourneyScalarRelationFilter = {
+    is?: PersonJourneyWhereInput
+    isNot?: PersonJourneyWhereInput
+  }
+
+  export type JourneyTaskScalarRelationFilter = {
+    is?: JourneyTaskWhereInput
+    isNot?: JourneyTaskWhereInput
+  }
+
+  export type PersonJourneyTaskJourneyIdTaskIdCompoundUniqueInput = {
+    journeyId: string
+    taskId: string
+  }
+
+  export type PersonJourneyTaskCountOrderByAggregateInput = {
+    id?: SortOrder
+    completed?: SortOrder
+    completedAt?: SortOrder
+    source?: SortOrder
+    personId?: SortOrder
+    journeyId?: SortOrder
+    taskId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PersonJourneyTaskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    completed?: SortOrder
+    completedAt?: SortOrder
+    source?: SortOrder
+    personId?: SortOrder
+    journeyId?: SortOrder
+    taskId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PersonJourneyTaskMinOrderByAggregateInput = {
+    id?: SortOrder
+    completed?: SortOrder
+    completedAt?: SortOrder
+    source?: SortOrder
+    personId?: SortOrder
+    journeyId?: SortOrder
+    taskId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JourneyAchievementScalarRelationFilter = {
+    is?: JourneyAchievementWhereInput
+    isNot?: JourneyAchievementWhereInput
+  }
+
+  export type PersonAchievementPersonIdAchievementIdCompoundUniqueInput = {
+    personId: string
+    achievementId: string
+  }
+
+  export type PersonAchievementCountOrderByAggregateInput = {
+    id?: SortOrder
+    earnedAt?: SortOrder
+    personId?: SortOrder
+    achievementId?: SortOrder
+  }
+
+  export type PersonAchievementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    earnedAt?: SortOrder
+    personId?: SortOrder
+    achievementId?: SortOrder
+  }
+
+  export type PersonAchievementMinOrderByAggregateInput = {
+    id?: SortOrder
+    earnedAt?: SortOrder
+    personId?: SortOrder
+    achievementId?: SortOrder
+  }
+
+  export type PersonJourneyStageHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    movedAt?: SortOrder
+    notes?: SortOrder
+    source?: SortOrder
+    journeyId?: SortOrder
+    fromStageId?: SortOrder
+    toStageId?: SortOrder
+  }
+
+  export type PersonJourneyStageHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    movedAt?: SortOrder
+    notes?: SortOrder
+    source?: SortOrder
+    journeyId?: SortOrder
+    fromStageId?: SortOrder
+    toStageId?: SortOrder
+  }
+
+  export type PersonJourneyStageHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    movedAt?: SortOrder
+    notes?: SortOrder
+    source?: SortOrder
+    journeyId?: SortOrder
+    fromStageId?: SortOrder
+    toStageId?: SortOrder
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -17990,11 +30904,32 @@ export namespace Prisma {
     connect?: VolunteerScaleWhereUniqueInput | VolunteerScaleWhereUniqueInput[]
   }
 
+  export type NotificationCreateNestedManyWithoutChurchInput = {
+    create?: XOR<NotificationCreateWithoutChurchInput, NotificationUncheckedCreateWithoutChurchInput> | NotificationCreateWithoutChurchInput[] | NotificationUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutChurchInput | NotificationCreateOrConnectWithoutChurchInput[]
+    createMany?: NotificationCreateManyChurchInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type FinancialEntryCreateNestedManyWithoutChurchInput = {
     create?: XOR<FinancialEntryCreateWithoutChurchInput, FinancialEntryUncheckedCreateWithoutChurchInput> | FinancialEntryCreateWithoutChurchInput[] | FinancialEntryUncheckedCreateWithoutChurchInput[]
     connectOrCreate?: FinancialEntryCreateOrConnectWithoutChurchInput | FinancialEntryCreateOrConnectWithoutChurchInput[]
     createMany?: FinancialEntryCreateManyChurchInputEnvelope
     connect?: FinancialEntryWhereUniqueInput | FinancialEntryWhereUniqueInput[]
+  }
+
+  export type JourneyStageCreateNestedManyWithoutChurchInput = {
+    create?: XOR<JourneyStageCreateWithoutChurchInput, JourneyStageUncheckedCreateWithoutChurchInput> | JourneyStageCreateWithoutChurchInput[] | JourneyStageUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutChurchInput | JourneyStageCreateOrConnectWithoutChurchInput[]
+    createMany?: JourneyStageCreateManyChurchInputEnvelope
+    connect?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+  }
+
+  export type JourneyAchievementCreateNestedManyWithoutChurchInput = {
+    create?: XOR<JourneyAchievementCreateWithoutChurchInput, JourneyAchievementUncheckedCreateWithoutChurchInput> | JourneyAchievementCreateWithoutChurchInput[] | JourneyAchievementUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: JourneyAchievementCreateOrConnectWithoutChurchInput | JourneyAchievementCreateOrConnectWithoutChurchInput[]
+    createMany?: JourneyAchievementCreateManyChurchInputEnvelope
+    connect?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
   }
 
   export type UserUncheckedCreateNestedManyWithoutYouChurchInput = {
@@ -18039,11 +30974,32 @@ export namespace Prisma {
     connect?: VolunteerScaleWhereUniqueInput | VolunteerScaleWhereUniqueInput[]
   }
 
+  export type NotificationUncheckedCreateNestedManyWithoutChurchInput = {
+    create?: XOR<NotificationCreateWithoutChurchInput, NotificationUncheckedCreateWithoutChurchInput> | NotificationCreateWithoutChurchInput[] | NotificationUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutChurchInput | NotificationCreateOrConnectWithoutChurchInput[]
+    createMany?: NotificationCreateManyChurchInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type FinancialEntryUncheckedCreateNestedManyWithoutChurchInput = {
     create?: XOR<FinancialEntryCreateWithoutChurchInput, FinancialEntryUncheckedCreateWithoutChurchInput> | FinancialEntryCreateWithoutChurchInput[] | FinancialEntryUncheckedCreateWithoutChurchInput[]
     connectOrCreate?: FinancialEntryCreateOrConnectWithoutChurchInput | FinancialEntryCreateOrConnectWithoutChurchInput[]
     createMany?: FinancialEntryCreateManyChurchInputEnvelope
     connect?: FinancialEntryWhereUniqueInput | FinancialEntryWhereUniqueInput[]
+  }
+
+  export type JourneyStageUncheckedCreateNestedManyWithoutChurchInput = {
+    create?: XOR<JourneyStageCreateWithoutChurchInput, JourneyStageUncheckedCreateWithoutChurchInput> | JourneyStageCreateWithoutChurchInput[] | JourneyStageUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutChurchInput | JourneyStageCreateOrConnectWithoutChurchInput[]
+    createMany?: JourneyStageCreateManyChurchInputEnvelope
+    connect?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+  }
+
+  export type JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput = {
+    create?: XOR<JourneyAchievementCreateWithoutChurchInput, JourneyAchievementUncheckedCreateWithoutChurchInput> | JourneyAchievementCreateWithoutChurchInput[] | JourneyAchievementUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: JourneyAchievementCreateOrConnectWithoutChurchInput | JourneyAchievementCreateOrConnectWithoutChurchInput[]
+    createMany?: JourneyAchievementCreateManyChurchInputEnvelope
+    connect?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -18147,6 +31103,20 @@ export namespace Prisma {
     deleteMany?: VolunteerScaleScalarWhereInput | VolunteerScaleScalarWhereInput[]
   }
 
+  export type NotificationUpdateManyWithoutChurchNestedInput = {
+    create?: XOR<NotificationCreateWithoutChurchInput, NotificationUncheckedCreateWithoutChurchInput> | NotificationCreateWithoutChurchInput[] | NotificationUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutChurchInput | NotificationCreateOrConnectWithoutChurchInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutChurchInput | NotificationUpsertWithWhereUniqueWithoutChurchInput[]
+    createMany?: NotificationCreateManyChurchInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutChurchInput | NotificationUpdateWithWhereUniqueWithoutChurchInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutChurchInput | NotificationUpdateManyWithWhereWithoutChurchInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type FinancialEntryUpdateManyWithoutChurchNestedInput = {
     create?: XOR<FinancialEntryCreateWithoutChurchInput, FinancialEntryUncheckedCreateWithoutChurchInput> | FinancialEntryCreateWithoutChurchInput[] | FinancialEntryUncheckedCreateWithoutChurchInput[]
     connectOrCreate?: FinancialEntryCreateOrConnectWithoutChurchInput | FinancialEntryCreateOrConnectWithoutChurchInput[]
@@ -18159,6 +31129,34 @@ export namespace Prisma {
     update?: FinancialEntryUpdateWithWhereUniqueWithoutChurchInput | FinancialEntryUpdateWithWhereUniqueWithoutChurchInput[]
     updateMany?: FinancialEntryUpdateManyWithWhereWithoutChurchInput | FinancialEntryUpdateManyWithWhereWithoutChurchInput[]
     deleteMany?: FinancialEntryScalarWhereInput | FinancialEntryScalarWhereInput[]
+  }
+
+  export type JourneyStageUpdateManyWithoutChurchNestedInput = {
+    create?: XOR<JourneyStageCreateWithoutChurchInput, JourneyStageUncheckedCreateWithoutChurchInput> | JourneyStageCreateWithoutChurchInput[] | JourneyStageUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutChurchInput | JourneyStageCreateOrConnectWithoutChurchInput[]
+    upsert?: JourneyStageUpsertWithWhereUniqueWithoutChurchInput | JourneyStageUpsertWithWhereUniqueWithoutChurchInput[]
+    createMany?: JourneyStageCreateManyChurchInputEnvelope
+    set?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+    disconnect?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+    delete?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+    connect?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+    update?: JourneyStageUpdateWithWhereUniqueWithoutChurchInput | JourneyStageUpdateWithWhereUniqueWithoutChurchInput[]
+    updateMany?: JourneyStageUpdateManyWithWhereWithoutChurchInput | JourneyStageUpdateManyWithWhereWithoutChurchInput[]
+    deleteMany?: JourneyStageScalarWhereInput | JourneyStageScalarWhereInput[]
+  }
+
+  export type JourneyAchievementUpdateManyWithoutChurchNestedInput = {
+    create?: XOR<JourneyAchievementCreateWithoutChurchInput, JourneyAchievementUncheckedCreateWithoutChurchInput> | JourneyAchievementCreateWithoutChurchInput[] | JourneyAchievementUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: JourneyAchievementCreateOrConnectWithoutChurchInput | JourneyAchievementCreateOrConnectWithoutChurchInput[]
+    upsert?: JourneyAchievementUpsertWithWhereUniqueWithoutChurchInput | JourneyAchievementUpsertWithWhereUniqueWithoutChurchInput[]
+    createMany?: JourneyAchievementCreateManyChurchInputEnvelope
+    set?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
+    disconnect?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
+    delete?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
+    connect?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
+    update?: JourneyAchievementUpdateWithWhereUniqueWithoutChurchInput | JourneyAchievementUpdateWithWhereUniqueWithoutChurchInput[]
+    updateMany?: JourneyAchievementUpdateManyWithWhereWithoutChurchInput | JourneyAchievementUpdateManyWithWhereWithoutChurchInput[]
+    deleteMany?: JourneyAchievementScalarWhereInput | JourneyAchievementScalarWhereInput[]
   }
 
   export type UserUncheckedUpdateManyWithoutYouChurchNestedInput = {
@@ -18245,6 +31243,20 @@ export namespace Prisma {
     deleteMany?: VolunteerScaleScalarWhereInput | VolunteerScaleScalarWhereInput[]
   }
 
+  export type NotificationUncheckedUpdateManyWithoutChurchNestedInput = {
+    create?: XOR<NotificationCreateWithoutChurchInput, NotificationUncheckedCreateWithoutChurchInput> | NotificationCreateWithoutChurchInput[] | NotificationUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutChurchInput | NotificationCreateOrConnectWithoutChurchInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutChurchInput | NotificationUpsertWithWhereUniqueWithoutChurchInput[]
+    createMany?: NotificationCreateManyChurchInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutChurchInput | NotificationUpdateWithWhereUniqueWithoutChurchInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutChurchInput | NotificationUpdateManyWithWhereWithoutChurchInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput = {
     create?: XOR<FinancialEntryCreateWithoutChurchInput, FinancialEntryUncheckedCreateWithoutChurchInput> | FinancialEntryCreateWithoutChurchInput[] | FinancialEntryUncheckedCreateWithoutChurchInput[]
     connectOrCreate?: FinancialEntryCreateOrConnectWithoutChurchInput | FinancialEntryCreateOrConnectWithoutChurchInput[]
@@ -18257,6 +31269,34 @@ export namespace Prisma {
     update?: FinancialEntryUpdateWithWhereUniqueWithoutChurchInput | FinancialEntryUpdateWithWhereUniqueWithoutChurchInput[]
     updateMany?: FinancialEntryUpdateManyWithWhereWithoutChurchInput | FinancialEntryUpdateManyWithWhereWithoutChurchInput[]
     deleteMany?: FinancialEntryScalarWhereInput | FinancialEntryScalarWhereInput[]
+  }
+
+  export type JourneyStageUncheckedUpdateManyWithoutChurchNestedInput = {
+    create?: XOR<JourneyStageCreateWithoutChurchInput, JourneyStageUncheckedCreateWithoutChurchInput> | JourneyStageCreateWithoutChurchInput[] | JourneyStageUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutChurchInput | JourneyStageCreateOrConnectWithoutChurchInput[]
+    upsert?: JourneyStageUpsertWithWhereUniqueWithoutChurchInput | JourneyStageUpsertWithWhereUniqueWithoutChurchInput[]
+    createMany?: JourneyStageCreateManyChurchInputEnvelope
+    set?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+    disconnect?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+    delete?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+    connect?: JourneyStageWhereUniqueInput | JourneyStageWhereUniqueInput[]
+    update?: JourneyStageUpdateWithWhereUniqueWithoutChurchInput | JourneyStageUpdateWithWhereUniqueWithoutChurchInput[]
+    updateMany?: JourneyStageUpdateManyWithWhereWithoutChurchInput | JourneyStageUpdateManyWithWhereWithoutChurchInput[]
+    deleteMany?: JourneyStageScalarWhereInput | JourneyStageScalarWhereInput[]
+  }
+
+  export type JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput = {
+    create?: XOR<JourneyAchievementCreateWithoutChurchInput, JourneyAchievementUncheckedCreateWithoutChurchInput> | JourneyAchievementCreateWithoutChurchInput[] | JourneyAchievementUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: JourneyAchievementCreateOrConnectWithoutChurchInput | JourneyAchievementCreateOrConnectWithoutChurchInput[]
+    upsert?: JourneyAchievementUpsertWithWhereUniqueWithoutChurchInput | JourneyAchievementUpsertWithWhereUniqueWithoutChurchInput[]
+    createMany?: JourneyAchievementCreateManyChurchInputEnvelope
+    set?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
+    disconnect?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
+    delete?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
+    connect?: JourneyAchievementWhereUniqueInput | JourneyAchievementWhereUniqueInput[]
+    update?: JourneyAchievementUpdateWithWhereUniqueWithoutChurchInput | JourneyAchievementUpdateWithWhereUniqueWithoutChurchInput[]
+    updateMany?: JourneyAchievementUpdateManyWithWhereWithoutChurchInput | JourneyAchievementUpdateManyWithWhereWithoutChurchInput[]
+    deleteMany?: JourneyAchievementScalarWhereInput | JourneyAchievementScalarWhereInput[]
   }
 
   export type ChurchCreateNestedOneWithoutFinancialEntriesInput = {
@@ -18349,6 +31389,20 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
+  export type NotificationCreateNestedManyWithoutRecipientUserInput = {
+    create?: XOR<NotificationCreateWithoutRecipientUserInput, NotificationUncheckedCreateWithoutRecipientUserInput> | NotificationCreateWithoutRecipientUserInput[] | NotificationUncheckedCreateWithoutRecipientUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutRecipientUserInput | NotificationCreateOrConnectWithoutRecipientUserInput[]
+    createMany?: NotificationCreateManyRecipientUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type NotificationCreateNestedManyWithoutActorUserInput = {
+    create?: XOR<NotificationCreateWithoutActorUserInput, NotificationUncheckedCreateWithoutActorUserInput> | NotificationCreateWithoutActorUserInput[] | NotificationUncheckedCreateWithoutActorUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutActorUserInput | NotificationCreateOrConnectWithoutActorUserInput[]
+    createMany?: NotificationCreateManyActorUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -18361,6 +31415,20 @@ export namespace Prisma {
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutRecipientUserInput = {
+    create?: XOR<NotificationCreateWithoutRecipientUserInput, NotificationUncheckedCreateWithoutRecipientUserInput> | NotificationCreateWithoutRecipientUserInput[] | NotificationUncheckedCreateWithoutRecipientUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutRecipientUserInput | NotificationCreateOrConnectWithoutRecipientUserInput[]
+    createMany?: NotificationCreateManyRecipientUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutActorUserInput = {
+    create?: XOR<NotificationCreateWithoutActorUserInput, NotificationUncheckedCreateWithoutActorUserInput> | NotificationCreateWithoutActorUserInput[] | NotificationUncheckedCreateWithoutActorUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutActorUserInput | NotificationCreateOrConnectWithoutActorUserInput[]
+    createMany?: NotificationCreateManyActorUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
   export type EnumSystemRoleFieldUpdateOperationsInput = {
@@ -18409,6 +31477,34 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type NotificationUpdateManyWithoutRecipientUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutRecipientUserInput, NotificationUncheckedCreateWithoutRecipientUserInput> | NotificationCreateWithoutRecipientUserInput[] | NotificationUncheckedCreateWithoutRecipientUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutRecipientUserInput | NotificationCreateOrConnectWithoutRecipientUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutRecipientUserInput | NotificationUpsertWithWhereUniqueWithoutRecipientUserInput[]
+    createMany?: NotificationCreateManyRecipientUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutRecipientUserInput | NotificationUpdateWithWhereUniqueWithoutRecipientUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutRecipientUserInput | NotificationUpdateManyWithWhereWithoutRecipientUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type NotificationUpdateManyWithoutActorUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutActorUserInput, NotificationUncheckedCreateWithoutActorUserInput> | NotificationCreateWithoutActorUserInput[] | NotificationUncheckedCreateWithoutActorUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutActorUserInput | NotificationCreateOrConnectWithoutActorUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutActorUserInput | NotificationUpsertWithWhereUniqueWithoutActorUserInput[]
+    createMany?: NotificationCreateManyActorUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutActorUserInput | NotificationUpdateWithWhereUniqueWithoutActorUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutActorUserInput | NotificationUpdateManyWithWhereWithoutActorUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -18437,6 +31533,34 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type NotificationUncheckedUpdateManyWithoutRecipientUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutRecipientUserInput, NotificationUncheckedCreateWithoutRecipientUserInput> | NotificationCreateWithoutRecipientUserInput[] | NotificationUncheckedCreateWithoutRecipientUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutRecipientUserInput | NotificationCreateOrConnectWithoutRecipientUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutRecipientUserInput | NotificationUpsertWithWhereUniqueWithoutRecipientUserInput[]
+    createMany?: NotificationCreateManyRecipientUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutRecipientUserInput | NotificationUpdateWithWhereUniqueWithoutRecipientUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutRecipientUserInput | NotificationUpdateManyWithWhereWithoutRecipientUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutActorUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutActorUserInput, NotificationUncheckedCreateWithoutActorUserInput> | NotificationCreateWithoutActorUserInput[] | NotificationUncheckedCreateWithoutActorUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutActorUserInput | NotificationCreateOrConnectWithoutActorUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutActorUserInput | NotificationUpsertWithWhereUniqueWithoutActorUserInput[]
+    createMany?: NotificationCreateManyActorUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutActorUserInput | NotificationUpdateWithWhereUniqueWithoutActorUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutActorUserInput | NotificationUpdateManyWithWhereWithoutActorUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type PersonCreatecontactInput = {
     set: string[]
   }
@@ -18447,11 +31571,51 @@ export namespace Prisma {
     connect?: ChurchWhereUniqueInput
   }
 
+  export type PersonJourneyCreateNestedOneWithoutPersonInput = {
+    create?: XOR<PersonJourneyCreateWithoutPersonInput, PersonJourneyUncheckedCreateWithoutPersonInput>
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutPersonInput
+    connect?: PersonJourneyWhereUniqueInput
+  }
+
+  export type PersonJourneyTaskCreateNestedManyWithoutPersonInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutPersonInput, PersonJourneyTaskUncheckedCreateWithoutPersonInput> | PersonJourneyTaskCreateWithoutPersonInput[] | PersonJourneyTaskUncheckedCreateWithoutPersonInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutPersonInput | PersonJourneyTaskCreateOrConnectWithoutPersonInput[]
+    createMany?: PersonJourneyTaskCreateManyPersonInputEnvelope
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+  }
+
+  export type PersonAchievementCreateNestedManyWithoutPersonInput = {
+    create?: XOR<PersonAchievementCreateWithoutPersonInput, PersonAchievementUncheckedCreateWithoutPersonInput> | PersonAchievementCreateWithoutPersonInput[] | PersonAchievementUncheckedCreateWithoutPersonInput[]
+    connectOrCreate?: PersonAchievementCreateOrConnectWithoutPersonInput | PersonAchievementCreateOrConnectWithoutPersonInput[]
+    createMany?: PersonAchievementCreateManyPersonInputEnvelope
+    connect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+  }
+
   export type VolunteerScaleCreateNestedManyWithoutPersonInput = {
     create?: XOR<VolunteerScaleCreateWithoutPersonInput, VolunteerScaleUncheckedCreateWithoutPersonInput> | VolunteerScaleCreateWithoutPersonInput[] | VolunteerScaleUncheckedCreateWithoutPersonInput[]
     connectOrCreate?: VolunteerScaleCreateOrConnectWithoutPersonInput | VolunteerScaleCreateOrConnectWithoutPersonInput[]
     createMany?: VolunteerScaleCreateManyPersonInputEnvelope
     connect?: VolunteerScaleWhereUniqueInput | VolunteerScaleWhereUniqueInput[]
+  }
+
+  export type PersonJourneyUncheckedCreateNestedOneWithoutPersonInput = {
+    create?: XOR<PersonJourneyCreateWithoutPersonInput, PersonJourneyUncheckedCreateWithoutPersonInput>
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutPersonInput
+    connect?: PersonJourneyWhereUniqueInput
+  }
+
+  export type PersonJourneyTaskUncheckedCreateNestedManyWithoutPersonInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutPersonInput, PersonJourneyTaskUncheckedCreateWithoutPersonInput> | PersonJourneyTaskCreateWithoutPersonInput[] | PersonJourneyTaskUncheckedCreateWithoutPersonInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutPersonInput | PersonJourneyTaskCreateOrConnectWithoutPersonInput[]
+    createMany?: PersonJourneyTaskCreateManyPersonInputEnvelope
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+  }
+
+  export type PersonAchievementUncheckedCreateNestedManyWithoutPersonInput = {
+    create?: XOR<PersonAchievementCreateWithoutPersonInput, PersonAchievementUncheckedCreateWithoutPersonInput> | PersonAchievementCreateWithoutPersonInput[] | PersonAchievementUncheckedCreateWithoutPersonInput[]
+    connectOrCreate?: PersonAchievementCreateOrConnectWithoutPersonInput | PersonAchievementCreateOrConnectWithoutPersonInput[]
+    createMany?: PersonAchievementCreateManyPersonInputEnvelope
+    connect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
   }
 
   export type VolunteerScaleUncheckedCreateNestedManyWithoutPersonInput = {
@@ -18482,6 +31646,44 @@ export namespace Prisma {
     update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutPersonsInput, ChurchUpdateWithoutPersonsInput>, ChurchUncheckedUpdateWithoutPersonsInput>
   }
 
+  export type PersonJourneyUpdateOneWithoutPersonNestedInput = {
+    create?: XOR<PersonJourneyCreateWithoutPersonInput, PersonJourneyUncheckedCreateWithoutPersonInput>
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutPersonInput
+    upsert?: PersonJourneyUpsertWithoutPersonInput
+    disconnect?: PersonJourneyWhereInput | boolean
+    delete?: PersonJourneyWhereInput | boolean
+    connect?: PersonJourneyWhereUniqueInput
+    update?: XOR<XOR<PersonJourneyUpdateToOneWithWhereWithoutPersonInput, PersonJourneyUpdateWithoutPersonInput>, PersonJourneyUncheckedUpdateWithoutPersonInput>
+  }
+
+  export type PersonJourneyTaskUpdateManyWithoutPersonNestedInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutPersonInput, PersonJourneyTaskUncheckedCreateWithoutPersonInput> | PersonJourneyTaskCreateWithoutPersonInput[] | PersonJourneyTaskUncheckedCreateWithoutPersonInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutPersonInput | PersonJourneyTaskCreateOrConnectWithoutPersonInput[]
+    upsert?: PersonJourneyTaskUpsertWithWhereUniqueWithoutPersonInput | PersonJourneyTaskUpsertWithWhereUniqueWithoutPersonInput[]
+    createMany?: PersonJourneyTaskCreateManyPersonInputEnvelope
+    set?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    disconnect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    delete?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    update?: PersonJourneyTaskUpdateWithWhereUniqueWithoutPersonInput | PersonJourneyTaskUpdateWithWhereUniqueWithoutPersonInput[]
+    updateMany?: PersonJourneyTaskUpdateManyWithWhereWithoutPersonInput | PersonJourneyTaskUpdateManyWithWhereWithoutPersonInput[]
+    deleteMany?: PersonJourneyTaskScalarWhereInput | PersonJourneyTaskScalarWhereInput[]
+  }
+
+  export type PersonAchievementUpdateManyWithoutPersonNestedInput = {
+    create?: XOR<PersonAchievementCreateWithoutPersonInput, PersonAchievementUncheckedCreateWithoutPersonInput> | PersonAchievementCreateWithoutPersonInput[] | PersonAchievementUncheckedCreateWithoutPersonInput[]
+    connectOrCreate?: PersonAchievementCreateOrConnectWithoutPersonInput | PersonAchievementCreateOrConnectWithoutPersonInput[]
+    upsert?: PersonAchievementUpsertWithWhereUniqueWithoutPersonInput | PersonAchievementUpsertWithWhereUniqueWithoutPersonInput[]
+    createMany?: PersonAchievementCreateManyPersonInputEnvelope
+    set?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    disconnect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    delete?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    connect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    update?: PersonAchievementUpdateWithWhereUniqueWithoutPersonInput | PersonAchievementUpdateWithWhereUniqueWithoutPersonInput[]
+    updateMany?: PersonAchievementUpdateManyWithWhereWithoutPersonInput | PersonAchievementUpdateManyWithWhereWithoutPersonInput[]
+    deleteMany?: PersonAchievementScalarWhereInput | PersonAchievementScalarWhereInput[]
+  }
+
   export type VolunteerScaleUpdateManyWithoutPersonNestedInput = {
     create?: XOR<VolunteerScaleCreateWithoutPersonInput, VolunteerScaleUncheckedCreateWithoutPersonInput> | VolunteerScaleCreateWithoutPersonInput[] | VolunteerScaleUncheckedCreateWithoutPersonInput[]
     connectOrCreate?: VolunteerScaleCreateOrConnectWithoutPersonInput | VolunteerScaleCreateOrConnectWithoutPersonInput[]
@@ -18494,6 +31696,44 @@ export namespace Prisma {
     update?: VolunteerScaleUpdateWithWhereUniqueWithoutPersonInput | VolunteerScaleUpdateWithWhereUniqueWithoutPersonInput[]
     updateMany?: VolunteerScaleUpdateManyWithWhereWithoutPersonInput | VolunteerScaleUpdateManyWithWhereWithoutPersonInput[]
     deleteMany?: VolunteerScaleScalarWhereInput | VolunteerScaleScalarWhereInput[]
+  }
+
+  export type PersonJourneyUncheckedUpdateOneWithoutPersonNestedInput = {
+    create?: XOR<PersonJourneyCreateWithoutPersonInput, PersonJourneyUncheckedCreateWithoutPersonInput>
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutPersonInput
+    upsert?: PersonJourneyUpsertWithoutPersonInput
+    disconnect?: PersonJourneyWhereInput | boolean
+    delete?: PersonJourneyWhereInput | boolean
+    connect?: PersonJourneyWhereUniqueInput
+    update?: XOR<XOR<PersonJourneyUpdateToOneWithWhereWithoutPersonInput, PersonJourneyUpdateWithoutPersonInput>, PersonJourneyUncheckedUpdateWithoutPersonInput>
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateManyWithoutPersonNestedInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutPersonInput, PersonJourneyTaskUncheckedCreateWithoutPersonInput> | PersonJourneyTaskCreateWithoutPersonInput[] | PersonJourneyTaskUncheckedCreateWithoutPersonInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutPersonInput | PersonJourneyTaskCreateOrConnectWithoutPersonInput[]
+    upsert?: PersonJourneyTaskUpsertWithWhereUniqueWithoutPersonInput | PersonJourneyTaskUpsertWithWhereUniqueWithoutPersonInput[]
+    createMany?: PersonJourneyTaskCreateManyPersonInputEnvelope
+    set?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    disconnect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    delete?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    update?: PersonJourneyTaskUpdateWithWhereUniqueWithoutPersonInput | PersonJourneyTaskUpdateWithWhereUniqueWithoutPersonInput[]
+    updateMany?: PersonJourneyTaskUpdateManyWithWhereWithoutPersonInput | PersonJourneyTaskUpdateManyWithWhereWithoutPersonInput[]
+    deleteMany?: PersonJourneyTaskScalarWhereInput | PersonJourneyTaskScalarWhereInput[]
+  }
+
+  export type PersonAchievementUncheckedUpdateManyWithoutPersonNestedInput = {
+    create?: XOR<PersonAchievementCreateWithoutPersonInput, PersonAchievementUncheckedCreateWithoutPersonInput> | PersonAchievementCreateWithoutPersonInput[] | PersonAchievementUncheckedCreateWithoutPersonInput[]
+    connectOrCreate?: PersonAchievementCreateOrConnectWithoutPersonInput | PersonAchievementCreateOrConnectWithoutPersonInput[]
+    upsert?: PersonAchievementUpsertWithWhereUniqueWithoutPersonInput | PersonAchievementUpsertWithWhereUniqueWithoutPersonInput[]
+    createMany?: PersonAchievementCreateManyPersonInputEnvelope
+    set?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    disconnect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    delete?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    connect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    update?: PersonAchievementUpdateWithWhereUniqueWithoutPersonInput | PersonAchievementUpdateWithWhereUniqueWithoutPersonInput[]
+    updateMany?: PersonAchievementUpdateManyWithWhereWithoutPersonInput | PersonAchievementUpdateManyWithWhereWithoutPersonInput[]
+    deleteMany?: PersonAchievementScalarWhereInput | PersonAchievementScalarWhereInput[]
   }
 
   export type VolunteerScaleUncheckedUpdateManyWithoutPersonNestedInput = {
@@ -18584,6 +31824,10 @@ export namespace Prisma {
     connect?: ChurchWhereUniqueInput
   }
 
+  export type EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput = {
+    set?: $Enums.VolunteerScaleResponseStatus
+  }
+
   export type PersonUpdateOneRequiredWithoutVolunteerScalesNestedInput = {
     create?: XOR<PersonCreateWithoutVolunteerScalesInput, PersonUncheckedCreateWithoutVolunteerScalesInput>
     connectOrCreate?: PersonCreateOrConnectWithoutVolunteerScalesInput
@@ -18606,6 +31850,580 @@ export namespace Prisma {
     upsert?: ChurchUpsertWithoutVolunteerScalesInput
     connect?: ChurchWhereUniqueInput
     update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutVolunteerScalesInput, ChurchUpdateWithoutVolunteerScalesInput>, ChurchUncheckedUpdateWithoutVolunteerScalesInput>
+  }
+
+  export type ChurchCreateNestedOneWithoutNotificationsInput = {
+    create?: XOR<ChurchCreateWithoutNotificationsInput, ChurchUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutNotificationsInput
+    connect?: ChurchWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutNotificationsReceivedInput = {
+    create?: XOR<UserCreateWithoutNotificationsReceivedInput, UserUncheckedCreateWithoutNotificationsReceivedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsReceivedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutNotificationsTriggeredInput = {
+    create?: XOR<UserCreateWithoutNotificationsTriggeredInput, UserUncheckedCreateWithoutNotificationsTriggeredInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsTriggeredInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumNotificationTypeFieldUpdateOperationsInput = {
+    set?: $Enums.NotificationType
+  }
+
+  export type ChurchUpdateOneRequiredWithoutNotificationsNestedInput = {
+    create?: XOR<ChurchCreateWithoutNotificationsInput, ChurchUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutNotificationsInput
+    upsert?: ChurchUpsertWithoutNotificationsInput
+    connect?: ChurchWhereUniqueInput
+    update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutNotificationsInput, ChurchUpdateWithoutNotificationsInput>, ChurchUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutNotificationsReceivedNestedInput = {
+    create?: XOR<UserCreateWithoutNotificationsReceivedInput, UserUncheckedCreateWithoutNotificationsReceivedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsReceivedInput
+    upsert?: UserUpsertWithoutNotificationsReceivedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationsReceivedInput, UserUpdateWithoutNotificationsReceivedInput>, UserUncheckedUpdateWithoutNotificationsReceivedInput>
+  }
+
+  export type UserUpdateOneWithoutNotificationsTriggeredNestedInput = {
+    create?: XOR<UserCreateWithoutNotificationsTriggeredInput, UserUncheckedCreateWithoutNotificationsTriggeredInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsTriggeredInput
+    upsert?: UserUpsertWithoutNotificationsTriggeredInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationsTriggeredInput, UserUpdateWithoutNotificationsTriggeredInput>, UserUncheckedUpdateWithoutNotificationsTriggeredInput>
+  }
+
+  export type ChurchCreateNestedOneWithoutJourneyStagesInput = {
+    create?: XOR<ChurchCreateWithoutJourneyStagesInput, ChurchUncheckedCreateWithoutJourneyStagesInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutJourneyStagesInput
+    connect?: ChurchWhereUniqueInput
+  }
+
+  export type JourneyTaskCreateNestedManyWithoutStageInput = {
+    create?: XOR<JourneyTaskCreateWithoutStageInput, JourneyTaskUncheckedCreateWithoutStageInput> | JourneyTaskCreateWithoutStageInput[] | JourneyTaskUncheckedCreateWithoutStageInput[]
+    connectOrCreate?: JourneyTaskCreateOrConnectWithoutStageInput | JourneyTaskCreateOrConnectWithoutStageInput[]
+    createMany?: JourneyTaskCreateManyStageInputEnvelope
+    connect?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+  }
+
+  export type PersonJourneyCreateNestedManyWithoutCurrentStageInput = {
+    create?: XOR<PersonJourneyCreateWithoutCurrentStageInput, PersonJourneyUncheckedCreateWithoutCurrentStageInput> | PersonJourneyCreateWithoutCurrentStageInput[] | PersonJourneyUncheckedCreateWithoutCurrentStageInput[]
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutCurrentStageInput | PersonJourneyCreateOrConnectWithoutCurrentStageInput[]
+    createMany?: PersonJourneyCreateManyCurrentStageInputEnvelope
+    connect?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+  }
+
+  export type PersonJourneyStageHistoryCreateNestedManyWithoutToStageInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutToStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput> | PersonJourneyStageHistoryCreateWithoutToStageInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput | PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyToStageInputEnvelope
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+  }
+
+  export type PersonJourneyStageHistoryCreateNestedManyWithoutFromStageInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutFromStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput> | PersonJourneyStageHistoryCreateWithoutFromStageInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput | PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyFromStageInputEnvelope
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+  }
+
+  export type JourneyTaskUncheckedCreateNestedManyWithoutStageInput = {
+    create?: XOR<JourneyTaskCreateWithoutStageInput, JourneyTaskUncheckedCreateWithoutStageInput> | JourneyTaskCreateWithoutStageInput[] | JourneyTaskUncheckedCreateWithoutStageInput[]
+    connectOrCreate?: JourneyTaskCreateOrConnectWithoutStageInput | JourneyTaskCreateOrConnectWithoutStageInput[]
+    createMany?: JourneyTaskCreateManyStageInputEnvelope
+    connect?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+  }
+
+  export type PersonJourneyUncheckedCreateNestedManyWithoutCurrentStageInput = {
+    create?: XOR<PersonJourneyCreateWithoutCurrentStageInput, PersonJourneyUncheckedCreateWithoutCurrentStageInput> | PersonJourneyCreateWithoutCurrentStageInput[] | PersonJourneyUncheckedCreateWithoutCurrentStageInput[]
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutCurrentStageInput | PersonJourneyCreateOrConnectWithoutCurrentStageInput[]
+    createMany?: PersonJourneyCreateManyCurrentStageInputEnvelope
+    connect?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+  }
+
+  export type PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutToStageInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutToStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput> | PersonJourneyStageHistoryCreateWithoutToStageInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput | PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyToStageInputEnvelope
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+  }
+
+  export type PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutFromStageInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutFromStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput> | PersonJourneyStageHistoryCreateWithoutFromStageInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput | PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyFromStageInputEnvelope
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+  }
+
+  export type ChurchUpdateOneRequiredWithoutJourneyStagesNestedInput = {
+    create?: XOR<ChurchCreateWithoutJourneyStagesInput, ChurchUncheckedCreateWithoutJourneyStagesInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutJourneyStagesInput
+    upsert?: ChurchUpsertWithoutJourneyStagesInput
+    connect?: ChurchWhereUniqueInput
+    update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutJourneyStagesInput, ChurchUpdateWithoutJourneyStagesInput>, ChurchUncheckedUpdateWithoutJourneyStagesInput>
+  }
+
+  export type JourneyTaskUpdateManyWithoutStageNestedInput = {
+    create?: XOR<JourneyTaskCreateWithoutStageInput, JourneyTaskUncheckedCreateWithoutStageInput> | JourneyTaskCreateWithoutStageInput[] | JourneyTaskUncheckedCreateWithoutStageInput[]
+    connectOrCreate?: JourneyTaskCreateOrConnectWithoutStageInput | JourneyTaskCreateOrConnectWithoutStageInput[]
+    upsert?: JourneyTaskUpsertWithWhereUniqueWithoutStageInput | JourneyTaskUpsertWithWhereUniqueWithoutStageInput[]
+    createMany?: JourneyTaskCreateManyStageInputEnvelope
+    set?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+    disconnect?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+    delete?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+    connect?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+    update?: JourneyTaskUpdateWithWhereUniqueWithoutStageInput | JourneyTaskUpdateWithWhereUniqueWithoutStageInput[]
+    updateMany?: JourneyTaskUpdateManyWithWhereWithoutStageInput | JourneyTaskUpdateManyWithWhereWithoutStageInput[]
+    deleteMany?: JourneyTaskScalarWhereInput | JourneyTaskScalarWhereInput[]
+  }
+
+  export type PersonJourneyUpdateManyWithoutCurrentStageNestedInput = {
+    create?: XOR<PersonJourneyCreateWithoutCurrentStageInput, PersonJourneyUncheckedCreateWithoutCurrentStageInput> | PersonJourneyCreateWithoutCurrentStageInput[] | PersonJourneyUncheckedCreateWithoutCurrentStageInput[]
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutCurrentStageInput | PersonJourneyCreateOrConnectWithoutCurrentStageInput[]
+    upsert?: PersonJourneyUpsertWithWhereUniqueWithoutCurrentStageInput | PersonJourneyUpsertWithWhereUniqueWithoutCurrentStageInput[]
+    createMany?: PersonJourneyCreateManyCurrentStageInputEnvelope
+    set?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+    disconnect?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+    delete?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+    connect?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+    update?: PersonJourneyUpdateWithWhereUniqueWithoutCurrentStageInput | PersonJourneyUpdateWithWhereUniqueWithoutCurrentStageInput[]
+    updateMany?: PersonJourneyUpdateManyWithWhereWithoutCurrentStageInput | PersonJourneyUpdateManyWithWhereWithoutCurrentStageInput[]
+    deleteMany?: PersonJourneyScalarWhereInput | PersonJourneyScalarWhereInput[]
+  }
+
+  export type PersonJourneyStageHistoryUpdateManyWithoutToStageNestedInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutToStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput> | PersonJourneyStageHistoryCreateWithoutToStageInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput | PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput[]
+    upsert?: PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutToStageInput | PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutToStageInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyToStageInputEnvelope
+    set?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    disconnect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    delete?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    update?: PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutToStageInput | PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutToStageInput[]
+    updateMany?: PersonJourneyStageHistoryUpdateManyWithWhereWithoutToStageInput | PersonJourneyStageHistoryUpdateManyWithWhereWithoutToStageInput[]
+    deleteMany?: PersonJourneyStageHistoryScalarWhereInput | PersonJourneyStageHistoryScalarWhereInput[]
+  }
+
+  export type PersonJourneyStageHistoryUpdateManyWithoutFromStageNestedInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutFromStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput> | PersonJourneyStageHistoryCreateWithoutFromStageInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput | PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput[]
+    upsert?: PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutFromStageInput | PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutFromStageInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyFromStageInputEnvelope
+    set?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    disconnect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    delete?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    update?: PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutFromStageInput | PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutFromStageInput[]
+    updateMany?: PersonJourneyStageHistoryUpdateManyWithWhereWithoutFromStageInput | PersonJourneyStageHistoryUpdateManyWithWhereWithoutFromStageInput[]
+    deleteMany?: PersonJourneyStageHistoryScalarWhereInput | PersonJourneyStageHistoryScalarWhereInput[]
+  }
+
+  export type JourneyTaskUncheckedUpdateManyWithoutStageNestedInput = {
+    create?: XOR<JourneyTaskCreateWithoutStageInput, JourneyTaskUncheckedCreateWithoutStageInput> | JourneyTaskCreateWithoutStageInput[] | JourneyTaskUncheckedCreateWithoutStageInput[]
+    connectOrCreate?: JourneyTaskCreateOrConnectWithoutStageInput | JourneyTaskCreateOrConnectWithoutStageInput[]
+    upsert?: JourneyTaskUpsertWithWhereUniqueWithoutStageInput | JourneyTaskUpsertWithWhereUniqueWithoutStageInput[]
+    createMany?: JourneyTaskCreateManyStageInputEnvelope
+    set?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+    disconnect?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+    delete?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+    connect?: JourneyTaskWhereUniqueInput | JourneyTaskWhereUniqueInput[]
+    update?: JourneyTaskUpdateWithWhereUniqueWithoutStageInput | JourneyTaskUpdateWithWhereUniqueWithoutStageInput[]
+    updateMany?: JourneyTaskUpdateManyWithWhereWithoutStageInput | JourneyTaskUpdateManyWithWhereWithoutStageInput[]
+    deleteMany?: JourneyTaskScalarWhereInput | JourneyTaskScalarWhereInput[]
+  }
+
+  export type PersonJourneyUncheckedUpdateManyWithoutCurrentStageNestedInput = {
+    create?: XOR<PersonJourneyCreateWithoutCurrentStageInput, PersonJourneyUncheckedCreateWithoutCurrentStageInput> | PersonJourneyCreateWithoutCurrentStageInput[] | PersonJourneyUncheckedCreateWithoutCurrentStageInput[]
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutCurrentStageInput | PersonJourneyCreateOrConnectWithoutCurrentStageInput[]
+    upsert?: PersonJourneyUpsertWithWhereUniqueWithoutCurrentStageInput | PersonJourneyUpsertWithWhereUniqueWithoutCurrentStageInput[]
+    createMany?: PersonJourneyCreateManyCurrentStageInputEnvelope
+    set?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+    disconnect?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+    delete?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+    connect?: PersonJourneyWhereUniqueInput | PersonJourneyWhereUniqueInput[]
+    update?: PersonJourneyUpdateWithWhereUniqueWithoutCurrentStageInput | PersonJourneyUpdateWithWhereUniqueWithoutCurrentStageInput[]
+    updateMany?: PersonJourneyUpdateManyWithWhereWithoutCurrentStageInput | PersonJourneyUpdateManyWithWhereWithoutCurrentStageInput[]
+    deleteMany?: PersonJourneyScalarWhereInput | PersonJourneyScalarWhereInput[]
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateManyWithoutToStageNestedInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutToStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput> | PersonJourneyStageHistoryCreateWithoutToStageInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput | PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput[]
+    upsert?: PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutToStageInput | PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutToStageInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyToStageInputEnvelope
+    set?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    disconnect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    delete?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    update?: PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutToStageInput | PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutToStageInput[]
+    updateMany?: PersonJourneyStageHistoryUpdateManyWithWhereWithoutToStageInput | PersonJourneyStageHistoryUpdateManyWithWhereWithoutToStageInput[]
+    deleteMany?: PersonJourneyStageHistoryScalarWhereInput | PersonJourneyStageHistoryScalarWhereInput[]
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateManyWithoutFromStageNestedInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutFromStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput> | PersonJourneyStageHistoryCreateWithoutFromStageInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput | PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput[]
+    upsert?: PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutFromStageInput | PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutFromStageInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyFromStageInputEnvelope
+    set?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    disconnect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    delete?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    update?: PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutFromStageInput | PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutFromStageInput[]
+    updateMany?: PersonJourneyStageHistoryUpdateManyWithWhereWithoutFromStageInput | PersonJourneyStageHistoryUpdateManyWithWhereWithoutFromStageInput[]
+    deleteMany?: PersonJourneyStageHistoryScalarWhereInput | PersonJourneyStageHistoryScalarWhereInput[]
+  }
+
+  export type JourneyStageCreateNestedOneWithoutTasksInput = {
+    create?: XOR<JourneyStageCreateWithoutTasksInput, JourneyStageUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutTasksInput
+    connect?: JourneyStageWhereUniqueInput
+  }
+
+  export type PersonJourneyTaskCreateNestedManyWithoutTaskInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutTaskInput, PersonJourneyTaskUncheckedCreateWithoutTaskInput> | PersonJourneyTaskCreateWithoutTaskInput[] | PersonJourneyTaskUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutTaskInput | PersonJourneyTaskCreateOrConnectWithoutTaskInput[]
+    createMany?: PersonJourneyTaskCreateManyTaskInputEnvelope
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+  }
+
+  export type PersonJourneyTaskUncheckedCreateNestedManyWithoutTaskInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutTaskInput, PersonJourneyTaskUncheckedCreateWithoutTaskInput> | PersonJourneyTaskCreateWithoutTaskInput[] | PersonJourneyTaskUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutTaskInput | PersonJourneyTaskCreateOrConnectWithoutTaskInput[]
+    createMany?: PersonJourneyTaskCreateManyTaskInputEnvelope
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+  }
+
+  export type EnumJourneyTriggerTypeFieldUpdateOperationsInput = {
+    set?: $Enums.JourneyTriggerType
+  }
+
+  export type JourneyStageUpdateOneRequiredWithoutTasksNestedInput = {
+    create?: XOR<JourneyStageCreateWithoutTasksInput, JourneyStageUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutTasksInput
+    upsert?: JourneyStageUpsertWithoutTasksInput
+    connect?: JourneyStageWhereUniqueInput
+    update?: XOR<XOR<JourneyStageUpdateToOneWithWhereWithoutTasksInput, JourneyStageUpdateWithoutTasksInput>, JourneyStageUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type PersonJourneyTaskUpdateManyWithoutTaskNestedInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutTaskInput, PersonJourneyTaskUncheckedCreateWithoutTaskInput> | PersonJourneyTaskCreateWithoutTaskInput[] | PersonJourneyTaskUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutTaskInput | PersonJourneyTaskCreateOrConnectWithoutTaskInput[]
+    upsert?: PersonJourneyTaskUpsertWithWhereUniqueWithoutTaskInput | PersonJourneyTaskUpsertWithWhereUniqueWithoutTaskInput[]
+    createMany?: PersonJourneyTaskCreateManyTaskInputEnvelope
+    set?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    disconnect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    delete?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    update?: PersonJourneyTaskUpdateWithWhereUniqueWithoutTaskInput | PersonJourneyTaskUpdateWithWhereUniqueWithoutTaskInput[]
+    updateMany?: PersonJourneyTaskUpdateManyWithWhereWithoutTaskInput | PersonJourneyTaskUpdateManyWithWhereWithoutTaskInput[]
+    deleteMany?: PersonJourneyTaskScalarWhereInput | PersonJourneyTaskScalarWhereInput[]
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateManyWithoutTaskNestedInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutTaskInput, PersonJourneyTaskUncheckedCreateWithoutTaskInput> | PersonJourneyTaskCreateWithoutTaskInput[] | PersonJourneyTaskUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutTaskInput | PersonJourneyTaskCreateOrConnectWithoutTaskInput[]
+    upsert?: PersonJourneyTaskUpsertWithWhereUniqueWithoutTaskInput | PersonJourneyTaskUpsertWithWhereUniqueWithoutTaskInput[]
+    createMany?: PersonJourneyTaskCreateManyTaskInputEnvelope
+    set?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    disconnect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    delete?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    update?: PersonJourneyTaskUpdateWithWhereUniqueWithoutTaskInput | PersonJourneyTaskUpdateWithWhereUniqueWithoutTaskInput[]
+    updateMany?: PersonJourneyTaskUpdateManyWithWhereWithoutTaskInput | PersonJourneyTaskUpdateManyWithWhereWithoutTaskInput[]
+    deleteMany?: PersonJourneyTaskScalarWhereInput | PersonJourneyTaskScalarWhereInput[]
+  }
+
+  export type ChurchCreateNestedOneWithoutJourneyAchievementsInput = {
+    create?: XOR<ChurchCreateWithoutJourneyAchievementsInput, ChurchUncheckedCreateWithoutJourneyAchievementsInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutJourneyAchievementsInput
+    connect?: ChurchWhereUniqueInput
+  }
+
+  export type PersonAchievementCreateNestedManyWithoutAchievementInput = {
+    create?: XOR<PersonAchievementCreateWithoutAchievementInput, PersonAchievementUncheckedCreateWithoutAchievementInput> | PersonAchievementCreateWithoutAchievementInput[] | PersonAchievementUncheckedCreateWithoutAchievementInput[]
+    connectOrCreate?: PersonAchievementCreateOrConnectWithoutAchievementInput | PersonAchievementCreateOrConnectWithoutAchievementInput[]
+    createMany?: PersonAchievementCreateManyAchievementInputEnvelope
+    connect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+  }
+
+  export type PersonAchievementUncheckedCreateNestedManyWithoutAchievementInput = {
+    create?: XOR<PersonAchievementCreateWithoutAchievementInput, PersonAchievementUncheckedCreateWithoutAchievementInput> | PersonAchievementCreateWithoutAchievementInput[] | PersonAchievementUncheckedCreateWithoutAchievementInput[]
+    connectOrCreate?: PersonAchievementCreateOrConnectWithoutAchievementInput | PersonAchievementCreateOrConnectWithoutAchievementInput[]
+    createMany?: PersonAchievementCreateManyAchievementInputEnvelope
+    connect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+  }
+
+  export type ChurchUpdateOneRequiredWithoutJourneyAchievementsNestedInput = {
+    create?: XOR<ChurchCreateWithoutJourneyAchievementsInput, ChurchUncheckedCreateWithoutJourneyAchievementsInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutJourneyAchievementsInput
+    upsert?: ChurchUpsertWithoutJourneyAchievementsInput
+    connect?: ChurchWhereUniqueInput
+    update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutJourneyAchievementsInput, ChurchUpdateWithoutJourneyAchievementsInput>, ChurchUncheckedUpdateWithoutJourneyAchievementsInput>
+  }
+
+  export type PersonAchievementUpdateManyWithoutAchievementNestedInput = {
+    create?: XOR<PersonAchievementCreateWithoutAchievementInput, PersonAchievementUncheckedCreateWithoutAchievementInput> | PersonAchievementCreateWithoutAchievementInput[] | PersonAchievementUncheckedCreateWithoutAchievementInput[]
+    connectOrCreate?: PersonAchievementCreateOrConnectWithoutAchievementInput | PersonAchievementCreateOrConnectWithoutAchievementInput[]
+    upsert?: PersonAchievementUpsertWithWhereUniqueWithoutAchievementInput | PersonAchievementUpsertWithWhereUniqueWithoutAchievementInput[]
+    createMany?: PersonAchievementCreateManyAchievementInputEnvelope
+    set?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    disconnect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    delete?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    connect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    update?: PersonAchievementUpdateWithWhereUniqueWithoutAchievementInput | PersonAchievementUpdateWithWhereUniqueWithoutAchievementInput[]
+    updateMany?: PersonAchievementUpdateManyWithWhereWithoutAchievementInput | PersonAchievementUpdateManyWithWhereWithoutAchievementInput[]
+    deleteMany?: PersonAchievementScalarWhereInput | PersonAchievementScalarWhereInput[]
+  }
+
+  export type PersonAchievementUncheckedUpdateManyWithoutAchievementNestedInput = {
+    create?: XOR<PersonAchievementCreateWithoutAchievementInput, PersonAchievementUncheckedCreateWithoutAchievementInput> | PersonAchievementCreateWithoutAchievementInput[] | PersonAchievementUncheckedCreateWithoutAchievementInput[]
+    connectOrCreate?: PersonAchievementCreateOrConnectWithoutAchievementInput | PersonAchievementCreateOrConnectWithoutAchievementInput[]
+    upsert?: PersonAchievementUpsertWithWhereUniqueWithoutAchievementInput | PersonAchievementUpsertWithWhereUniqueWithoutAchievementInput[]
+    createMany?: PersonAchievementCreateManyAchievementInputEnvelope
+    set?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    disconnect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    delete?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    connect?: PersonAchievementWhereUniqueInput | PersonAchievementWhereUniqueInput[]
+    update?: PersonAchievementUpdateWithWhereUniqueWithoutAchievementInput | PersonAchievementUpdateWithWhereUniqueWithoutAchievementInput[]
+    updateMany?: PersonAchievementUpdateManyWithWhereWithoutAchievementInput | PersonAchievementUpdateManyWithWhereWithoutAchievementInput[]
+    deleteMany?: PersonAchievementScalarWhereInput | PersonAchievementScalarWhereInput[]
+  }
+
+  export type PersonCreateNestedOneWithoutJourneyInput = {
+    create?: XOR<PersonCreateWithoutJourneyInput, PersonUncheckedCreateWithoutJourneyInput>
+    connectOrCreate?: PersonCreateOrConnectWithoutJourneyInput
+    connect?: PersonWhereUniqueInput
+  }
+
+  export type JourneyStageCreateNestedOneWithoutCurrentJourneysInput = {
+    create?: XOR<JourneyStageCreateWithoutCurrentJourneysInput, JourneyStageUncheckedCreateWithoutCurrentJourneysInput>
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutCurrentJourneysInput
+    connect?: JourneyStageWhereUniqueInput
+  }
+
+  export type PersonJourneyTaskCreateNestedManyWithoutJourneyInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutJourneyInput, PersonJourneyTaskUncheckedCreateWithoutJourneyInput> | PersonJourneyTaskCreateWithoutJourneyInput[] | PersonJourneyTaskUncheckedCreateWithoutJourneyInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutJourneyInput | PersonJourneyTaskCreateOrConnectWithoutJourneyInput[]
+    createMany?: PersonJourneyTaskCreateManyJourneyInputEnvelope
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+  }
+
+  export type PersonJourneyStageHistoryCreateNestedManyWithoutJourneyInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutJourneyInput, PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput> | PersonJourneyStageHistoryCreateWithoutJourneyInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput | PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyJourneyInputEnvelope
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+  }
+
+  export type PersonJourneyTaskUncheckedCreateNestedManyWithoutJourneyInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutJourneyInput, PersonJourneyTaskUncheckedCreateWithoutJourneyInput> | PersonJourneyTaskCreateWithoutJourneyInput[] | PersonJourneyTaskUncheckedCreateWithoutJourneyInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutJourneyInput | PersonJourneyTaskCreateOrConnectWithoutJourneyInput[]
+    createMany?: PersonJourneyTaskCreateManyJourneyInputEnvelope
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+  }
+
+  export type PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutJourneyInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutJourneyInput, PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput> | PersonJourneyStageHistoryCreateWithoutJourneyInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput | PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyJourneyInputEnvelope
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+  }
+
+  export type PersonUpdateOneRequiredWithoutJourneyNestedInput = {
+    create?: XOR<PersonCreateWithoutJourneyInput, PersonUncheckedCreateWithoutJourneyInput>
+    connectOrCreate?: PersonCreateOrConnectWithoutJourneyInput
+    upsert?: PersonUpsertWithoutJourneyInput
+    connect?: PersonWhereUniqueInput
+    update?: XOR<XOR<PersonUpdateToOneWithWhereWithoutJourneyInput, PersonUpdateWithoutJourneyInput>, PersonUncheckedUpdateWithoutJourneyInput>
+  }
+
+  export type JourneyStageUpdateOneWithoutCurrentJourneysNestedInput = {
+    create?: XOR<JourneyStageCreateWithoutCurrentJourneysInput, JourneyStageUncheckedCreateWithoutCurrentJourneysInput>
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutCurrentJourneysInput
+    upsert?: JourneyStageUpsertWithoutCurrentJourneysInput
+    disconnect?: JourneyStageWhereInput | boolean
+    delete?: JourneyStageWhereInput | boolean
+    connect?: JourneyStageWhereUniqueInput
+    update?: XOR<XOR<JourneyStageUpdateToOneWithWhereWithoutCurrentJourneysInput, JourneyStageUpdateWithoutCurrentJourneysInput>, JourneyStageUncheckedUpdateWithoutCurrentJourneysInput>
+  }
+
+  export type PersonJourneyTaskUpdateManyWithoutJourneyNestedInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutJourneyInput, PersonJourneyTaskUncheckedCreateWithoutJourneyInput> | PersonJourneyTaskCreateWithoutJourneyInput[] | PersonJourneyTaskUncheckedCreateWithoutJourneyInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutJourneyInput | PersonJourneyTaskCreateOrConnectWithoutJourneyInput[]
+    upsert?: PersonJourneyTaskUpsertWithWhereUniqueWithoutJourneyInput | PersonJourneyTaskUpsertWithWhereUniqueWithoutJourneyInput[]
+    createMany?: PersonJourneyTaskCreateManyJourneyInputEnvelope
+    set?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    disconnect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    delete?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    update?: PersonJourneyTaskUpdateWithWhereUniqueWithoutJourneyInput | PersonJourneyTaskUpdateWithWhereUniqueWithoutJourneyInput[]
+    updateMany?: PersonJourneyTaskUpdateManyWithWhereWithoutJourneyInput | PersonJourneyTaskUpdateManyWithWhereWithoutJourneyInput[]
+    deleteMany?: PersonJourneyTaskScalarWhereInput | PersonJourneyTaskScalarWhereInput[]
+  }
+
+  export type PersonJourneyStageHistoryUpdateManyWithoutJourneyNestedInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutJourneyInput, PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput> | PersonJourneyStageHistoryCreateWithoutJourneyInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput | PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput[]
+    upsert?: PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutJourneyInput | PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutJourneyInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyJourneyInputEnvelope
+    set?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    disconnect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    delete?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    update?: PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutJourneyInput | PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutJourneyInput[]
+    updateMany?: PersonJourneyStageHistoryUpdateManyWithWhereWithoutJourneyInput | PersonJourneyStageHistoryUpdateManyWithWhereWithoutJourneyInput[]
+    deleteMany?: PersonJourneyStageHistoryScalarWhereInput | PersonJourneyStageHistoryScalarWhereInput[]
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateManyWithoutJourneyNestedInput = {
+    create?: XOR<PersonJourneyTaskCreateWithoutJourneyInput, PersonJourneyTaskUncheckedCreateWithoutJourneyInput> | PersonJourneyTaskCreateWithoutJourneyInput[] | PersonJourneyTaskUncheckedCreateWithoutJourneyInput[]
+    connectOrCreate?: PersonJourneyTaskCreateOrConnectWithoutJourneyInput | PersonJourneyTaskCreateOrConnectWithoutJourneyInput[]
+    upsert?: PersonJourneyTaskUpsertWithWhereUniqueWithoutJourneyInput | PersonJourneyTaskUpsertWithWhereUniqueWithoutJourneyInput[]
+    createMany?: PersonJourneyTaskCreateManyJourneyInputEnvelope
+    set?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    disconnect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    delete?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    connect?: PersonJourneyTaskWhereUniqueInput | PersonJourneyTaskWhereUniqueInput[]
+    update?: PersonJourneyTaskUpdateWithWhereUniqueWithoutJourneyInput | PersonJourneyTaskUpdateWithWhereUniqueWithoutJourneyInput[]
+    updateMany?: PersonJourneyTaskUpdateManyWithWhereWithoutJourneyInput | PersonJourneyTaskUpdateManyWithWhereWithoutJourneyInput[]
+    deleteMany?: PersonJourneyTaskScalarWhereInput | PersonJourneyTaskScalarWhereInput[]
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateManyWithoutJourneyNestedInput = {
+    create?: XOR<PersonJourneyStageHistoryCreateWithoutJourneyInput, PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput> | PersonJourneyStageHistoryCreateWithoutJourneyInput[] | PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput[]
+    connectOrCreate?: PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput | PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput[]
+    upsert?: PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutJourneyInput | PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutJourneyInput[]
+    createMany?: PersonJourneyStageHistoryCreateManyJourneyInputEnvelope
+    set?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    disconnect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    delete?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    connect?: PersonJourneyStageHistoryWhereUniqueInput | PersonJourneyStageHistoryWhereUniqueInput[]
+    update?: PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutJourneyInput | PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutJourneyInput[]
+    updateMany?: PersonJourneyStageHistoryUpdateManyWithWhereWithoutJourneyInput | PersonJourneyStageHistoryUpdateManyWithWhereWithoutJourneyInput[]
+    deleteMany?: PersonJourneyStageHistoryScalarWhereInput | PersonJourneyStageHistoryScalarWhereInput[]
+  }
+
+  export type PersonCreateNestedOneWithoutJourneyTasksInput = {
+    create?: XOR<PersonCreateWithoutJourneyTasksInput, PersonUncheckedCreateWithoutJourneyTasksInput>
+    connectOrCreate?: PersonCreateOrConnectWithoutJourneyTasksInput
+    connect?: PersonWhereUniqueInput
+  }
+
+  export type PersonJourneyCreateNestedOneWithoutTasksInput = {
+    create?: XOR<PersonJourneyCreateWithoutTasksInput, PersonJourneyUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutTasksInput
+    connect?: PersonJourneyWhereUniqueInput
+  }
+
+  export type JourneyTaskCreateNestedOneWithoutProgressEntriesInput = {
+    create?: XOR<JourneyTaskCreateWithoutProgressEntriesInput, JourneyTaskUncheckedCreateWithoutProgressEntriesInput>
+    connectOrCreate?: JourneyTaskCreateOrConnectWithoutProgressEntriesInput
+    connect?: JourneyTaskWhereUniqueInput
+  }
+
+  export type PersonUpdateOneRequiredWithoutJourneyTasksNestedInput = {
+    create?: XOR<PersonCreateWithoutJourneyTasksInput, PersonUncheckedCreateWithoutJourneyTasksInput>
+    connectOrCreate?: PersonCreateOrConnectWithoutJourneyTasksInput
+    upsert?: PersonUpsertWithoutJourneyTasksInput
+    connect?: PersonWhereUniqueInput
+    update?: XOR<XOR<PersonUpdateToOneWithWhereWithoutJourneyTasksInput, PersonUpdateWithoutJourneyTasksInput>, PersonUncheckedUpdateWithoutJourneyTasksInput>
+  }
+
+  export type PersonJourneyUpdateOneRequiredWithoutTasksNestedInput = {
+    create?: XOR<PersonJourneyCreateWithoutTasksInput, PersonJourneyUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutTasksInput
+    upsert?: PersonJourneyUpsertWithoutTasksInput
+    connect?: PersonJourneyWhereUniqueInput
+    update?: XOR<XOR<PersonJourneyUpdateToOneWithWhereWithoutTasksInput, PersonJourneyUpdateWithoutTasksInput>, PersonJourneyUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type JourneyTaskUpdateOneRequiredWithoutProgressEntriesNestedInput = {
+    create?: XOR<JourneyTaskCreateWithoutProgressEntriesInput, JourneyTaskUncheckedCreateWithoutProgressEntriesInput>
+    connectOrCreate?: JourneyTaskCreateOrConnectWithoutProgressEntriesInput
+    upsert?: JourneyTaskUpsertWithoutProgressEntriesInput
+    connect?: JourneyTaskWhereUniqueInput
+    update?: XOR<XOR<JourneyTaskUpdateToOneWithWhereWithoutProgressEntriesInput, JourneyTaskUpdateWithoutProgressEntriesInput>, JourneyTaskUncheckedUpdateWithoutProgressEntriesInput>
+  }
+
+  export type PersonCreateNestedOneWithoutAchievementsInput = {
+    create?: XOR<PersonCreateWithoutAchievementsInput, PersonUncheckedCreateWithoutAchievementsInput>
+    connectOrCreate?: PersonCreateOrConnectWithoutAchievementsInput
+    connect?: PersonWhereUniqueInput
+  }
+
+  export type JourneyAchievementCreateNestedOneWithoutPersonAchievementsInput = {
+    create?: XOR<JourneyAchievementCreateWithoutPersonAchievementsInput, JourneyAchievementUncheckedCreateWithoutPersonAchievementsInput>
+    connectOrCreate?: JourneyAchievementCreateOrConnectWithoutPersonAchievementsInput
+    connect?: JourneyAchievementWhereUniqueInput
+  }
+
+  export type PersonUpdateOneRequiredWithoutAchievementsNestedInput = {
+    create?: XOR<PersonCreateWithoutAchievementsInput, PersonUncheckedCreateWithoutAchievementsInput>
+    connectOrCreate?: PersonCreateOrConnectWithoutAchievementsInput
+    upsert?: PersonUpsertWithoutAchievementsInput
+    connect?: PersonWhereUniqueInput
+    update?: XOR<XOR<PersonUpdateToOneWithWhereWithoutAchievementsInput, PersonUpdateWithoutAchievementsInput>, PersonUncheckedUpdateWithoutAchievementsInput>
+  }
+
+  export type JourneyAchievementUpdateOneRequiredWithoutPersonAchievementsNestedInput = {
+    create?: XOR<JourneyAchievementCreateWithoutPersonAchievementsInput, JourneyAchievementUncheckedCreateWithoutPersonAchievementsInput>
+    connectOrCreate?: JourneyAchievementCreateOrConnectWithoutPersonAchievementsInput
+    upsert?: JourneyAchievementUpsertWithoutPersonAchievementsInput
+    connect?: JourneyAchievementWhereUniqueInput
+    update?: XOR<XOR<JourneyAchievementUpdateToOneWithWhereWithoutPersonAchievementsInput, JourneyAchievementUpdateWithoutPersonAchievementsInput>, JourneyAchievementUncheckedUpdateWithoutPersonAchievementsInput>
+  }
+
+  export type PersonJourneyCreateNestedOneWithoutHistoryInput = {
+    create?: XOR<PersonJourneyCreateWithoutHistoryInput, PersonJourneyUncheckedCreateWithoutHistoryInput>
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutHistoryInput
+    connect?: PersonJourneyWhereUniqueInput
+  }
+
+  export type JourneyStageCreateNestedOneWithoutPreviousEntriesInput = {
+    create?: XOR<JourneyStageCreateWithoutPreviousEntriesInput, JourneyStageUncheckedCreateWithoutPreviousEntriesInput>
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutPreviousEntriesInput
+    connect?: JourneyStageWhereUniqueInput
+  }
+
+  export type JourneyStageCreateNestedOneWithoutHistoryEntriesInput = {
+    create?: XOR<JourneyStageCreateWithoutHistoryEntriesInput, JourneyStageUncheckedCreateWithoutHistoryEntriesInput>
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutHistoryEntriesInput
+    connect?: JourneyStageWhereUniqueInput
+  }
+
+  export type PersonJourneyUpdateOneRequiredWithoutHistoryNestedInput = {
+    create?: XOR<PersonJourneyCreateWithoutHistoryInput, PersonJourneyUncheckedCreateWithoutHistoryInput>
+    connectOrCreate?: PersonJourneyCreateOrConnectWithoutHistoryInput
+    upsert?: PersonJourneyUpsertWithoutHistoryInput
+    connect?: PersonJourneyWhereUniqueInput
+    update?: XOR<XOR<PersonJourneyUpdateToOneWithWhereWithoutHistoryInput, PersonJourneyUpdateWithoutHistoryInput>, PersonJourneyUncheckedUpdateWithoutHistoryInput>
+  }
+
+  export type JourneyStageUpdateOneWithoutPreviousEntriesNestedInput = {
+    create?: XOR<JourneyStageCreateWithoutPreviousEntriesInput, JourneyStageUncheckedCreateWithoutPreviousEntriesInput>
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutPreviousEntriesInput
+    upsert?: JourneyStageUpsertWithoutPreviousEntriesInput
+    disconnect?: JourneyStageWhereInput | boolean
+    delete?: JourneyStageWhereInput | boolean
+    connect?: JourneyStageWhereUniqueInput
+    update?: XOR<XOR<JourneyStageUpdateToOneWithWhereWithoutPreviousEntriesInput, JourneyStageUpdateWithoutPreviousEntriesInput>, JourneyStageUncheckedUpdateWithoutPreviousEntriesInput>
+  }
+
+  export type JourneyStageUpdateOneRequiredWithoutHistoryEntriesNestedInput = {
+    create?: XOR<JourneyStageCreateWithoutHistoryEntriesInput, JourneyStageUncheckedCreateWithoutHistoryEntriesInput>
+    connectOrCreate?: JourneyStageCreateOrConnectWithoutHistoryEntriesInput
+    upsert?: JourneyStageUpsertWithoutHistoryEntriesInput
+    connect?: JourneyStageWhereUniqueInput
+    update?: XOR<XOR<JourneyStageUpdateToOneWithWhereWithoutHistoryEntriesInput, JourneyStageUpdateWithoutHistoryEntriesInput>, JourneyStageUncheckedUpdateWithoutHistoryEntriesInput>
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -18934,6 +32752,57 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumVolunteerScaleResponseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.VolunteerScaleResponseStatus | EnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VolunteerScaleResponseStatus[] | ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VolunteerScaleResponseStatus[] | ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVolunteerScaleResponseStatusFilter<$PrismaModel> | $Enums.VolunteerScaleResponseStatus
+  }
+
+  export type NestedEnumVolunteerScaleResponseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VolunteerScaleResponseStatus | EnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VolunteerScaleResponseStatus[] | ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VolunteerScaleResponseStatus[] | ListEnumVolunteerScaleResponseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVolunteerScaleResponseStatusWithAggregatesFilter<$PrismaModel> | $Enums.VolunteerScaleResponseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVolunteerScaleResponseStatusFilter<$PrismaModel>
+    _max?: NestedEnumVolunteerScaleResponseStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+  }
+
+  export type NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumJourneyTriggerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.JourneyTriggerType | EnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.JourneyTriggerType[] | ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.JourneyTriggerType[] | ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumJourneyTriggerTypeFilter<$PrismaModel> | $Enums.JourneyTriggerType
+  }
+
+  export type NestedEnumJourneyTriggerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.JourneyTriggerType | EnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.JourneyTriggerType[] | ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.JourneyTriggerType[] | ListEnumJourneyTriggerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumJourneyTriggerTypeWithAggregatesFilter<$PrismaModel> | $Enums.JourneyTriggerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumJourneyTriggerTypeFilter<$PrismaModel>
+    _max?: NestedEnumJourneyTriggerTypeFilter<$PrismaModel>
+  }
+
   export type UserCreateWithoutYouChurchInput = {
     id?: string
     name: string
@@ -18946,6 +32815,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientUserInput
+    notificationsTriggered?: NotificationCreateNestedManyWithoutActorUserInput
   }
 
   export type UserUncheckedCreateWithoutYouChurchInput = {
@@ -18960,6 +32831,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientUserInput
+    notificationsTriggered?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
   }
 
   export type UserCreateOrConnectWithoutYouChurchInput = {
@@ -18989,6 +32862,9 @@ export namespace Prisma {
     onboardingCompletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    journey?: PersonJourneyCreateNestedOneWithoutPersonInput
+    journeyTasks?: PersonJourneyTaskCreateNestedManyWithoutPersonInput
+    achievements?: PersonAchievementCreateNestedManyWithoutPersonInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutPersonInput
   }
 
@@ -19009,6 +32885,9 @@ export namespace Prisma {
     onboardingCompletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    journey?: PersonJourneyUncheckedCreateNestedOneWithoutPersonInput
+    journeyTasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutPersonInput
+    achievements?: PersonAchievementUncheckedCreateNestedManyWithoutPersonInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutPersonInput
   }
 
@@ -19124,6 +33003,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     person: PersonCreateNestedOneWithoutVolunteerScalesInput
@@ -19136,6 +33018,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     personId: string
     ministryId: string
     createdAt?: Date | string
@@ -19149,6 +33034,48 @@ export namespace Prisma {
 
   export type VolunteerScaleCreateManyChurchInputEnvelope = {
     data: VolunteerScaleCreateManyChurchInput | VolunteerScaleCreateManyChurchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NotificationCreateWithoutChurchInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    recipientUser: UserCreateNestedOneWithoutNotificationsReceivedInput
+    actorUser?: UserCreateNestedOneWithoutNotificationsTriggeredInput
+  }
+
+  export type NotificationUncheckedCreateWithoutChurchInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    recipientUserId: string
+    actorUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutChurchInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutChurchInput, NotificationUncheckedCreateWithoutChurchInput>
+  }
+
+  export type NotificationCreateManyChurchInputEnvelope = {
+    data: NotificationCreateManyChurchInput | NotificationCreateManyChurchInput[]
     skipDuplicates?: boolean
   }
 
@@ -19183,6 +33110,86 @@ export namespace Prisma {
 
   export type FinancialEntryCreateManyChurchInputEnvelope = {
     data: FinancialEntryCreateManyChurchInput | FinancialEntryCreateManyChurchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type JourneyStageCreateWithoutChurchInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: JourneyTaskCreateNestedManyWithoutStageInput
+    currentJourneys?: PersonJourneyCreateNestedManyWithoutCurrentStageInput
+    historyEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutToStageInput
+    previousEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageUncheckedCreateWithoutChurchInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: JourneyTaskUncheckedCreateNestedManyWithoutStageInput
+    currentJourneys?: PersonJourneyUncheckedCreateNestedManyWithoutCurrentStageInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutToStageInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageCreateOrConnectWithoutChurchInput = {
+    where: JourneyStageWhereUniqueInput
+    create: XOR<JourneyStageCreateWithoutChurchInput, JourneyStageUncheckedCreateWithoutChurchInput>
+  }
+
+  export type JourneyStageCreateManyChurchInputEnvelope = {
+    data: JourneyStageCreateManyChurchInput | JourneyStageCreateManyChurchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type JourneyAchievementCreateWithoutChurchInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points?: number
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    personAchievements?: PersonAchievementCreateNestedManyWithoutAchievementInput
+  }
+
+  export type JourneyAchievementUncheckedCreateWithoutChurchInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points?: number
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    personAchievements?: PersonAchievementUncheckedCreateNestedManyWithoutAchievementInput
+  }
+
+  export type JourneyAchievementCreateOrConnectWithoutChurchInput = {
+    where: JourneyAchievementWhereUniqueInput
+    create: XOR<JourneyAchievementCreateWithoutChurchInput, JourneyAchievementUncheckedCreateWithoutChurchInput>
+  }
+
+  export type JourneyAchievementCreateManyChurchInputEnvelope = {
+    data: JourneyAchievementCreateManyChurchInput | JourneyAchievementCreateManyChurchInput[]
     skipDuplicates?: boolean
   }
 
@@ -19374,11 +33381,50 @@ export namespace Prisma {
     role?: StringFilter<"VolunteerScale"> | string
     eventName?: StringNullableFilter<"VolunteerScale"> | string | null
     confirmed?: BoolFilter<"VolunteerScale"> | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFilter<"VolunteerScale"> | $Enums.VolunteerScaleResponseStatus
+    responseNote?: StringNullableFilter<"VolunteerScale"> | string | null
+    respondedAt?: DateTimeNullableFilter<"VolunteerScale"> | Date | string | null
     personId?: StringFilter<"VolunteerScale"> | string
     ministryId?: StringFilter<"VolunteerScale"> | string
     churchId?: StringFilter<"VolunteerScale"> | string
     createdAt?: DateTimeFilter<"VolunteerScale"> | Date | string
     updatedAt?: DateTimeFilter<"VolunteerScale"> | Date | string
+  }
+
+  export type NotificationUpsertWithWhereUniqueWithoutChurchInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutChurchInput, NotificationUncheckedUpdateWithoutChurchInput>
+    create: XOR<NotificationCreateWithoutChurchInput, NotificationUncheckedCreateWithoutChurchInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutChurchInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutChurchInput, NotificationUncheckedUpdateWithoutChurchInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutChurchInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutChurchInput>
+  }
+
+  export type NotificationScalarWhereInput = {
+    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    OR?: NotificationScalarWhereInput[]
+    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    id?: StringFilter<"Notification"> | string
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    title?: StringFilter<"Notification"> | string
+    message?: StringFilter<"Notification"> | string
+    link?: StringNullableFilter<"Notification"> | string | null
+    entityType?: StringNullableFilter<"Notification"> | string | null
+    entityId?: StringNullableFilter<"Notification"> | string | null
+    metadata?: JsonNullableFilter<"Notification">
+    readAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    churchId?: StringFilter<"Notification"> | string
+    recipientUserId?: StringFilter<"Notification"> | string
+    actorUserId?: StringNullableFilter<"Notification"> | string | null
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
   }
 
   export type FinancialEntryUpsertWithWhereUniqueWithoutChurchInput = {
@@ -19413,6 +33459,71 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"FinancialEntry"> | Date | string
   }
 
+  export type JourneyStageUpsertWithWhereUniqueWithoutChurchInput = {
+    where: JourneyStageWhereUniqueInput
+    update: XOR<JourneyStageUpdateWithoutChurchInput, JourneyStageUncheckedUpdateWithoutChurchInput>
+    create: XOR<JourneyStageCreateWithoutChurchInput, JourneyStageUncheckedCreateWithoutChurchInput>
+  }
+
+  export type JourneyStageUpdateWithWhereUniqueWithoutChurchInput = {
+    where: JourneyStageWhereUniqueInput
+    data: XOR<JourneyStageUpdateWithoutChurchInput, JourneyStageUncheckedUpdateWithoutChurchInput>
+  }
+
+  export type JourneyStageUpdateManyWithWhereWithoutChurchInput = {
+    where: JourneyStageScalarWhereInput
+    data: XOR<JourneyStageUpdateManyMutationInput, JourneyStageUncheckedUpdateManyWithoutChurchInput>
+  }
+
+  export type JourneyStageScalarWhereInput = {
+    AND?: JourneyStageScalarWhereInput | JourneyStageScalarWhereInput[]
+    OR?: JourneyStageScalarWhereInput[]
+    NOT?: JourneyStageScalarWhereInput | JourneyStageScalarWhereInput[]
+    id?: StringFilter<"JourneyStage"> | string
+    key?: StringFilter<"JourneyStage"> | string
+    name?: StringFilter<"JourneyStage"> | string
+    description?: StringFilter<"JourneyStage"> | string
+    order?: IntFilter<"JourneyStage"> | number
+    active?: BoolFilter<"JourneyStage"> | boolean
+    visibleToMember?: BoolFilter<"JourneyStage"> | boolean
+    pointsReward?: IntFilter<"JourneyStage"> | number
+    churchId?: StringFilter<"JourneyStage"> | string
+    createdAt?: DateTimeFilter<"JourneyStage"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyStage"> | Date | string
+  }
+
+  export type JourneyAchievementUpsertWithWhereUniqueWithoutChurchInput = {
+    where: JourneyAchievementWhereUniqueInput
+    update: XOR<JourneyAchievementUpdateWithoutChurchInput, JourneyAchievementUncheckedUpdateWithoutChurchInput>
+    create: XOR<JourneyAchievementCreateWithoutChurchInput, JourneyAchievementUncheckedCreateWithoutChurchInput>
+  }
+
+  export type JourneyAchievementUpdateWithWhereUniqueWithoutChurchInput = {
+    where: JourneyAchievementWhereUniqueInput
+    data: XOR<JourneyAchievementUpdateWithoutChurchInput, JourneyAchievementUncheckedUpdateWithoutChurchInput>
+  }
+
+  export type JourneyAchievementUpdateManyWithWhereWithoutChurchInput = {
+    where: JourneyAchievementScalarWhereInput
+    data: XOR<JourneyAchievementUpdateManyMutationInput, JourneyAchievementUncheckedUpdateManyWithoutChurchInput>
+  }
+
+  export type JourneyAchievementScalarWhereInput = {
+    AND?: JourneyAchievementScalarWhereInput | JourneyAchievementScalarWhereInput[]
+    OR?: JourneyAchievementScalarWhereInput[]
+    NOT?: JourneyAchievementScalarWhereInput | JourneyAchievementScalarWhereInput[]
+    id?: StringFilter<"JourneyAchievement"> | string
+    key?: StringFilter<"JourneyAchievement"> | string
+    name?: StringFilter<"JourneyAchievement"> | string
+    description?: StringFilter<"JourneyAchievement"> | string
+    icon?: StringFilter<"JourneyAchievement"> | string
+    points?: IntFilter<"JourneyAchievement"> | number
+    active?: BoolFilter<"JourneyAchievement"> | boolean
+    churchId?: StringFilter<"JourneyAchievement"> | string
+    createdAt?: DateTimeFilter<"JourneyAchievement"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyAchievement"> | Date | string
+  }
+
   export type ChurchCreateWithoutFinancialEntriesInput = {
     id?: string
     name: string
@@ -19431,6 +33542,9 @@ export namespace Prisma {
     schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
     ministries?: MinistryCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutFinancialEntriesInput = {
@@ -19451,6 +33565,9 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
     ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutFinancialEntriesInput = {
@@ -19487,6 +33604,9 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutFinancialEntriesInput = {
@@ -19507,6 +33627,9 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutLinksInput = {
@@ -19526,7 +33649,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
     ministries?: MinistryCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutLinksInput = {
@@ -19546,7 +33672,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
     ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutLinksInput = {
@@ -19582,7 +33711,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutLinksInput = {
@@ -19602,7 +33734,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutSchedulesInput = {
@@ -19622,7 +33757,10 @@ export namespace Prisma {
     links?: ChurchLinkCreateNestedManyWithoutChurchInput
     ministries?: MinistryCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutSchedulesInput = {
@@ -19642,7 +33780,10 @@ export namespace Prisma {
     links?: ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
     ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutSchedulesInput = {
@@ -19678,7 +33819,10 @@ export namespace Prisma {
     links?: ChurchLinkUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutSchedulesInput = {
@@ -19698,7 +33842,10 @@ export namespace Prisma {
     links?: ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutUsersInput = {
@@ -19718,7 +33865,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
     ministries?: MinistryCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutUsersInput = {
@@ -19738,7 +33888,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
     ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutUsersInput = {
@@ -19816,6 +33969,90 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type NotificationCreateWithoutRecipientUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutNotificationsInput
+    actorUser?: UserCreateNestedOneWithoutNotificationsTriggeredInput
+  }
+
+  export type NotificationUncheckedCreateWithoutRecipientUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    churchId: string
+    actorUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutRecipientUserInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutRecipientUserInput, NotificationUncheckedCreateWithoutRecipientUserInput>
+  }
+
+  export type NotificationCreateManyRecipientUserInputEnvelope = {
+    data: NotificationCreateManyRecipientUserInput | NotificationCreateManyRecipientUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NotificationCreateWithoutActorUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutNotificationsInput
+    recipientUser: UserCreateNestedOneWithoutNotificationsReceivedInput
+  }
+
+  export type NotificationUncheckedCreateWithoutActorUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    churchId: string
+    recipientUserId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutActorUserInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutActorUserInput, NotificationUncheckedCreateWithoutActorUserInput>
+  }
+
+  export type NotificationCreateManyActorUserInputEnvelope = {
+    data: NotificationCreateManyActorUserInput | NotificationCreateManyActorUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ChurchUpsertWithoutUsersInput = {
     update: XOR<ChurchUpdateWithoutUsersInput, ChurchUncheckedUpdateWithoutUsersInput>
     create: XOR<ChurchCreateWithoutUsersInput, ChurchUncheckedCreateWithoutUsersInput>
@@ -19844,7 +34081,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutUsersInput = {
@@ -19864,7 +34104,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -19932,6 +34175,38 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
+  export type NotificationUpsertWithWhereUniqueWithoutRecipientUserInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutRecipientUserInput, NotificationUncheckedUpdateWithoutRecipientUserInput>
+    create: XOR<NotificationCreateWithoutRecipientUserInput, NotificationUncheckedCreateWithoutRecipientUserInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutRecipientUserInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutRecipientUserInput, NotificationUncheckedUpdateWithoutRecipientUserInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutRecipientUserInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutRecipientUserInput>
+  }
+
+  export type NotificationUpsertWithWhereUniqueWithoutActorUserInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutActorUserInput, NotificationUncheckedUpdateWithoutActorUserInput>
+    create: XOR<NotificationCreateWithoutActorUserInput, NotificationUncheckedCreateWithoutActorUserInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutActorUserInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutActorUserInput, NotificationUncheckedUpdateWithoutActorUserInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutActorUserInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutActorUserInput>
+  }
+
   export type ChurchCreateWithoutPersonsInput = {
     id?: string
     name: string
@@ -19949,7 +34224,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
     ministries?: MinistryCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutPersonsInput = {
@@ -19969,12 +34247,104 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
     ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutPersonsInput = {
     where: ChurchWhereUniqueInput
     create: XOR<ChurchCreateWithoutPersonsInput, ChurchUncheckedCreateWithoutPersonsInput>
+  }
+
+  export type PersonJourneyCreateWithoutPersonInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    currentStage?: JourneyStageCreateNestedOneWithoutCurrentJourneysInput
+    tasks?: PersonJourneyTaskCreateNestedManyWithoutJourneyInput
+    history?: PersonJourneyStageHistoryCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyUncheckedCreateWithoutPersonInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    currentStageId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutJourneyInput
+    history?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyCreateOrConnectWithoutPersonInput = {
+    where: PersonJourneyWhereUniqueInput
+    create: XOR<PersonJourneyCreateWithoutPersonInput, PersonJourneyUncheckedCreateWithoutPersonInput>
+  }
+
+  export type PersonJourneyTaskCreateWithoutPersonInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    journey: PersonJourneyCreateNestedOneWithoutTasksInput
+    task: JourneyTaskCreateNestedOneWithoutProgressEntriesInput
+  }
+
+  export type PersonJourneyTaskUncheckedCreateWithoutPersonInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    journeyId: string
+    taskId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyTaskCreateOrConnectWithoutPersonInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    create: XOR<PersonJourneyTaskCreateWithoutPersonInput, PersonJourneyTaskUncheckedCreateWithoutPersonInput>
+  }
+
+  export type PersonJourneyTaskCreateManyPersonInputEnvelope = {
+    data: PersonJourneyTaskCreateManyPersonInput | PersonJourneyTaskCreateManyPersonInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PersonAchievementCreateWithoutPersonInput = {
+    id?: string
+    earnedAt?: Date | string
+    achievement: JourneyAchievementCreateNestedOneWithoutPersonAchievementsInput
+  }
+
+  export type PersonAchievementUncheckedCreateWithoutPersonInput = {
+    id?: string
+    earnedAt?: Date | string
+    achievementId: string
+  }
+
+  export type PersonAchievementCreateOrConnectWithoutPersonInput = {
+    where: PersonAchievementWhereUniqueInput
+    create: XOR<PersonAchievementCreateWithoutPersonInput, PersonAchievementUncheckedCreateWithoutPersonInput>
+  }
+
+  export type PersonAchievementCreateManyPersonInputEnvelope = {
+    data: PersonAchievementCreateManyPersonInput | PersonAchievementCreateManyPersonInput[]
+    skipDuplicates?: boolean
   }
 
   export type VolunteerScaleCreateWithoutPersonInput = {
@@ -19983,6 +34353,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ministry: MinistryCreateNestedOneWithoutScalesInput
@@ -19995,6 +34368,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     ministryId: string
     churchId: string
     createdAt?: Date | string
@@ -20039,7 +34415,10 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutPersonsInput = {
@@ -20059,7 +34438,108 @@ export namespace Prisma {
     schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
+  }
+
+  export type PersonJourneyUpsertWithoutPersonInput = {
+    update: XOR<PersonJourneyUpdateWithoutPersonInput, PersonJourneyUncheckedUpdateWithoutPersonInput>
+    create: XOR<PersonJourneyCreateWithoutPersonInput, PersonJourneyUncheckedCreateWithoutPersonInput>
+    where?: PersonJourneyWhereInput
+  }
+
+  export type PersonJourneyUpdateToOneWithWhereWithoutPersonInput = {
+    where?: PersonJourneyWhereInput
+    data: XOR<PersonJourneyUpdateWithoutPersonInput, PersonJourneyUncheckedUpdateWithoutPersonInput>
+  }
+
+  export type PersonJourneyUpdateWithoutPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    currentStage?: JourneyStageUpdateOneWithoutCurrentJourneysNestedInput
+    tasks?: PersonJourneyTaskUpdateManyWithoutJourneyNestedInput
+    history?: PersonJourneyStageHistoryUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type PersonJourneyUncheckedUpdateWithoutPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: PersonJourneyTaskUncheckedUpdateManyWithoutJourneyNestedInput
+    history?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type PersonJourneyTaskUpsertWithWhereUniqueWithoutPersonInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    update: XOR<PersonJourneyTaskUpdateWithoutPersonInput, PersonJourneyTaskUncheckedUpdateWithoutPersonInput>
+    create: XOR<PersonJourneyTaskCreateWithoutPersonInput, PersonJourneyTaskUncheckedCreateWithoutPersonInput>
+  }
+
+  export type PersonJourneyTaskUpdateWithWhereUniqueWithoutPersonInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    data: XOR<PersonJourneyTaskUpdateWithoutPersonInput, PersonJourneyTaskUncheckedUpdateWithoutPersonInput>
+  }
+
+  export type PersonJourneyTaskUpdateManyWithWhereWithoutPersonInput = {
+    where: PersonJourneyTaskScalarWhereInput
+    data: XOR<PersonJourneyTaskUpdateManyMutationInput, PersonJourneyTaskUncheckedUpdateManyWithoutPersonInput>
+  }
+
+  export type PersonJourneyTaskScalarWhereInput = {
+    AND?: PersonJourneyTaskScalarWhereInput | PersonJourneyTaskScalarWhereInput[]
+    OR?: PersonJourneyTaskScalarWhereInput[]
+    NOT?: PersonJourneyTaskScalarWhereInput | PersonJourneyTaskScalarWhereInput[]
+    id?: StringFilter<"PersonJourneyTask"> | string
+    completed?: BoolFilter<"PersonJourneyTask"> | boolean
+    completedAt?: DateTimeNullableFilter<"PersonJourneyTask"> | Date | string | null
+    source?: EnumJourneyTriggerTypeFilter<"PersonJourneyTask"> | $Enums.JourneyTriggerType
+    personId?: StringFilter<"PersonJourneyTask"> | string
+    journeyId?: StringFilter<"PersonJourneyTask"> | string
+    taskId?: StringFilter<"PersonJourneyTask"> | string
+    createdAt?: DateTimeFilter<"PersonJourneyTask"> | Date | string
+    updatedAt?: DateTimeFilter<"PersonJourneyTask"> | Date | string
+  }
+
+  export type PersonAchievementUpsertWithWhereUniqueWithoutPersonInput = {
+    where: PersonAchievementWhereUniqueInput
+    update: XOR<PersonAchievementUpdateWithoutPersonInput, PersonAchievementUncheckedUpdateWithoutPersonInput>
+    create: XOR<PersonAchievementCreateWithoutPersonInput, PersonAchievementUncheckedCreateWithoutPersonInput>
+  }
+
+  export type PersonAchievementUpdateWithWhereUniqueWithoutPersonInput = {
+    where: PersonAchievementWhereUniqueInput
+    data: XOR<PersonAchievementUpdateWithoutPersonInput, PersonAchievementUncheckedUpdateWithoutPersonInput>
+  }
+
+  export type PersonAchievementUpdateManyWithWhereWithoutPersonInput = {
+    where: PersonAchievementScalarWhereInput
+    data: XOR<PersonAchievementUpdateManyMutationInput, PersonAchievementUncheckedUpdateManyWithoutPersonInput>
+  }
+
+  export type PersonAchievementScalarWhereInput = {
+    AND?: PersonAchievementScalarWhereInput | PersonAchievementScalarWhereInput[]
+    OR?: PersonAchievementScalarWhereInput[]
+    NOT?: PersonAchievementScalarWhereInput | PersonAchievementScalarWhereInput[]
+    id?: StringFilter<"PersonAchievement"> | string
+    earnedAt?: DateTimeFilter<"PersonAchievement"> | Date | string
+    personId?: StringFilter<"PersonAchievement"> | string
+    achievementId?: StringFilter<"PersonAchievement"> | string
   }
 
   export type VolunteerScaleUpsertWithWhereUniqueWithoutPersonInput = {
@@ -20095,7 +34575,10 @@ export namespace Prisma {
     links?: ChurchLinkCreateNestedManyWithoutChurchInput
     schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMinistriesInput = {
@@ -20115,7 +34598,10 @@ export namespace Prisma {
     links?: ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
     schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
     volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutMinistriesInput = {
@@ -20129,6 +34615,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     person: PersonCreateNestedOneWithoutVolunteerScalesInput
@@ -20141,6 +34630,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     personId: string
     churchId: string
     createdAt?: Date | string
@@ -20185,7 +34677,10 @@ export namespace Prisma {
     links?: ChurchLinkUpdateManyWithoutChurchNestedInput
     schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMinistriesInput = {
@@ -20205,7 +34700,10 @@ export namespace Prisma {
     links?: ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
     schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type VolunteerScaleUpsertWithWhereUniqueWithoutMinistryInput = {
@@ -20242,6 +34740,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     youChurch: ChurchCreateNestedOneWithoutPersonsInput
+    journey?: PersonJourneyCreateNestedOneWithoutPersonInput
+    journeyTasks?: PersonJourneyTaskCreateNestedManyWithoutPersonInput
+    achievements?: PersonAchievementCreateNestedManyWithoutPersonInput
   }
 
   export type PersonUncheckedCreateWithoutVolunteerScalesInput = {
@@ -20262,6 +34763,9 @@ export namespace Prisma {
     churchId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    journey?: PersonJourneyUncheckedCreateNestedOneWithoutPersonInput
+    journeyTasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutPersonInput
+    achievements?: PersonAchievementUncheckedCreateNestedManyWithoutPersonInput
   }
 
   export type PersonCreateOrConnectWithoutVolunteerScalesInput = {
@@ -20313,7 +34817,10 @@ export namespace Prisma {
     links?: ChurchLinkCreateNestedManyWithoutChurchInput
     schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
     ministries?: MinistryCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutVolunteerScalesInput = {
@@ -20333,7 +34840,10 @@ export namespace Prisma {
     links?: ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
     schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
     ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
     financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutVolunteerScalesInput = {
@@ -20370,6 +34880,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     youChurch?: ChurchUpdateOneRequiredWithoutPersonsNestedInput
+    journey?: PersonJourneyUpdateOneWithoutPersonNestedInput
+    journeyTasks?: PersonJourneyTaskUpdateManyWithoutPersonNestedInput
+    achievements?: PersonAchievementUpdateManyWithoutPersonNestedInput
   }
 
   export type PersonUncheckedUpdateWithoutVolunteerScalesInput = {
@@ -20390,6 +34903,9 @@ export namespace Prisma {
     churchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journey?: PersonJourneyUncheckedUpdateOneWithoutPersonNestedInput
+    journeyTasks?: PersonJourneyTaskUncheckedUpdateManyWithoutPersonNestedInput
+    achievements?: PersonAchievementUncheckedUpdateManyWithoutPersonNestedInput
   }
 
   export type MinistryUpsertWithoutScalesInput = {
@@ -20453,7 +34969,10 @@ export namespace Prisma {
     links?: ChurchLinkUpdateManyWithoutChurchNestedInput
     schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutVolunteerScalesInput = {
@@ -20473,7 +34992,1869 @@ export namespace Prisma {
     links?: ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
     schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
     ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
     financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
+  }
+
+  export type ChurchCreateWithoutNotificationsInput = {
+    id?: string
+    name: string
+    label: string
+    address: string
+    contact?: ChurchCreatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: string | null
+    pixKeyValue?: string | null
+    pixCopyPaste?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutYouChurchInput
+    persons?: PersonCreateNestedManyWithoutYouChurchInput
+    links?: ChurchLinkCreateNestedManyWithoutChurchInput
+    schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
+    ministries?: MinistryCreateNestedManyWithoutChurchInput
+    volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchUncheckedCreateWithoutNotificationsInput = {
+    id?: string
+    name: string
+    label: string
+    address: string
+    contact?: ChurchCreatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: string | null
+    pixKeyValue?: string | null
+    pixCopyPaste?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutYouChurchInput
+    persons?: PersonUncheckedCreateNestedManyWithoutYouChurchInput
+    links?: ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
+    schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+    ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
+    volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchCreateOrConnectWithoutNotificationsInput = {
+    where: ChurchWhereUniqueInput
+    create: XOR<ChurchCreateWithoutNotificationsInput, ChurchUncheckedCreateWithoutNotificationsInput>
+  }
+
+  export type UserCreateWithoutNotificationsReceivedInput = {
+    id?: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    role?: $Enums.SystemRole
+    status?: $Enums.TypePerson | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    youChurch?: ChurchCreateNestedOneWithoutUsersInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    notificationsTriggered?: NotificationCreateNestedManyWithoutActorUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
+    id?: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    role?: $Enums.SystemRole
+    status?: $Enums.TypePerson | null
+    churchId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    notificationsTriggered?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNotificationsReceivedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNotificationsReceivedInput, UserUncheckedCreateWithoutNotificationsReceivedInput>
+  }
+
+  export type UserCreateWithoutNotificationsTriggeredInput = {
+    id?: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    role?: $Enums.SystemRole
+    status?: $Enums.TypePerson | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    youChurch?: ChurchCreateNestedOneWithoutUsersInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNotificationsTriggeredInput = {
+    id?: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    role?: $Enums.SystemRole
+    status?: $Enums.TypePerson | null
+    churchId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNotificationsTriggeredInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNotificationsTriggeredInput, UserUncheckedCreateWithoutNotificationsTriggeredInput>
+  }
+
+  export type ChurchUpsertWithoutNotificationsInput = {
+    update: XOR<ChurchUpdateWithoutNotificationsInput, ChurchUncheckedUpdateWithoutNotificationsInput>
+    create: XOR<ChurchCreateWithoutNotificationsInput, ChurchUncheckedCreateWithoutNotificationsInput>
+    where?: ChurchWhereInput
+  }
+
+  export type ChurchUpdateToOneWithWhereWithoutNotificationsInput = {
+    where?: ChurchWhereInput
+    data: XOR<ChurchUpdateWithoutNotificationsInput, ChurchUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type ChurchUpdateWithoutNotificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    contact?: ChurchUpdatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: NullableStringFieldUpdateOperationsInput | string | null
+    pixKeyValue?: NullableStringFieldUpdateOperationsInput | string | null
+    pixCopyPaste?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutYouChurchNestedInput
+    persons?: PersonUpdateManyWithoutYouChurchNestedInput
+    links?: ChurchLinkUpdateManyWithoutChurchNestedInput
+    schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
+    ministries?: MinistryUpdateManyWithoutChurchNestedInput
+    volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
+  }
+
+  export type ChurchUncheckedUpdateWithoutNotificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    contact?: ChurchUpdatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: NullableStringFieldUpdateOperationsInput | string | null
+    pixKeyValue?: NullableStringFieldUpdateOperationsInput | string | null
+    pixCopyPaste?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutYouChurchNestedInput
+    persons?: PersonUncheckedUpdateManyWithoutYouChurchNestedInput
+    links?: ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
+    schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+    ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
+    volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
+  }
+
+  export type UserUpsertWithoutNotificationsReceivedInput = {
+    update: XOR<UserUpdateWithoutNotificationsReceivedInput, UserUncheckedUpdateWithoutNotificationsReceivedInput>
+    create: XOR<UserCreateWithoutNotificationsReceivedInput, UserUncheckedCreateWithoutNotificationsReceivedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNotificationsReceivedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNotificationsReceivedInput, UserUncheckedUpdateWithoutNotificationsReceivedInput>
+  }
+
+  export type UserUpdateWithoutNotificationsReceivedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: NullableEnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    youChurch?: ChurchUpdateOneWithoutUsersNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    notificationsTriggered?: NotificationUpdateManyWithoutActorUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: NullableEnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    notificationsTriggered?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+  }
+
+  export type UserUpsertWithoutNotificationsTriggeredInput = {
+    update: XOR<UserUpdateWithoutNotificationsTriggeredInput, UserUncheckedUpdateWithoutNotificationsTriggeredInput>
+    create: XOR<UserCreateWithoutNotificationsTriggeredInput, UserUncheckedCreateWithoutNotificationsTriggeredInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNotificationsTriggeredInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNotificationsTriggeredInput, UserUncheckedUpdateWithoutNotificationsTriggeredInput>
+  }
+
+  export type UserUpdateWithoutNotificationsTriggeredInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: NullableEnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    youChurch?: ChurchUpdateOneWithoutUsersNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNotificationsTriggeredInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSystemRoleFieldUpdateOperationsInput | $Enums.SystemRole
+    status?: NullableEnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientUserNestedInput
+  }
+
+  export type ChurchCreateWithoutJourneyStagesInput = {
+    id?: string
+    name: string
+    label: string
+    address: string
+    contact?: ChurchCreatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: string | null
+    pixKeyValue?: string | null
+    pixCopyPaste?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutYouChurchInput
+    persons?: PersonCreateNestedManyWithoutYouChurchInput
+    links?: ChurchLinkCreateNestedManyWithoutChurchInput
+    schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
+    ministries?: MinistryCreateNestedManyWithoutChurchInput
+    volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
+    financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchUncheckedCreateWithoutJourneyStagesInput = {
+    id?: string
+    name: string
+    label: string
+    address: string
+    contact?: ChurchCreatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: string | null
+    pixKeyValue?: string | null
+    pixCopyPaste?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutYouChurchInput
+    persons?: PersonUncheckedCreateNestedManyWithoutYouChurchInput
+    links?: ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
+    schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+    ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
+    volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
+    financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyAchievements?: JourneyAchievementUncheckedCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchCreateOrConnectWithoutJourneyStagesInput = {
+    where: ChurchWhereUniqueInput
+    create: XOR<ChurchCreateWithoutJourneyStagesInput, ChurchUncheckedCreateWithoutJourneyStagesInput>
+  }
+
+  export type JourneyTaskCreateWithoutStageInput = {
+    id?: string
+    key: string
+    title: string
+    description: string
+    points?: number
+    required?: boolean
+    active?: boolean
+    triggerType?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    progressEntries?: PersonJourneyTaskCreateNestedManyWithoutTaskInput
+  }
+
+  export type JourneyTaskUncheckedCreateWithoutStageInput = {
+    id?: string
+    key: string
+    title: string
+    description: string
+    points?: number
+    required?: boolean
+    active?: boolean
+    triggerType?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    progressEntries?: PersonJourneyTaskUncheckedCreateNestedManyWithoutTaskInput
+  }
+
+  export type JourneyTaskCreateOrConnectWithoutStageInput = {
+    where: JourneyTaskWhereUniqueInput
+    create: XOR<JourneyTaskCreateWithoutStageInput, JourneyTaskUncheckedCreateWithoutStageInput>
+  }
+
+  export type JourneyTaskCreateManyStageInputEnvelope = {
+    data: JourneyTaskCreateManyStageInput | JourneyTaskCreateManyStageInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PersonJourneyCreateWithoutCurrentStageInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    person: PersonCreateNestedOneWithoutJourneyInput
+    tasks?: PersonJourneyTaskCreateNestedManyWithoutJourneyInput
+    history?: PersonJourneyStageHistoryCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyUncheckedCreateWithoutCurrentStageInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    personId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutJourneyInput
+    history?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyCreateOrConnectWithoutCurrentStageInput = {
+    where: PersonJourneyWhereUniqueInput
+    create: XOR<PersonJourneyCreateWithoutCurrentStageInput, PersonJourneyUncheckedCreateWithoutCurrentStageInput>
+  }
+
+  export type PersonJourneyCreateManyCurrentStageInputEnvelope = {
+    data: PersonJourneyCreateManyCurrentStageInput | PersonJourneyCreateManyCurrentStageInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PersonJourneyStageHistoryCreateWithoutToStageInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journey: PersonJourneyCreateNestedOneWithoutHistoryInput
+    fromStage?: JourneyStageCreateNestedOneWithoutPreviousEntriesInput
+  }
+
+  export type PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journeyId: string
+    fromStageId?: string | null
+  }
+
+  export type PersonJourneyStageHistoryCreateOrConnectWithoutToStageInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    create: XOR<PersonJourneyStageHistoryCreateWithoutToStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput>
+  }
+
+  export type PersonJourneyStageHistoryCreateManyToStageInputEnvelope = {
+    data: PersonJourneyStageHistoryCreateManyToStageInput | PersonJourneyStageHistoryCreateManyToStageInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PersonJourneyStageHistoryCreateWithoutFromStageInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journey: PersonJourneyCreateNestedOneWithoutHistoryInput
+    toStage: JourneyStageCreateNestedOneWithoutHistoryEntriesInput
+  }
+
+  export type PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journeyId: string
+    toStageId: string
+  }
+
+  export type PersonJourneyStageHistoryCreateOrConnectWithoutFromStageInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    create: XOR<PersonJourneyStageHistoryCreateWithoutFromStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput>
+  }
+
+  export type PersonJourneyStageHistoryCreateManyFromStageInputEnvelope = {
+    data: PersonJourneyStageHistoryCreateManyFromStageInput | PersonJourneyStageHistoryCreateManyFromStageInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChurchUpsertWithoutJourneyStagesInput = {
+    update: XOR<ChurchUpdateWithoutJourneyStagesInput, ChurchUncheckedUpdateWithoutJourneyStagesInput>
+    create: XOR<ChurchCreateWithoutJourneyStagesInput, ChurchUncheckedCreateWithoutJourneyStagesInput>
+    where?: ChurchWhereInput
+  }
+
+  export type ChurchUpdateToOneWithWhereWithoutJourneyStagesInput = {
+    where?: ChurchWhereInput
+    data: XOR<ChurchUpdateWithoutJourneyStagesInput, ChurchUncheckedUpdateWithoutJourneyStagesInput>
+  }
+
+  export type ChurchUpdateWithoutJourneyStagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    contact?: ChurchUpdatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: NullableStringFieldUpdateOperationsInput | string | null
+    pixKeyValue?: NullableStringFieldUpdateOperationsInput | string | null
+    pixCopyPaste?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutYouChurchNestedInput
+    persons?: PersonUpdateManyWithoutYouChurchNestedInput
+    links?: ChurchLinkUpdateManyWithoutChurchNestedInput
+    schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
+    ministries?: MinistryUpdateManyWithoutChurchNestedInput
+    volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
+    financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUpdateManyWithoutChurchNestedInput
+  }
+
+  export type ChurchUncheckedUpdateWithoutJourneyStagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    contact?: ChurchUpdatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: NullableStringFieldUpdateOperationsInput | string | null
+    pixKeyValue?: NullableStringFieldUpdateOperationsInput | string | null
+    pixCopyPaste?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutYouChurchNestedInput
+    persons?: PersonUncheckedUpdateManyWithoutYouChurchNestedInput
+    links?: ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
+    schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+    ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
+    volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
+    financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyAchievements?: JourneyAchievementUncheckedUpdateManyWithoutChurchNestedInput
+  }
+
+  export type JourneyTaskUpsertWithWhereUniqueWithoutStageInput = {
+    where: JourneyTaskWhereUniqueInput
+    update: XOR<JourneyTaskUpdateWithoutStageInput, JourneyTaskUncheckedUpdateWithoutStageInput>
+    create: XOR<JourneyTaskCreateWithoutStageInput, JourneyTaskUncheckedCreateWithoutStageInput>
+  }
+
+  export type JourneyTaskUpdateWithWhereUniqueWithoutStageInput = {
+    where: JourneyTaskWhereUniqueInput
+    data: XOR<JourneyTaskUpdateWithoutStageInput, JourneyTaskUncheckedUpdateWithoutStageInput>
+  }
+
+  export type JourneyTaskUpdateManyWithWhereWithoutStageInput = {
+    where: JourneyTaskScalarWhereInput
+    data: XOR<JourneyTaskUpdateManyMutationInput, JourneyTaskUncheckedUpdateManyWithoutStageInput>
+  }
+
+  export type JourneyTaskScalarWhereInput = {
+    AND?: JourneyTaskScalarWhereInput | JourneyTaskScalarWhereInput[]
+    OR?: JourneyTaskScalarWhereInput[]
+    NOT?: JourneyTaskScalarWhereInput | JourneyTaskScalarWhereInput[]
+    id?: StringFilter<"JourneyTask"> | string
+    key?: StringFilter<"JourneyTask"> | string
+    title?: StringFilter<"JourneyTask"> | string
+    description?: StringFilter<"JourneyTask"> | string
+    points?: IntFilter<"JourneyTask"> | number
+    required?: BoolFilter<"JourneyTask"> | boolean
+    active?: BoolFilter<"JourneyTask"> | boolean
+    triggerType?: EnumJourneyTriggerTypeFilter<"JourneyTask"> | $Enums.JourneyTriggerType
+    stageId?: StringFilter<"JourneyTask"> | string
+    createdAt?: DateTimeFilter<"JourneyTask"> | Date | string
+    updatedAt?: DateTimeFilter<"JourneyTask"> | Date | string
+  }
+
+  export type PersonJourneyUpsertWithWhereUniqueWithoutCurrentStageInput = {
+    where: PersonJourneyWhereUniqueInput
+    update: XOR<PersonJourneyUpdateWithoutCurrentStageInput, PersonJourneyUncheckedUpdateWithoutCurrentStageInput>
+    create: XOR<PersonJourneyCreateWithoutCurrentStageInput, PersonJourneyUncheckedCreateWithoutCurrentStageInput>
+  }
+
+  export type PersonJourneyUpdateWithWhereUniqueWithoutCurrentStageInput = {
+    where: PersonJourneyWhereUniqueInput
+    data: XOR<PersonJourneyUpdateWithoutCurrentStageInput, PersonJourneyUncheckedUpdateWithoutCurrentStageInput>
+  }
+
+  export type PersonJourneyUpdateManyWithWhereWithoutCurrentStageInput = {
+    where: PersonJourneyScalarWhereInput
+    data: XOR<PersonJourneyUpdateManyMutationInput, PersonJourneyUncheckedUpdateManyWithoutCurrentStageInput>
+  }
+
+  export type PersonJourneyScalarWhereInput = {
+    AND?: PersonJourneyScalarWhereInput | PersonJourneyScalarWhereInput[]
+    OR?: PersonJourneyScalarWhereInput[]
+    NOT?: PersonJourneyScalarWhereInput | PersonJourneyScalarWhereInput[]
+    id?: StringFilter<"PersonJourney"> | string
+    score?: IntFilter<"PersonJourney"> | number
+    level?: IntFilter<"PersonJourney"> | number
+    progress?: IntFilter<"PersonJourney"> | number
+    startedAt?: DateTimeFilter<"PersonJourney"> | Date | string
+    completedAt?: DateTimeNullableFilter<"PersonJourney"> | Date | string | null
+    lastActivityAt?: DateTimeNullableFilter<"PersonJourney"> | Date | string | null
+    personId?: StringFilter<"PersonJourney"> | string
+    currentStageId?: StringNullableFilter<"PersonJourney"> | string | null
+    createdAt?: DateTimeFilter<"PersonJourney"> | Date | string
+    updatedAt?: DateTimeFilter<"PersonJourney"> | Date | string
+  }
+
+  export type PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutToStageInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    update: XOR<PersonJourneyStageHistoryUpdateWithoutToStageInput, PersonJourneyStageHistoryUncheckedUpdateWithoutToStageInput>
+    create: XOR<PersonJourneyStageHistoryCreateWithoutToStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutToStageInput>
+  }
+
+  export type PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutToStageInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    data: XOR<PersonJourneyStageHistoryUpdateWithoutToStageInput, PersonJourneyStageHistoryUncheckedUpdateWithoutToStageInput>
+  }
+
+  export type PersonJourneyStageHistoryUpdateManyWithWhereWithoutToStageInput = {
+    where: PersonJourneyStageHistoryScalarWhereInput
+    data: XOR<PersonJourneyStageHistoryUpdateManyMutationInput, PersonJourneyStageHistoryUncheckedUpdateManyWithoutToStageInput>
+  }
+
+  export type PersonJourneyStageHistoryScalarWhereInput = {
+    AND?: PersonJourneyStageHistoryScalarWhereInput | PersonJourneyStageHistoryScalarWhereInput[]
+    OR?: PersonJourneyStageHistoryScalarWhereInput[]
+    NOT?: PersonJourneyStageHistoryScalarWhereInput | PersonJourneyStageHistoryScalarWhereInput[]
+    id?: StringFilter<"PersonJourneyStageHistory"> | string
+    movedAt?: DateTimeFilter<"PersonJourneyStageHistory"> | Date | string
+    notes?: StringNullableFilter<"PersonJourneyStageHistory"> | string | null
+    source?: EnumJourneyTriggerTypeFilter<"PersonJourneyStageHistory"> | $Enums.JourneyTriggerType
+    journeyId?: StringFilter<"PersonJourneyStageHistory"> | string
+    fromStageId?: StringNullableFilter<"PersonJourneyStageHistory"> | string | null
+    toStageId?: StringFilter<"PersonJourneyStageHistory"> | string
+  }
+
+  export type PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutFromStageInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    update: XOR<PersonJourneyStageHistoryUpdateWithoutFromStageInput, PersonJourneyStageHistoryUncheckedUpdateWithoutFromStageInput>
+    create: XOR<PersonJourneyStageHistoryCreateWithoutFromStageInput, PersonJourneyStageHistoryUncheckedCreateWithoutFromStageInput>
+  }
+
+  export type PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutFromStageInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    data: XOR<PersonJourneyStageHistoryUpdateWithoutFromStageInput, PersonJourneyStageHistoryUncheckedUpdateWithoutFromStageInput>
+  }
+
+  export type PersonJourneyStageHistoryUpdateManyWithWhereWithoutFromStageInput = {
+    where: PersonJourneyStageHistoryScalarWhereInput
+    data: XOR<PersonJourneyStageHistoryUpdateManyMutationInput, PersonJourneyStageHistoryUncheckedUpdateManyWithoutFromStageInput>
+  }
+
+  export type JourneyStageCreateWithoutTasksInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutJourneyStagesInput
+    currentJourneys?: PersonJourneyCreateNestedManyWithoutCurrentStageInput
+    historyEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutToStageInput
+    previousEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageUncheckedCreateWithoutTasksInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    currentJourneys?: PersonJourneyUncheckedCreateNestedManyWithoutCurrentStageInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutToStageInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageCreateOrConnectWithoutTasksInput = {
+    where: JourneyStageWhereUniqueInput
+    create: XOR<JourneyStageCreateWithoutTasksInput, JourneyStageUncheckedCreateWithoutTasksInput>
+  }
+
+  export type PersonJourneyTaskCreateWithoutTaskInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    person: PersonCreateNestedOneWithoutJourneyTasksInput
+    journey: PersonJourneyCreateNestedOneWithoutTasksInput
+  }
+
+  export type PersonJourneyTaskUncheckedCreateWithoutTaskInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    personId: string
+    journeyId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyTaskCreateOrConnectWithoutTaskInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    create: XOR<PersonJourneyTaskCreateWithoutTaskInput, PersonJourneyTaskUncheckedCreateWithoutTaskInput>
+  }
+
+  export type PersonJourneyTaskCreateManyTaskInputEnvelope = {
+    data: PersonJourneyTaskCreateManyTaskInput | PersonJourneyTaskCreateManyTaskInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type JourneyStageUpsertWithoutTasksInput = {
+    update: XOR<JourneyStageUpdateWithoutTasksInput, JourneyStageUncheckedUpdateWithoutTasksInput>
+    create: XOR<JourneyStageCreateWithoutTasksInput, JourneyStageUncheckedCreateWithoutTasksInput>
+    where?: JourneyStageWhereInput
+  }
+
+  export type JourneyStageUpdateToOneWithWhereWithoutTasksInput = {
+    where?: JourneyStageWhereInput
+    data: XOR<JourneyStageUpdateWithoutTasksInput, JourneyStageUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type JourneyStageUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutJourneyStagesNestedInput
+    currentJourneys?: PersonJourneyUpdateManyWithoutCurrentStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUpdateManyWithoutToStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type JourneyStageUncheckedUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    currentJourneys?: PersonJourneyUncheckedUpdateManyWithoutCurrentStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutToStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type PersonJourneyTaskUpsertWithWhereUniqueWithoutTaskInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    update: XOR<PersonJourneyTaskUpdateWithoutTaskInput, PersonJourneyTaskUncheckedUpdateWithoutTaskInput>
+    create: XOR<PersonJourneyTaskCreateWithoutTaskInput, PersonJourneyTaskUncheckedCreateWithoutTaskInput>
+  }
+
+  export type PersonJourneyTaskUpdateWithWhereUniqueWithoutTaskInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    data: XOR<PersonJourneyTaskUpdateWithoutTaskInput, PersonJourneyTaskUncheckedUpdateWithoutTaskInput>
+  }
+
+  export type PersonJourneyTaskUpdateManyWithWhereWithoutTaskInput = {
+    where: PersonJourneyTaskScalarWhereInput
+    data: XOR<PersonJourneyTaskUpdateManyMutationInput, PersonJourneyTaskUncheckedUpdateManyWithoutTaskInput>
+  }
+
+  export type ChurchCreateWithoutJourneyAchievementsInput = {
+    id?: string
+    name: string
+    label: string
+    address: string
+    contact?: ChurchCreatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: string | null
+    pixKeyValue?: string | null
+    pixCopyPaste?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutYouChurchInput
+    persons?: PersonCreateNestedManyWithoutYouChurchInput
+    links?: ChurchLinkCreateNestedManyWithoutChurchInput
+    schedules?: WeeklyScheduleCreateNestedManyWithoutChurchInput
+    ministries?: MinistryCreateNestedManyWithoutChurchInput
+    volunteerScales?: VolunteerScaleCreateNestedManyWithoutChurchInput
+    notifications?: NotificationCreateNestedManyWithoutChurchInput
+    financialEntries?: FinancialEntryCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchUncheckedCreateWithoutJourneyAchievementsInput = {
+    id?: string
+    name: string
+    label: string
+    address: string
+    contact?: ChurchCreatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: string | null
+    pixKeyValue?: string | null
+    pixCopyPaste?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutYouChurchInput
+    persons?: PersonUncheckedCreateNestedManyWithoutYouChurchInput
+    links?: ChurchLinkUncheckedCreateNestedManyWithoutChurchInput
+    schedules?: WeeklyScheduleUncheckedCreateNestedManyWithoutChurchInput
+    ministries?: MinistryUncheckedCreateNestedManyWithoutChurchInput
+    volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutChurchInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutChurchInput
+    financialEntries?: FinancialEntryUncheckedCreateNestedManyWithoutChurchInput
+    journeyStages?: JourneyStageUncheckedCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchCreateOrConnectWithoutJourneyAchievementsInput = {
+    where: ChurchWhereUniqueInput
+    create: XOR<ChurchCreateWithoutJourneyAchievementsInput, ChurchUncheckedCreateWithoutJourneyAchievementsInput>
+  }
+
+  export type PersonAchievementCreateWithoutAchievementInput = {
+    id?: string
+    earnedAt?: Date | string
+    person: PersonCreateNestedOneWithoutAchievementsInput
+  }
+
+  export type PersonAchievementUncheckedCreateWithoutAchievementInput = {
+    id?: string
+    earnedAt?: Date | string
+    personId: string
+  }
+
+  export type PersonAchievementCreateOrConnectWithoutAchievementInput = {
+    where: PersonAchievementWhereUniqueInput
+    create: XOR<PersonAchievementCreateWithoutAchievementInput, PersonAchievementUncheckedCreateWithoutAchievementInput>
+  }
+
+  export type PersonAchievementCreateManyAchievementInputEnvelope = {
+    data: PersonAchievementCreateManyAchievementInput | PersonAchievementCreateManyAchievementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChurchUpsertWithoutJourneyAchievementsInput = {
+    update: XOR<ChurchUpdateWithoutJourneyAchievementsInput, ChurchUncheckedUpdateWithoutJourneyAchievementsInput>
+    create: XOR<ChurchCreateWithoutJourneyAchievementsInput, ChurchUncheckedCreateWithoutJourneyAchievementsInput>
+    where?: ChurchWhereInput
+  }
+
+  export type ChurchUpdateToOneWithWhereWithoutJourneyAchievementsInput = {
+    where?: ChurchWhereInput
+    data: XOR<ChurchUpdateWithoutJourneyAchievementsInput, ChurchUncheckedUpdateWithoutJourneyAchievementsInput>
+  }
+
+  export type ChurchUpdateWithoutJourneyAchievementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    contact?: ChurchUpdatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: NullableStringFieldUpdateOperationsInput | string | null
+    pixKeyValue?: NullableStringFieldUpdateOperationsInput | string | null
+    pixCopyPaste?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutYouChurchNestedInput
+    persons?: PersonUpdateManyWithoutYouChurchNestedInput
+    links?: ChurchLinkUpdateManyWithoutChurchNestedInput
+    schedules?: WeeklyScheduleUpdateManyWithoutChurchNestedInput
+    ministries?: MinistryUpdateManyWithoutChurchNestedInput
+    volunteerScales?: VolunteerScaleUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUpdateManyWithoutChurchNestedInput
+    financialEntries?: FinancialEntryUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUpdateManyWithoutChurchNestedInput
+  }
+
+  export type ChurchUncheckedUpdateWithoutJourneyAchievementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    contact?: ChurchUpdatecontactInput | string[]
+    customization?: NullableJsonNullValueInput | InputJsonValue
+    pixKeyType?: NullableStringFieldUpdateOperationsInput | string | null
+    pixKeyValue?: NullableStringFieldUpdateOperationsInput | string | null
+    pixCopyPaste?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutYouChurchNestedInput
+    persons?: PersonUncheckedUpdateManyWithoutYouChurchNestedInput
+    links?: ChurchLinkUncheckedUpdateManyWithoutChurchNestedInput
+    schedules?: WeeklyScheduleUncheckedUpdateManyWithoutChurchNestedInput
+    ministries?: MinistryUncheckedUpdateManyWithoutChurchNestedInput
+    volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutChurchNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutChurchNestedInput
+    financialEntries?: FinancialEntryUncheckedUpdateManyWithoutChurchNestedInput
+    journeyStages?: JourneyStageUncheckedUpdateManyWithoutChurchNestedInput
+  }
+
+  export type PersonAchievementUpsertWithWhereUniqueWithoutAchievementInput = {
+    where: PersonAchievementWhereUniqueInput
+    update: XOR<PersonAchievementUpdateWithoutAchievementInput, PersonAchievementUncheckedUpdateWithoutAchievementInput>
+    create: XOR<PersonAchievementCreateWithoutAchievementInput, PersonAchievementUncheckedCreateWithoutAchievementInput>
+  }
+
+  export type PersonAchievementUpdateWithWhereUniqueWithoutAchievementInput = {
+    where: PersonAchievementWhereUniqueInput
+    data: XOR<PersonAchievementUpdateWithoutAchievementInput, PersonAchievementUncheckedUpdateWithoutAchievementInput>
+  }
+
+  export type PersonAchievementUpdateManyWithWhereWithoutAchievementInput = {
+    where: PersonAchievementScalarWhereInput
+    data: XOR<PersonAchievementUpdateManyMutationInput, PersonAchievementUncheckedUpdateManyWithoutAchievementInput>
+  }
+
+  export type PersonCreateWithoutJourneyInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: PersonCreatecontactInput | string[]
+    address?: string | null
+    birthday?: string | null
+    type?: $Enums.TypePerson
+    profileImage?: string | null
+    ministry?: string | null
+    role?: string | null
+    notes?: string | null
+    firstVisitAt?: Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    youChurch: ChurchCreateNestedOneWithoutPersonsInput
+    journeyTasks?: PersonJourneyTaskCreateNestedManyWithoutPersonInput
+    achievements?: PersonAchievementCreateNestedManyWithoutPersonInput
+    volunteerScales?: VolunteerScaleCreateNestedManyWithoutPersonInput
+  }
+
+  export type PersonUncheckedCreateWithoutJourneyInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: PersonCreatecontactInput | string[]
+    address?: string | null
+    birthday?: string | null
+    type?: $Enums.TypePerson
+    profileImage?: string | null
+    ministry?: string | null
+    role?: string | null
+    notes?: string | null
+    firstVisitAt?: Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: Date | string | null
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    journeyTasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutPersonInput
+    achievements?: PersonAchievementUncheckedCreateNestedManyWithoutPersonInput
+    volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutPersonInput
+  }
+
+  export type PersonCreateOrConnectWithoutJourneyInput = {
+    where: PersonWhereUniqueInput
+    create: XOR<PersonCreateWithoutJourneyInput, PersonUncheckedCreateWithoutJourneyInput>
+  }
+
+  export type JourneyStageCreateWithoutCurrentJourneysInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutJourneyStagesInput
+    tasks?: JourneyTaskCreateNestedManyWithoutStageInput
+    historyEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutToStageInput
+    previousEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageUncheckedCreateWithoutCurrentJourneysInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: JourneyTaskUncheckedCreateNestedManyWithoutStageInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutToStageInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageCreateOrConnectWithoutCurrentJourneysInput = {
+    where: JourneyStageWhereUniqueInput
+    create: XOR<JourneyStageCreateWithoutCurrentJourneysInput, JourneyStageUncheckedCreateWithoutCurrentJourneysInput>
+  }
+
+  export type PersonJourneyTaskCreateWithoutJourneyInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    person: PersonCreateNestedOneWithoutJourneyTasksInput
+    task: JourneyTaskCreateNestedOneWithoutProgressEntriesInput
+  }
+
+  export type PersonJourneyTaskUncheckedCreateWithoutJourneyInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    personId: string
+    taskId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyTaskCreateOrConnectWithoutJourneyInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    create: XOR<PersonJourneyTaskCreateWithoutJourneyInput, PersonJourneyTaskUncheckedCreateWithoutJourneyInput>
+  }
+
+  export type PersonJourneyTaskCreateManyJourneyInputEnvelope = {
+    data: PersonJourneyTaskCreateManyJourneyInput | PersonJourneyTaskCreateManyJourneyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PersonJourneyStageHistoryCreateWithoutJourneyInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    fromStage?: JourneyStageCreateNestedOneWithoutPreviousEntriesInput
+    toStage: JourneyStageCreateNestedOneWithoutHistoryEntriesInput
+  }
+
+  export type PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    fromStageId?: string | null
+    toStageId: string
+  }
+
+  export type PersonJourneyStageHistoryCreateOrConnectWithoutJourneyInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    create: XOR<PersonJourneyStageHistoryCreateWithoutJourneyInput, PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput>
+  }
+
+  export type PersonJourneyStageHistoryCreateManyJourneyInputEnvelope = {
+    data: PersonJourneyStageHistoryCreateManyJourneyInput | PersonJourneyStageHistoryCreateManyJourneyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PersonUpsertWithoutJourneyInput = {
+    update: XOR<PersonUpdateWithoutJourneyInput, PersonUncheckedUpdateWithoutJourneyInput>
+    create: XOR<PersonCreateWithoutJourneyInput, PersonUncheckedCreateWithoutJourneyInput>
+    where?: PersonWhereInput
+  }
+
+  export type PersonUpdateToOneWithWhereWithoutJourneyInput = {
+    where?: PersonWhereInput
+    data: XOR<PersonUpdateWithoutJourneyInput, PersonUncheckedUpdateWithoutJourneyInput>
+  }
+
+  export type PersonUpdateWithoutJourneyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: PersonUpdatecontactInput | string[]
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ministry?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    firstVisitAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    youChurch?: ChurchUpdateOneRequiredWithoutPersonsNestedInput
+    journeyTasks?: PersonJourneyTaskUpdateManyWithoutPersonNestedInput
+    achievements?: PersonAchievementUpdateManyWithoutPersonNestedInput
+    volunteerScales?: VolunteerScaleUpdateManyWithoutPersonNestedInput
+  }
+
+  export type PersonUncheckedUpdateWithoutJourneyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: PersonUpdatecontactInput | string[]
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ministry?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    firstVisitAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journeyTasks?: PersonJourneyTaskUncheckedUpdateManyWithoutPersonNestedInput
+    achievements?: PersonAchievementUncheckedUpdateManyWithoutPersonNestedInput
+    volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutPersonNestedInput
+  }
+
+  export type JourneyStageUpsertWithoutCurrentJourneysInput = {
+    update: XOR<JourneyStageUpdateWithoutCurrentJourneysInput, JourneyStageUncheckedUpdateWithoutCurrentJourneysInput>
+    create: XOR<JourneyStageCreateWithoutCurrentJourneysInput, JourneyStageUncheckedCreateWithoutCurrentJourneysInput>
+    where?: JourneyStageWhereInput
+  }
+
+  export type JourneyStageUpdateToOneWithWhereWithoutCurrentJourneysInput = {
+    where?: JourneyStageWhereInput
+    data: XOR<JourneyStageUpdateWithoutCurrentJourneysInput, JourneyStageUncheckedUpdateWithoutCurrentJourneysInput>
+  }
+
+  export type JourneyStageUpdateWithoutCurrentJourneysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutJourneyStagesNestedInput
+    tasks?: JourneyTaskUpdateManyWithoutStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUpdateManyWithoutToStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type JourneyStageUncheckedUpdateWithoutCurrentJourneysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: JourneyTaskUncheckedUpdateManyWithoutStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutToStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type PersonJourneyTaskUpsertWithWhereUniqueWithoutJourneyInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    update: XOR<PersonJourneyTaskUpdateWithoutJourneyInput, PersonJourneyTaskUncheckedUpdateWithoutJourneyInput>
+    create: XOR<PersonJourneyTaskCreateWithoutJourneyInput, PersonJourneyTaskUncheckedCreateWithoutJourneyInput>
+  }
+
+  export type PersonJourneyTaskUpdateWithWhereUniqueWithoutJourneyInput = {
+    where: PersonJourneyTaskWhereUniqueInput
+    data: XOR<PersonJourneyTaskUpdateWithoutJourneyInput, PersonJourneyTaskUncheckedUpdateWithoutJourneyInput>
+  }
+
+  export type PersonJourneyTaskUpdateManyWithWhereWithoutJourneyInput = {
+    where: PersonJourneyTaskScalarWhereInput
+    data: XOR<PersonJourneyTaskUpdateManyMutationInput, PersonJourneyTaskUncheckedUpdateManyWithoutJourneyInput>
+  }
+
+  export type PersonJourneyStageHistoryUpsertWithWhereUniqueWithoutJourneyInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    update: XOR<PersonJourneyStageHistoryUpdateWithoutJourneyInput, PersonJourneyStageHistoryUncheckedUpdateWithoutJourneyInput>
+    create: XOR<PersonJourneyStageHistoryCreateWithoutJourneyInput, PersonJourneyStageHistoryUncheckedCreateWithoutJourneyInput>
+  }
+
+  export type PersonJourneyStageHistoryUpdateWithWhereUniqueWithoutJourneyInput = {
+    where: PersonJourneyStageHistoryWhereUniqueInput
+    data: XOR<PersonJourneyStageHistoryUpdateWithoutJourneyInput, PersonJourneyStageHistoryUncheckedUpdateWithoutJourneyInput>
+  }
+
+  export type PersonJourneyStageHistoryUpdateManyWithWhereWithoutJourneyInput = {
+    where: PersonJourneyStageHistoryScalarWhereInput
+    data: XOR<PersonJourneyStageHistoryUpdateManyMutationInput, PersonJourneyStageHistoryUncheckedUpdateManyWithoutJourneyInput>
+  }
+
+  export type PersonCreateWithoutJourneyTasksInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: PersonCreatecontactInput | string[]
+    address?: string | null
+    birthday?: string | null
+    type?: $Enums.TypePerson
+    profileImage?: string | null
+    ministry?: string | null
+    role?: string | null
+    notes?: string | null
+    firstVisitAt?: Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    youChurch: ChurchCreateNestedOneWithoutPersonsInput
+    journey?: PersonJourneyCreateNestedOneWithoutPersonInput
+    achievements?: PersonAchievementCreateNestedManyWithoutPersonInput
+    volunteerScales?: VolunteerScaleCreateNestedManyWithoutPersonInput
+  }
+
+  export type PersonUncheckedCreateWithoutJourneyTasksInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: PersonCreatecontactInput | string[]
+    address?: string | null
+    birthday?: string | null
+    type?: $Enums.TypePerson
+    profileImage?: string | null
+    ministry?: string | null
+    role?: string | null
+    notes?: string | null
+    firstVisitAt?: Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: Date | string | null
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    journey?: PersonJourneyUncheckedCreateNestedOneWithoutPersonInput
+    achievements?: PersonAchievementUncheckedCreateNestedManyWithoutPersonInput
+    volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutPersonInput
+  }
+
+  export type PersonCreateOrConnectWithoutJourneyTasksInput = {
+    where: PersonWhereUniqueInput
+    create: XOR<PersonCreateWithoutJourneyTasksInput, PersonUncheckedCreateWithoutJourneyTasksInput>
+  }
+
+  export type PersonJourneyCreateWithoutTasksInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    person: PersonCreateNestedOneWithoutJourneyInput
+    currentStage?: JourneyStageCreateNestedOneWithoutCurrentJourneysInput
+    history?: PersonJourneyStageHistoryCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyUncheckedCreateWithoutTasksInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    personId: string
+    currentStageId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    history?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyCreateOrConnectWithoutTasksInput = {
+    where: PersonJourneyWhereUniqueInput
+    create: XOR<PersonJourneyCreateWithoutTasksInput, PersonJourneyUncheckedCreateWithoutTasksInput>
+  }
+
+  export type JourneyTaskCreateWithoutProgressEntriesInput = {
+    id?: string
+    key: string
+    title: string
+    description: string
+    points?: number
+    required?: boolean
+    active?: boolean
+    triggerType?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    stage: JourneyStageCreateNestedOneWithoutTasksInput
+  }
+
+  export type JourneyTaskUncheckedCreateWithoutProgressEntriesInput = {
+    id?: string
+    key: string
+    title: string
+    description: string
+    points?: number
+    required?: boolean
+    active?: boolean
+    triggerType?: $Enums.JourneyTriggerType
+    stageId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JourneyTaskCreateOrConnectWithoutProgressEntriesInput = {
+    where: JourneyTaskWhereUniqueInput
+    create: XOR<JourneyTaskCreateWithoutProgressEntriesInput, JourneyTaskUncheckedCreateWithoutProgressEntriesInput>
+  }
+
+  export type PersonUpsertWithoutJourneyTasksInput = {
+    update: XOR<PersonUpdateWithoutJourneyTasksInput, PersonUncheckedUpdateWithoutJourneyTasksInput>
+    create: XOR<PersonCreateWithoutJourneyTasksInput, PersonUncheckedCreateWithoutJourneyTasksInput>
+    where?: PersonWhereInput
+  }
+
+  export type PersonUpdateToOneWithWhereWithoutJourneyTasksInput = {
+    where?: PersonWhereInput
+    data: XOR<PersonUpdateWithoutJourneyTasksInput, PersonUncheckedUpdateWithoutJourneyTasksInput>
+  }
+
+  export type PersonUpdateWithoutJourneyTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: PersonUpdatecontactInput | string[]
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ministry?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    firstVisitAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    youChurch?: ChurchUpdateOneRequiredWithoutPersonsNestedInput
+    journey?: PersonJourneyUpdateOneWithoutPersonNestedInput
+    achievements?: PersonAchievementUpdateManyWithoutPersonNestedInput
+    volunteerScales?: VolunteerScaleUpdateManyWithoutPersonNestedInput
+  }
+
+  export type PersonUncheckedUpdateWithoutJourneyTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: PersonUpdatecontactInput | string[]
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ministry?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    firstVisitAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journey?: PersonJourneyUncheckedUpdateOneWithoutPersonNestedInput
+    achievements?: PersonAchievementUncheckedUpdateManyWithoutPersonNestedInput
+    volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutPersonNestedInput
+  }
+
+  export type PersonJourneyUpsertWithoutTasksInput = {
+    update: XOR<PersonJourneyUpdateWithoutTasksInput, PersonJourneyUncheckedUpdateWithoutTasksInput>
+    create: XOR<PersonJourneyCreateWithoutTasksInput, PersonJourneyUncheckedCreateWithoutTasksInput>
+    where?: PersonJourneyWhereInput
+  }
+
+  export type PersonJourneyUpdateToOneWithWhereWithoutTasksInput = {
+    where?: PersonJourneyWhereInput
+    data: XOR<PersonJourneyUpdateWithoutTasksInput, PersonJourneyUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type PersonJourneyUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutJourneyNestedInput
+    currentStage?: JourneyStageUpdateOneWithoutCurrentJourneysNestedInput
+    history?: PersonJourneyStageHistoryUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type PersonJourneyUncheckedUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personId?: StringFieldUpdateOperationsInput | string
+    currentStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    history?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type JourneyTaskUpsertWithoutProgressEntriesInput = {
+    update: XOR<JourneyTaskUpdateWithoutProgressEntriesInput, JourneyTaskUncheckedUpdateWithoutProgressEntriesInput>
+    create: XOR<JourneyTaskCreateWithoutProgressEntriesInput, JourneyTaskUncheckedCreateWithoutProgressEntriesInput>
+    where?: JourneyTaskWhereInput
+  }
+
+  export type JourneyTaskUpdateToOneWithWhereWithoutProgressEntriesInput = {
+    where?: JourneyTaskWhereInput
+    data: XOR<JourneyTaskUpdateWithoutProgressEntriesInput, JourneyTaskUncheckedUpdateWithoutProgressEntriesInput>
+  }
+
+  export type JourneyTaskUpdateWithoutProgressEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stage?: JourneyStageUpdateOneRequiredWithoutTasksNestedInput
+  }
+
+  export type JourneyTaskUncheckedUpdateWithoutProgressEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    stageId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonCreateWithoutAchievementsInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: PersonCreatecontactInput | string[]
+    address?: string | null
+    birthday?: string | null
+    type?: $Enums.TypePerson
+    profileImage?: string | null
+    ministry?: string | null
+    role?: string | null
+    notes?: string | null
+    firstVisitAt?: Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    youChurch: ChurchCreateNestedOneWithoutPersonsInput
+    journey?: PersonJourneyCreateNestedOneWithoutPersonInput
+    journeyTasks?: PersonJourneyTaskCreateNestedManyWithoutPersonInput
+    volunteerScales?: VolunteerScaleCreateNestedManyWithoutPersonInput
+  }
+
+  export type PersonUncheckedCreateWithoutAchievementsInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: PersonCreatecontactInput | string[]
+    address?: string | null
+    birthday?: string | null
+    type?: $Enums.TypePerson
+    profileImage?: string | null
+    ministry?: string | null
+    role?: string | null
+    notes?: string | null
+    firstVisitAt?: Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: Date | string | null
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    journey?: PersonJourneyUncheckedCreateNestedOneWithoutPersonInput
+    journeyTasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutPersonInput
+    volunteerScales?: VolunteerScaleUncheckedCreateNestedManyWithoutPersonInput
+  }
+
+  export type PersonCreateOrConnectWithoutAchievementsInput = {
+    where: PersonWhereUniqueInput
+    create: XOR<PersonCreateWithoutAchievementsInput, PersonUncheckedCreateWithoutAchievementsInput>
+  }
+
+  export type JourneyAchievementCreateWithoutPersonAchievementsInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points?: number
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutJourneyAchievementsInput
+  }
+
+  export type JourneyAchievementUncheckedCreateWithoutPersonAchievementsInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points?: number
+    active?: boolean
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JourneyAchievementCreateOrConnectWithoutPersonAchievementsInput = {
+    where: JourneyAchievementWhereUniqueInput
+    create: XOR<JourneyAchievementCreateWithoutPersonAchievementsInput, JourneyAchievementUncheckedCreateWithoutPersonAchievementsInput>
+  }
+
+  export type PersonUpsertWithoutAchievementsInput = {
+    update: XOR<PersonUpdateWithoutAchievementsInput, PersonUncheckedUpdateWithoutAchievementsInput>
+    create: XOR<PersonCreateWithoutAchievementsInput, PersonUncheckedCreateWithoutAchievementsInput>
+    where?: PersonWhereInput
+  }
+
+  export type PersonUpdateToOneWithWhereWithoutAchievementsInput = {
+    where?: PersonWhereInput
+    data: XOR<PersonUpdateWithoutAchievementsInput, PersonUncheckedUpdateWithoutAchievementsInput>
+  }
+
+  export type PersonUpdateWithoutAchievementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: PersonUpdatecontactInput | string[]
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ministry?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    firstVisitAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    youChurch?: ChurchUpdateOneRequiredWithoutPersonsNestedInput
+    journey?: PersonJourneyUpdateOneWithoutPersonNestedInput
+    journeyTasks?: PersonJourneyTaskUpdateManyWithoutPersonNestedInput
+    volunteerScales?: VolunteerScaleUpdateManyWithoutPersonNestedInput
+  }
+
+  export type PersonUncheckedUpdateWithoutAchievementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: PersonUpdatecontactInput | string[]
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypePersonFieldUpdateOperationsInput | $Enums.TypePerson
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ministry?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    firstVisitAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingDraft?: NullableJsonNullValueInput | InputJsonValue
+    onboardingCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journey?: PersonJourneyUncheckedUpdateOneWithoutPersonNestedInput
+    journeyTasks?: PersonJourneyTaskUncheckedUpdateManyWithoutPersonNestedInput
+    volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutPersonNestedInput
+  }
+
+  export type JourneyAchievementUpsertWithoutPersonAchievementsInput = {
+    update: XOR<JourneyAchievementUpdateWithoutPersonAchievementsInput, JourneyAchievementUncheckedUpdateWithoutPersonAchievementsInput>
+    create: XOR<JourneyAchievementCreateWithoutPersonAchievementsInput, JourneyAchievementUncheckedCreateWithoutPersonAchievementsInput>
+    where?: JourneyAchievementWhereInput
+  }
+
+  export type JourneyAchievementUpdateToOneWithWhereWithoutPersonAchievementsInput = {
+    where?: JourneyAchievementWhereInput
+    data: XOR<JourneyAchievementUpdateWithoutPersonAchievementsInput, JourneyAchievementUncheckedUpdateWithoutPersonAchievementsInput>
+  }
+
+  export type JourneyAchievementUpdateWithoutPersonAchievementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutJourneyAchievementsNestedInput
+  }
+
+  export type JourneyAchievementUncheckedUpdateWithoutPersonAchievementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyCreateWithoutHistoryInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    person: PersonCreateNestedOneWithoutJourneyInput
+    currentStage?: JourneyStageCreateNestedOneWithoutCurrentJourneysInput
+    tasks?: PersonJourneyTaskCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyUncheckedCreateWithoutHistoryInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    personId: string
+    currentStageId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: PersonJourneyTaskUncheckedCreateNestedManyWithoutJourneyInput
+  }
+
+  export type PersonJourneyCreateOrConnectWithoutHistoryInput = {
+    where: PersonJourneyWhereUniqueInput
+    create: XOR<PersonJourneyCreateWithoutHistoryInput, PersonJourneyUncheckedCreateWithoutHistoryInput>
+  }
+
+  export type JourneyStageCreateWithoutPreviousEntriesInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutJourneyStagesInput
+    tasks?: JourneyTaskCreateNestedManyWithoutStageInput
+    currentJourneys?: PersonJourneyCreateNestedManyWithoutCurrentStageInput
+    historyEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutToStageInput
+  }
+
+  export type JourneyStageUncheckedCreateWithoutPreviousEntriesInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: JourneyTaskUncheckedCreateNestedManyWithoutStageInput
+    currentJourneys?: PersonJourneyUncheckedCreateNestedManyWithoutCurrentStageInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutToStageInput
+  }
+
+  export type JourneyStageCreateOrConnectWithoutPreviousEntriesInput = {
+    where: JourneyStageWhereUniqueInput
+    create: XOR<JourneyStageCreateWithoutPreviousEntriesInput, JourneyStageUncheckedCreateWithoutPreviousEntriesInput>
+  }
+
+  export type JourneyStageCreateWithoutHistoryEntriesInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church: ChurchCreateNestedOneWithoutJourneyStagesInput
+    tasks?: JourneyTaskCreateNestedManyWithoutStageInput
+    currentJourneys?: PersonJourneyCreateNestedManyWithoutCurrentStageInput
+    previousEntries?: PersonJourneyStageHistoryCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageUncheckedCreateWithoutHistoryEntriesInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    churchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: JourneyTaskUncheckedCreateNestedManyWithoutStageInput
+    currentJourneys?: PersonJourneyUncheckedCreateNestedManyWithoutCurrentStageInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedCreateNestedManyWithoutFromStageInput
+  }
+
+  export type JourneyStageCreateOrConnectWithoutHistoryEntriesInput = {
+    where: JourneyStageWhereUniqueInput
+    create: XOR<JourneyStageCreateWithoutHistoryEntriesInput, JourneyStageUncheckedCreateWithoutHistoryEntriesInput>
+  }
+
+  export type PersonJourneyUpsertWithoutHistoryInput = {
+    update: XOR<PersonJourneyUpdateWithoutHistoryInput, PersonJourneyUncheckedUpdateWithoutHistoryInput>
+    create: XOR<PersonJourneyCreateWithoutHistoryInput, PersonJourneyUncheckedCreateWithoutHistoryInput>
+    where?: PersonJourneyWhereInput
+  }
+
+  export type PersonJourneyUpdateToOneWithWhereWithoutHistoryInput = {
+    where?: PersonJourneyWhereInput
+    data: XOR<PersonJourneyUpdateWithoutHistoryInput, PersonJourneyUncheckedUpdateWithoutHistoryInput>
+  }
+
+  export type PersonJourneyUpdateWithoutHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutJourneyNestedInput
+    currentStage?: JourneyStageUpdateOneWithoutCurrentJourneysNestedInput
+    tasks?: PersonJourneyTaskUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type PersonJourneyUncheckedUpdateWithoutHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personId?: StringFieldUpdateOperationsInput | string
+    currentStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: PersonJourneyTaskUncheckedUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type JourneyStageUpsertWithoutPreviousEntriesInput = {
+    update: XOR<JourneyStageUpdateWithoutPreviousEntriesInput, JourneyStageUncheckedUpdateWithoutPreviousEntriesInput>
+    create: XOR<JourneyStageCreateWithoutPreviousEntriesInput, JourneyStageUncheckedCreateWithoutPreviousEntriesInput>
+    where?: JourneyStageWhereInput
+  }
+
+  export type JourneyStageUpdateToOneWithWhereWithoutPreviousEntriesInput = {
+    where?: JourneyStageWhereInput
+    data: XOR<JourneyStageUpdateWithoutPreviousEntriesInput, JourneyStageUncheckedUpdateWithoutPreviousEntriesInput>
+  }
+
+  export type JourneyStageUpdateWithoutPreviousEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutJourneyStagesNestedInput
+    tasks?: JourneyTaskUpdateManyWithoutStageNestedInput
+    currentJourneys?: PersonJourneyUpdateManyWithoutCurrentStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUpdateManyWithoutToStageNestedInput
+  }
+
+  export type JourneyStageUncheckedUpdateWithoutPreviousEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: JourneyTaskUncheckedUpdateManyWithoutStageNestedInput
+    currentJourneys?: PersonJourneyUncheckedUpdateManyWithoutCurrentStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutToStageNestedInput
+  }
+
+  export type JourneyStageUpsertWithoutHistoryEntriesInput = {
+    update: XOR<JourneyStageUpdateWithoutHistoryEntriesInput, JourneyStageUncheckedUpdateWithoutHistoryEntriesInput>
+    create: XOR<JourneyStageCreateWithoutHistoryEntriesInput, JourneyStageUncheckedCreateWithoutHistoryEntriesInput>
+    where?: JourneyStageWhereInput
+  }
+
+  export type JourneyStageUpdateToOneWithWhereWithoutHistoryEntriesInput = {
+    where?: JourneyStageWhereInput
+    data: XOR<JourneyStageUpdateWithoutHistoryEntriesInput, JourneyStageUncheckedUpdateWithoutHistoryEntriesInput>
+  }
+
+  export type JourneyStageUpdateWithoutHistoryEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutJourneyStagesNestedInput
+    tasks?: JourneyTaskUpdateManyWithoutStageNestedInput
+    currentJourneys?: PersonJourneyUpdateManyWithoutCurrentStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type JourneyStageUncheckedUpdateWithoutHistoryEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    churchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: JourneyTaskUncheckedUpdateManyWithoutStageNestedInput
+    currentJourneys?: PersonJourneyUncheckedUpdateManyWithoutCurrentStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutFromStageNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -20488,6 +36869,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     youChurch?: ChurchCreateNestedOneWithoutUsersInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientUserInput
+    notificationsTriggered?: NotificationCreateNestedManyWithoutActorUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -20502,6 +36885,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientUserInput
+    notificationsTriggered?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -20532,6 +36917,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     youChurch?: ChurchUpdateOneWithoutUsersNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientUserNestedInput
+    notificationsTriggered?: NotificationUpdateManyWithoutActorUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -20546,6 +36933,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientUserNestedInput
+    notificationsTriggered?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -20560,6 +36949,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     youChurch?: ChurchCreateNestedOneWithoutUsersInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientUserInput
+    notificationsTriggered?: NotificationCreateNestedManyWithoutActorUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -20574,6 +36965,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientUserInput
+    notificationsTriggered?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -20604,6 +36997,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     youChurch?: ChurchUpdateOneWithoutUsersNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientUserNestedInput
+    notificationsTriggered?: NotificationUpdateManyWithoutActorUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -20618,6 +37013,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientUserNestedInput
+    notificationsTriggered?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
   }
 
   export type UserCreateManyYouChurchInput = {
@@ -20689,8 +37086,27 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     personId: string
     ministryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationCreateManyChurchInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    recipientUserId: string
+    actorUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20707,6 +37123,31 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type JourneyStageCreateManyChurchInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    order: number
+    active?: boolean
+    visibleToMember?: boolean
+    pointsReward?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JourneyAchievementCreateManyChurchInput = {
+    id?: string
+    key: string
+    name: string
+    description: string
+    icon: string
+    points?: number
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserUpdateWithoutYouChurchInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -20719,6 +37160,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientUserNestedInput
+    notificationsTriggered?: NotificationUpdateManyWithoutActorUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutYouChurchInput = {
@@ -20733,6 +37176,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientUserNestedInput
+    notificationsTriggered?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutYouChurchInput = {
@@ -20764,6 +37209,9 @@ export namespace Prisma {
     onboardingCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journey?: PersonJourneyUpdateOneWithoutPersonNestedInput
+    journeyTasks?: PersonJourneyTaskUpdateManyWithoutPersonNestedInput
+    achievements?: PersonAchievementUpdateManyWithoutPersonNestedInput
     volunteerScales?: VolunteerScaleUpdateManyWithoutPersonNestedInput
   }
 
@@ -20784,6 +37232,9 @@ export namespace Prisma {
     onboardingCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journey?: PersonJourneyUncheckedUpdateOneWithoutPersonNestedInput
+    journeyTasks?: PersonJourneyTaskUncheckedUpdateManyWithoutPersonNestedInput
+    achievements?: PersonAchievementUncheckedUpdateManyWithoutPersonNestedInput
     volunteerScales?: VolunteerScaleUncheckedUpdateManyWithoutPersonNestedInput
   }
 
@@ -20910,6 +37361,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     person?: PersonUpdateOneRequiredWithoutVolunteerScalesNestedInput
@@ -20922,6 +37376,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     personId?: StringFieldUpdateOperationsInput | string
     ministryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20934,8 +37391,59 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     personId?: StringFieldUpdateOperationsInput | string
     ministryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipientUser?: UserUpdateOneRequiredWithoutNotificationsReceivedNestedInput
+    actorUser?: UserUpdateOneWithoutNotificationsTriggeredNestedInput
+  }
+
+  export type NotificationUncheckedUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    recipientUserId?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    recipientUserId?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20976,6 +37484,91 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type JourneyStageUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: JourneyTaskUpdateManyWithoutStageNestedInput
+    currentJourneys?: PersonJourneyUpdateManyWithoutCurrentStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUpdateManyWithoutToStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type JourneyStageUncheckedUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: JourneyTaskUncheckedUpdateManyWithoutStageNestedInput
+    currentJourneys?: PersonJourneyUncheckedUpdateManyWithoutCurrentStageNestedInput
+    historyEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutToStageNestedInput
+    previousEntries?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutFromStageNestedInput
+  }
+
+  export type JourneyStageUncheckedUpdateManyWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    visibleToMember?: BoolFieldUpdateOperationsInput | boolean
+    pointsReward?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JourneyAchievementUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    personAchievements?: PersonAchievementUpdateManyWithoutAchievementNestedInput
+  }
+
+  export type JourneyAchievementUncheckedUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    personAchievements?: PersonAchievementUncheckedUpdateManyWithoutAchievementNestedInput
+  }
+
+  export type JourneyAchievementUncheckedUpdateManyWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SessionCreateManyUserInput = {
     id: string
     expiresAt: Date | string
@@ -20997,6 +37590,38 @@ export namespace Prisma {
     refreshTokenExpiresAt?: Date | string | null
     scope?: string | null
     password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationCreateManyRecipientUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    churchId: string
+    actorUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationCreateManyActorUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    link?: string | null
+    entityType?: string | null
+    entityId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: Date | string | null
+    churchId: string
+    recipientUserId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21076,16 +37701,183 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NotificationUpdateWithoutRecipientUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutNotificationsNestedInput
+    actorUser?: UserUpdateOneWithoutNotificationsTriggeredNestedInput
+  }
+
+  export type NotificationUncheckedUpdateWithoutRecipientUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutRecipientUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    actorUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUpdateWithoutActorUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneRequiredWithoutNotificationsNestedInput
+    recipientUser?: UserUpdateOneRequiredWithoutNotificationsReceivedNestedInput
+  }
+
+  export type NotificationUncheckedUpdateWithoutActorUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    recipientUserId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutActorUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    entityId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    churchId?: StringFieldUpdateOperationsInput | string
+    recipientUserId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyTaskCreateManyPersonInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    journeyId: string
+    taskId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonAchievementCreateManyPersonInput = {
+    id?: string
+    earnedAt?: Date | string
+    achievementId: string
+  }
+
   export type VolunteerScaleCreateManyPersonInput = {
     id?: string
     date: Date | string
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     ministryId: string
     churchId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type PersonJourneyTaskUpdateWithoutPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journey?: PersonJourneyUpdateOneRequiredWithoutTasksNestedInput
+    task?: JourneyTaskUpdateOneRequiredWithoutProgressEntriesNestedInput
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateWithoutPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journeyId?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateManyWithoutPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journeyId?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonAchievementUpdateWithoutPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    achievement?: JourneyAchievementUpdateOneRequiredWithoutPersonAchievementsNestedInput
+  }
+
+  export type PersonAchievementUncheckedUpdateWithoutPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    achievementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonAchievementUncheckedUpdateManyWithoutPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    achievementId?: StringFieldUpdateOperationsInput | string
   }
 
   export type VolunteerScaleUpdateWithoutPersonInput = {
@@ -21094,6 +37886,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ministry?: MinistryUpdateOneRequiredWithoutScalesNestedInput
@@ -21106,6 +37901,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ministryId?: StringFieldUpdateOperationsInput | string
     churchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21118,6 +37916,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ministryId?: StringFieldUpdateOperationsInput | string
     churchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21130,6 +37931,9 @@ export namespace Prisma {
     role: string
     eventName?: string | null
     confirmed?: boolean
+    responseStatus?: $Enums.VolunteerScaleResponseStatus
+    responseNote?: string | null
+    respondedAt?: Date | string | null
     personId: string
     churchId: string
     createdAt?: Date | string
@@ -21142,6 +37946,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     person?: PersonUpdateOneRequiredWithoutVolunteerScalesNestedInput
@@ -21154,6 +37961,9 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     personId?: StringFieldUpdateOperationsInput | string
     churchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21166,10 +37976,343 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     eventName?: NullableStringFieldUpdateOperationsInput | string | null
     confirmed?: BoolFieldUpdateOperationsInput | boolean
+    responseStatus?: EnumVolunteerScaleResponseStatusFieldUpdateOperationsInput | $Enums.VolunteerScaleResponseStatus
+    responseNote?: NullableStringFieldUpdateOperationsInput | string | null
+    respondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     personId?: StringFieldUpdateOperationsInput | string
     churchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JourneyTaskCreateManyStageInput = {
+    id?: string
+    key: string
+    title: string
+    description: string
+    points?: number
+    required?: boolean
+    active?: boolean
+    triggerType?: $Enums.JourneyTriggerType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyCreateManyCurrentStageInput = {
+    id?: string
+    score?: number
+    level?: number
+    progress?: number
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    lastActivityAt?: Date | string | null
+    personId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyStageHistoryCreateManyToStageInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journeyId: string
+    fromStageId?: string | null
+  }
+
+  export type PersonJourneyStageHistoryCreateManyFromStageInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    journeyId: string
+    toStageId: string
+  }
+
+  export type JourneyTaskUpdateWithoutStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    progressEntries?: PersonJourneyTaskUpdateManyWithoutTaskNestedInput
+  }
+
+  export type JourneyTaskUncheckedUpdateWithoutStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    progressEntries?: PersonJourneyTaskUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type JourneyTaskUncheckedUpdateManyWithoutStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    required?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    triggerType?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyUpdateWithoutCurrentStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutJourneyNestedInput
+    tasks?: PersonJourneyTaskUpdateManyWithoutJourneyNestedInput
+    history?: PersonJourneyStageHistoryUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type PersonJourneyUncheckedUpdateWithoutCurrentStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: PersonJourneyTaskUncheckedUpdateManyWithoutJourneyNestedInput
+    history?: PersonJourneyStageHistoryUncheckedUpdateManyWithoutJourneyNestedInput
+  }
+
+  export type PersonJourneyUncheckedUpdateManyWithoutCurrentStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    progress?: IntFieldUpdateOperationsInput | number
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyStageHistoryUpdateWithoutToStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journey?: PersonJourneyUpdateOneRequiredWithoutHistoryNestedInput
+    fromStage?: JourneyStageUpdateOneWithoutPreviousEntriesNestedInput
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateWithoutToStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journeyId?: StringFieldUpdateOperationsInput | string
+    fromStageId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateManyWithoutToStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journeyId?: StringFieldUpdateOperationsInput | string
+    fromStageId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PersonJourneyStageHistoryUpdateWithoutFromStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journey?: PersonJourneyUpdateOneRequiredWithoutHistoryNestedInput
+    toStage?: JourneyStageUpdateOneRequiredWithoutHistoryEntriesNestedInput
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateWithoutFromStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journeyId?: StringFieldUpdateOperationsInput | string
+    toStageId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateManyWithoutFromStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    journeyId?: StringFieldUpdateOperationsInput | string
+    toStageId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonJourneyTaskCreateManyTaskInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    personId: string
+    journeyId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyTaskUpdateWithoutTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutJourneyTasksNestedInput
+    journey?: PersonJourneyUpdateOneRequiredWithoutTasksNestedInput
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateWithoutTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    personId?: StringFieldUpdateOperationsInput | string
+    journeyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateManyWithoutTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    personId?: StringFieldUpdateOperationsInput | string
+    journeyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonAchievementCreateManyAchievementInput = {
+    id?: string
+    earnedAt?: Date | string
+    personId: string
+  }
+
+  export type PersonAchievementUpdateWithoutAchievementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutAchievementsNestedInput
+  }
+
+  export type PersonAchievementUncheckedUpdateWithoutAchievementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    personId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonAchievementUncheckedUpdateManyWithoutAchievementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    personId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonJourneyTaskCreateManyJourneyInput = {
+    id?: string
+    completed?: boolean
+    completedAt?: Date | string | null
+    source?: $Enums.JourneyTriggerType
+    personId: string
+    taskId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PersonJourneyStageHistoryCreateManyJourneyInput = {
+    id?: string
+    movedAt?: Date | string
+    notes?: string | null
+    source?: $Enums.JourneyTriggerType
+    fromStageId?: string | null
+    toStageId: string
+  }
+
+  export type PersonJourneyTaskUpdateWithoutJourneyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    person?: PersonUpdateOneRequiredWithoutJourneyTasksNestedInput
+    task?: JourneyTaskUpdateOneRequiredWithoutProgressEntriesNestedInput
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateWithoutJourneyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    personId?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyTaskUncheckedUpdateManyWithoutJourneyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    personId?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PersonJourneyStageHistoryUpdateWithoutJourneyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    fromStage?: JourneyStageUpdateOneWithoutPreviousEntriesNestedInput
+    toStage?: JourneyStageUpdateOneRequiredWithoutHistoryEntriesNestedInput
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateWithoutJourneyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    fromStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    toStageId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonJourneyStageHistoryUncheckedUpdateManyWithoutJourneyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: EnumJourneyTriggerTypeFieldUpdateOperationsInput | $Enums.JourneyTriggerType
+    fromStageId?: NullableStringFieldUpdateOperationsInput | string | null
+    toStageId?: StringFieldUpdateOperationsInput | string
   }
 
 

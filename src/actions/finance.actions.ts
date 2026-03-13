@@ -1,7 +1,7 @@
 "use server";
 
 import { ActionResponse } from "@/@types/shared.types";
-import { requireChurchStaffSession } from "@/lib/authorization";
+import { requireChurchModuleSession } from "@/lib/authorization";
 import { ManualIncomeFormData, PixConfigFormData } from "@/lib/validations";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -27,7 +27,7 @@ export async function registerIncomeAction(
   churchId: string,
   data: ManualIncomeFormData
 ): Promise<ActionResponse<{ id: string } & ManualIncomeFormData>> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "financeiro");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }
@@ -76,7 +76,7 @@ export async function updatePixConfigAction(
   churchId: string,
   data: PixConfigFormData
 ): Promise<ActionResponse> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "financeiro");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }
@@ -105,7 +105,7 @@ export async function deleteIncomeAction(
   churchId: string,
   incomeId: string
 ): Promise<ActionResponse> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "financeiro");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }

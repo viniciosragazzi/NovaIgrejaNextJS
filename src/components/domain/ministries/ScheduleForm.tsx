@@ -143,9 +143,10 @@ export function ScheduleForm({
                 filteredVolunteers.map((volunteer) => {
                   const isSelected = selectedVolunteerIds.includes(volunteer.id)
                   return (
-                    <button
+                    <Button
                       key={volunteer.id}
                       type="button"
+                      variant="ghost"
                       onClick={() => toggleVolunteer(volunteer.id)}
                       className={cn(
                         "flex w-full items-center justify-between rounded-xl border px-3 py-3 text-left transition-colors",
@@ -164,7 +165,7 @@ export function ScheduleForm({
                       >
                         {isSelected ? <Check className="h-3.5 w-3.5" /> : null}
                       </div>
-                    </button>
+                    </Button>
                   )
                 })
               ) : (

@@ -86,9 +86,10 @@ export function CommandPalette({ churchLabel, items }: CommandPaletteProps) {
           <div className="max-h-[420px] space-y-2 overflow-y-auto">
             {filteredItems.length > 0 ? (
               filteredItems.map((item) => (
-                <button
+                <Button
                   key={item.id}
                   type="button"
+                  variant="ghost"
                   onClick={() => {
                     setOpen(false)
                     setQuery("")
@@ -105,7 +106,7 @@ export function CommandPalette({ churchLabel, items }: CommandPaletteProps) {
                   <Badge variant="secondary" className="rounded-full px-3 py-1 text-[10px] uppercase tracking-wide">
                     {item.group}
                   </Badge>
-                </button>
+                </Button>
               ))
             ) : (
               <div className="rounded-2xl border border-dashed px-4 py-8 text-center text-sm text-muted-foreground">

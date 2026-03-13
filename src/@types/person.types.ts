@@ -13,6 +13,8 @@ export interface Person {
   type: PersonType;
   ministry?: string;
   role?: string;
+  accessStatus?: "STAFF" | "VOLUNTEER" | "MEMBER" | "VISITOR";
+  hasLinkedUser?: boolean;
 }
 
 export interface PersonFormData {

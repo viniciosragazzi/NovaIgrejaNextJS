@@ -1,5 +1,6 @@
+import type { PermissionModuleKey } from "@/@types/church.types"
 import { auth } from "@/lib/auth";
-import { isStaffUser } from "@/lib/authorization";
+import { getChurchModuleAccess, isPlatformAdmin, isStaffUser } from "@/lib/authorization";
 import prisma from "@/lib/prisma";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
@@ -12,7 +13,7 @@ export async function getOptionalSession() {
 
 export async function getChurchContext(
   churchLabel: string,
-  options?: { allowIncompleteMemberOnboarding?: boolean }
+  options?: { allowIncompleteMemberOnboarding?: boolean; requiredModule?: PermissionModuleKey }
 ) {
   const session = await getOptionalSession();
 
@@ -33,7 +34,9 @@ export async function getChurchContext(
     notFound();
   }
 
-  if (session.user.churchId !== church.id) {
+  const platformAdmin = isPlatformAdmin(session.user)
+
+  if (!platformAdmin && session.user.churchId !== church.id) {
     const userChurch = await prisma.church.findUnique({
       where: { id: session.user.churchId ?? "" },
       select: { label: true },
@@ -42,9 +45,15 @@ export async function getChurchContext(
     redirect(userChurch ? `/${userChurch.label}/dashboard` : "/onboarding");
   }
 
-  const isStaff = isStaffUser(session.user)
+  const isStaff = platformAdmin || isStaffUser(session.user)
+  const moduleAccess = getChurchModuleAccess(session.user, church.customization)
+  const hasAdministrativeAccess = Object.values(moduleAccess).some(Boolean)
 
-  if (!isStaff && !options?.allowIncompleteMemberOnboarding) {
+  if (options?.requiredModule && !moduleAccess[options.requiredModule]) {
+    redirect(`/${churchLabel}/dashboard`)
+  }
+
+  if (!isStaff && !hasAdministrativeAccess && !options?.allowIncompleteMemberOnboarding) {
     const memberProfile = await prisma.person.findFirst({
       where: {
         churchId: church.id,
@@ -64,5 +73,7 @@ export async function getChurchContext(
     church,
     user: session.user,
     isStaff,
+    isPlatformAdmin: platformAdmin,
+    moduleAccess,
   };
 }

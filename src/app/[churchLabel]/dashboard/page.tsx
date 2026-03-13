@@ -1,5 +1,7 @@
 import prisma from "@/lib/prisma"
 import { getChurchContext } from "@/lib/get-church-context"
+import { buildJourneyOverview } from "@/lib/member-journey"
+import { VolunteerScaleResponseStatus } from "@prisma/generated/prisma/client"
 import DashboardClientPage from "./dashboard-client-page"
 
 type DashboardStat = {
@@ -16,9 +18,9 @@ export default async function DashboardPage({
   params: Promise<{ churchLabel: string }>
 }) {
   const { churchLabel } = await params
-  const { church, isStaff } = await getChurchContext(churchLabel)
+  const { church, isStaff, user } = await getChurchContext(churchLabel)
 
-  const [people, schedules, volunteerScales] = await Promise.all([
+  const [people, schedules, volunteerScales, memberPerson] = await Promise.all([
     prisma.person.findMany({
       where: { churchId: church.id },
       select: {
@@ -42,8 +44,17 @@ export default async function DashboardPage({
           gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
         },
       },
-      select: { confirmed: true },
+      select: { confirmed: true, responseStatus: true },
     }),
+    isStaff
+      ? Promise.resolve(null)
+      : prisma.person.findFirst({
+          where: {
+            churchId: church.id,
+            email: user.email,
+          },
+          select: { id: true },
+        }),
   ])
 
   const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
@@ -53,6 +64,9 @@ export default async function DashboardPage({
   const members = people.filter((person) => person.type === "MEMBER" || person.type === "VOLUNTEER" || person.type === "STAFF").length
   const confirmedScales = volunteerScales.filter((item) => item.confirmed).length
   const totalScales = volunteerScales.length
+  const pendingScales = volunteerScales.filter(
+    (item) => item.responseStatus === VolunteerScaleResponseStatus.PENDING
+  ).length
 
   const stats: readonly DashboardStat[] = isStaff
     ? [
@@ -75,7 +89,7 @@ export default async function DashboardPage({
           value: String(schedules.length),
           change: schedules.length > 0 ? "Agenda publicada" : "Sem eventos",
           icon: "calendar",
-          color: "bg-[#8ee4af]",
+          color: "bg-[hsl(var(--status-success))]",
         },
         {
           label: "Escalas Confirmadas",
@@ -98,7 +112,7 @@ export default async function DashboardPage({
           value: String(schedules.length),
           change: schedules.length > 0 ? "Agenda disponivel" : "Sem agenda publicada",
           icon: "calendar",
-          color: "bg-[#8ee4af]",
+          color: "bg-[hsl(var(--status-success))]",
         },
       ] as const
 
@@ -128,11 +142,11 @@ export default async function DashboardPage({
     actionLabel: string
   }> = isStaff
     ? [
-        totalScales > confirmedScales
+        pendingScales > 0
           ? {
               id: "pending-scales",
               title: "Escalas aguardando confirmacao",
-              description: `${totalScales - confirmedScales} escala(s) ainda sem retorno dos voluntarios.`,
+              description: `${pendingScales} escala(s) ainda sem retorno dos voluntarios.`,
               tone: "warning" as const,
               href: `/${churchLabel}/dashboard/ministerios`,
               actionLabel: "Revisar escalas",
@@ -172,6 +186,11 @@ export default async function DashboardPage({
       )
     : []
 
+  const memberJourney =
+    !isStaff && memberPerson
+      ? await prisma.$transaction((tx) => buildJourneyOverview(tx, memberPerson.id, church.id))
+      : null
+
   return (
     <DashboardClientPage
       churchLabel={churchLabel}
@@ -180,6 +199,16 @@ export default async function DashboardPage({
       alerts={alerts}
       recentVisitors={recentVisitors}
       events={events}
+      memberJourney={
+        memberJourney
+          ? {
+              currentStageName: memberJourney.currentStage?.name || "Jornada iniciada",
+              progress: memberJourney.progress,
+              score: memberJourney.score,
+              level: memberJourney.level,
+            }
+          : null
+      }
     />
   )
 }

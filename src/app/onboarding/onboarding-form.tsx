@@ -12,6 +12,13 @@ import { OnboardingShell } from "@/components/onboarding/onboarding-shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { churchOnboardingSchema } from "@/lib/validations";
 import type { ZodIssue } from "zod";
@@ -364,9 +371,30 @@ export function OnboardingForm({ userName }: { userName: string }) {
             {draft.schedules.map((schedule, index) => (
               <div key={schedule.id} className="grid gap-3 rounded-2xl border bg-muted/30 p-4 sm:grid-cols-3">
                 <Input value={schedule.title} onChange={(event) => setDraft((current) => ({ ...current, schedules: current.schedules.map((item, itemIndex) => itemIndex === index ? { ...item, title: event.target.value } : item) }))} placeholder="Nome do culto" className="h-11 rounded-xl" />
-                <select value={schedule.dayOfWeek} onChange={(event) => setDraft((current) => ({ ...current, schedules: current.schedules.map((item, itemIndex) => itemIndex === index ? { ...item, dayOfWeek: event.target.value as typeof schedule.dayOfWeek } : item) }))} className="h-11 rounded-xl border bg-background px-3">
-                  {dayOptions.map((day) => <option key={day.value} value={day.value}>{day.label}</option>)}
-                </select>
+                <Select
+                  value={schedule.dayOfWeek}
+                  onValueChange={(value) =>
+                    setDraft((current) => ({
+                      ...current,
+                      schedules: current.schedules.map((item, itemIndex) =>
+                        itemIndex === index
+                          ? { ...item, dayOfWeek: value as typeof schedule.dayOfWeek }
+                          : item
+                      ),
+                    }))
+                  }
+                >
+                  <SelectTrigger className="h-11 rounded-xl">
+                    <SelectValue placeholder="Dia do culto" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {dayOptions.map((day) => (
+                      <SelectItem key={day.value} value={day.value}>
+                        {day.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <div className="flex gap-2">
                   <Input type="time" value={schedule.time} onChange={(event) => setDraft((current) => ({ ...current, schedules: current.schedules.map((item, itemIndex) => itemIndex === index ? { ...item, time: event.target.value } : item) }))} className="h-11 rounded-xl" />
                   <Button type="button" variant="outline" className="rounded-xl" onClick={() => setDraft((current) => ({ ...current, schedules: current.schedules.filter((_, itemIndex) => itemIndex !== index) }))}>

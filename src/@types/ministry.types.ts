@@ -16,6 +16,9 @@ export interface Schedule {
   ministryId: string
   ministryName?: string
   confirmed: boolean
+  responseStatus: "pending" | "confirmed" | "declined" | "swap_requested"
+  responseNote?: string
+  respondedAt?: string
   role: string
   person: Person
 }

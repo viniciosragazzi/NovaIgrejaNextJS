@@ -43,7 +43,8 @@ export function OnboardingProgressIndicator({
               className={cn(
                 "rounded-2xl border px-3 py-3 text-sm transition-colors",
                 index === currentStep && "border-primary bg-primary/5 text-foreground",
-                index < currentStep && "border-emerald-200 bg-emerald-50 text-emerald-800",
+                index < currentStep &&
+                  "border-[hsl(var(--status-success))] bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))]",
                 index > currentStep && "border-border bg-background text-muted-foreground"
               )}
             >

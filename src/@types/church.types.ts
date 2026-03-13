@@ -29,7 +29,7 @@ export type PermissionModuleKey =
   | "paginaPublica"
   | "configuracoes"
 
-export type PermissionRoleKey = "perfilPastor" | "perfilAdministrador" | "perfilLider" | "perfilStaff"
+export type PermissionStatusKey = "STAFF" | "VOLUNTEER" | "MEMBER" | "VISITOR"
 
 export interface OrderedToggleItem<T extends string> {
   key: T
@@ -167,7 +167,7 @@ export interface ChurchPublicInteractionSettings {
 }
 
 export interface ChurchPermissionsSettings {
-  permissoesPorModulo: Record<PermissionRoleKey, Record<PermissionModuleKey, boolean>>
+  permissoesPorModulo: Record<PermissionStatusKey, Record<PermissionModuleKey, boolean>>
 }
 
 export interface ChurchPublicPageSettings {

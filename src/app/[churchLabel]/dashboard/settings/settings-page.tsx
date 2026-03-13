@@ -1,28 +1,34 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useMemo, useState, useTransition } from "react"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
+import { useTheme } from "next-themes"
+import { toast } from "sonner"
 import {
-  Settings,
   Bell,
-  Shield,
-  Palette,
-  Moon,
-  Sun,
-  Smartphone,
-  Mail,
-  Lock,
+  Camera,
   Eye,
   EyeOff,
+  Globe,
+  Lock,
+  Mail,
+  Moon,
+  Palette,
   Save,
-  Trash2,
+  Settings,
+  Shield,
+  Smartphone,
+  Sun,
+  TriangleAlert,
+  UserRound,
 } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { changeMyPasswordAction, updateMyProfileAction } from "@/actions/account.actions"
+import { ImageUploadField } from "@/components/domain/church/image-upload-field"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
-import { Spinner } from "@/components/ui/spinner"
 import {
   Select,
   SelectContent,
@@ -30,23 +36,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+import { Spinner } from "@/components/ui/spinner"
+import { Switch } from "@/components/ui/switch"
 
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.08 },
   },
 }
 
@@ -55,48 +52,267 @@ const item = {
   show: { opacity: 1, y: 0 },
 }
 
-export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [settings, setSettings] = useState({
-    notifications: {
-      newVisitor: true,
-      weeklyReport: true,
-      emailAlerts: false,
-      pushNotifications: true,
-    },
-    appearance: {
-      theme: "light",
-      language: "pt-BR",
-    },
-    security: {
-      twoFactor: false,
-    },
+const languageStorageKey = "novaigreja.settings.language"
+const notificationStorageKey = "novaigreja.settings.notifications"
+
+type ThemeOption = "light" | "dark" | "system"
+type LanguageOption = "pt-BR" | "en-US" | "es"
+
+type NotificationSettings = {
+  newVisitor: boolean
+  weeklyReport: boolean
+  pushNotifications: boolean
+}
+
+interface SettingsPageProps {
+  isStaff: boolean
+  currentUser: {
+    name: string
+    email: string
+    image: string
+  }
+}
+
+export default function SettingsPage({ isStaff, currentUser }: SettingsPageProps) {
+  const router = useRouter()
+  const { theme, setTheme } = useTheme()
+
+  const [mounted, setMounted] = useState(false)
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const [profileDraft, setProfileDraft] = useState({
+    name: currentUser.name,
+    image: currentUser.image,
   })
 
-  async function handleSave() {
-    setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    console.log("Settings saved:", settings)
-    setIsSubmitting(false)
+  const [appearance, setAppearance] = useState<{
+    theme: ThemeOption
+    language: LanguageOption
+  }>({
+    theme: "system",
+    language: "pt-BR",
+  })
+
+  const [notifications, setNotifications] = useState<NotificationSettings>({
+    newVisitor: true,
+    weeklyReport: true,
+    pushNotifications: true,
+  })
+
+  const [security, setSecurity] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+    revokeOtherSessions: true,
+  })
+
+  const [isSavingProfile, startProfileTransition] = useTransition()
+  const [isSavingAppearance, startAppearanceTransition] = useTransition()
+  const [isSavingNotifications, startNotificationsTransition] = useTransition()
+  const [isChangingPassword, startPasswordTransition] = useTransition()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) {
+      return
+    }
+
+    const savedLanguage = window.localStorage.getItem(languageStorageKey) as LanguageOption | null
+    if (savedLanguage === "pt-BR" || savedLanguage === "en-US" || savedLanguage === "es") {
+      setAppearance((current) => ({ ...current, language: savedLanguage }))
+    }
+
+    const rawNotificationSettings = window.localStorage.getItem(notificationStorageKey)
+    if (!rawNotificationSettings) {
+      return
+    }
+
+    try {
+      const parsed = JSON.parse(rawNotificationSettings) as Partial<NotificationSettings>
+      setNotifications((current) => ({
+        newVisitor: typeof parsed.newVisitor === "boolean" ? parsed.newVisitor : current.newVisitor,
+        weeklyReport: typeof parsed.weeklyReport === "boolean" ? parsed.weeklyReport : current.weeklyReport,
+        pushNotifications:
+          typeof parsed.pushNotifications === "boolean"
+            ? parsed.pushNotifications
+            : current.pushNotifications,
+      }))
+    } catch {
+      window.localStorage.removeItem(notificationStorageKey)
+    }
+  }, [mounted])
+
+  useEffect(() => {
+    if (!mounted) {
+      return
+    }
+
+    const nextTheme = theme === "light" || theme === "dark" || theme === "system" ? theme : "system"
+    setAppearance((current) => (current.theme === nextTheme ? current : { ...current, theme: nextTheme }))
+  }, [mounted, theme])
+
+  const currentThemeLabel = useMemo(() => {
+    if (appearance.theme === "dark") {
+      return "Escuro"
+    }
+
+    if (appearance.theme === "light") {
+      return "Claro"
+    }
+
+    return "Sistema"
+  }, [appearance.theme])
+
+  function saveProfile() {
+    startProfileTransition(async () => {
+      const result = await updateMyProfileAction(profileDraft)
+
+      if (!result.success) {
+        toast.error(result.error || "Nao foi possivel atualizar seu perfil.")
+        return
+      }
+
+      toast.success("Perfil atualizado com sucesso.")
+      router.refresh()
+    })
+  }
+
+  function saveAppearance() {
+    startAppearanceTransition(async () => {
+      setTheme(appearance.theme)
+      window.localStorage.setItem(languageStorageKey, appearance.language)
+      toast.success("Preferencias de aparencia salvas.")
+    })
+  }
+
+  function saveNotifications() {
+    startNotificationsTransition(async () => {
+      window.localStorage.setItem(notificationStorageKey, JSON.stringify(notifications))
+      toast.success("Preferencias de notificacao salvas neste navegador.")
+    })
+  }
+
+  function changePassword() {
+    startPasswordTransition(async () => {
+      const result = await changeMyPasswordAction(security)
+
+      if (!result.success) {
+        toast.error(result.error || "Nao foi possivel alterar sua senha.")
+        return
+      }
+
+      setSecurity({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+        revokeOtherSessions: security.revokeOtherSessions,
+      })
+      toast.success("Senha atualizada com sucesso.")
+    })
   }
 
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="space-y-8"
-    >
-      {/* Header */}
+    <motion.div variants={container} initial="hidden" animate="show" className="space-y-8">
       <motion.div variants={item}>
         <h1 className="text-2xl font-bold">Configuracoes</h1>
         <p className="text-muted-foreground">
-          Gerencie as preferencias da sua conta
+          Gerencie seu perfil, preferencias e a seguranca da sua conta.
         </p>
       </motion.div>
 
-      {/* Notifications Card */}
+      <motion.div variants={item}>
+        <Card className="rounded-2xl border-0 shadow-sm">
+          <CardHeader className="flex flex-row items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary">
+              <UserRound className="h-5 w-5 text-secondary-foreground" />
+            </div>
+            <div>
+              <CardTitle>Meu Perfil</CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Atualize seu nome, foto e os dados usados na sua conta.
+              </p>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="settings-name">Nome</Label>
+                  <Input
+                    id="settings-name"
+                    value={profileDraft.name}
+                    onChange={(event) =>
+                      setProfileDraft((current) => ({ ...current, name: event.target.value }))
+                    }
+                    className="h-12 rounded-xl"
+                    placeholder="Seu nome"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="settings-email">E-mail</Label>
+                  <Input
+                    id="settings-email"
+                    value={currentUser.email}
+                    disabled
+                    className="h-12 rounded-xl opacity-80"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    O e-mail atual identifica sua conta e nao pode ser alterado nesta tela.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border bg-muted/20 p-4">
+                  <div className="flex items-center gap-3">
+                    <Camera className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <p className="font-medium">Visibilidade no painel</p>
+                      <p className="text-sm text-muted-foreground">
+                        Seu nome atualizado aparece no painel e em partes do cadastro interno.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ImageUploadField
+                label="Foto de perfil"
+                value={profileDraft.image}
+                onChange={(image) => setProfileDraft((current) => ({ ...current, image }))}
+                placeholder="https://"
+                hint="Voce pode usar uma URL ou enviar uma imagem."
+              />
+            </div>
+
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                onClick={saveProfile}
+                disabled={isSavingProfile}
+                className="h-12 rounded-2xl px-6"
+              >
+                {isSavingProfile ? (
+                  <>
+                    <Spinner className="mr-2 h-4 w-4" />
+                    Salvando...
+                  </>
+                ) : (
+                  <>
+                    <Save className="mr-2 h-4 w-4" />
+                    Salvar perfil
+                  </>
+                )}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
       <motion.div variants={item}>
         <Card className="rounded-2xl border-0 shadow-sm">
           <CardHeader className="flex flex-row items-center gap-3">
@@ -106,7 +322,7 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
             <div>
               <CardTitle>Notificacoes</CardTitle>
               <p className="text-sm text-muted-foreground">
-                Configure como voce recebe alertas
+                Ajuste alertas locais usados neste navegador.
               </p>
             </div>
           </CardHeader>
@@ -119,20 +335,14 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
                 <div>
                   <p className="font-medium">Novos Visitantes</p>
                   <p className="text-sm text-muted-foreground">
-                    Receba alertas quando novos visitantes se cadastrarem
+                    Preferencia local para destacar eventos de novos visitantes.
                   </p>
                 </div>
               </div>
               <Switch
-                checked={settings.notifications.newVisitor}
+                checked={notifications.newVisitor}
                 onCheckedChange={(checked) =>
-                  setSettings({
-                    ...settings,
-                    notifications: {
-                      ...settings.notifications,
-                      newVisitor: checked,
-                    },
-                  })
+                  setNotifications((current) => ({ ...current, newVisitor: checked }))
                 }
               />
             </div>
@@ -145,20 +355,14 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
                 <div>
                   <p className="font-medium">Relatorio Semanal</p>
                   <p className="text-sm text-muted-foreground">
-                    Receba um resumo semanal por email
+                    Guarda sua preferencia para resumos e lembretes no painel.
                   </p>
                 </div>
               </div>
               <Switch
-                checked={settings.notifications.weeklyReport}
+                checked={notifications.weeklyReport}
                 onCheckedChange={(checked) =>
-                  setSettings({
-                    ...settings,
-                    notifications: {
-                      ...settings.notifications,
-                      weeklyReport: checked,
-                    },
-                  })
+                  setNotifications((current) => ({ ...current, weeklyReport: checked }))
                 }
               />
             </div>
@@ -171,46 +375,60 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
                 <div>
                   <p className="font-medium">Push Notifications</p>
                   <p className="text-sm text-muted-foreground">
-                    Receba notificacoes no navegador
+                    Mantem a preferencia salva para este dispositivo.
                   </p>
                 </div>
               </div>
               <Switch
-                checked={settings.notifications.pushNotifications}
+                checked={notifications.pushNotifications}
                 onCheckedChange={(checked) =>
-                  setSettings({
-                    ...settings,
-                    notifications: {
-                      ...settings.notifications,
-                      pushNotifications: checked,
-                    },
-                  })
+                  setNotifications((current) => ({ ...current, pushNotifications: checked }))
                 }
               />
+            </div>
+
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                onClick={saveNotifications}
+                disabled={isSavingNotifications}
+                className="h-12 rounded-2xl px-6"
+              >
+                {isSavingNotifications ? (
+                  <>
+                    <Spinner className="mr-2 h-4 w-4" />
+                    Salvando...
+                  </>
+                ) : (
+                  <>
+                    <Save className="mr-2 h-4 w-4" />
+                    Salvar notificacoes
+                  </>
+                )}
+              </Button>
             </div>
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* Appearance Card */}
       <motion.div variants={item}>
         <Card className="rounded-2xl border-0 shadow-sm">
           <CardHeader className="flex flex-row items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#8ee4af]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[hsl(var(--status-success))]">
               <Palette className="h-5 w-5 text-foreground" />
             </div>
             <div>
               <CardTitle>Aparencia</CardTitle>
               <p className="text-sm text-muted-foreground">
-                Personalize a interface do sistema
+                Personalize como o painel se comporta no seu navegador.
               </p>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted">
-                  {settings.appearance.theme === "dark" ? (
+                  {appearance.theme === "dark" ? (
                     <Moon className="h-5 w-5 text-muted-foreground" />
                   ) : (
                     <Sun className="h-5 w-5 text-muted-foreground" />
@@ -219,20 +437,21 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
                 <div>
                   <p className="font-medium">Tema</p>
                   <p className="text-sm text-muted-foreground">
-                    Escolha entre claro ou escuro
+                    Atualmente: {mounted ? currentThemeLabel : "Carregando..."}
                   </p>
                 </div>
               </div>
               <Select
-                value={settings.appearance.theme}
-                onValueChange={(value) =>
-                  value && setSettings({
-                    ...settings,
-                    appearance: { ...settings.appearance, theme: value },
-                  })
-                }
+                value={appearance.theme}
+                onValueChange={(value) => {
+                  if (!value) {
+                    return
+                  }
+
+                  setAppearance((current) => ({ ...current, theme: value }))
+                }}
               >
-                <SelectTrigger className="w-32 rounded-xl border-0 bg-muted/50">
+                <SelectTrigger className="w-36 rounded-xl bg-muted/50">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -243,28 +462,29 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
               </Select>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted">
-                  <Settings className="h-5 w-5 text-muted-foreground" />
+                  <Globe className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div>
                   <p className="font-medium">Idioma</p>
                   <p className="text-sm text-muted-foreground">
-                    Selecione o idioma do sistema
+                    Preferencia salva localmente para evolucoes futuras da interface.
                   </p>
                 </div>
               </div>
               <Select
-                value={settings.appearance.language}
-                onValueChange={(value) =>
-                  value && setSettings({
-                    ...settings,
-                    appearance: { ...settings.appearance, language: value },
-                  })
-                }
+                value={appearance.language}
+                onValueChange={(value) => {
+                  if (!value) {
+                    return
+                  }
+
+                  setAppearance((current) => ({ ...current, language: value }))
+                }}
               >
-                <SelectTrigger className="w-40 rounded-xl border-0 bg-muted/50">
+                <SelectTrigger className="w-44 rounded-xl bg-muted/50">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -274,11 +494,31 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
                 </SelectContent>
               </Select>
             </div>
+
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                onClick={saveAppearance}
+                disabled={isSavingAppearance}
+                className="h-12 rounded-2xl px-6"
+              >
+                {isSavingAppearance ? (
+                  <>
+                    <Spinner className="mr-2 h-4 w-4" />
+                    Salvando...
+                  </>
+                ) : (
+                  <>
+                    <Save className="mr-2 h-4 w-4" />
+                    Salvar aparencia
+                  </>
+                )}
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* Security Card */}
       <motion.div variants={item}>
         <Card className="rounded-2xl border-0 shadow-sm">
           <CardHeader className="flex flex-row items-center gap-3">
@@ -288,7 +528,7 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
             <div>
               <CardTitle>Seguranca</CardTitle>
               <p className="text-sm text-muted-foreground">
-                Proteja sua conta
+                Altere sua senha e mantenha sua conta protegida.
               </p>
             </div>
           </CardHeader>
@@ -299,22 +539,22 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
                 <div className="relative">
                   <Input
                     id="currentPassword"
-                    type={showPassword ? "text" : "password"}
-                    className="h-12 rounded-xl border-0 bg-muted/50 pr-10"
+                    type={showCurrentPassword ? "text" : "password"}
+                    className="h-12 rounded-xl pr-10"
                     placeholder="Digite sua senha atual"
+                    value={security.currentPassword}
+                    onChange={(event) =>
+                      setSecurity((current) => ({ ...current, currentPassword: event.target.value }))
+                    }
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2"
-                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-xl"
+                    onClick={() => setShowCurrentPassword((current) => !current)}
                   >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
+                    {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </Button>
                 </div>
               </div>
@@ -322,21 +562,52 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="newPassword">Nova Senha</Label>
-                  <Input
-                    id="newPassword"
-                    type="password"
-                    className="h-12 rounded-xl border-0 bg-muted/50"
-                    placeholder="Digite a nova senha"
-                  />
+                  <div className="relative">
+                    <Input
+                      id="newPassword"
+                      type={showNewPassword ? "text" : "password"}
+                      className="h-12 rounded-xl pr-10"
+                      placeholder="Digite a nova senha"
+                      value={security.newPassword}
+                      onChange={(event) =>
+                        setSecurity((current) => ({ ...current, newPassword: event.target.value }))
+                      }
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-xl"
+                      onClick={() => setShowNewPassword((current) => !current)}
+                    >
+                      {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </Button>
+                  </div>
                 </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword">Confirmar Senha</Label>
-                  <Input
-                    id="confirmPassword"
-                    type="password"
-                    className="h-12 rounded-xl border-0 bg-muted/50"
-                    placeholder="Confirme a nova senha"
-                  />
+                  <div className="relative">
+                    <Input
+                      id="confirmPassword"
+                      type={showConfirmPassword ? "text" : "password"}
+                      className="h-12 rounded-xl pr-10"
+                      placeholder="Confirme a nova senha"
+                      value={security.confirmPassword}
+                      onChange={(event) =>
+                        setSecurity((current) => ({ ...current, confirmPassword: event.target.value }))
+                      }
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-xl"
+                      onClick={() => setShowConfirmPassword((current) => !current)}
+                    >
+                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -345,90 +616,92 @@ export default function SettingsPage({ isStaff }: { isStaff: boolean }) {
               <div className="flex items-center gap-3">
                 <Lock className="h-5 w-5 text-muted-foreground" />
                 <div>
-                  <p className="font-medium">Autenticacao em Dois Fatores</p>
+                  <p className="font-medium">Encerrar outras sessoes</p>
                   <p className="text-sm text-muted-foreground">
-                    Adicione uma camada extra de seguranca
+                    Recomendado ao trocar a senha em computadores compartilhados.
                   </p>
                 </div>
               </div>
               <Switch
-                checked={settings.security.twoFactor}
+                checked={security.revokeOtherSessions}
                 onCheckedChange={(checked) =>
-                  setSettings({
-                    ...settings,
-                    security: { twoFactor: checked },
-                  })
+                  setSecurity((current) => ({ ...current, revokeOtherSessions: checked }))
                 }
               />
             </div>
-          </CardContent>
-        </Card>
-      </motion.div>
 
-      {/* Danger Zone */}
-      <motion.div variants={item}>
-        <Card className="rounded-2xl border-0 border-destructive/20 shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-destructive">Zona de Perigo</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="font-medium">Excluir Conta</p>
-                <p className="text-sm text-muted-foreground">
-                  Esta acao e irreversivel e excluira todos os dados
-                </p>
+            <div className="rounded-2xl border border-dashed border-border bg-muted/20 p-4">
+              <div className="flex items-start gap-3">
+                <TriangleAlert className="mt-0.5 h-5 w-5 text-muted-foreground" />
+                <div className="space-y-1">
+                  <p className="font-medium">Autenticacao em dois fatores</p>
+                  <p className="text-sm text-muted-foreground">
+                    Este projeto ainda nao configurou o plugin de 2FA no auth. A troca de senha ja
+                    esta funcional, mas o 2FA ainda nao esta disponivel nesta base.
+                  </p>
+                </div>
               </div>
-              <AlertDialog>
-                <AlertDialogTrigger >
-                  <Button variant="destructive" className="rounded-xl">
-                    <Trash2 className="mr-2 h-4 w-4" />
-                    Excluir Conta
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className="rounded-2xl">
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Voce tem certeza?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      Esta acao nao pode ser desfeita. Isso excluira
-                      permanentemente sua conta e remover todos os dados dos
-                      nossos servidores.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel className="rounded-xl">
-                      Cancelar
-                    </AlertDialogCancel>
-                    <AlertDialogAction className="rounded-xl bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                      Sim, excluir conta
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+            </div>
+
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                onClick={changePassword}
+                disabled={isChangingPassword}
+                className="h-12 rounded-2xl px-6"
+              >
+                {isChangingPassword ? (
+                  <>
+                    <Spinner className="mr-2 h-4 w-4" />
+                    Atualizando...
+                  </>
+                ) : (
+                  <>
+                    <Shield className="mr-2 h-4 w-4" />
+                    Atualizar senha
+                  </>
+                )}
+              </Button>
             </div>
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* Save Button */}
-      <motion.div variants={item} className="flex justify-end">
-        <Button
-          onClick={handleSave}
-          disabled={isSubmitting}
-          className="h-12 w-full rounded-2xl bg-primary px-8 sm:w-auto"
-        >
-          {isSubmitting ? (
-            <>
-              <Spinner className="mr-2 h-4 w-4" />
-              Salvando...
-            </>
-          ) : (
-            <>
-              <Save className="mr-2 h-4 w-4" />
-              Salvar Alteracoes
-            </>
-          )}
-        </Button>
+      <motion.div variants={item}>
+        <Card className="rounded-2xl border border-destructive/20 shadow-sm">
+          <CardHeader className="flex flex-row items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-destructive/10">
+              <TriangleAlert className="h-5 w-5 text-destructive" />
+            </div>
+            <div>
+              <CardTitle className="text-destructive">Zona de Perigo</CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Recursos destrutivos continuam bloqueados ate terem fluxo seguro completo.
+              </p>
+            </div>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-medium">Exclusao de conta</p>
+              <p className="text-sm text-muted-foreground">
+                Esta acao ainda nao foi implementada com confirmacao e auditoria.
+              </p>
+            </div>
+            <Button type="button" variant="destructive" disabled className="h-12 rounded-2xl px-6">
+              Indisponivel por enquanto
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <motion.div variants={item}>
+        <div className="rounded-2xl border bg-card px-4 py-3 text-sm text-muted-foreground">
+          <span className="font-medium text-foreground">
+            {isStaff ? "Modo administrativo" : "Conta de membro"}
+          </span>
+          {" "}
+          ativa nesta igreja.
+        </div>
       </motion.div>
     </motion.div>
   )

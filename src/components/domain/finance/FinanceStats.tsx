@@ -14,7 +14,7 @@ export function FinanceStats({ stats }: FinanceStatsProps) {
   return (
     <div className="grid gap-4 sm:grid-cols-3">
       <div className="flex items-center gap-4 rounded-3xl bg-card p-6 shadow-sm">
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#8ee4af]">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[hsl(var(--status-success))]">
           <DollarSign className="h-6 w-6 text-foreground" />
         </div>
         <div>
@@ -24,7 +24,7 @@ export function FinanceStats({ stats }: FinanceStatsProps) {
       </div>
 
       <div className="flex items-center gap-4 rounded-3xl bg-card p-6 shadow-sm">
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f9a8d4]">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary">
           <TrendingUp className="h-6 w-6 text-foreground" />
         </div>
         <div>

@@ -1,12 +1,11 @@
 "use server";
 
-import { ActionResponse } from "@/@types/shared.types";
 import { ChurchLink } from "@/@types/church.types";
-import { auth } from "@/lib/auth";
+import { ActionResponse } from "@/@types/shared.types";
+import { requireChurchModuleSession } from "@/lib/authorization";
 import prisma from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 import { ChurchProfileSchemaData } from "@/lib/validations";
+import { revalidatePath } from "next/cache";
 import { Prisma } from "@prisma/generated/prisma/client";
 
 export async function updateChurchProfileAction(
@@ -14,16 +13,10 @@ export async function updateChurchProfileAction(
   data: ChurchProfileSchemaData,
   links: Partial<ChurchLink>[]
 ): Promise<ActionResponse> {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await requireChurchModuleSession(churchId, "perfil");
 
-  if (
-    !session ||
-    session.user.churchId !== churchId ||
-    (session.user.status !== "STAFF" && session.user.role !== "ADMIN")
-  ) {
-    return { success: false, error: "Não autorizado" };
+  if (!session) {
+    return { success: false, error: "Nao autorizado" };
   }
 
   try {
@@ -34,8 +27,7 @@ export async function updateChurchProfileAction(
           name: data.name,
           address: data.address,
           customization: data.customization as Prisma.InputJsonValue,
-          pixCopyPaste:
-            data.customization.doacoes.qrCodePix || undefined,
+          pixCopyPaste: data.customization.doacoes.qrCodePix || undefined,
         },
       }),
       prisma.churchLink.deleteMany({ where: { churchId } }),

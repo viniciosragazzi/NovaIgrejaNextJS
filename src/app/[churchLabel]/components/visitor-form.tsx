@@ -88,7 +88,7 @@ function FormContent({
   if (isSuccess) {
     return (
       <div className="flex flex-col items-center justify-center py-8">
-        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))]">
           <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
@@ -201,11 +201,11 @@ export function VisitorFormTrigger({ churchLabel }: { churchLabel: string }) {
   const triggerButton = (
     <Button
       size="lg"
-      className="flex h-16 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-xl shadow-black/20 hover:bg-primary/90"
+      className="flex h-16 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-xl shadow-primary/20 hover:bg-primary/90"
     >
       <UserPlus className="h-5 w-5" />
       <span>Sou Novo</span>
-      <div className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#8ee4af]">
+      <div className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-[hsl(var(--status-success))]">
         <ChevronRight className="h-4 w-4 text-foreground" />
       </div>
     </Button>

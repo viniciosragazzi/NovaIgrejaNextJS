@@ -54,7 +54,7 @@ export function PixConfigCard({
     <div className="rounded-3xl bg-card p-6 shadow-sm">
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#8ee4af]">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[hsl(var(--status-success))]">
             <QrCode className="h-6 w-6 text-foreground" />
           </div>
           <div>

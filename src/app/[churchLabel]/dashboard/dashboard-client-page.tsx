@@ -7,6 +7,7 @@ import {
   Calendar,
   ChevronRight,
   Heart,
+  Map,
   Plus,
   TrendingUp,
   Users,
@@ -66,12 +67,18 @@ type DashboardClientPageProps = {
     day: string
     time: string
   }>
+  memberJourney: {
+    currentStageName: string
+    progress: number
+    score: number
+    level: number
+  } | null
 }
 
 const alertToneClasses = {
-  warning: "border-amber-200 bg-amber-50 text-amber-900",
-  info: "border-blue-200 bg-blue-50 text-blue-900",
-  success: "border-emerald-200 bg-emerald-50 text-emerald-900",
+  warning: "border-[hsl(var(--status-warning))] bg-[hsl(var(--status-warning))] text-[hsl(var(--status-warning-foreground))]",
+  info: "border-[hsl(var(--status-info))] bg-[hsl(var(--status-info))] text-[hsl(var(--status-info-foreground))]",
+  success: "border-[hsl(var(--status-success))] bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))]",
 }
 
 export default function DashboardClientPage({
@@ -81,6 +88,7 @@ export default function DashboardClientPage({
   alerts,
   recentVisitors,
   events,
+  memberJourney,
 }: DashboardClientPageProps) {
   const quickActions = isStaff
     ? [
@@ -177,6 +185,46 @@ export default function DashboardClientPage({
                   description="O painel esta em dia. Use as acoes rapidas para continuar a operacao da igreja."
                 />
               )}
+            </CardContent>
+          </Card>
+        </motion.div>
+      ) : null}
+
+      {!isStaff && memberJourney ? (
+        <motion.div variants={item}>
+          <Card className="rounded-3xl border-0 shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle className="text-lg">Minha Jornada</CardTitle>
+              <Badge variant="secondary" className="rounded-full px-3 py-1">
+                Progresso
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center gap-4 rounded-2xl bg-muted/40 p-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary">
+                  <Map className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold">{memberJourney.currentStageName}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Nivel {memberJourney.level} • {memberJourney.score} pontos
+                  </p>
+                </div>
+                <span className="rounded-full bg-background px-3 py-1 text-xs font-medium shadow-sm">
+                  {memberJourney.progress}%
+                </span>
+              </div>
+
+              <div className="h-2 overflow-hidden rounded-full bg-muted">
+                <div className="h-full rounded-full bg-primary" style={{ width: `${memberJourney.progress}%` }} />
+              </div>
+
+              <Button className="rounded-2xl">
+                <Link href={`/${churchLabel}/dashboard/jornada`} className="flex items-center">
+                  Ver jornada completa
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </CardContent>
           </Card>
         </motion.div>

@@ -1,7 +1,6 @@
 import { ScheduleEvent } from "@/@types/shared.types"
 import { getChurchContext } from "@/lib/get-church-context"
 import prisma from "@/lib/prisma"
-import { redirect } from "next/navigation"
 import ScheduleClientPage from "./schedule-client-page"
 
 const dayMap = {
@@ -20,11 +19,7 @@ export default async function SchedulePage({
   params: Promise<{ churchLabel: string }>
 }) {
   const { churchLabel } = await params
-  const { isStaff, church } = await getChurchContext(churchLabel)
-
-  if (!isStaff) {
-    redirect(`/${churchLabel}/dashboard`)
-  }
+  const { church } = await getChurchContext(churchLabel, { requiredModule: "agenda" })
 
   const schedules = await prisma.weeklySchedule.findMany({
     where: { churchId: church.id, active: true },

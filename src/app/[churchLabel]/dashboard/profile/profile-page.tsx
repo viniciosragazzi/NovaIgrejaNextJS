@@ -31,7 +31,7 @@ import {
   MinistryCustomization,
   NoticeBoardEntry,
   PermissionModuleKey,
-  PermissionRoleKey,
+  PermissionStatusKey,
   PrayerRequestEntry,
 } from "@/@types/church.types"
 import { updateChurchProfileAction } from "@/actions/church.actions"
@@ -48,7 +48,8 @@ import {
   homepageWidgetLabels,
   normalizeChurchCustomization,
   permissionModuleLabels,
-  permissionRoleLabels,
+  permissionStatusDescriptions,
+  permissionStatusLabels,
   publicSectionLabels,
 } from "@/lib/church-customization"
 import { churchProfileSchema, ChurchProfileSchemaData } from "@/lib/validations"
@@ -90,7 +91,7 @@ function SectionCard({
 }) {
   return (
     <Card className="w-full overflow-hidden rounded-3xl border-0 shadow-sm">
-      <CardHeader className="border-b bg-zinc-50/70">
+      <CardHeader className="border-b bg-muted/40">
         <div className="flex min-w-0 items-start gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
             {icon}
@@ -317,15 +318,110 @@ function NoticeBoardEditor({
   )
 }
 
+function PermissionsMatrix({
+  customization,
+  setCustomization,
+}: {
+  customization: ChurchProfileSchemaData["customization"]
+  setCustomization: <K extends keyof ChurchProfileSchemaData["customization"]>(
+    section: K,
+    value: ChurchProfileSchemaData["customization"][K]
+  ) => void
+}) {
+  return (
+    <SectionCard
+      title="Permissoes por importancia"
+      description="Os niveis exibidos seguem a importancia do acesso, mas continuam ligados aos status reais do schema."
+      icon={<Shield className="h-5 w-5" />}
+    >
+      <div className="hidden overflow-x-auto rounded-3xl border xl:block">
+        <table className="min-w-full divide-y text-sm">
+          <thead className="bg-muted/40">
+            <tr>
+              <th className="px-4 py-3 text-left font-semibold">Modulo</th>
+              {(Object.keys(permissionStatusLabels) as PermissionStatusKey[]).map((status) => (
+                <th key={status} className="px-4 py-3 text-center font-semibold">
+                  <div>{permissionStatusLabels[status]}</div>
+                  <div className="text-[11px] font-normal uppercase tracking-[0.14em] text-muted-foreground">
+                    {permissionStatusDescriptions[status]}
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y bg-background">
+            {(Object.keys(permissionModuleLabels) as PermissionModuleKey[]).map((module) => (
+              <tr key={module}>
+                <td className="px-4 py-3 font-medium">{permissionModuleLabels[module]}</td>
+                {(Object.keys(permissionStatusLabels) as PermissionStatusKey[]).map((status) => (
+                  <td key={`${status}-${module}`} className="px-4 py-3 text-center">
+                    <Switch
+                      checked={customization.permissoes.permissoesPorModulo[status][module]}
+                      onCheckedChange={(enabled) =>
+                        setCustomization("permissoes", {
+                          permissoesPorModulo: {
+                            ...customization.permissoes.permissoesPorModulo,
+                            [status]: {
+                              ...customization.permissoes.permissoesPorModulo[status],
+                              [module]: enabled,
+                            },
+                          },
+                        })
+                      }
+                    />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="space-y-3 xl:hidden">
+        {(Object.keys(permissionModuleLabels) as PermissionModuleKey[]).map((module) => (
+          <div key={module} className="rounded-2xl border bg-muted/30 p-4">
+            <p className="mb-3 font-medium">{permissionModuleLabels[module]}</p>
+            <div className="space-y-3">
+              {(Object.keys(permissionStatusLabels) as PermissionStatusKey[]).map((status) => (
+                <div key={`${status}-${module}`} className="flex items-center justify-between gap-3">
+                  <div>
+                    <span className="text-sm text-muted-foreground">{permissionStatusLabels[status]}</span>
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground/80">
+                      {permissionStatusDescriptions[status]}
+                    </p>
+                  </div>
+                  <Switch
+                    checked={customization.permissoes.permissoesPorModulo[status][module]}
+                    onCheckedChange={(enabled) =>
+                      setCustomization("permissoes", {
+                        permissoesPorModulo: {
+                          ...customization.permissoes.permissoesPorModulo,
+                          [status]: {
+                            ...customization.permissoes.permissoesPorModulo[status],
+                            [module]: enabled,
+                          },
+                        },
+                      })
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </SectionCard>
+  )
+}
+
 interface ProfilePageProps {
-  isStaff: boolean
+  canManageProfile: boolean
   initialData: ChurchData
   initialLinks: ChurchLink[]
   initialMinistries: Array<{ id: string; name: string; description: string | null }>
   initialSchedules: Array<{ id: string; title: string; dayOfWeek: DayOfWeek; time: string; description: string | null }>
 }
 
-type ProfileTabKey = "geral" | "visual" | "organizacao" | "publico" | "doacoes"
+type ProfileTabKey = "geral" | "visual" | "organizacao" | "publico" | "doacoes" | "administracao"
 
 const profileTabs: Array<{ key: ProfileTabKey; label: string }> = [
   { key: "geral", label: "Geral" },
@@ -333,10 +429,11 @@ const profileTabs: Array<{ key: ProfileTabKey; label: string }> = [
   { key: "organizacao", label: "Organizacao" },
   { key: "publico", label: "Pagina Publica" },
   { key: "doacoes", label: "Doacoes" },
+  { key: "administracao", label: "Administracao" },
 ]
 
 export default function ChurchProfilePage({
-  isStaff,
+  canManageProfile,
   initialData,
   initialLinks,
   initialMinistries,
@@ -381,7 +478,7 @@ export default function ChurchProfilePage({
   }
 
   async function onSubmit(data: ChurchProfileSchemaData) {
-    if (!isStaff) {
+    if (!canManageProfile) {
       return
     }
 
@@ -421,9 +518,10 @@ export default function ChurchProfilePage({
           <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-sm">
             <div className="grid  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
               {profileTabs.map((tab) => (
-                <button
+                <Button
                   key={tab.key}
                   type="button"
+                  variant="ghost"
                   onClick={() => setActiveTab(tab.key)}
                   className={`min-w-0 flex-1 rounded-2xl px-3 py-3 text-center text-xs font-medium transition-colors sm:min-w-[9.5rem] sm:flex-none sm:text-sm ${activeTab === tab.key
                     ? "bg-primary text-primary-foreground shadow-sm"
@@ -431,7 +529,7 @@ export default function ChurchProfilePage({
                     }`}
                 >
                   <span className="block break-words leading-5">{tab.label}</span>
-                </button>
+                </Button>
               ))}
             </div>
           </div>
@@ -600,7 +698,7 @@ export default function ChurchProfilePage({
           ) : null}
 
           {activeTab === "publico" ? (
-            <div className="mx-auto w-full min-w-0 sm:max-w-full max-w-[260px] overflow-x-hidden space-y-6  sm:max-w-none">
+            <div className="mx-auto w-full min-w-0 sm:max-w-full max-w-sm overflow-x-hidden space-y-6  sm:max-w-none">
               <SectionCard title="Pagina Publica" description="Controle de secoes, SEO, galeria e quick links." icon={<Globe className="h-5 w-5" />}>
                 <div className="grid min-w-0 max-w-full gap-4 xl:grid-cols-2">
                   <div className="space-y-2 xl:col-span-2"><Label>Sobre a Igreja</Label><Textarea {...form.register("customization.paginaPublica.sobreAIgreja")} className="min-h-28 rounded-xl" /></div>
@@ -705,53 +803,21 @@ export default function ChurchProfilePage({
                 </div>
                 <StringListField label="Categorias de contribuicao" items={customization.doacoes.categoriasDeContribuicao} onChange={(categoriasDeContribuicao) => setCustomization("doacoes", { ...customization.doacoes, categoriasDeContribuicao })} placeholder="Ex: Dizimo" emptyMessage="Nenhuma categoria configurada." />
               </SectionCard>
+            </div>
+          ) : null}
 
-              <SectionCard title="Permissoes administrativas" description="Persistencia de matriz de acesso para evolucao do RBAC atual." icon={<Shield className="h-5 w-5" />}>
-                <div className="hidden overflow-x-auto rounded-3xl border xl:block">
-                  <table className="min-w-full divide-y text-sm">
-                    <thead className="bg-muted/40"><tr><th className="px-4 py-3 text-left font-semibold">Modulo</th>{(Object.keys(permissionRoleLabels) as PermissionRoleKey[]).map((role) => <th key={role} className="px-4 py-3 text-center font-semibold">{permissionRoleLabels[role]}</th>)}</tr></thead>
-                    <tbody className="divide-y bg-background">
-                      {(Object.keys(permissionModuleLabels) as PermissionModuleKey[]).map((module) => (
-                        <tr key={module}>
-                          <td className="px-4 py-3 font-medium">{permissionModuleLabels[module]}</td>
-                          {(Object.keys(permissionRoleLabels) as PermissionRoleKey[]).map((role) => (
-                            <td key={`${role}-${module}`} className="px-4 py-3 text-center">
-                              <Switch
-                                checked={customization.permissoes.permissoesPorModulo[role][module]}
-                                onCheckedChange={(enabled) => setCustomization("permissoes", { permissoesPorModulo: { ...customization.permissoes.permissoesPorModulo, [role]: { ...customization.permissoes.permissoesPorModulo[role], [module]: enabled } } })}
-                              />
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="space-y-3 xl:hidden">
-                  {(Object.keys(permissionModuleLabels) as PermissionModuleKey[]).map((module) => (
-                    <div key={module} className="rounded-2xl border bg-muted/30 p-4">
-                      <p className="mb-3 font-medium">{permissionModuleLabels[module]}</p>
-                      <div className="space-y-3">
-                        {(Object.keys(permissionRoleLabels) as PermissionRoleKey[]).map((role) => (
-                          <div key={`${role}-${module}`} className="flex items-center justify-between gap-3">
-                            <span className="text-sm text-muted-foreground">{permissionRoleLabels[role]}</span>
-                            <Switch
-                              checked={customization.permissoes.permissoesPorModulo[role][module]}
-                              onCheckedChange={(enabled) => setCustomization("permissoes", { permissoesPorModulo: { ...customization.permissoes.permissoesPorModulo, [role]: { ...customization.permissoes.permissoesPorModulo[role], [module]: enabled } } })}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </SectionCard>
+          {activeTab === "administracao" ? (
+            <div className="space-y-6">
+              <PermissionsMatrix
+                customization={customization}
+                setCustomization={setCustomization}
+              />
             </div>
           ) : null}
         </div>
 
         <div className="flex justify-end">
-          <Button type="submit" disabled={isSubmitting || !isStaff} className="h-14 w-full rounded-2xl px-6 sm:w-auto sm:px-10">
+          <Button type="submit" disabled={isSubmitting || !canManageProfile} className="h-14 w-full rounded-2xl px-6 sm:w-auto sm:px-10">
             <Save className="mr-2 h-4 w-4" />
             {isSubmitting ? "Salvando..." : "Salvar Personalizacao"}
           </Button>

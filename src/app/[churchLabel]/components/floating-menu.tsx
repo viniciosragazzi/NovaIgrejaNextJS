@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { Calendar, Heart, Home, User } from "lucide-react"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { VisitorFormTrigger } from "./visitor-form"
 
 const menuItems = [
@@ -29,10 +31,15 @@ export function FloatingMenu({
           {menuItems.map((item) => {
             const IconComponent = item.icon
             return (
-              <Link href={`${basePath}${item.navigateTo}`} key={item.label} className="cursor-pointer">
-                <button className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-foreground transition-colors sm:h-11 sm:w-11">
+              <Link
+                href={`${basePath}${item.navigateTo}`}
+                key={item.label}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon" }),
+                  "h-10 w-10 rounded-full bg-muted text-foreground sm:h-11 sm:w-11"
+                )}
+              >
                   <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" />
-                </button>
               </Link>
             )
           })}
@@ -46,10 +53,15 @@ export function FloatingMenu({
           {rightMenuItems.map((item) => {
             const IconComponent = item.icon
             return (
-              <Link href={`${basePath}${item.navigateTo}`} key={item.label}>
-                <button className="flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground sm:h-11 sm:w-11">
+              <Link
+                href={`${basePath}${item.navigateTo}`}
+                key={item.label}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon" }),
+                  "h-10 w-10 rounded-full text-muted-foreground hover:text-foreground sm:h-11 sm:w-11"
+                )}
+              >
                   <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" />
-                </button>
               </Link>
             )
           })}

@@ -3,6 +3,8 @@
 import type { ChurchOnboardingFormData, MemberOnboardingFormData } from "@/lib/validations";
 import type { MemberOnboardingDraft } from "@/@types/onboarding.types";
 import { createDefaultChurchCustomization } from "@/lib/church-customization";
+import { applyJourneyTrigger } from "@/lib/member-journey";
+import { buildPersonMatchWhere, formatPhone } from "@/lib/person-linking";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { headers } from "next/headers";
@@ -141,10 +143,10 @@ export async function saveMemberOnboardingDraftAction(
 
   try {
     const existingProfile = await prisma.person.findFirst({
-      where: {
-        churchId,
+      where: buildPersonMatchWhere(churchId, {
         email: authResult.session.user.email,
-      },
+        phone: draft.profile.phone,
+      }),
       select: { id: true },
     })
 
@@ -161,7 +163,7 @@ export async function saveMemberOnboardingDraftAction(
           churchId,
           email: authResult.session.user.email,
           name: draft.profile.fullName || authResult.session.user.name,
-          contact: draft.profile.phone ? [draft.profile.phone] : [],
+          contact: draft.profile.phone ? [formatPhone(draft.profile.phone)] : [],
           birthday: draft.profile.birthDate || null,
           profileImage: draft.profile.profileImage || null,
           onboardingDraft: draft as Prisma.InputJsonValue,
@@ -193,16 +195,16 @@ export async function completeMemberOnboardingAction(
   try {
     await prisma.$transaction(async (tx) => {
       const existingProfile = await tx.person.findFirst({
-        where: {
-          churchId,
+        where: buildPersonMatchWhere(churchId, {
           email: authResult.session.user.email,
-        },
+          phone: data.profile.phone,
+        }),
         select: { id: true },
       })
 
       const personPayload = {
         name: data.profile.fullName,
-        contact: data.profile.phone ? [data.profile.phone] : [],
+        contact: data.profile.phone ? [formatPhone(data.profile.phone)] : [],
         birthday: data.profile.birthDate || null,
         profileImage: data.profile.profileImage || null,
         ministry: data.interests.ministries.join(", ") || null,
@@ -229,6 +231,19 @@ export async function completeMemberOnboardingAction(
             ...personPayload,
           },
         })
+      }
+
+      const person = await tx.person.findFirst({
+        where: buildPersonMatchWhere(churchId, {
+          email: authResult.session.user.email,
+          phone: data.profile.phone,
+        }),
+        select: { id: true },
+      })
+
+      if (person) {
+        await applyJourneyTrigger(tx, churchId, person.id, "PROFILE_COMPLETED")
+        await applyJourneyTrigger(tx, churchId, person.id, "ONBOARDING_COMPLETED")
       }
 
       await tx.user.update({

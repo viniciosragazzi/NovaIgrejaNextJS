@@ -2,52 +2,67 @@ import { Ministry, Schedule } from "@/@types/ministry.types";
 import { Person, PersonType } from "@/@types/person.types";
 import { getChurchContext } from "@/lib/get-church-context";
 import prisma from "@/lib/prisma";
-import { redirect } from "next/navigation";
 import MinistriesPage from "./ministerios-page";
 
 export default async function Page({ params }: { params: Promise<{ churchLabel: string }> }) {
   const { churchLabel } = await params;
-  const { isStaff, church } = await getChurchContext(churchLabel);
+  const { isStaff, church, user } = await getChurchContext(churchLabel);
 
-  if (!isStaff) {
-    redirect(`/${churchLabel}/dashboard`);
-  }
+  const [dbMinistries, memberPerson] = await Promise.all([
+    prisma.ministry.findMany({
+      where: { churchId: church.id },
+      orderBy: { name: "asc" },
+    }),
+    isStaff
+      ? Promise.resolve(null)
+      : prisma.person.findFirst({
+          where: {
+            churchId: church.id,
+            email: user.email,
+          },
+          select: {
+            id: true,
+          },
+        }),
+  ]);
 
-  const dbMinistries = await prisma.ministry.findMany({
-    where: { churchId: church.id },
-    orderBy: { name: "asc" },
-  });
-
-  const dbPeople = await prisma.person.findMany({
-    where: { churchId: church.id },
-    orderBy: { name: "asc" },
-  });
-
-  const dbSchedules = await prisma.volunteerScale.findMany({
-    where: { churchId: church.id },
-    include: {
-      person: {
-        select: {
-          id: true,
-          name: true,
-          contact: true,
-          email: true,
-          address: true,
-          birthday: true,
-          notes: true,
-          ministry: true,
-          role: true,
-          type: true,
+  const [dbPeople, dbSchedules] = await Promise.all([
+    prisma.person.findMany({
+      where: {
+        churchId: church.id,
+        ...(isStaff ? {} : { id: memberPerson?.id ?? "__no-person__" }),
+      },
+      orderBy: { name: "asc" },
+    }),
+    prisma.volunteerScale.findMany({
+      where: {
+        churchId: church.id,
+        ...(isStaff ? {} : { personId: memberPerson?.id ?? "__no-person__" }),
+      },
+      include: {
+        person: {
+          select: {
+            id: true,
+            name: true,
+            contact: true,
+            email: true,
+            address: true,
+            birthday: true,
+            notes: true,
+            ministry: true,
+            role: true,
+            type: true,
+          },
+        },
+        ministry: {
+          select: {
+            name: true,
+          },
         },
       },
-      ministry: {
-        select: {
-          name: true,
-        },
-      },
-    },
-    orderBy: { date: "asc" },
-  });
+      orderBy: { date: "asc" },
+    }),
+  ]);
 
   const formattedVolunteers: Person[] = dbPeople.map((person) => ({
     id: person.id,
@@ -70,6 +85,9 @@ export default async function Page({ params }: { params: Promise<{ churchLabel: 
     ministryName: schedule.ministry.name,
     role: schedule.role,
     confirmed: schedule.confirmed,
+    responseStatus: schedule.responseStatus.toLowerCase() as Schedule["responseStatus"],
+    responseNote: schedule.responseNote || undefined,
+    respondedAt: schedule.respondedAt?.toISOString(),
     person: {
       id: schedule.person.id,
       fullName: schedule.person.name,
@@ -88,6 +106,7 @@ export default async function Page({ params }: { params: Promise<{ churchLabel: 
     <MinistriesPage
       churchId={church.id}
       isStaff={isStaff}
+      churchLabel={churchLabel}
       ministries={dbMinistries as unknown as Ministry[]}
       volunteers={formattedVolunteers}
       initialSchedules={formattedSchedules}

@@ -31,7 +31,7 @@ export function LogoutButton({ churchLabel, isCollapsed }: { churchLabel?: strin
       onClick={handleLogout}
       variant="ghost"
       className={cn(
-        "w-full justify-start gap-3 rounded-2xl px-4 py-3 text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors",
+        "w-full justify-start gap-3 rounded-2xl px-4 py-3 text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive",
         isCollapsed && "justify-center"
       )}
     >

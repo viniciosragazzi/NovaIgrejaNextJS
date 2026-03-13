@@ -36,7 +36,7 @@ export function VolunteerCard({
 
       <Button
         size="sm"
-        className="gap-2 rounded-xl bg-[#25d366] text-white hover:bg-[#20bd5a]"
+        className="gap-2 rounded-xl bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))] hover:opacity-90"
         onClick={() => onSendWhatsApp(volunteer)}
       >
         <MessageCircle className="h-4 w-4" />

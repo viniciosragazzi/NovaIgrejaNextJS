@@ -30,9 +30,9 @@ export function IncomeList({ incomes, onDelete }: IncomeListProps) {
                 <div
                   className={`flex h-10 w-10 items-center justify-center rounded-xl ${
                     income.category === "tithe"
-                      ? "bg-[#8ee4af]"
+                      ? "bg-[hsl(var(--status-success))]"
                       : income.category === "offering"
-                      ? "bg-[#f9a8d4]"
+                      ? "bg-secondary text-secondary-foreground"
                       : income.category === "missions"
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted"
@@ -52,7 +52,7 @@ export function IncomeList({ incomes, onDelete }: IncomeListProps) {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="font-semibold text-[#22c55e]">
+                <span className="font-semibold text-[hsl(var(--status-success-foreground))]">
                   +R$ {income.amount.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
                 </span>
                 <Button

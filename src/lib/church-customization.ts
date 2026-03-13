@@ -6,7 +6,7 @@ import {
   MinistryCustomization,
   OrderedToggleItem,
   PermissionModuleKey,
-  PermissionRoleKey,
+  PermissionStatusKey,
   PrayerRequestEntry,
   PublicSectionKey,
 } from "@/@types/church.types"
@@ -32,12 +32,17 @@ const publicSectionOrder: PublicSectionKey[] = [
   "galeria",
 ]
 
-const permissionRoles: PermissionRoleKey[] = [
-  "perfilPastor",
-  "perfilAdministrador",
-  "perfilLider",
-  "perfilStaff",
+const permissionStatuses: PermissionStatusKey[] = [
+  "STAFF",
+  "VOLUNTEER",
+  "MEMBER",
+  "VISITOR",
 ]
+
+const legacyPermissionAliases: Partial<Record<PermissionStatusKey, string[]>> = {
+  STAFF: ["perfilStaff", "perfilAdministrador", "perfilPastor"],
+  VOLUNTEER: ["perfilLider"],
+}
 
 const permissionModules: PermissionModuleKey[] = [
   "perfil",
@@ -164,11 +169,14 @@ function normalizeMinistryCustomizations(
 }
 
 function createPermissionDefaults() {
-  return permissionRoles.reduce(
-    (acc, role) => {
-      acc[role] = permissionModules.reduce(
+  return permissionStatuses.reduce(
+    (acc, status) => {
+      acc[status] = permissionModules.reduce(
         (modules, module) => {
-          modules[module] = role === "perfilPastor" || role === "perfilAdministrador"
+          modules[module] =
+            status === "STAFF" ||
+            (status === "VOLUNTEER" && (module === "perfil" || module === "ministerios" || module === "agenda")) ||
+            (status === "MEMBER" && module === "perfil")
           return modules
         },
         {} as Record<PermissionModuleKey, boolean>
@@ -176,7 +184,7 @@ function createPermissionDefaults() {
 
       return acc
     },
-    {} as Record<PermissionRoleKey, Record<PermissionModuleKey, boolean>>
+    {} as Record<PermissionStatusKey, Record<PermissionModuleKey, boolean>>
   )
 }
 
@@ -189,15 +197,25 @@ function normalizePermissions(value: unknown) {
 
   const record = value as Record<string, unknown>
 
-  return permissionRoles.reduce(
-    (acc, role) => {
-      const roleValue = record[role]
-      const roleRecord = roleValue && typeof roleValue === "object" ? (roleValue as Record<string, unknown>) : {}
+  return permissionStatuses.reduce(
+    (acc, status) => {
+      const currentValue = record[status]
+      const aliasValue = legacyPermissionAliases[status]
+        ?.map((key) => record[key])
+        .find((item) => item && typeof item === "object")
 
-      acc[role] = permissionModules.reduce(
+      const statusRecord =
+        (currentValue && typeof currentValue === "object" ? currentValue : aliasValue) &&
+        typeof (currentValue && typeof currentValue === "object" ? currentValue : aliasValue) === "object"
+          ? ((currentValue && typeof currentValue === "object" ? currentValue : aliasValue) as Record<string, unknown>)
+          : {}
+
+      acc[status] = permissionModules.reduce(
         (modules, module) => {
           modules[module] =
-            typeof roleRecord[module] === "boolean" ? (roleRecord[module] as boolean) : defaults[role][module]
+            typeof statusRecord[module] === "boolean"
+              ? (statusRecord[module] as boolean)
+              : defaults[status][module]
           return modules
         },
         {} as Record<PermissionModuleKey, boolean>
@@ -205,7 +223,7 @@ function normalizePermissions(value: unknown) {
 
       return acc
     },
-    {} as Record<PermissionRoleKey, Record<PermissionModuleKey, boolean>>
+    {} as Record<PermissionStatusKey, Record<PermissionModuleKey, boolean>>
   )
 }
 
@@ -279,11 +297,18 @@ export const publicSectionLabels: Record<PublicSectionKey, string> = {
   galeria: "Galeria",
 }
 
-export const permissionRoleLabels: Record<PermissionRoleKey, string> = {
-  perfilPastor: "Pastor",
-  perfilAdministrador: "Administrador",
-  perfilLider: "Lider",
-  perfilStaff: "Staff",
+export const permissionStatusLabels: Record<PermissionStatusKey, string> = {
+  STAFF: "Critica",
+  VOLUNTEER: "Alta",
+  MEMBER: "Media",
+  VISITOR: "Baixa",
+}
+
+export const permissionStatusDescriptions: Record<PermissionStatusKey, string> = {
+  STAFF: "Status STAFF",
+  VOLUNTEER: "Status VOLUNTEER",
+  MEMBER: "Status MEMBER",
+  VISITOR: "Status VISITOR",
 }
 
 export const permissionModuleLabels: Record<PermissionModuleKey, string> = {

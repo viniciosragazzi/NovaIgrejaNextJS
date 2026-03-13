@@ -40,18 +40,18 @@ export function PersonForm({
   return (
     <form onSubmit={onSubmit} className="mt-4 space-y-4 pb-6">
       <div className="space-y-1">
-        <Label className="text-[10px] font-bold uppercase text-zinc-400">
+        <Label className="text-[10px] font-bold uppercase text-muted-foreground">
           Nome Completo *
         </Label>
         <Input
           {...form.register("fullName")}
-          className="h-12 rounded-xl bg-zinc-50 border-0"
+          className="h-12 rounded-xl border bg-muted/40"
         />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1">
-          <Label className="text-[10px] font-bold uppercase text-zinc-400">
+          <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             WhatsApp *
           </Label>
           <Input
@@ -59,29 +59,29 @@ export function PersonForm({
             onChange={(e) =>
               form.setValue("whatsapp", formatWhatsApp(e.target.value))
             }
-            className="h-12 rounded-xl bg-zinc-50 border-0"
+            className="h-12 rounded-xl border bg-muted/40"
           />
         </div>
         <div className="space-y-1">
-          <Label className="text-[10px] font-bold uppercase text-zinc-400">
+          <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             E-mail
           </Label>
           <Input
             {...form.register("email")}
-            className="h-12 rounded-xl bg-zinc-50 border-0"
+            className="h-12 rounded-xl border bg-muted/40"
           />
         </div>
       </div>
 
       <div className="space-y-1">
-        <Label className="text-[10px] font-bold uppercase text-zinc-400">
+        <Label className="text-[10px] font-bold uppercase text-muted-foreground">
           Vínculo
         </Label>
         <Select
           value={currentType}
           onValueChange={(v) => form.setValue("type", v as PersonType)}
         >
-          <SelectTrigger className="h-12 rounded-xl bg-zinc-50 border-0">
+          <SelectTrigger className="h-12 rounded-xl border bg-muted/40">
             <SelectValue placeholder="Selecione" />
           </SelectTrigger>
           <SelectContent className="rounded-2xl border-0 shadow-2xl">
@@ -102,23 +102,23 @@ export function PersonForm({
           >
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <Label className="text-[10px] font-bold uppercase text-amber-600">
+                <Label className="text-[10px] font-bold uppercase text-secondary-foreground">
                   Ministério
                 </Label>
                 <Input
                   {...form.register("ministry")}
                   placeholder="Ex: Louvor"
-                  className="h-12 rounded-xl bg-amber-50/30 border-0"
+                  className="h-12 rounded-xl border bg-secondary/50"
                 />
               </div>
               <div className="space-y-1">
-                <Label className="text-[10px] font-bold uppercase text-amber-600">
+                <Label className="text-[10px] font-bold uppercase text-secondary-foreground">
                   Função
                 </Label>
                 <Input
                   {...form.register("role")}
                   placeholder="Ex: Guitarra"
-                  className="h-12 rounded-xl bg-amber-50/30 border-0"
+                  className="h-12 rounded-xl border bg-secondary/50"
                 />
               </div>
             </div>
@@ -128,44 +128,44 @@ export function PersonForm({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1">
-          <Label className="text-[10px] font-bold uppercase text-zinc-400">
+          <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             Endereço
           </Label>
           <Input
             {...form.register("address")}
-            className="h-12 rounded-xl bg-zinc-50 border-0"
+            className="h-12 rounded-xl border bg-muted/40"
           />
         </div>
         <div className="space-y-1">
-          <Label className="text-[10px] font-bold uppercase text-zinc-400">
+          <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             Nascimento
           </Label>
           <Input
             {...form.register("birthDate")}
             type="date"
-            className="h-12 rounded-xl bg-zinc-50 border-0"
+            className="h-12 rounded-xl border bg-muted/40"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1">
-          <Label className="text-[10px] font-bold uppercase text-zinc-400">
+          <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             Primeira Visita
           </Label>
           <Input
             {...form.register("firstVisitDate")}
             type="date"
-            className="h-12 rounded-xl bg-zinc-50 border-0"
+            className="h-12 rounded-xl border bg-muted/40"
           />
         </div>
         <div className="space-y-1">
-          <Label className="text-[10px] font-bold uppercase text-zinc-400">
+          <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             Observações
           </Label>
           <Input
             {...form.register("notes")}
-            className="h-12 rounded-xl bg-zinc-50 border-0"
+            className="h-12 rounded-xl border bg-muted/40"
           />
         </div>
       </div>
@@ -173,7 +173,7 @@ export function PersonForm({
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="h-14 w-full rounded-2xl bg-zinc-900 text-white font-bold"
+        className="h-14 w-full rounded-2xl font-bold"
       >
         {isSubmitting ? (
           <Spinner />

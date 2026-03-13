@@ -1,10 +1,12 @@
 "use client"
 
+import Link from "next/link"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Baby, Heart, Monitor, Music, Users, type LucideIcon } from "lucide-react"
 import { Ministry, Schedule } from "@/@types/ministry.types"
 import { Person as Volunteer } from "@/@types/person.types"
+import { MemberScaleCard } from "@/components/domain/ministries/member-scale-card"
 import { MinistryCard } from "@/components/domain/ministries/MinistryCard"
 import { ScheduleCard, ScheduleGroup } from "@/components/domain/ministries/ScheduleCard"
 import { ScheduleForm } from "@/components/domain/ministries/ScheduleForm"
@@ -26,6 +28,7 @@ const ministryIcons: Record<string, LucideIcon> = {
 
 interface MinistriesPageProps {
   churchId: string
+  churchLabel: string
   isStaff: boolean
   ministries: Ministry[]
   volunteers: Volunteer[]
@@ -34,6 +37,7 @@ interface MinistriesPageProps {
 
 export default function MinistriesPage({
   churchId,
+  churchLabel,
   isStaff,
   ministries = [],
   volunteers = [],
@@ -128,6 +132,89 @@ export default function MinistriesPage({
     return groups
   }, [])
 
+  const myUpcomingSchedules = schedules
+    .slice()
+    .sort((left, right) => new Date(left.eventDate).getTime() - new Date(right.eventDate).getTime())
+
+  const myPendingSchedules = myUpcomingSchedules.filter((schedule) => schedule.responseStatus === "pending")
+
+  if (!isStaff) {
+    return (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 p-4 pb-24 lg:p-8">
+        <PageHeader
+          title="Minhas Escalas"
+          description="Veja suas escalas, confirme participacao, negue quando nao puder e solicite troca direto pelo app."
+          badge={`${myUpcomingSchedules.length} escala(s)`}
+          actions={[
+            <Button key="journey" className="rounded-2xl">
+              <Link href={`/${churchLabel}/dashboard/jornada`}>Ver minha jornada</Link>
+            </Button>,
+          ]}
+        />
+
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-3xl bg-card p-5 shadow-sm">
+            <p className="text-sm text-muted-foreground">Pendentes</p>
+            <p className="mt-2 text-3xl font-semibold">{myPendingSchedules.length}</p>
+          </div>
+          <div className="rounded-3xl bg-card p-5 shadow-sm">
+            <p className="text-sm text-muted-foreground">Confirmadas</p>
+            <p className="mt-2 text-3xl font-semibold">
+              {myUpcomingSchedules.filter((schedule) => schedule.responseStatus === "confirmed").length}
+            </p>
+          </div>
+          <div className="rounded-3xl bg-card p-5 shadow-sm">
+            <p className="text-sm text-muted-foreground">Trocas solicitadas</p>
+            <p className="mt-2 text-3xl font-semibold">
+              {myUpcomingSchedules.filter((schedule) => schedule.responseStatus === "swap_requested").length}
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4 lg:grid-cols-2">
+          {myUpcomingSchedules.length > 0 ? (
+            myUpcomingSchedules.map((schedule) => (
+              <MemberScaleCard
+                key={schedule.id}
+                churchId={churchId}
+                schedule={schedule}
+                onUpdated={(updatedSchedule) =>
+                  setSchedules((current) =>
+                    current.map((scheduleItem) =>
+                      scheduleItem.id === updatedSchedule.id ? updatedSchedule : scheduleItem
+                    )
+                  )
+                }
+              />
+            ))
+          ) : (
+            <EmptyState
+              icon={<Users className="h-5 w-5" />}
+              title="Nenhuma escala vinculada a voce"
+              description="Quando a lideranca montar suas escalas de voluntariado, elas aparecerao aqui."
+            />
+          )}
+        </div>
+
+        <div className="rounded-3xl bg-card p-5 shadow-sm">
+          <p className="text-lg font-semibold">Ministerios disponiveis</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Consulte os ministerios cadastrados e acompanhe onde voce pode servir.
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {ministries.length > 0 ? (
+              ministries.map((ministry) => (
+                <MinistryCard key={ministry.id} ministry={ministry} volunteers={volunteers} />
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground">Nenhum ministerio cadastrado ainda.</p>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    )
+  }
+
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 p-4 pb-24 lg:p-8">
       <PageHeader
@@ -184,7 +271,9 @@ export default function MinistriesPage({
               onClick={() => setSelectedMinistry("all")}
               className={cn(
                 "rounded-full",
-                selectedMinistry === "all" ? "bg-black text-white" : "bg-muted"
+                selectedMinistry === "all"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground"
               )}
             >
               Todos
@@ -199,7 +288,8 @@ export default function MinistriesPage({
                   onClick={() => setSelectedMinistry(ministry.id)}
                   className={cn(
                     "gap-2 rounded-full",
-                    selectedMinistry === ministry.id && "border-black bg-black text-white"
+                    selectedMinistry === ministry.id &&
+                      "border-primary bg-primary text-primary-foreground"
                   )}
                 >
                   <Icon className="h-4 w-4" />

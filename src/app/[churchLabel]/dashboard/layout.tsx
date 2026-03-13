@@ -3,6 +3,7 @@
 import { CommandPalette, type CommandPaletteItem } from "@/components/dashboard/command-palette"
 import { DashboardTopbar } from "@/components/dashboard/dashboard-topbar"
 import { getChurchContext } from "@/lib/get-church-context"
+import { getNotificationFeed } from "@/lib/notifications"
 import prisma from "@/lib/prisma"
 import { dashboardNavItems } from "@/lib/dashboard-navigation"
 import { DashboardSidebar } from "./components/sidebar"
@@ -14,7 +15,8 @@ interface LayoutProps {
 
 export default async function DashboardLayout({ children, params }: LayoutProps) {
   const { churchLabel } = await params
-  const { church, user, isStaff } = await getChurchContext(churchLabel)
+  const { church, user, isStaff, moduleAccess } = await getChurchContext(churchLabel)
+  const initialNotificationFeed = await getNotificationFeed(church.id, user.id)
 
   const [people, ministries, schedules] = isStaff
     ? await Promise.all([
@@ -41,7 +43,10 @@ export default async function DashboardLayout({ children, params }: LayoutProps)
 
   const commandItems: CommandPaletteItem[] = [
     ...dashboardNavItems
-      .filter((item) => !item.requiredStaff || isStaff)
+      .filter(
+        (item) =>
+          (!item.requiredModule || moduleAccess[item.requiredModule])
+      )
       .map((item) => ({
         id: `page-${item.href}`,
         label: item.label,
@@ -79,10 +84,17 @@ export default async function DashboardLayout({ children, params }: LayoutProps)
         churchLabel={churchLabel}
         userName={user.name}
         isStaff={isStaff}
+        moduleAccess={moduleAccess}
       />
       <main className="flex-1 overflow-auto">
         <div className="container mx-auto max-w-7xl px-4 py-6 lg:px-8 lg:py-8">
-          <DashboardTopbar churchLabel={churchLabel} churchName={church.name} />
+          <DashboardTopbar
+            churchId={church.id}
+            churchLabel={churchLabel}
+            churchName={church.name}
+            initialNotificationFeed={initialNotificationFeed}
+            isStaff={isStaff}
+          />
           {children}
         </div>
       </main>

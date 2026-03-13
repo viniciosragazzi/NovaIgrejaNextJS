@@ -1,7 +1,7 @@
 "use server";
 
 import { ActionResponse, DayOfWeek } from "@/@types/shared.types";
-import { requireChurchStaffSession } from "@/lib/authorization";
+import { requireChurchModuleSession } from "@/lib/authorization";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { DayOfWeek as PrismaDayOfWeek } from "@prisma/generated/prisma/client";
@@ -64,7 +64,7 @@ export async function createScheduleEventAction(
   churchId: string,
   data: ScheduleInput
 ): Promise<ActionResponse<SchedulePayload>> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "agenda");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }
@@ -103,7 +103,7 @@ export async function updateScheduleEventAction(
   scheduleId: string,
   data: ScheduleInput
 ): Promise<ActionResponse<SchedulePayload>> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "agenda");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }
@@ -150,7 +150,7 @@ export async function deleteScheduleEventAction(
   churchId: string,
   scheduleId: string
 ): Promise<ActionResponse> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "agenda");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }

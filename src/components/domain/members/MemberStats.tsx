@@ -21,31 +21,35 @@ const itemVariants = {
 
 export function MemberStats({ stats }: MemberStatsProps) {
   const statItems = [
-    { label: "Total", value: stats.total, color: "bg-zinc-900" },
-    { label: "Membros", value: stats.members, color: "bg-emerald-400" },
-    { label: "Visitantes", value: stats.visitors, color: "bg-blue-500" },
-    { label: "Voluntários", value: stats.volunteers, color: "bg-amber-400" },
+    { label: "Total", value: stats.total, color: "bg-primary text-primary-foreground" },
+    {
+      label: "Membros",
+      value: stats.members,
+      color: "bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))]",
+    },
+    {
+      label: "Visitantes",
+      value: stats.visitors,
+      color: "bg-[hsl(var(--status-info))] text-[hsl(var(--status-info-foreground))]",
+    },
+    {
+      label: "Voluntarios",
+      value: stats.volunteers,
+      color: "bg-secondary text-secondary-foreground",
+    },
   ]
 
   return (
     <motion.div variants={itemVariants} className="grid gap-4 sm:grid-cols-4">
-      {statItems.map((stat, i) => (
-        <Card
-          key={i}
-          className="rounded-3xl border-0 shadow-sm overflow-hidden bg-white"
-        >
+      {statItems.map((stat) => (
+        <Card key={stat.label} className="overflow-hidden rounded-3xl border shadow-sm">
           <CardContent className="flex items-center gap-4 p-6">
-            <div
-              className={cn(
-                "h-12 w-12 rounded-2xl flex items-center justify-center text-white",
-                stat.color
-              )}
-            >
+            <div className={cn("flex h-12 w-12 items-center justify-center rounded-2xl", stat.color)}>
               <Users className="h-5 w-5" />
             </div>
             <div>
               <p className="text-2xl font-bold tracking-tight">{stat.value}</p>
-              <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
                 {stat.label}
               </p>
             </div>

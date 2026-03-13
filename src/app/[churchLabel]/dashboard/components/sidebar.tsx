@@ -1,5 +1,6 @@
 "use client"
 
+import type { ModuleAccessMap } from "@/lib/authorization"
 import { useMemo, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -7,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { ChevronLeft, Menu, Search, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LogoutButton } from "@/components/logout"
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { dashboardNavGroupLabels, dashboardNavItems } from "@/lib/dashboard-navigation"
 import { cn } from "@/lib/utils"
@@ -16,9 +18,10 @@ interface SidebarProps {
   churchName: string
   userName?: string
   isStaff?: boolean
+  moduleAccess?: ModuleAccessMap
 }
 
-export function DashboardSidebar({ churchLabel, churchName, userName, isStaff }: SidebarProps) {
+export function DashboardSidebar({ churchLabel, churchName, userName, isStaff, moduleAccess }: SidebarProps) {
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
@@ -29,10 +32,12 @@ export function DashboardSidebar({ churchLabel, churchName, userName, isStaff }:
       group,
       label,
       items: dashboardNavItems.filter(
-        (item) => item.group === group && (!item.requiredStaff || isStaff)
+        (item) =>
+          item.group === group &&
+          (!item.requiredModule || moduleAccess?.[item.requiredModule])
       ),
     }))
-  }, [isStaff])
+  }, [moduleAccess])
 
   return (
     <>
@@ -135,7 +140,7 @@ export function DashboardSidebar({ churchLabel, churchName, userName, isStaff }:
                               : "text-muted-foreground hover:bg-muted hover:text-foreground"
                           )}
                         >
-                          <Icon className={cn("h-5 w-5 shrink-0", isActive && "text-[#8ee4af]")} />
+                          <Icon className={cn("h-5 w-5 shrink-0", isActive && "text-foreground")} />
                           {!isCollapsed ? <span className="truncate">{item.label}</span> : null}
                         </Link>
                       )
@@ -156,6 +161,14 @@ export function DashboardSidebar({ churchLabel, churchName, userName, isStaff }:
               <p className="truncate text-sm font-semibold">{userName}</p>
             </div>
           ) : null}
+          <AnimatedThemeToggler
+            className={cn(
+              "mb-3 inline-flex h-11 w-full items-center rounded-2xl border border-border bg-background px-4 text-sm font-medium text-foreground transition-colors hover:bg-muted",
+              isCollapsed && "justify-center px-0"
+            )}
+          >
+            {!isCollapsed ? <span className="ml-2">Alternar tema</span> : null}
+          </AnimatedThemeToggler>
           <LogoutButton churchLabel={churchLabel} isCollapsed={isCollapsed} />
         </div>
       </motion.aside>

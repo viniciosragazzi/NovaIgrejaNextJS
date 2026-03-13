@@ -1,11 +1,13 @@
 "use server";
 
 import { ActionResponse } from "@/@types/shared.types";
+import { PermissionStatusKey } from "@/@types/church.types";
 import { PersonFormData } from "@/@types/person.types";
-import { requireChurchStaffSession } from "@/lib/authorization";
+import { requireChurchModuleSession, requireChurchStaffSession } from "@/lib/authorization";
+import { applyJourneyTrigger } from "@/lib/member-journey";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { TypePerson } from "@prisma/generated/prisma/client";
+import { Prisma, TypePerson } from "@prisma/generated/prisma/client";
 
 async function getChurchLabel(churchId: string) {
   const church = await prisma.church.findUnique({
@@ -70,44 +72,60 @@ export async function createPersonAction(
   churchId: string,
   data: PersonFormData
 ): Promise<PersonActionResponse> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "membros");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }
 
   try {
-    if (data.type === "volunteer" && data.ministry) {
-      await prisma.ministry.upsert({
-        where: {
-          name_churchId: {
+    const person = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
+      if (data.type === "volunteer" && data.ministry) {
+        await tx.ministry.upsert({
+          where: {
+            name_churchId: {
+              name: data.ministry,
+              churchId,
+            },
+          },
+          update: {},
+          create: {
             name: data.ministry,
             churchId,
+            color: "#8ee4af",
+            icon: "users",
           },
-        },
-        update: {},
-        create: {
-          name: data.ministry,
+        });
+      }
+
+      const createdPerson = await tx.person.create({
+        data: {
+          name: data.fullName,
+          email: data.email || null,
+          contact: [data.whatsapp],
+          birthday: data.birthDate || null,
+          address: data.address || null,
+          type: mapPersonType(data.type),
           churchId,
-          color: "#8ee4af",
-          icon: "users",
+          ministry: data.type === "volunteer" ? data.ministry || null : null,
+          role: data.type === "volunteer" ? data.role || null : null,
+          notes: data.notes || null,
+          firstVisitAt: data.firstVisitDate ? new Date(data.firstVisitDate) : undefined,
         },
       });
-    }
 
-    const person = await prisma.person.create({
-      data: {
-        name: data.fullName,
-        email: data.email || null,
-        contact: [data.whatsapp],
-        birthday: data.birthDate || null,
-        address: data.address || null,
-        type: mapPersonType(data.type),
-        churchId,
-        ministry: data.type === "volunteer" ? data.ministry || null : null,
-        role: data.type === "volunteer" ? data.role || null : null,
-        notes: data.notes || null,
-        firstVisitAt: data.firstVisitDate ? new Date(data.firstVisitDate) : undefined,
-      },
+      if (createdPerson.name && createdPerson.contact[0]) {
+        await applyJourneyTrigger(tx, churchId, createdPerson.id, "PROFILE_COMPLETED");
+      }
+
+      if (data.firstVisitDate) {
+        await applyJourneyTrigger(tx, churchId, createdPerson.id, "FIRST_ATTENDANCE");
+      }
+
+      if (data.type === "volunteer" || data.ministry) {
+        await applyJourneyTrigger(tx, churchId, createdPerson.id, "JOINED_MINISTRY");
+      }
+
+      return createdPerson;
     });
 
     await revalidateChurchPeopleRoutes(churchId);
@@ -123,7 +141,7 @@ export async function updatePersonAction(
   personId: string,
   data: PersonFormData
 ): Promise<PersonActionResponse> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "membros");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }
@@ -138,38 +156,54 @@ export async function updatePersonAction(
       return { success: false, error: "Pessoa nao encontrada." };
     }
 
-    if (data.type === "volunteer" && data.ministry) {
-      await prisma.ministry.upsert({
-        where: {
-          name_churchId: {
+    const person = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
+      if (data.type === "volunteer" && data.ministry) {
+        await tx.ministry.upsert({
+          where: {
+            name_churchId: {
+              name: data.ministry,
+              churchId,
+            },
+          },
+          update: {},
+          create: {
             name: data.ministry,
             churchId,
+            color: "#8ee4af",
+            icon: "users",
           },
-        },
-        update: {},
-        create: {
-          name: data.ministry,
-          churchId,
-          color: "#8ee4af",
-          icon: "users",
+        });
+      }
+
+      const updatedPerson = await tx.person.update({
+        where: { id: personId },
+        data: {
+          name: data.fullName,
+          email: data.email || null,
+          contact: [data.whatsapp],
+          birthday: data.birthDate || null,
+          address: data.address || null,
+          type: mapPersonType(data.type),
+          ministry: data.type === "volunteer" ? data.ministry || null : null,
+          role: data.type === "volunteer" ? data.role || null : null,
+          notes: data.notes || null,
+          firstVisitAt: data.firstVisitDate ? new Date(data.firstVisitDate) : null,
         },
       });
-    }
 
-    const person = await prisma.person.update({
-      where: { id: personId },
-      data: {
-        name: data.fullName,
-        email: data.email || null,
-        contact: [data.whatsapp],
-        birthday: data.birthDate || null,
-        address: data.address || null,
-        type: mapPersonType(data.type),
-        ministry: data.type === "volunteer" ? data.ministry || null : null,
-        role: data.type === "volunteer" ? data.role || null : null,
-        notes: data.notes || null,
-        firstVisitAt: data.firstVisitDate ? new Date(data.firstVisitDate) : null,
-      },
+      if (updatedPerson.name && updatedPerson.contact[0]) {
+        await applyJourneyTrigger(tx, churchId, updatedPerson.id, "PROFILE_COMPLETED");
+      }
+
+      if (data.firstVisitDate) {
+        await applyJourneyTrigger(tx, churchId, updatedPerson.id, "FIRST_ATTENDANCE");
+      }
+
+      if (data.type === "volunteer" || data.ministry) {
+        await applyJourneyTrigger(tx, churchId, updatedPerson.id, "JOINED_MINISTRY");
+      }
+
+      return updatedPerson;
     });
 
     await revalidateChurchPeopleRoutes(churchId);
@@ -184,7 +218,7 @@ export async function deletePersonAction(
   churchId: string,
   personId: string
 ): Promise<ActionResponse> {
-  const session = await requireChurchStaffSession(churchId);
+  const session = await requireChurchModuleSession(churchId, "membros");
   if (!session) {
     return { success: false, error: "Nao autorizado" };
   }
@@ -207,5 +241,69 @@ export async function deletePersonAction(
     return { success: true };
   } catch {
     return { success: false, error: "Erro ao excluir registro." };
+  }
+}
+
+export async function updatePersonAccessStatusAction(
+  churchId: string,
+  personId: string,
+  nextStatus: PermissionStatusKey
+): Promise<ActionResponse<{ personId: string; status: PermissionStatusKey }>> {
+  const session = await requireChurchStaffSession(churchId);
+  if (!session) {
+    return { success: false, error: "Nao autorizado" };
+  }
+
+  try {
+    const person = await prisma.person.findFirst({
+      where: { id: personId, churchId },
+      select: { id: true, email: true, name: true },
+    });
+
+    if (!person) {
+      return { success: false, error: "Pessoa nao encontrada." };
+    }
+
+    if (!person.email) {
+      return { success: false, error: "Esta pessoa nao possui e-mail vinculado a uma conta." };
+    }
+
+    const user = await prisma.user.findFirst({
+      where: {
+        churchId,
+        email: person.email,
+      },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
+
+    if (!user) {
+      return { success: false, error: "Nenhuma conta vinculada foi encontrada para esta pessoa." };
+    }
+
+    if (user.id === session.user.id) {
+      return { success: false, error: "Voce nao pode alterar o proprio status por esta tela." };
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        status: nextStatus,
+      },
+    });
+
+    await revalidateChurchPeopleRoutes(churchId);
+    return {
+      success: true,
+      data: {
+        personId,
+        status: nextStatus,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Nao foi possivel atualizar o status de acesso." };
   }
 }

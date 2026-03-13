@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { Mail, MoreHorizontal, Search } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 type ChurchHeaderProps = {
   church: {
@@ -27,9 +28,9 @@ export function ChurchHeader({ church }: ChurchHeaderProps) {
       ) : null}
 
       <div className="flex items-center justify-between">
-        <button className="flex h-10 w-10 items-center justify-center rounded-full text-foreground">
+        <Button type="button" variant="ghost" size="icon" className="rounded-full text-foreground">
           <Search className="h-5 w-5" />
-        </button>
+        </Button>
 
         <div className="flex h-12 w-12 items-center justify-center">
           <svg viewBox="0 0 40 40" className="h-10 w-10 text-foreground" fill="currentColor">
@@ -41,12 +42,12 @@ export function ChurchHeader({ church }: ChurchHeaderProps) {
         </div>
 
         <div className="flex items-center gap-1">
-          <button className="flex h-10 w-10 items-center justify-center rounded-full text-foreground">
+          <Button type="button" variant="ghost" size="icon" className="rounded-full text-foreground">
             <Mail className="h-5 w-5" />
-          </button>
-          <button className="flex h-10 w-10 items-center justify-center rounded-full text-foreground">
+          </Button>
+          <Button type="button" variant="ghost" size="icon" className="rounded-full text-foreground">
             <MoreHorizontal className="h-5 w-5" />
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -71,39 +72,39 @@ export function ChurchHeader({ church }: ChurchHeaderProps) {
 
       <div className="grid grid-cols-3 gap-3 sm:gap-8">
         <div className="flex min-w-0 flex-col items-center gap-2 text-center">
-          <button className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f5b8f5] sm:h-14 sm:w-14">
-            <svg viewBox="0 0 24 24" className="h-6 w-6 text-zinc-800" fill="none" stroke="currentColor" strokeWidth="2">
+          <Button type="button" variant="ghost" size="icon-lg" className="rounded-full bg-secondary text-secondary-foreground sm:h-14 sm:w-14">
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2L2 7l10 5 10-5-10-5z" />
               <path d="M2 17l10 5 10-5" />
               <path d="M2 12l10 5 10-5" />
             </svg>
-          </button>
+          </Button>
           <span className="text-xs font-medium text-foreground sm:text-sm">Comunidade</span>
           <span className="text-xs text-muted-foreground sm:text-sm">{church.memberCount} pessoas</span>
         </div>
 
         <div className="flex min-w-0 flex-col items-center gap-2 text-center">
-          <button className="flex h-12 w-12 items-center justify-center rounded-full bg-primary sm:h-14 sm:w-14">
+          <Button type="button" variant="ghost" size="icon-lg" className="rounded-full bg-primary sm:h-14 sm:w-14">
             <svg viewBox="0 0 24 24" className="h-6 w-6 text-primary-foreground" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="4" width="18" height="18" rx="2" />
               <path d="M16 2v4" />
               <path d="M8 2v4" />
               <path d="M3 10h18" />
             </svg>
-          </button>
+          </Button>
           <span className="text-xs font-medium text-foreground sm:text-sm">Eventos</span>
           <span className="text-xs text-muted-foreground sm:text-sm">{church.eventCount} ativos</span>
         </div>
 
         <div className="flex min-w-0 flex-col items-center gap-2 text-center">
-          <button className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8ee4af] sm:h-14 sm:w-14">
-            <svg viewBox="0 0 24 24" className="h-6 w-6 text-zinc-800" fill="none" stroke="currentColor" strokeWidth="2">
+          <Button type="button" variant="ghost" size="icon-lg" className="rounded-full bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))] sm:h-14 sm:w-14">
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
               <circle cx="9" cy="7" r="4" />
               <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
               <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
-          </button>
+          </Button>
           <span className="text-xs font-medium text-foreground sm:text-sm">Proximo</span>
           <span className="text-xs text-muted-foreground sm:text-sm">{church.nextSchedule || "A definir"}</span>
         </div>

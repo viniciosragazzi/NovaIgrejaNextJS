@@ -3,8 +3,15 @@
 import { Person } from "@/@types/person.types"
 import { Schedule, ScheduleFormData } from "@/@types/ministry.types"
 import { ActionResponse } from "@/@types/shared.types"
-import { requireChurchStaffSession } from "@/lib/authorization"
+import { getAuthSession, requireChurchModuleSession } from "@/lib/authorization"
+import { applyJourneyTrigger } from "@/lib/member-journey"
+import {
+  notifyStaffAboutScaleResponse,
+  notifyVolunteerAssignedToScale,
+} from "@/lib/notifications"
 import prisma from "@/lib/prisma"
+import { volunteerScaleResponseSchema } from "@/lib/validations"
+import { VolunteerScaleResponseStatus } from "@prisma/generated/prisma/client"
 import { revalidatePath } from "next/cache"
 
 async function getChurchLabel(churchId: string) {
@@ -56,6 +63,9 @@ function mapSchedule(scale: {
   ministryId: string
   role: string
   confirmed: boolean
+  responseStatus: VolunteerScaleResponseStatus
+  responseNote: string | null
+  respondedAt: Date | null
   person: {
     id: string
     name: string
@@ -79,6 +89,9 @@ function mapSchedule(scale: {
     ministryId: scale.ministryId,
     ministryName: scale.ministry.name,
     confirmed: scale.confirmed,
+    responseStatus: scale.responseStatus.toLowerCase() as Schedule["responseStatus"],
+    responseNote: scale.responseNote || undefined,
+    respondedAt: scale.respondedAt?.toISOString(),
     role: scale.role,
     person: mapPerson(scale.person),
   } satisfies Schedule
@@ -90,7 +103,7 @@ export async function createScheduleAction(
   churchId: string,
   data: ScheduleFormData
 ): Promise<ScheduleCreateResponse> {
-  const session = await requireChurchStaffSession(churchId)
+  const session = await requireChurchModuleSession(churchId, "ministerios")
   if (!session) {
     return { success: false, error: "Nao autorizado" }
   }
@@ -127,6 +140,7 @@ export async function createScheduleAction(
             personId: volunteerId,
             ministryId: data.ministryId,
             churchId,
+            responseStatus: VolunteerScaleResponseStatus.PENDING,
           },
           include: {
             person: {
@@ -151,6 +165,34 @@ export async function createScheduleAction(
       )
     )
 
+    const churchLabel = await getChurchLabel(churchId)
+
+    if (churchLabel) {
+      await prisma.$transaction(async (tx) => {
+        for (const schedule of createdSchedules) {
+          await notifyVolunteerAssignedToScale(tx, {
+            churchId,
+            churchLabel,
+            actorUserId: session.user.id,
+            scale: {
+              id: schedule.id,
+              eventName: schedule.eventName,
+              role: schedule.role,
+              date: schedule.date,
+              person: {
+                id: schedule.person.id,
+                name: schedule.person.name,
+                email: schedule.person.email,
+              },
+              ministry: {
+                name: schedule.ministry.name,
+              },
+            },
+          })
+        }
+      })
+    }
+
     await revalidateMinistryRoute(churchId)
 
     return {
@@ -168,7 +210,7 @@ export async function updateScaleVolunteerAction(
   scaleId: string,
   volunteerId: string
 ): Promise<ActionResponse<Schedule>> {
-  const session = await requireChurchStaffSession(churchId)
+  const session = await requireChurchModuleSession(churchId, "ministerios")
   if (!session) {
     return { success: false, error: "Nao autorizado" }
   }
@@ -188,28 +230,56 @@ export async function updateScaleVolunteerAction(
       return { success: false, error: "Escala ou voluntario invalido." }
     }
 
-    const updatedScale = await prisma.volunteerScale.update({
-      where: { id: scaleId },
-      data: { personId: volunteerId },
-      include: {
-        person: {
-          select: {
-            id: true,
-            name: true,
-            contact: true,
-            email: true,
-            address: true,
-            birthday: true,
-            notes: true,
-            ministry: true,
-            role: true,
-            type: true,
+    const churchLabel = await getChurchLabel(churchId)
+
+    const updatedScale = await prisma.$transaction(async (tx) => {
+      const updated = await tx.volunteerScale.update({
+        where: { id: scaleId },
+        data: { personId: volunteerId },
+        include: {
+          person: {
+            select: {
+              id: true,
+              name: true,
+              contact: true,
+              email: true,
+              address: true,
+              birthday: true,
+              notes: true,
+              ministry: true,
+              role: true,
+              type: true,
+            },
+          },
+          ministry: {
+            select: { name: true },
           },
         },
-        ministry: {
-          select: { name: true },
-        },
-      },
+      })
+
+      if (churchLabel) {
+        await notifyVolunteerAssignedToScale(tx, {
+          churchId,
+          churchLabel,
+          actorUserId: session.user.id,
+          scale: {
+            id: updated.id,
+            eventName: updated.eventName,
+            role: updated.role,
+            date: updated.date,
+            person: {
+              id: updated.person.id,
+              name: updated.person.name,
+              email: updated.person.email,
+            },
+            ministry: {
+              name: updated.ministry.name,
+            },
+          },
+        })
+      }
+
+      return updated
     })
 
     await revalidateMinistryRoute(churchId)
@@ -224,7 +294,7 @@ export async function deleteScheduleAction(
   churchId: string,
   scaleId: string
 ): Promise<ActionResponse> {
-  const session = await requireChurchStaffSession(churchId)
+  const session = await requireChurchModuleSession(churchId, "ministerios")
   if (!session) {
     return { success: false, error: "Nao autorizado" }
   }
@@ -247,5 +317,155 @@ export async function deleteScheduleAction(
     return { success: true }
   } catch {
     return { success: false, error: "Erro ao excluir escala." }
+  }
+}
+
+async function revalidateVolunteerRoutes(churchId: string) {
+  const churchLabel = await getChurchLabel(churchId)
+  if (!churchLabel) {
+    return
+  }
+
+  revalidatePath(`/${churchLabel}/dashboard`)
+  revalidatePath(`/${churchLabel}/dashboard/jornada`)
+  revalidatePath(`/${churchLabel}/dashboard/ministerios`)
+}
+
+export async function respondToMyScaleAction(
+  churchId: string,
+  input: { scaleId: string; status: "confirmed" | "declined" | "swap_requested"; note?: string }
+): Promise<ActionResponse<Schedule>> {
+  const session = await getAuthSession()
+  if (!session || session.user.churchId !== churchId) {
+    return { success: false, error: "Nao autorizado" }
+  }
+
+  const parsed = volunteerScaleResponseSchema.safeParse(input)
+  if (!parsed.success) {
+    return { success: false, error: parsed.error.issues[0]?.message || "Dados invalidos." }
+  }
+
+  try {
+    const person = await prisma.person.findFirst({
+      where: {
+        churchId,
+        email: session.user.email,
+      },
+      select: { id: true },
+    })
+
+    if (!person) {
+      return { success: false, error: "Perfil do voluntario nao encontrado." }
+    }
+
+    const scale = await prisma.volunteerScale.findFirst({
+      where: {
+        id: parsed.data.scaleId,
+        churchId,
+        personId: person.id,
+      },
+      include: {
+        person: {
+          select: {
+            id: true,
+            name: true,
+            contact: true,
+            email: true,
+            address: true,
+            birthday: true,
+            notes: true,
+            ministry: true,
+            role: true,
+            type: true,
+          },
+        },
+        ministry: {
+          select: { name: true },
+        },
+      },
+    })
+
+    if (!scale) {
+      return { success: false, error: "Escala nao encontrada." }
+    }
+
+    const nextStatus = {
+      confirmed: VolunteerScaleResponseStatus.CONFIRMED,
+      declined: VolunteerScaleResponseStatus.DECLINED,
+      swap_requested: VolunteerScaleResponseStatus.SWAP_REQUESTED,
+    }[parsed.data.status]
+
+    const churchLabel = await getChurchLabel(churchId)
+
+    const updatedScale = await prisma.$transaction(async (tx) => {
+      const updated = await tx.volunteerScale.update({
+        where: { id: scale.id },
+        data: {
+          confirmed: parsed.data.status === "confirmed",
+          responseStatus: nextStatus,
+          responseNote: parsed.data.note?.trim() || null,
+          respondedAt: new Date(),
+        },
+        include: {
+          person: {
+            select: {
+              id: true,
+              name: true,
+              contact: true,
+              email: true,
+              address: true,
+              birthday: true,
+              notes: true,
+              ministry: true,
+              role: true,
+              type: true,
+            },
+          },
+          ministry: {
+            select: { name: true },
+          },
+        },
+      })
+
+      if (parsed.data.status === "confirmed") {
+        await applyJourneyTrigger(tx, churchId, person.id, "SCALE_CONFIRMED")
+      }
+
+      if (churchLabel) {
+        const typeByStatus = {
+          confirmed: "VOLUNTEER_CONFIRMED_SCALE",
+          declined: "VOLUNTEER_DECLINED_SCALE",
+          swap_requested: "VOLUNTEER_REQUESTED_SWAP",
+        } as const
+
+        await notifyStaffAboutScaleResponse(tx, {
+          churchId,
+          churchLabel,
+          actorUserId: session.user.id,
+          type: typeByStatus[parsed.data.status],
+          scale: {
+            id: updated.id,
+            eventName: updated.eventName,
+            role: updated.role,
+            responseNote: updated.responseNote,
+            person: {
+              id: updated.person.id,
+              name: updated.person.name,
+            },
+            ministry: {
+              name: updated.ministry.name,
+            },
+          },
+        })
+      }
+
+      return updated
+    })
+
+    await revalidateVolunteerRoutes(churchId)
+    return { success: true, data: mapSchedule(updatedScale) }
+  } catch (error) {
+    console.error(error)
+    return { success: false, error: "Nao foi possivel atualizar sua resposta." }
   }
 }

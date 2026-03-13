@@ -3,13 +3,18 @@
 import { useMemo } from "react"
 import { usePathname } from "next/navigation"
 import { ChevronRight, Search, Waypoints } from "lucide-react"
+import { NotificationFeed } from "@/@types/notification.types"
+import { NotificationCenter } from "@/components/notifications/notification-center"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { dashboardNavItems } from "@/lib/dashboard-navigation"
 
 interface DashboardTopbarProps {
+  churchId: string
   churchLabel: string
   churchName: string
+  initialNotificationFeed: NotificationFeed
+  isStaff?: boolean
 }
 
 function formatSegment(value: string) {
@@ -18,7 +23,13 @@ function formatSegment(value: string) {
     .replace(/\b\w/g, (letter) => letter.toUpperCase())
 }
 
-export function DashboardTopbar({ churchLabel, churchName }: DashboardTopbarProps) {
+export function DashboardTopbar({
+  churchId,
+  churchLabel,
+  churchName,
+  initialNotificationFeed,
+  isStaff,
+}: DashboardTopbarProps) {
   const pathname = usePathname()
 
   const breadcrumbItems = useMemo(() => {
@@ -37,7 +48,7 @@ export function DashboardTopbar({ churchLabel, churchName }: DashboardTopbarProp
 
   return (
     <div className="sticky top-0 z-20 mb-6 flex flex-col gap-4 rounded-[2rem] border bg-background/90 px-4 py-4 backdrop-blur lg:px-6">
-      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col relative w-fit gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <Waypoints className="h-3.5 w-3.5" />
@@ -51,23 +62,26 @@ export function DashboardTopbar({ churchLabel, churchName }: DashboardTopbarProp
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-lg font-semibold">{churchName}</h2>
             <Badge variant="secondary" className="rounded-full px-3 py-1 text-[10px] uppercase tracking-wide">
-              Painel Administrativo
+              {isStaff ? "Painel Administrativo" : "Area do Membro"}
             </Badge>
           </div>
         </div>
 
-        <Button
-          type="button"
-          variant="outline"
-          className="h-11 justify-between rounded-2xl px-4 text-muted-foreground lg:min-w-72"
-          onClick={() => window.dispatchEvent(new Event("open-command-palette"))}
-        >
-          <span className="flex items-center gap-2">
-            <Search className="h-4 w-4" />
-            Busca global
-          </span>
-          <span className="rounded-lg bg-muted px-2 py-1 text-[10px]">Ctrl K</span>
-        </Button>
+        <div className="flex items-center gap-3 relative w-full">
+          <Button
+            type="button"
+            variant="outline"
+            className="h-11 justify-between rounded-2xl max-sm:w-full px-4 text-muted-foreground lg:min-w-72"
+            onClick={() => window.dispatchEvent(new Event("open-command-palette"))}
+          >
+            <span className="flex items-center gap-2">
+              <Search className="h-4 w-4" />
+              Busca global
+            </span>
+            <span className="rounded-lg bg-muted px-2 py-1 text-[10px]">Ctrl K</span>
+          </Button>
+          <NotificationCenter churchId={churchId} initialFeed={initialNotificationFeed} />
+        </div>
       </div>
     </div>
   )

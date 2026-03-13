@@ -1,7 +1,7 @@
 "use server"
 
 import { ActionResponse } from "@/@types/shared.types"
-import { requireChurchStaffSession } from "@/lib/authorization"
+import { requireChurchModuleSession } from "@/lib/authorization"
 import { normalizeChurchCustomization } from "@/lib/church-customization"
 import { buildPixPayload, extractCityFromAddress, getPixPaymentLink } from "@/lib/pix"
 import {
@@ -123,7 +123,7 @@ export async function updatePrayerRequestStatusAction(
   requestId: string,
   status: "pending" | "reviewed"
 ): Promise<ActionResponse> {
-  const session = await requireChurchStaffSession(churchId)
+  const session = await requireChurchModuleSession(churchId, "paginaPublica")
   if (!session) {
     return { success: false, error: "Nao autorizado" }
   }
@@ -170,7 +170,7 @@ export async function deletePrayerRequestAction(
   churchId: string,
   requestId: string
 ): Promise<ActionResponse> {
-  const session = await requireChurchStaffSession(churchId)
+  const session = await requireChurchModuleSession(churchId, "paginaPublica")
   if (!session) {
     return { success: false, error: "Nao autorizado" }
   }

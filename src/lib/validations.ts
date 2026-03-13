@@ -169,10 +169,10 @@ export const churchProfileSchema = z.object({
     }),
     permissoes: z.object({
       permissoesPorModulo: z.object({
-        perfilPastor: permissionsByModuleSchema,
-        perfilAdministrador: permissionsByModuleSchema,
-        perfilLider: permissionsByModuleSchema,
-        perfilStaff: permissionsByModuleSchema,
+        STAFF: permissionsByModuleSchema,
+        VOLUNTEER: permissionsByModuleSchema,
+        MEMBER: permissionsByModuleSchema,
+        VISITOR: permissionsByModuleSchema,
       }),
     }),
     paginaPublica: z.object({
@@ -211,6 +211,12 @@ export const volunteerScaleSchema = z.object({
   ministryId: z.string().min(1, "Ministerio obrigatorio"),
   volunteerIds: z.array(z.string()).min(1, "Selecione pelo menos um voluntario"),
   role: z.string().min(1, "Funcao obrigatoria"),
+})
+
+export const volunteerScaleResponseSchema = z.object({
+  scaleId: z.string().min(1, "Escala obrigatoria"),
+  status: z.enum(["confirmed", "declined", "swap_requested"]),
+  note: z.string().max(500, "Observacao muito longa").optional().or(z.literal("")),
 })
 
 export const scheduleEventSchema = z.object({
@@ -329,6 +335,22 @@ export const memberOnboardingSchema = z.object({
   }),
 })
 
+export const moveJourneyStageSchema = z.object({
+  personId: z.string().min(1, "Pessoa obrigatoria"),
+  stageId: z.string().min(1, "Etapa obrigatoria"),
+  notes: z.string().optional().or(z.literal("")),
+})
+
+export const memberJourneyInterestSchema = z.object({
+  selections: z.array(z.string().min(1, "Selecao invalida")).min(1, "Selecione pelo menos uma opcao"),
+  message: z.string().max(500, "Mensagem muito longa").optional().or(z.literal("")),
+})
+
+export const memberJourneySelfTriggerSchema = z.enum([
+  "FIRST_ATTENDANCE",
+  "ATTENDANCE_STREAK",
+])
+
 export type PixConfigFormData = z.infer<typeof pixConfigSchema>
 export type ManualIncomeFormData = z.infer<typeof manualIncomeSchema>
 export type ChurchProfileSchemaData = z.infer<typeof churchProfileSchema>
@@ -336,3 +358,6 @@ export type PublicPrayerRequestFormData = z.infer<typeof publicPrayerRequestSche
 export type PublicOfferingFormData = z.infer<typeof publicOfferingSchema>
 export type ChurchOnboardingFormData = z.infer<typeof churchOnboardingSchema>
 export type MemberOnboardingFormData = z.infer<typeof memberOnboardingSchema>
+export type MoveJourneyStageFormData = z.infer<typeof moveJourneyStageSchema>
+export type MemberJourneyInterestFormData = z.infer<typeof memberJourneyInterestSchema>
+export type VolunteerScaleResponseFormData = z.infer<typeof volunteerScaleResponseSchema>

@@ -4,7 +4,8 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Plus } from "lucide-react"
 import { toast } from "sonner"
-import { deletePersonAction } from "@/actions/person.actions"
+import { PermissionStatusKey } from "@/@types/church.types"
+import { updatePersonAccessStatusAction, deletePersonAction } from "@/actions/person.actions"
 import { EmptyState } from "@/components/shared/empty-state"
 import { PageHeader } from "@/components/shared/page-header"
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
@@ -17,6 +18,7 @@ import { Person } from "@/@types/person.types"
 import { MemberCard } from "@/components/domain/members/MemberCard"
 import { MemberStats } from "@/components/domain/members/MemberStats"
 import { MemberFilter } from "@/components/domain/members/MemberFilter"
+import { MembersTable } from "@/components/domain/members/members-table"
 import { PersonForm } from "@/components/domain/members/PersonForm"
 import { usePersonForm } from "@/hooks/use-person-form"
 import { Search, Users } from "lucide-react"
@@ -34,9 +36,9 @@ const typeLabels: Record<string, string> = {
 }
 
 const typeColors: Record<string, string> = {
-  member: "bg-emerald-100 text-emerald-700",
-  visitor: "bg-blue-100 text-blue-700",
-  volunteer: "bg-amber-100 text-amber-700",
+  member: "bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))]",
+  visitor: "bg-[hsl(var(--status-info))] text-[hsl(var(--status-info-foreground))]",
+  volunteer: "bg-secondary text-secondary-foreground",
 }
 
 const containerVariants = {
@@ -51,6 +53,7 @@ const itemVariants = {
 
 export default function MembersPage({ isStaff, churchId, initialData }: MembersPageProps) {
   const [people, setPeople] = useState<Person[]>(initialData)
+  const [updatingAccessId, setUpdatingAccessId] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [filterType, setFilterType] = useState<string>("all")
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -102,8 +105,35 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
     toast.success("Pessoa excluída!")
   }
 
+  const handleAccessStatusChange = async (personId: string, status: PermissionStatusKey) => {
+    setUpdatingAccessId(personId)
+
+    try {
+      const result = await updatePersonAccessStatusAction(churchId, personId, status)
+
+      if (!result.success) {
+        toast.error(result.error || "Nao foi possivel atualizar o status de acesso.")
+        return
+      }
+
+      setPeople((current) =>
+        current.map((person) =>
+          person.id === personId
+            ? {
+                ...person,
+                accessStatus: status,
+              }
+            : person
+        )
+      )
+      toast.success("Status de acesso atualizado.")
+    } finally {
+      setUpdatingAccessId(null)
+    }
+  }
+
   return (
-    <motion.div variants={containerVariants} initial="hidden" animate="show" className="mx-auto max-w-6xl space-y-8 p-6">
+    <motion.div variants={containerVariants} initial="hidden" animate="show" className="mx-auto max-w-6xl space-y-8 px-4 py-6 sm:p-6">
       <PageHeader
         title="Membros e Visitantes"
         description="Busque rapidamente, filtre por tipo e mantenha o cadastro da comunidade sempre organizado."
@@ -112,7 +142,7 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
           isStaff ? (
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogTrigger>
-                <Button className="h-12 rounded-2xl bg-zinc-900 px-6 shadow-lg shadow-zinc-900/20 transition-all hover:scale-105">
+                <Button className="h-12 rounded-2xl px-6 shadow-lg transition-all hover:scale-105">
                   <Plus className="mr-2 h-4 w-4" /> Adicionar Novo
                 </Button>
               </DialogTrigger>
@@ -137,24 +167,44 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
       />
 
       <motion.div variants={itemVariants}>
-        <Card className="overflow-hidden rounded-[40px] border-0 bg-white shadow-sm">
-          <div className="divide-y divide-zinc-50">
+        <Card className="overflow-hidden rounded-[40px] border shadow-sm">
+          <div className="divide-y divide-border">
             <AnimatePresence mode="popLayout">
               {filteredPeople.length > 0 ? (
-                filteredPeople.map((person) => (
-                  <MemberCard
-                    key={person.id}
-                    person={person}
-                    isStaff={isStaff}
-                    typeLabels={typeLabels}
-                    typeColors={typeColors}
-                    onEdit={(selectedPerson) => {
-                      setEditingPerson(selectedPerson)
-                      setIsEditOpen(true)
-                    }}
-                    onDelete={handleDeletePerson}
-                  />
-                ))
+                isMobile ? (
+                  filteredPeople.map((person) => (
+                    <MemberCard
+                      key={person.id}
+                      person={person}
+                      isStaff={isStaff}
+                      isUpdatingAccess={updatingAccessId === person.id}
+                      typeLabels={typeLabels}
+                      typeColors={typeColors}
+                      onEdit={(selectedPerson) => {
+                        setEditingPerson(selectedPerson)
+                        setIsEditOpen(true)
+                      }}
+                      onDelete={handleDeletePerson}
+                      onAccessStatusChange={handleAccessStatusChange}
+                    />
+                  ))
+                ) : (
+                  <div className="p-2 md:p-4">
+                    <MembersTable
+                      people={filteredPeople}
+                      isStaff={isStaff}
+                      updatingAccessId={updatingAccessId}
+                      typeLabels={typeLabels}
+                      typeColors={typeColors}
+                      onEdit={(selectedPerson) => {
+                        setEditingPerson(selectedPerson)
+                        setIsEditOpen(true)
+                      }}
+                      onDelete={handleDeletePerson}
+                      onAccessStatusChange={handleAccessStatusChange}
+                    />
+                  </div>
+                )
               ) : (
                 <EmptyState
                   icon={searchTerm || filterType !== "all" ? <Search className="h-5 w-5" /> : <Users className="h-5 w-5" />}

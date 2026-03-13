@@ -140,6 +140,12 @@ export function ScheduleCard({
   }
 
   const hasAnyConfirmed = scheduleGroup.schedules.some((schedule) => schedule.confirmed)
+  const hasSwapRequest = scheduleGroup.schedules.some(
+    (schedule) => schedule.responseStatus === "swap_requested"
+  )
+  const hasDeclined = scheduleGroup.schedules.some(
+    (schedule) => schedule.responseStatus === "declined"
+  )
 
   return (
     <motion.div className="rounded-3xl bg-card p-5 shadow-sm">
@@ -160,17 +166,29 @@ export function ScheduleCard({
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Badge className="rounded-full bg-zinc-100 text-zinc-700">
+          <Badge className="rounded-full bg-muted text-muted-foreground">
             <Users className="mr-1 h-3.5 w-3.5" />
             {scheduleGroup.schedules.length} pessoas
           </Badge>
           <Badge
             className={cn(
               "rounded-full",
-              hasAnyConfirmed ? "bg-[#8ee4af]" : "bg-[#f9a8d4]"
+              hasSwapRequest
+                ? "bg-[hsl(var(--status-info))] text-[hsl(var(--status-info-foreground))]"
+                : hasDeclined
+                  ? "bg-destructive/15 text-destructive"
+                  : hasAnyConfirmed
+                    ? "bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))]"
+                    : "bg-secondary text-secondary-foreground"
             )}
           >
-            {hasAnyConfirmed ? "Com confirmacoes" : "Pendentes"}
+            {hasSwapRequest
+              ? "Com pedido de troca"
+              : hasDeclined
+                ? "Com recusas"
+                : hasAnyConfirmed
+                  ? "Com confirmacoes"
+                  : "Pendentes"}
           </Badge>
         </div>
       </div>
@@ -179,12 +197,15 @@ export function ScheduleCard({
         {scheduleGroup.schedules.map((schedule) => (
           <div
             key={schedule.id}
-            className="rounded-2xl border border-white/70 bg-white/80 p-3"
+            className="rounded-2xl border border-border bg-card p-3"
           >
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-sm font-medium">{schedule.person.fullName}</p>
                 <p className="text-xs text-muted-foreground">{schedule.role}</p>
+                {schedule.responseNote ? (
+                  <p className="mt-1 text-xs text-muted-foreground">Obs: {schedule.responseNote}</p>
+                ) : null}
               </div>
               <div className="flex flex-wrap justify-end gap-2">
                 <Button
@@ -225,7 +246,7 @@ export function ScheduleCard({
                     <AlertDialogTrigger
                       render={<Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg" />}
                     >
-                      <Trash2 className="h-4 w-4 text-red-500" />
+                      <Trash2 className="h-4 w-4 text-destructive" />
                     </AlertDialogTrigger>
                     <AlertDialogContent className="rounded-2xl">
                       <AlertDialogHeader>
@@ -272,9 +293,10 @@ export function ScheduleCard({
                     {compatibleVolunteers.length > 0 ? compatibleVolunteers.map((volunteer) => {
                       const isSelected = selectedVolunteerIds.includes(volunteer.id)
                       return (
-                        <button
+                        <Button
                           key={volunteer.id}
                           type="button"
+                          variant="ghost"
                           onClick={() => toggleVolunteerSelection(volunteer.id)}
                           className={cn(
                             "flex w-full items-center justify-between rounded-xl border px-3 py-3 text-left transition-colors",
@@ -290,7 +312,7 @@ export function ScheduleCard({
                           <span className={cn("text-xs font-semibold", isSelected ? "text-primary" : "text-muted-foreground")}>
                             {isSelected ? "Selecionado" : "Selecionar"}
                           </span>
-                        </button>
+                        </Button>
                       )
                     }) : (
                       <p className="text-sm text-muted-foreground">Nenhum voluntário compatível disponível.</p>
