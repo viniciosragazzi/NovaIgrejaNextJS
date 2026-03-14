@@ -40,15 +40,15 @@ export function MemberStats({ stats }: MemberStatsProps) {
   ]
 
   return (
-    <motion.div variants={itemVariants} className="grid gap-4 sm:grid-cols-4">
+    <motion.div variants={itemVariants} className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
       {statItems.map((stat) => (
         <Card key={stat.label} className="overflow-hidden rounded-3xl border shadow-sm">
-          <CardContent className="flex items-center gap-4 p-6">
-            <div className={cn("flex h-12 w-12 items-center justify-center rounded-2xl", stat.color)}>
+          <CardContent className="flex items-center gap-3 p-4 sm:gap-4 sm:p-6">
+            <div className={cn("flex h-11 w-11 items-center justify-center rounded-2xl sm:h-12 sm:w-12", stat.color)}>
               <Users className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-2xl font-bold tracking-tight">{stat.value}</p>
+              <p className="text-xl font-bold tracking-tight sm:text-2xl">{stat.value}</p>
               <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
                 {stat.label}
               </p>

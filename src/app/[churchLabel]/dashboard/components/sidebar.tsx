@@ -50,6 +50,15 @@ export function DashboardSidebar({ churchLabel, churchName, userName, isStaff, m
         <Menu className="h-5 w-5" />
       </Button>
 
+      <motion.div
+        aria-hidden="true"
+        initial={false}
+        animate={{
+          width: isCollapsed ? 86 : 292,
+        }}
+        className="hidden h-screen shrink-0 lg:block"
+      />
+
       <motion.aside
         initial={false}
         animate={{
@@ -58,7 +67,7 @@ export function DashboardSidebar({ churchLabel, churchName, userName, isStaff, m
         }}
         className={cn(
           "fixed left-0 top-0 z-50 flex h-screen flex-col border-r bg-card transition-all duration-100",
-          "lg:relative lg:z-0 shadow-xl lg:shadow-none"
+          "shadow-xl lg:z-30 lg:shadow-none"
         )}
       >
         <div className="border-b px-4 py-5">

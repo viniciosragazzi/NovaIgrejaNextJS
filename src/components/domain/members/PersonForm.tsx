@@ -38,7 +38,7 @@ export function PersonForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-4 space-y-4 pb-6">
+    <form onSubmit={onSubmit} className="mt-4 space-y-4 pb-4 sm:pb-6">
       <div className="space-y-1">
         <Label className="text-[10px] font-bold uppercase text-muted-foreground">
           Nome Completo *
@@ -49,7 +49,7 @@ export function PersonForm({
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-1">
           <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             WhatsApp *
@@ -100,7 +100,7 @@ export function PersonForm({
             exit={{ height: 0, opacity: 0 }}
             className="space-y-4 overflow-hidden border-t pt-4"
           >
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-1">
                 <Label className="text-[10px] font-bold uppercase text-secondary-foreground">
                   Ministério
@@ -126,7 +126,7 @@ export function PersonForm({
         )}
       </AnimatePresence>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-1">
           <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             Endereço
@@ -148,7 +148,7 @@ export function PersonForm({
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-1">
           <Label className="text-[10px] font-bold uppercase text-muted-foreground">
             Primeira Visita

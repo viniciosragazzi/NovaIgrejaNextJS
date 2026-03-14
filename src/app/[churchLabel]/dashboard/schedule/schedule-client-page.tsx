@@ -210,17 +210,19 @@ export default function ScheduleClientPage({
           </Button>
 
           <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogTrigger>
-              <Button
-                className="h-12 rounded-2xl bg-primary"
-                onClick={() => {
-                  setEditingEvent(null)
-                  reset({ dayOfWeek: "sunday", name: "", time: "", description: "" })
-                }}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                Novo Evento
-              </Button>
+            <DialogTrigger
+              render={
+                <Button
+                  className="h-12 rounded-2xl bg-primary"
+                  onClick={() => {
+                    setEditingEvent(null)
+                    reset({ dayOfWeek: "sunday", name: "", time: "", description: "" })
+                  }}
+                />
+              }
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Novo Evento
             </DialogTrigger>
             <DialogContent className="rounded-2xl sm:max-w-lg">
               <DialogHeader>

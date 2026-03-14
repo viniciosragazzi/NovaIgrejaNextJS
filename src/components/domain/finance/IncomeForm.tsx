@@ -45,11 +45,11 @@ export function IncomeForm({ onSubmit, isOpen, onOpenChange }: IncomeFormProps) 
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogTrigger >
-        <Button className="gap-2 rounded-2xl bg-primary px-6 text-primary-foreground">
-          <Plus className="h-4 w-4" />
-          Registrar Entrada
-        </Button>
+      <DialogTrigger
+        render={<Button className="gap-2 rounded-2xl bg-primary px-6 text-primary-foreground" />}
+      >
+        <Plus className="h-4 w-4" />
+        Registrar Entrada
       </DialogTrigger>
       <DialogContent className="rounded-3xl sm:max-w-md">
         <DialogHeader>

@@ -60,10 +60,10 @@ export function MemberCard({
       animate={{ opacity: 1 }}
       className="group flex flex-col gap-4 p-4 transition-all hover:bg-muted/40 sm:flex-row sm:items-center sm:justify-between sm:p-6"
     >
-      <div className="flex min-w-0 items-center gap-4">
+      <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
         <div
           className={cn(
-            "flex h-14 w-14 shrink-0 items-center justify-center rounded-3xl font-bold text-xl sm:h-16 sm:w-16",
+            "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl font-bold text-lg sm:h-16 sm:w-16 sm:rounded-3xl sm:text-xl",
             person.type === "volunteer"
               ? "bg-secondary text-secondary-foreground"
               : "bg-muted text-muted-foreground"
@@ -75,28 +75,33 @@ export function MemberCard({
             person.fullName.charAt(0)
           )}
         </div>
-        <div className="min-w-0">
-          <h3 className="truncate text-base font-bold tracking-tight text-foreground">
-            {person.fullName}
-          </h3>
-          <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[11px] font-medium text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <Phone className="h-3 w-3" /> {person.whatsapp}
-            </span>
-            {person.type === "volunteer" && person.ministry && (
-              <span className="flex items-center gap-1 font-bold text-secondary-foreground">
-                <Briefcase className="h-3 w-3" /> {person.ministry} ({person.role})
+          <div className="min-w-0 flex-1">
+            <h3 className="break-words text-sm font-bold tracking-tight text-foreground sm:truncate sm:text-base">
+              {person.fullName}
+            </h3>
+            <div className="mt-1 flex flex-col gap-y-1 text-[11px] font-medium text-muted-foreground sm:flex-row sm:flex-wrap sm:gap-x-4">
+              <span className="flex min-w-0 items-center gap-1">
+                <Phone className="h-3 w-3 shrink-0" />
+                <span className="truncate">{person.whatsapp || "Sem telefone"}</span>
               </span>
-            )}
-          </div>
+              {person.type === "volunteer" && person.ministry && (
+                <span className="flex min-w-0 items-center gap-1 font-bold text-secondary-foreground">
+                  <Briefcase className="h-3 w-3 shrink-0" />
+                  <span className="truncate">
+                    {person.ministry}
+                    {person.role ? ` (${person.role})` : ""}
+                  </span>
+                </span>
+              )}
+            </div>
         </div>
       </div>
 
       <div className="flex w-full flex-col gap-3 sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:justify-end">
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-3">
           <span
             className={cn(
-              "rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-tighter",
+              "inline-flex items-center justify-center rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-tighter",
               typeColors[person.type]
             )}
           >
@@ -117,7 +122,7 @@ export function MemberCard({
                 <SelectTrigger
                   size="sm"
                   disabled={isUpdatingAccess}
-                  className="min-w-full rounded-xl sm:min-w-32"
+                  className="w-full rounded-xl sm:min-w-32"
                 >
                   <SelectValue />
                 </SelectTrigger>
@@ -135,7 +140,7 @@ export function MemberCard({
           ) : null}
         </div>
         {isStaff && (
-          <div className="flex justify-end">
+          <div className="flex justify-end sm:justify-start">
             <DropdownMenu>
               <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl" />}>
                 <MoreHorizontal className="h-5 w-5" />

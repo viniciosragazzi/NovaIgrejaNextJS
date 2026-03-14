@@ -20,25 +20,25 @@ export default async function DashboardLayout({ children, params }: LayoutProps)
 
   const [people, ministries, schedules] = isStaff
     ? await Promise.all([
-        prisma.person.findMany({
-          where: { churchId: church.id },
-          select: { id: true, name: true, type: true },
-          orderBy: { name: "asc" },
-          take: 10,
-        }),
-        prisma.ministry.findMany({
-          where: { churchId: church.id },
-          select: { id: true, name: true },
-          orderBy: { name: "asc" },
-          take: 10,
-        }),
-        prisma.weeklySchedule.findMany({
-          where: { churchId: church.id, active: true },
-          select: { id: true, title: true, time: true },
-          orderBy: { title: "asc" },
-          take: 10,
-        }),
-      ])
+      prisma.person.findMany({
+        where: { churchId: church.id },
+        select: { id: true, name: true, type: true },
+        orderBy: { name: "asc" },
+        take: 10,
+      }),
+      prisma.ministry.findMany({
+        where: { churchId: church.id },
+        select: { id: true, name: true },
+        orderBy: { name: "asc" },
+        take: 10,
+      }),
+      prisma.weeklySchedule.findMany({
+        where: { churchId: church.id, active: true },
+        select: { id: true, title: true, time: true },
+        orderBy: { title: "asc" },
+        take: 10,
+      }),
+    ])
     : [[], [], []]
 
   const commandItems: CommandPaletteItem[] = [
@@ -78,7 +78,7 @@ export default async function DashboardLayout({ children, params }: LayoutProps)
   ]
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen  bg-background">
       <DashboardSidebar
         churchName={church.name}
         churchLabel={churchLabel}
@@ -87,7 +87,7 @@ export default async function DashboardLayout({ children, params }: LayoutProps)
         moduleAccess={moduleAccess}
       />
       <main className="flex-1 overflow-auto">
-        <div className="container mx-auto max-w-7xl px-4 py-6 lg:px-8 lg:py-8">
+        <div className="container mx-auto max-w-7xl max-sm:max-w-[420px] px-4 py-6 lg:px-8 lg:py-8">
           <DashboardTopbar
             churchId={church.id}
             churchLabel={churchLabel}

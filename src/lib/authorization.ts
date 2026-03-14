@@ -81,6 +81,16 @@ export async function getAuthSession() {
   return auth.api.getSession({ headers: await headers() })
 }
 
+export async function requirePlatformAdminSession() {
+  const session = await getAuthSession()
+
+  if (!session || !isPlatformAdmin(session.user)) {
+    return null
+  }
+
+  return session
+}
+
 export async function requireChurchStaffSession(churchId: string) {
   const session = await getAuthSession()
 

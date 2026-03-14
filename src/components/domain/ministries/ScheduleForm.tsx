@@ -93,11 +93,13 @@ export function ScheduleForm({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogTrigger>
-        <Button className="gap-2 rounded-2xl bg-primary px-6 text-primary-foreground">
-          <Plus className="h-4 w-4" />
-          Nova Escala
-        </Button>
+      <DialogTrigger
+        render={
+          <Button className="gap-2 rounded-2xl bg-primary px-6 text-primary-foreground" />
+        }
+      >
+        <Plus className="h-4 w-4" />
+        Nova Escala
       </DialogTrigger>
 
       <DialogContent className="rounded-3xl sm:max-w-lg">

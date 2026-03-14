@@ -47,9 +47,9 @@ export function DashboardTopbar({
   }, [churchLabel, pathname])
 
   return (
-    <div className="sticky top-0 z-20 mb-6 flex flex-col gap-4 rounded-[2rem] border bg-background/90 px-4 py-4 backdrop-blur lg:px-6">
-      <div className="flex flex-col relative w-fit gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div className="space-y-2">
+    <div className="sticky top-0 z-20 mb-6 flex flex-col gap-4 rounded-[2rem] border bg-background/90 px-4 py-4 backdrop-blur lg:px-6 w-full">
+      <div className="flex flex-col relative w-full gap-3 lg:flex-row justify-between   max-sm:ml-5 lg:items-center lg:justify-between">
+        <div className="space-y-4 ">
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <Waypoints className="h-3.5 w-3.5" />
             {breadcrumbItems.map((item, index) => (
@@ -67,7 +67,7 @@ export function DashboardTopbar({
           </div>
         </div>
 
-        <div className="flex items-center gap-3 relative w-full">
+        <div className="flex max-sm:mr- items-center justify-end max-sm:max-w-sm max-sm:justify-center gap-3 relative w-full">
           <Button
             type="button"
             variant="outline"

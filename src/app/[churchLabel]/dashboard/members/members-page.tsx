@@ -133,7 +133,12 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
   }
 
   return (
-    <motion.div variants={containerVariants} initial="hidden" animate="show" className="mx-auto max-w-6xl space-y-8 px-4 py-6 sm:p-6">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      className="mx-auto w-full max-w-6xl space-y-6 px-0 py-4 sm:space-y-8 sm:px-0 sm:py-6"
+    >
       <PageHeader
         title="Membros e Visitantes"
         description="Busque rapidamente, filtre por tipo e mantenha o cadastro da comunidade sempre organizado."
@@ -141,10 +146,12 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
         actions={
           isStaff ? (
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-              <DialogTrigger>
-                <Button className="h-12 rounded-2xl px-6 shadow-lg transition-all hover:scale-105">
-                  <Plus className="mr-2 h-4 w-4" /> Adicionar Novo
-                </Button>
+              <DialogTrigger
+                render={
+                  <Button className="h-12 w-full rounded-2xl px-6 shadow-lg sm:w-auto sm:transition-all sm:hover:scale-105" />
+                }
+              >
+                <Plus className="mr-2 h-4 w-4" /> Adicionar Novo
               </DialogTrigger>
               <DialogContent className="rounded-[32px] border-0 shadow-2xl sm:max-w-lg">
                 <DialogHeader>
@@ -167,7 +174,7 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
       />
 
       <motion.div variants={itemVariants}>
-        <Card className="overflow-hidden rounded-[40px] border shadow-sm">
+        <Card className="overflow-hidden rounded-[28px] border shadow-sm sm:rounded-[40px]">
           <div className="divide-y divide-border">
             <AnimatePresence mode="popLayout">
               {filteredPeople.length > 0 ? (
@@ -189,7 +196,7 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
                     />
                   ))
                 ) : (
-                  <div className="p-2 md:p-4">
+                  <div className="overflow-x-auto p-2 md:p-4">
                     <MembersTable
                       people={filteredPeople}
                       isStaff={isStaff}
@@ -232,7 +239,7 @@ export default function MembersPage({ isStaff, churchId, initialData }: MembersP
       {editingPerson &&
         (isMobile ? (
           <Drawer open={isEditOpen} onOpenChange={setIsEditOpen}>
-            <DrawerContent className="px-6 pb-10">
+            <DrawerContent className="px-4 pb-8 sm:px-6 sm:pb-10">
               <DrawerHeader>
                 <DrawerTitle>Editar Perfil</DrawerTitle>
               </DrawerHeader>

@@ -237,7 +237,7 @@ export function VisitorFormTrigger({ churchLabel }: { churchLabel: string }) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>{triggerButton}</DialogTrigger>
+      <DialogTrigger render={triggerButton} />
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl">Cadastro de Visitante</DialogTitle>
